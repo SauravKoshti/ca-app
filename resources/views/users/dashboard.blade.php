@@ -2,103 +2,116 @@
 @section('title', 'Login')
 @section('content')
 <section class="banner-sec">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="item active"> <img src="{{ asset('assets/user/images/banner1.jpg')}}" alt="banner1"> </div>
-      <div class="item"> <img src="{{ asset('assets/user/images/banner2.jpg')}}" alt="banner2"> </div>
-      <div class="item"> <img src="{{ asset('assets/user/images/banner3.jpg')}}" alt="banner3"> </div>
-      <div class="item"> <img src="{{ asset('assets/user/images/banner4.jpg')}}" alt="banner4"> </div>
-      <div class="item"> <img src="{{ asset('assets/user/images/banner5.jpg')}}" alt="banner5"> </div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active"> <img src="{{ asset('assets/user/images/banner1.jpg')}}" alt="banner1"> </div>
+            <div class="item"> <img src="{{ asset('assets/user/images/banner2.jpg')}}" alt="banner2"> </div>
+            <div class="item"> <img src="{{ asset('assets/user/images/banner3.jpg')}}" alt="banner3"> </div>
+            <div class="item"> <img src="{{ asset('assets/user/images/banner4.jpg')}}" alt="banner4"> </div>
+            <div class="item"> <img src="{{ asset('assets/user/images/banner5.jpg')}}" alt="banner5"> </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span
+                class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span> </a> <a
+            class="right carousel-control" href="#myCarousel" data-slide="next"> <span
+                class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span> </a>
     </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#myCarousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span> </a> </div>
 </section>
 <section class="hm-text-sec">
-            <div class="container">
-              
-  <h1>Lorem Ipsum is simply dummy  <span>text of the printing</span></h1>
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    <div class="container">
 
-            </div>
-          </section>
-<section class="hm-services-sec">
-  <div class="container">
-    <h2>Our <span>Services</span></h2>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
-          <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
-          <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
-          <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
-          </svg>
-          <div class="icons"><img src="{{ asset('assets/user/images/mutual_fund.png') }}" alt="" title=""></div>
-          <h4>Mutual Fund</h4>
-          <p>A mutual fund is a company that pools money from many investors and invests the money in securities such as stocks, bonds, and short-term debt.</p>
-          <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
-          <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
-          <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
-          <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
-          </svg>
-          <div class="icons"><img src="{{ asset('assets/user/images/taxation.png')}}" alt="" title=""></div>
-          <h4>Taxation</h4>
-          <p>Taxes are of 4 types: Direct tax, Indirect tax, Business tax, and Property and Sales Tax.</p>
-          <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
-          <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
-          <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
-          <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
-          </svg>
-          <div class="icons"><img src="{{ asset('assets/user/images/gst.png')}}" alt="" title=""></div>
-          <h4>GST</h4>
-          <p>Goods and Services Rates</p>
-          <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
-        </div>
-      </div>
-      <div class="col-md-4 col-md-offset-2">
-        <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
-          <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
-          <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
-          <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
-          </svg>
-          <div class="icons"><img src="{{asset('assets/user/images/accounting.png')}}" alt="" title=""></div>
-          <h4>Accounting</h4>
-          <p>Bank Statutory Audits, Concurrent Audits and Stock Audits.</p>
-          <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
-          <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
-          <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
-          <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
-          </svg>
-          <div class="icons"><img src="{{ asset('assets/user/images/pancard.png')}}" alt="" title=""></div>
-          <h4>Pancard</h4>
-          <p>Permanent Account Number</p>
-          <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
-        </div>
-      </div>
+        <h1>Lorem Ipsum is simply dummy <span>text of the printing</span></h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book.</p>
+
     </div>
-  </div>
+</section>
+<section class="hm-services-sec">
+    <div class="container">
+        <h2>Our <span>Services</span></h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
+                        <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
+                        <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
+                        <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
+                    </svg>
+                    <div class="icons"><img src="{{ asset('assets/user/images/mutual_fund.png') }}" alt="" title="">
+                    </div>
+                    <h4>Mutual Fund</h4>
+                    <p>A mutual fund is a company that pools money from many investors and invests the money in
+                        securities such as stocks, bonds, and short-term debt.</p>
+                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
+                        <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
+                        <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
+                        <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
+                    </svg>
+                    <div class="icons"><img src="{{ asset('assets/user/images/taxation.png')}}" alt="" title=""></div>
+                    <h4>Taxation</h4>
+                    <p>Taxes are of 4 types: Direct tax, Indirect tax, Business tax, and Property and Sales Tax.</p>
+                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
+                        <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
+                        <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
+                        <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
+                    </svg>
+                    <div class="icons"><img src="{{ asset('assets/user/images/gst.png')}}" alt="" title=""></div>
+                    <h4>GST</h4>
+                    <p>Goods and Services Rates</p>
+                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
+                        <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
+                        <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
+                        <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
+                    </svg>
+                    <div class="icons"><img src="{{asset('assets/user/images/accounting.png')}}" alt="" title=""></div>
+                    <h4>Accounting</h4>
+                    <p>Bank Statutory Audits, Concurrent Audits and Stock Audits.</p>
+                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
+                        <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
+                        <line class="bottom" x1="100%" y1="100%" x2="-600" y2="100%"></line>
+                        <line class="right" x1="100%" y1="0" x2="100%" y2="1380"></line>
+                    </svg>
+                    <div class="icons"><img src="{{ asset('assets/user/images/pancard.png')}}" alt="" title=""></div>
+                    <h4>Pancard</h4>
+                    <p>Permanent Account Number</p>
+                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- <section class="news-sec">
   <div class="container">
@@ -209,29 +222,38 @@
   </div>
 </section> -->
 <section class="enquiry-sec">
-  <div class="container">
-    <h2>Request a <span>Call Back</span></h2>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <input name="ctl00$txtname" type="text" id="ctl00_txtname" class="form-control" placeholder="Enter Name *">
-          <span id="ctl00_RequiredFieldValidator1" class="errer" style="color:Red;visibility:hidden;">*</span> </div>
-        <div class="form-group">
-          <input name="ctl00$txtmail" type="text" id="ctl00_txtmail" class="form-control" placeholder="Enter Email Address *">
-          <span id="ctl00_RegularExpressionValidator1" class="errer" style="color:Red;visibility:hidden;">*</span> </div>
-        <div class="form-group">
-          <input name="ctl00$txtcontact" type="text" maxlength="12" id="ctl00_txtcontact" class="form-control" placeholder="Enter Phone" onkeypress="return isNumeric(event);">
+    <div class="container">
+        <h2>Request a <span>Call Back</span></h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input name="ctl00$txtname" type="text" id="ctl00_txtname" class="form-control"
+                        placeholder="Enter Name *">
+                    <span id="ctl00_RequiredFieldValidator1" class="errer" style="color:Red;visibility:hidden;">*</span>
+                </div>
+                <div class="form-group">
+                    <input name="ctl00$txtmail" type="text" id="ctl00_txtmail" class="form-control"
+                        placeholder="Enter Email Address *">
+                    <span id="ctl00_RegularExpressionValidator1" class="errer"
+                        style="color:Red;visibility:hidden;">*</span>
+                </div>
+                <div class="form-group">
+                    <input name="ctl00$txtcontact" type="text" maxlength="12" id="ctl00_txtcontact" class="form-control"
+                        placeholder="Enter Phone" onkeypress="return isNumeric(event);">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea name="ctl00$txtremark" rows="5" cols="50" id="ctl00_txtremark" class="form-control"
+                        placeholder="Type your message here"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="ctl00$btnsubmit" value="Submit"
+                        onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$btnsubmit&quot;, &quot;&quot;, true, &quot;a&quot;, &quot;&quot;, false, false))"
+                        id="ctl00_btnsubmit" class="btn btn-send">
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <textarea name="ctl00$txtremark" rows="5" cols="50" id="ctl00_txtremark" class="form-control" placeholder="Type your message here"></textarea>
-        </div>
-        <div class="form-group">
-          <input type="submit" name="ctl00$btnsubmit" value="Submit" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$btnsubmit&quot;, &quot;&quot;, true, &quot;a&quot;, &quot;&quot;, false, false))" id="ctl00_btnsubmit" class="btn btn-send">
-        </div>
-      </div>
     </div>
-  </div>
 </section>
 @endsection

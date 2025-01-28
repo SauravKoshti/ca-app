@@ -44,9 +44,9 @@
                                         <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>email</th>
-                                            <th>Pancard</th>
-                                            <th>AdharCard</th>
+                                            <th>Email</th>
+                                            <th>UserName</th>
+                                            <!--<th>AdharCard</th> -->
                                             <th>DOB</th>
                                             <th>Action</th>
                                         </tr>
@@ -54,9 +54,9 @@
                                         <tfoot>
                                         <tr>
                                             <th>Name</th>
-                                            <th>email</th>
-                                            <th>Pancard</th>
-                                            <th>AdharCard</th>
+                                            <th>Email</th>
+                                            <th>UserName</th>
+                                            <!-- <th>AdharCard</th> -->
                                             <th>DOB</th>
                                             <th>Action</th>
                                         </tr>
@@ -64,15 +64,19 @@
                                         <tbody>
                                         @foreach($users as $user)
                                             <tr>
-                                                <td>{{ $user->firstname }} {{ $user->lastname }} </td>
+                                                <td>{{ $user->first_name }} {{ $user->last_name }} </td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->username }}</td>
-                                                <td>{{ $user->pancard }}</td>
-                                                <td>{{ $user->adharcard }}</td>
+                                                <!-- <td>{{ $user->pancard }}</td> -->
+                                                <td>{{ $user->dob }}</td>
                                                 <td>
                                                     <div class="form-button-action">
-                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
+                                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Show User">
                                                             <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        
+                                                        <a href="{{ route('users.document', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="User document">
+                                                        <i class="fa-solid fa-file-arrow-up"></i>
                                                         </a>
 
                                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">

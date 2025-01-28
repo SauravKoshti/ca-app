@@ -29,6 +29,11 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+Route::get('/register', [AuthController::class, 'registration'])->name('user.register');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
@@ -44,6 +49,8 @@ Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+Route::get('/users/document/{user}', [UserController::class, 'show'])->name('users.document');
 
 // Group Routes
 Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
