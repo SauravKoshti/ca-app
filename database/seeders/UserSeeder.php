@@ -35,15 +35,14 @@ class UserSeeder extends Seeder
         
         */
         User::create([
-            'firstname' => 'admin',
-            'lastname' => 'admin',
+            'first_name' => 'admin',
+            'last_name' => 'admin',
             'username' => 'admin',
+            'user_type' => 'admin',
             'mobile' => '1234567890',
             'email' => 'admin@admin.com',
             'dob' => '1990-01-01',
-            'pancard' => 'ABCDE1234F',
-            'adharcard' => '123456789012',
-            'password' => Hash::make('password')
-        ]);
+            'password' => Hash::make('password'),
+        ]);        
     }
 }

@@ -22,12 +22,12 @@ class User extends Authenticatable
         'mobile',
         'email',
         'dob',
-        'pancard',
-        'adharcard',
+        // 'pancard',
+        // 'adharcard',
         'password',
-        'father_full_name',
+        // 'father_full_name',
         'user_type',
-        'gs_number',
+        // 'gs_number',
         // 'role'
     ];
 
