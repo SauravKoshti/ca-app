@@ -88,23 +88,6 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="pancard">PAN Card</label>
-                                                    <input type="text" class="form-control" id="pancard" name="pancard"
-                                                           placeholder="Enter PAN Card Number" >
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="adharcard">Aadhar Card</label>
-                                                    <input type="text" class="form-control" id="adharcard"
-                                                           name="adharcard" placeholder="Enter Aadhar Card Number"
-                                                           >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
                                                     <label>Gender</label><br />
                                                     <div class="d-flex">
                                                         <div class="form-check">
