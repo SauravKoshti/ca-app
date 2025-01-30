@@ -18,3 +18,4 @@ class GroupSeeder extends Seeder
         \App\Models\Group::factory(50)->create();
     }
 }
+   
