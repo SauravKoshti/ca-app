@@ -133,7 +133,7 @@ class UserController extends Controller
 
     public Function getDocument($request) 
     {
-        dd(Auth::getUser(),$request);
+        dd(Auth::user(),$request);
         return view('admin.users.document');
     }
 }

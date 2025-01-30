@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('father_full_name');
             $table->date('dob');
             $table->string('email')->unique();
-            $table->enum('user_type', ['business', 'private'])->default('private');
-            $table->string('gs_number')->nullable();
+            $table->enum('user_type', ['business', 'private','admin'])->default('private');
+            $table->string('gst_number')->nullable();
             $table->string('role')->default('user');
             $table->string('password');
+            // $table->foreignId('group_id')->nullable()->constrained('groups')->onDelete('set null');
+
             $table->timestamps();
         });
     }

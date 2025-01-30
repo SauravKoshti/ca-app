@@ -9,8 +9,6 @@ class Document extends Model
 {
     use HasFactory;
 
-    protected $table = 'documents';
-
     protected $fillable = [
         'user_id',
         'created_by',
@@ -20,27 +18,65 @@ class Document extends Model
         'document_image_path',
     ];
 
-    /**
-     * Get the user that owns the document.
-     */
+    // Relationships
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * Get the user who created the document.
-     */
-    public function createdBy()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    /**
-     * Get the user who uploaded the document.
-     */
-    public function uploadedBy()
+    public function uploader()
     {
         return $this->belongsTo(User::class, 'uploaded_by');
     }
+}
+
+
+// namespace App\Models;
+
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Model;
+
+// class Document extends Model
+// {
+//     use HasFactory;
+
+//     protected $table = 'documents';
+
+//     protected $fillable = [
+//         'user_id',
+//         'created_by',
+//         'uploaded_by',
+//         'document_name',
+//         'doc_type',
+//         'document_image_path',
+//     ];
+
+//     /**
+//      * Get the user that owns the document.
+//      */
+//     public function user()
+//     {
+//         return $this->belongsTo(User::class);
+//     }
+
+//     /**
+//      * Get the user who created the document.
+//      */
+//     public function createdBy()
+//     {
+//         return $this->belongsTo(User::class, 'created_by');
+//     }
+
+//     /**
+//      * Get the user who uploaded the document.
+//      */
+//     public function uploadedBy()
+//     {
+//         return $this->belongsTo(User::class, 'uploaded_by');
+//     }
 }

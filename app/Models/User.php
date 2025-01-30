@@ -22,13 +22,9 @@ class User extends Authenticatable
         'mobile',
         'email',
         'dob',
-        // 'pancard',
-        // 'adharcard',
         'password',
-        // 'father_full_name',
+        'father_full_name',
         'user_type',
-        // 'gs_number',
-        // 'role'
     ];
 
     // The attributes that should be hidden for arrays
@@ -42,5 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // If you use any custom methods for the User model, you can add them here.
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+    
 }

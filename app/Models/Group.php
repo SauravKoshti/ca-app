@@ -13,4 +13,9 @@ class Group extends Model
         'name',
         'description',
     ];
+    public function group()
+{
+    return $this->belongsTo(Group::class);
+}
+
 }
