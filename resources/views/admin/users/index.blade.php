@@ -75,10 +75,6 @@
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         
-                                                        <a href="{{ route('users.document', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="User document">
-                                                        <i class="fa-solid fa-file-arrow-up"></i>
-                                                        </a>
-
                                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
                                                             <i class="fa fa-edit"></i>
                                                         </a>

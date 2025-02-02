@@ -39,9 +39,18 @@ class GroupController extends Controller
         return redirect()->route('groups.index')->with('success', 'Group created successfully.');
     }
 
+    public function show(Group $group)
+    {
+        $groupData =Group::where('id', $group->id)->first();
+        $userData = User::all();
+        $userListData = User::where('group_id',$group->id)->get();
+        return view('admin.groups.show', compact('groupData','userData','userListData'));
+    }
+
     public function edit(Group $group)
     {
-        return view('admin.groups.edit', compact('group'));
+        $userData = User::all();    
+        return view('admin.groups.edit', compact('group','userData'));
     }
 
     public function update(Request $request, Group $group)
@@ -58,5 +67,19 @@ class GroupController extends Controller
     {
         $group->delete();
         return redirect()->route('groups.index')->with('success', 'Group deleted successfully.');
+    }
+
+    public function storeUsersGroup(Request $request) 
+    {
+        if ($request->usersGroup) {
+            foreach($request->usersGroup as $userData) {
+                // dd($request);
+                $user = User::findOrFail($userData);
+                $groupData = $user->update([
+                    'group_id' => $request->group_id
+                ]);
+            }
+            return redirect()->route('groups.store.users')->with('success', 'Group updated successfully.');
+        }
     }
 }

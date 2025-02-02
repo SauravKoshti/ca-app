@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Providers\FoundationServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -71,7 +72,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', compact('user'));
+        $documentDataArray = Document::where('user_id', $user->id)->get();
+        $loggedInUserId = Auth::user()->id;
+        return view('admin.users.show', compact('user','documentDataArray','loggedInUserId'));
     }
 
     /**
@@ -131,9 +134,42 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 
-    public Function getDocument($request) 
+    public function documentDestroy(Document $document)
     {
-        dd(Auth::user(),$request);
-        return view('admin.users.document');
+        $document->delete();
+        return view('users.show')->with('success', 'Document deleted successfully.');
     }
+
+
+    public Function getDocument($user) 
+    {
+        $userId = $user;
+        $documentDataArray = Document::where('user_id', $userId)->get();
+        $userData = User::where('id', $userId)->first();
+        // dd($userData, $user);
+        $loggedInUserId = Auth::user()->id;
+        return view('admin.users.document',compact('loggedInUserId','userId','userData','documentDataArray'));
+    }
+
+    public Function uploadDocument(Request $request) 
+    {
+        $request->validate([
+            // 'name' => 'required',
+            // 'detail' => 'required',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $input = $request->all();
+        if ($image = $request->file('document_image_path')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['document_image_path'] = $destinationPath.$profileImage;
+        } 
+    
+        Document::create($input);
+        return redirect()->route('users.document', $request->user_id)->with('success', 'User deleted successfully.');
+        // return view('admin.users.document',$request->user_id)
+        //                 ->with('success','Product created successfully.');
+    }
+
 }

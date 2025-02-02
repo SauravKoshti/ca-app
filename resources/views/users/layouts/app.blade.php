@@ -8,7 +8,7 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="{{ asset('assets/user/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/user/css/style.css') }}">
-    <!-- <link rel="stylesheet" href="{{ asset('assets/user/css/custom.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/user/css/custom.css') }}">    
 </head>
 
 <body>

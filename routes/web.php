@@ -50,7 +50,11 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.e
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+Route::delete('/users/document/{document}', [UserController::class, 'documentDestroy'])->name('users.document.destroy');
+
 Route::get('/users/document/{user}', [UserController::class, 'getDocument'])->name('users.document');
+Route::post('/users/document', [UserController::class, 'uploadDocument'])->name('users.upload.document');
+Route::get('/users/document/list', [UserController::class, 'documentList'])->name('users.document.list');
 
 // Group Routes
 Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
@@ -60,7 +64,8 @@ Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.sh
 Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
 Route::put('/groups/{group}', [GroupController::class, 'update'])->name('groups.update');
 Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
-
+Route::post('/groups', [GroupController::class, 'storeUsersGroup'])->name('groups.store.users');
+// Route::get('/groups', [GroupController::class, 'getUsersGroup'])->name('groups.list.users');
 
 //});
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
