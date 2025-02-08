@@ -29,8 +29,6 @@ Route::get('/users/login', function () {
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
 Route::get('/register', [AuthController::class, 'registration'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
@@ -56,20 +54,19 @@ Route::get('/users/document/{user}', [UserController::class, 'getDocument'])->na
 Route::post('/users/document', [DocumentController::class, 'store'])->name('users.upload.document');
 Route::get('/users/document/list', [UserController::class, 'documentList'])->name('users.document.list');
 Route::post('/users/document/destroy', [DocumentController::class, 'documentDestroy'])->name('users.document.destroy');
+Route::post('/users/download/documents', [DocumentController::class, 'mergeDocuments'])->name('users.download.documents');
 
 // Group Routes
 Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
 Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
-Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
+Route::post('/groups/store', [GroupController::class, 'store'])->name('groups.store');
 Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
 Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
 Route::put('/groups/{group}', [GroupController::class, 'update'])->name('groups.update');
 Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
 Route::post('/groups', [GroupController::class, 'storeUsersGroup'])->name('groups.store.users');
-// Route::get('/groups', [GroupController::class, 'getUsersGroup'])->name('groups.list.users');
 
-//});
+
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
-
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
 Route::get('/services', [HomeController::class, 'services'])->name('services');

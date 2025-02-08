@@ -301,14 +301,20 @@
                     </div>
                     <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                         <div class="document-card">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between">
                                 <div class="card-title">Document List</div>
+                                <div>
+
+                                    <button class="btn btn-primary" onclick="downloadSelected('pdf')">Download Pdf</button>
+                                    <button class="btn btn-primary" onclick="downloadSelected('zip')">Download Zip</button>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <!-- <th>#</th> -->
+                                            <th>Select</th>
                                             <th>Document Name</th>
                                             <th>Document Type</th>
                                             <th>Document Image</th>
@@ -320,11 +326,14 @@
                                         @foreach ($documentDataArray as $documentData)
                                         <tr>
                                             <!-- <td>{{ $documentData }}</td> -->
+                                            <td>
+                                                <input type="checkbox" name="document_id" data-id="{{ $documentData->id }}">
+                                            </td>
                                             <td>{{ $documentData->document_name }}</td>
                                             <td>{{ $documentData->doc_type }}</td>
                                             <td>
                                                 <img src="{{ asset($documentData->document_image_path) }}"
-                                                    alt="Document Image">
+                                                    alt="Document Image" height="100" width="100">
 
                                             </td>
 
@@ -356,3 +365,40 @@
 </div>
 </div>
 @endsection
+<script>
+    function downloadSelected(type){
+        let allIds = [];
+        var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
+        checkboxes.forEach(function(checkbox) {
+            allIds.push(checkbox.getAttribute('data-id'));
+        });
+        console.log(allIds); // Output the array of all checked data-id values
+        $.ajax({
+            url: "{{ route('users.download.documents') }}",
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                type: type,
+                document_ids: allIds
+            },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function(response) {
+                var blob = new Blob([response], { type: 'application/pdf' });
+                var link = document.createElement('a');
+                if (type === 'pdf') {
+                    link.download = 'merged_document.pdf';
+                } else if (type === 'zip') {
+                    link.download = 'documents.zip';
+                }
+                link.href = window.URL.createObjectURL(blob);
+                link.click();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                console.log('Response:', xhr.responseText);
+            }
+        });
+    }
+</script>

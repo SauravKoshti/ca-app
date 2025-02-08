@@ -6,6 +6,8 @@ use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdi\PdfReader;
 
 class DocumentController extends Controller
 {
@@ -43,7 +45,7 @@ class DocumentController extends Controller
             'document_image_path' => $path,
         ]);
 
-        return redirect()->route('users.document', $request->user_id)->with('success', 'Document created successfully.');
+        return redirect()->route('users.show', $request->user_id)->with('success', 'Document created successfully.');
     }
 
     public function show($id)
@@ -56,7 +58,7 @@ class DocumentController extends Controller
     public function documentDestroy(Request $request)
     {
         Document::where('id', $request->id)->delete();
-        return redirect()->route('users.document', $request->user_id)->with('success', 'Document deleted successfully.');
+        return redirect()->route('users.show', $request->user_id)->with('success', 'Document deleted successfully.');
     }
 
     public function update(Request $request, $id)
@@ -89,4 +91,94 @@ class DocumentController extends Controller
 
         return response()->json(['message' => 'Document deleted successfully']);
     }
+
+    public function mergeDocuments(Request $request)
+    {
+        $request->validate([
+            'document_ids' => 'required|array',
+            'document_ids.*' => 'exists:documents,id',
+        ]);
+    
+        $documents = Document::whereIn('id', $request->document_ids)->get();
+    if ($request->type === 'pdf') {
+        return $this->downloadPdf($documents);
+    } else if ($request->type === 'zip') {
+        return $this->downloadZip($documents);
+    }
+}
+     
+    private function downloadPdf($documents)
+    {
+          // Initialize FPDI
+          $pdf = new Fpdi();
+          $pdf->SetAutoPageBreak(true, 10); // Enable auto page break
+      
+          foreach ($documents as $document) {
+              $filePath = public_path( $document->document_image_path);
+              if (!file_exists($filePath)) {
+                  \Log::error("File not found: " . $filePath);
+                  continue; // Skip missing files
+              }
+      
+              $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+      
+              if ($extension === 'pdf') {
+                  // Import PDF pages
+                  $pageCount = $pdf->setSourceFile($filePath);
+                  for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+                      $templateId = $pdf->importPage($pageNo);
+                      $size = $pdf->getTemplateSize($templateId);
+                      $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+                      $pdf->useTemplate($templateId);
+                  }
+              } elseif (in_array($extension, ['jpg', 'jpeg', 'png'])) {
+                  // Add image to PDF
+                  list($width, $height) = getimagesize($filePath);
+                  
+                  if (!$width || !$height) {
+                      \Log::error("Invalid image file: " . $filePath);
+                      continue;
+                  }
+      
+                  $pdf->AddPage();
+                  $pdf->Image($filePath, 10, 10, 190);
+              } else {
+                  \Log::error("Unsupported file type: " . $filePath);
+              }
+          }
+      
+          // Check if pages were added
+          if ($pdf->PageNo() == 0) {
+              return response()->json(['error' => 'No valid pages were added to the PDF'], 400);
+          }
+      
+          $outputPath = storage_path('app/public/merged_document.pdf');
+          $pdf->Output($outputPath, 'F');
+      
+          return response()->download($outputPath)->deleteFileAfterSend(true);
+    }
+
+    private function downloadZip($documents)
+    {
+        $zip = new \ZipArchive();
+        $zipFileName = storage_path('app/public/documents.zip');
+
+        if ($zip->open($zipFileName, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== true) {
+            return response()->json(['error' => 'Failed to create zip file'], 500);
+        }
+
+        foreach ($documents as $document) {
+            $filePath = public_path($document->document_image_path);
+            if (file_exists($filePath)) {
+            $zip->addFile($filePath, basename($filePath));
+            } else {
+            \Log::error("File not found: " . $filePath);
+            }
+        }
+
+        $zip->close();
+
+        return response()->download($zipFileName)->deleteFileAfterSend(true);
+    }
+
 }
