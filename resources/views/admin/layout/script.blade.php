@@ -12,4 +12,9 @@
     $(document).ready(function () {
         $("#basic-datatables").DataTable({});
     });
+    layout: {
+        topStart: {
+            buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+        }
+    }
 </script>

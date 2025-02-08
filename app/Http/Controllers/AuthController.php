@@ -21,7 +21,7 @@ class AuthController extends Controller
         return view('users.auth.registration');
     }
 
-      
+
     public function register(Request $request)
     {
         // Validate the request data
@@ -36,7 +36,7 @@ class AuthController extends Controller
         //     'userType' => 'required|in:business,private',
         //     'gstNumber' => 'nullable|string|required_if:userType,business',
         // ]);
-    
+
         // Check for validation errors
         // if ($validator->fails()) {
         //     return redirect()->back()->withErrors($validator)->withInput();
@@ -59,7 +59,7 @@ class AuthController extends Controller
         return redirect('login')->with('success', 'Registration successful!');
     }
 
-    
+
     // Handle login logic
     public function login(Request $request)
     {
@@ -69,15 +69,14 @@ class AuthController extends Controller
         //     'username' => 'required|userName',
         //     'password' => 'required',
         // ]);
-
         // Attempt to log the user in
         if (Auth::attempt(['username' => $request->userName, 'password' => $request->password])) {
             $request->session()->regenerate();
             $user = Auth::user();
             if ($user->user_type === 'admin') {
-                return redirect('users');    
+                return redirect('users');
             }
-            return redirect()->intended('users');
+            return redirect('/');
         }
 
         // Return with an error if login fails

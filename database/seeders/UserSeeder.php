@@ -30,19 +30,30 @@ class UserSeeder extends Seeder
             'pancard' => 'ABCDE1234F',
             'adharcard' => '123456789012',
             'password' => Hash::make('password')
-        ]);
+        ]);*/
 
-        
-        */
-        User::create([
-            'first_name' => 'admin',
-            'last_name' => 'admin',
-            'username' => 'admin',
-            'user_type' => 'admin',
-            'email' => 'admin@admin.com',
-            'dob' => '1990-01-01',
-            'father_full_name' => '',
-            'password' => Hash::make('password'),
-        ]);        
-    }
+User::create([
+    'first_name' => 'admin',
+    'last_name' => 'admin',
+    'username' => 'admin',
+    'user_type' => 'admin',
+    'mobile' => '1234567890',
+    'email' => 'admin@admin.com',
+    'dob' => '1990-01-01',
+    'password' => Hash::make('password'),
+    'father_full_name' => 'Admin Father',
+    'name' => 'Admin Name',
+    'address' => '123 Admin Street, Admin City',
+    'city' => 'Admin City',
+    'pincode' => '123456',
+    'aadhaar_card' => '1234-5678-9012',
+    'pan_card' => 'ABCDE1234F',
+    'gst_number' => null, // Keeping it optional
+    'anniversary_date' => null, // Keeping it optional
+    'role' => 'admin',
+    'created_at' => now(),
+    'updated_at' => now(),
+]);
+
+}
 }

@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id','desc')->get();
+        $users = User::orderBy('id', 'desc')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -35,34 +35,49 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'username' => 'required|string|unique:users,username|max:255',
-//            'mobile' => ['required', 'regex:/^[7-9][0-9]{9}$/'],
-            'password' => 'required|string|min:8',
-            'email' => 'required|email|unique:users,email',
-            'dob' => 'required|date',
-            // 'pancard' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/'], // PAN Card validation
-            // 'adharcard' => ['required', 'regex:/^\d{12}$/'], // Aadhar Card validation
-//            'password' => 'required|string|min:8|confirmed',
-        ]);
-        if ($validator->fails()) {
-            dd($validator->errors());
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-//        dd($request);
+        // $validated = $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'firstname' => 'required|string|max:255',
+        //     'lastname' => 'required|string|max:255',
+        //     'username' => 'required|string|unique:users,username|max:255',
+        //     'address' => 'required',
+        //     'city' => 'required|string|max:255',
+        //     'pincode' => 'required|string|max:10',
+        //     'aadhaar_card' => ['required', 'regex:/^\d{12}$/', 'unique:customers,aadhaar_card'], // Aadhar Card validation
+        //     'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/', 'unique:customers,pan_card'], // PAN Card validation
+        //     'email' => 'required|email|unique:users,email',
+        //     'gst_number' => 'nullable|string|unique:customers,gst_number',
+        //     'birthdate' => 'required|date',
+        //     'anniversary_date' => 'nullable|date',
+        //     'mobile_number' => ['required', 'regex:/^[7-9][0-9]{9}$/', 'unique:customers,mobile_number'],
+        //     'password' => 'required|string|min:8',
+        // ]);
+
+        // if ($validated->fails()) {
+        //     dd($validated->errors());
+        //     return redirect()->back()->withErrors($validated)->withInput();
+        // }
+        //        dd($request);
         User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'username' => $request->username,
-            'mobile' => $request->mobile,
+            'mobile' => $request->mobile_number,
             'password' => Hash::make($request->password),
             'email' => $request->email,
-            'dob' => $request->dob,
-            'pancard' => $request->pancard,
-            'adharcard' => $request->adharcard,
+            'dob' => $request->birthdate,
+            'pan_card' => $request->pan_card,
+            'aadhaar_card' => $request->aadhaar_card,
+            'name' => $request->name,
+            'address' => $request->address,
+            'city' => $request->city,
+            'pincode' => $request->pincode,
+            'gst_number' => $request->gst_number ?? null,
+            'anniversary_date' => $request->anniversary_date ?? null,
+            'user_type' => $request->user_type ?? 'private',
+            'role' => $request->role ?? 'user',
         ]);
+
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -73,8 +88,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         $documentDataArray = Document::where('user_id', $user->id)->get();
-        $loggedInUserId = Auth::user()->id;
-        return view('admin.users.show', compact('user','documentDataArray','loggedInUserId'));
+        $loggedInUserId = '1';
+        // dd($user);
+        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId'));
     }
 
     /**
@@ -90,23 +106,33 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validator = Validator::make($request->all(), [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-//            'username' => 'required|string|unique:users,username|max:255',
-//            'mobile' => ['required', 'regex:/^[7-9][0-9]{9}$/'],
-            'password' => 'required|string|min:8',
-//            'email' => 'required|email|unique:users,email',
-            'dob' => 'required|date',
-            // 'pancard' => ['nullable', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/'], // PAN Card validation
-            // 'adharcard' => ['nullable', 'regex:/^\d{12}$/'], // Aadhar Card validation
-//            'password' => 'required|string|min:8|confirmed',
-//            'password' => 'required|string|min:8|confirmed',
-        ]);
-        if ($validator->fails()) {
-            dd($validator->errors());
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+       // $validated = $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'firstname' => 'required|string|max:255',
+        //     'lastname' => 'required|string|max:255',
+        //     'username' => 'required|string|unique:users,username|max:255',
+        //     'address' => 'required',
+        //     'city' => 'required|string|max:255',
+        //     'pincode' => 'required|string|max:10',
+        //     'aadhaar_card' => ['required', 'regex:/^\d{12}$/', 'unique:customers,aadhaar_card'], // Aadhar Card validation
+        //     'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/', 'unique:customers,pan_card'], // PAN Card validation
+        //     'email' => 'required|email|unique:users,email',
+        //     'gst_number' => 'nullable|string|unique:customers,gst_number',
+        //     'birthdate' => 'required|date',
+        //     'anniversary_date' => 'nullable|date',
+        //     'mobile_number' => ['required', 'regex:/^[7-9][0-9]{9}$/', 'unique:customers,mobile_number'],
+        //     'password' => 'required|string|min:8',
+        // ]);
+
+        // if ($validated->fails()) {
+        //     dd($validated->errors());
+        //     return redirect()->back()->withErrors($validated)->withInput();
+        // }
+        //        dd($request);
+
+        $user = User::findOrFail($id);
+
+        // Update user fields
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -114,19 +140,29 @@ class UserController extends Controller
             'mobile' => $request->mobile,
             'email' => $request->email,
             'dob' => $request->dob,
-            'pancard' => $request->pancard,
-            'adharcard' => $request->adharcard,
+            'pan_card' => $request->pan_card,
+            'aadhaar_card' => $request->aadhaar_card,
+            'name' => $request->name,
+            'address' => $request->address,
+            'city' => $request->city,
+            'pincode' => $request->pincode,
+            'gst_number' => $request->gst_number ?? null,
+            'anniversary_date' => $request->anniversary_date ?? null,
+            'user_type' => $request->user_type,
+            'role' => $request->role,
         ]);
 
-        if ($request->password) {
-            $user->update(['password' => Hash::make($request->password)]);
+        // Update password only if provided
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
         }
-
         return redirect()->route('users.index')->with('success', 'User updated successfully!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Resmove the specified resource from storage.
      */
     public function destroy(User $user)
     {
@@ -135,17 +171,17 @@ class UserController extends Controller
     }
 
 
-    public Function getDocument($user) 
+    public function getDocument($user)
     {
         $userId = $user;
         $documentDataArray = Document::where('user_id', $userId)->get();
         $userData = User::where('id', $userId)->first();
         // dd($userData, $user);
         $loggedInUserId = Auth::user()->id;
-        return view('admin.users.document',compact('loggedInUserId','userId','userData','documentDataArray'));
+        return view('admin.users.document', compact('loggedInUserId', 'userId', 'userData', 'documentDataArray'));
     }
 
-    public Function uploadDocument(Request $request) 
+    public function uploadDocument(Request $request)
     {
         $request->validate([
             // 'name' => 'required',
@@ -157,13 +193,12 @@ class UserController extends Controller
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $input['document_image_path'] = $destinationPath.$profileImage;
-        } 
-    
+            $input['document_image_path'] = $destinationPath . $profileImage;
+        }
+
         Document::create($input);
         return redirect()->route('users.document', $request->user_id)->with('success', 'User deleted successfully.');
         // return view('admin.users.document',$request->user_id)
         //                 ->with('success','Product created successfully.');
     }
-
 }

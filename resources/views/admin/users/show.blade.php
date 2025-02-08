@@ -60,6 +60,139 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="firstname">First Name</label>
+                                                    <p class="form-control-static">{{ $user->first_name }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="lastname">Last Name</label>
+                                                    <p class="form-control-static">{{ $user->last_name }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="username">Username</label>
+                                                    <p class="form-control-static">{{ $user->username }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="mobile">Mobile</label>
+                                                    <p class="form-control-static">{{ $user->mobile }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <p class="form-control-static">{{ $user->email }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="password">Password</label>
+                                                    <p class="form-control-static">*******</p>
+                                                    <!-- Hide actual password -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="pancard">PAN Card</label>
+                                                    <p class="form-control-static">{{ $user->pan_card }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="adharcard">Aadhar Card</label>
+                                                    <p class="form-control-static">{{ $user->aadhaar_card }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>Gender</label>
+                                                    <p class="form-control-static">{{ $user->gender }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="dob">Date of Birth</label>
+                                                    <p class="form-control-static">{{ $user->dob }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="name">Name</label>
+                                                    <p class="form-control-static">{{ $user->name }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="fullname">Full Name</label>
+                                                    <p class="form-control-static">{{ $user->father_full_name }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="address">Address</label>
+                                                    <p class="form-control-static">{{ $user->address }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="city">City</label>
+                                                    <p class="form-control-static">{{ $user->city }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="gst">GST Number</label>
+                                                    <p class="form-control-static">{{ $user->gst_number ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="anniversary_date">Anniversary Date</label>
+                                                    <p class="form-control-static">{{ $user->anniversary_date ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="usertype">User Type</label>
+                                                    <p class="form-control-static">{{ ucfirst($user->user_type) }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="role">Role</label>
+                                                    <p class="form-control-static">{{ ucfirst($user->role) }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="firstname">First Name</label>
                                                     <p class="form-control-static">{{ $user->firstname }}</p>
                                                 </div>
                                             </div>
@@ -129,7 +262,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

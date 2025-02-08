@@ -43,6 +43,7 @@
                                     >
                                         <thead>
                                         <tr>
+                                            <th>select</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>UserName</th>
@@ -53,6 +54,7 @@
                                         </thead>
                                         <tfoot>
                                         <tr>
+                                            <th>select</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>UserName</th>
@@ -64,6 +66,7 @@
                                         <tbody>
                                         @foreach($users as $user)
                                             <tr>
+                                                <td><input type="checkbox" name="documenName" id="documenId"></td>
                                                 <td>{{ $user->first_name }} {{ $user->last_name }} </td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->username }}</td>
@@ -74,7 +77,7 @@
                                                         <a href="{{ route('users.show', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Show User">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        
+
                                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
@@ -100,4 +103,4 @@
         </div>
     </div>
 @endsection
-{{--@include('admin.layout.change-theme-color')--}}
+{{-- @include('admin.layout.script') --}}
