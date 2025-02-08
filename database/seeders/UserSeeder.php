@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Seed 50 users using UserFactory
-        User::factory(50)->create();
+        // User::factory(50)->create();
 
         // Alternatively, you can manually create users like this:
         /*
@@ -34,15 +34,15 @@ class UserSeeder extends Seeder
 
         
         */
-        // User::create([
-        //     'first_name' => 'admin',
-        //     'last_name' => 'admin',
-        //     'username' => 'admin',
-        //     'user_type' => 'admin',
-        //     'mobile' => '1234567890',
-        //     'email' => 'admin@admin.com',
-        //     'dob' => '1990-01-01',
-        //     'password' => Hash::make('password'),
-        // ]);        
+        User::create([
+            'first_name' => 'admin',
+            'last_name' => 'admin',
+            'username' => 'admin',
+            'user_type' => 'admin',
+            'email' => 'admin@admin.com',
+            'dob' => '1990-01-01',
+            'father_full_name' => '',
+            'password' => Hash::make('password'),
+        ]);        
     }
 }
