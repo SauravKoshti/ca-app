@@ -19,8 +19,16 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'username',
-        'mobile',
+        'name',
+        'address',
+        'city',
+        'pincode',
+        'aadhaar_card',
+        'pan_card',
         'email',
+        'gst_number',
+        'anniversary_date',
+        'mobile',
         'dob',
         'password',
         'father_full_name',
@@ -43,5 +51,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Group::class);
     }
-    
 }

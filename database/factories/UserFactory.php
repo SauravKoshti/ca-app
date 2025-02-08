@@ -1,33 +1,38 @@
 <?php
-
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\[User]>
- */
 class UserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = User::class;
+
     public function definition(): array
     {
         return [
-            'first_name' => $this->faker->firstName,   // Ensure 'firstname' is populated
-            'last_name' => $this->faker->lastName,
-            'username' => $this->faker->unique()->userName,
-            'father_full_name' => $this->faker->lastName,
-            // 'mobile' => $this->faker->unique()->phoneNumber,
-            'email' => $this->faker->unique()->safeEmail,
-            'dob' => $this->faker->date('Y-m-d', '2000-01-01'),
-            // 'pancard' => strtoupper($this->faker->bothify('?????#####')),
-            // 'adharcard' => $this->faker->numerify('############'),
+            'username' => $this->faker->unique()->userName(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'father_full_name' => $this->faker->name('male'),
+            'name' => $this->faker->name(),
+            'address' => $this->faker->address(),
+            'city' => $this->faker->city(),
+            // 'pincode' => $this->faker->postcode('[0-9]{6}'),
+            'aadhaar_card' => $this->faker->unique()->numerify('####-####-####'),
+            'pan_card' => $this->faker->unique()->bothify('?????####?'),
+            'email' => $this->faker->unique()->safeEmail(),
+            'gst_number' => $this->faker->optional()->regexify('[0-9A-Z]{15}'), // Optional GST Number
+            'anniversary_date' => $this->faker->optional()->date(),
+            'mobile' => $this->faker->unique()->numerify('##########'),
+            'dob' => $this->faker->date(),
+            'user_type' => $this->faker->randomElement(['business', 'private', 'admin']),
+            'role' => 'user', // Default role
             'password' => Hash::make('password'), // Default password
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

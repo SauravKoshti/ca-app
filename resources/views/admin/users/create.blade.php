@@ -26,7 +26,7 @@
             </ul>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
                 <div class="container mt-4">
                     <div class="row">
                         <div class="col-md-3">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col">
                 <!-- Tab Content -->
                 <div class="tab-content" id="v-pills-tabContent">
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <form action="{{ route('users.store') }}" method="POST">
+                                        {{-- <form action="{{ route('users.store') }}" method="POST">
                                             @csrf
                                             <div class="col">
                                                 <div class="row">
@@ -170,6 +170,125 @@
                                                 <button type="submit" class="btn btn-primary mt-3">Create
                                                     User</button>
                                             </div>
+                                        </form> --}}
+
+                                        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="firstname">First Name <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="firstname" name="firstname"
+                                                                placeholder="Enter First Name" required oninput="updateFullName()">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="lastname">Last Name <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                                                placeholder="Enter Last Name" required oninput="updateFullName()">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="fullname">Full Name <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="fullname" name="fullname"
+                                                                placeholder="Full Name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="username">Username <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="username" name="username"
+                                                                placeholder="Enter Username" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="mobile">Mobile <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="mobile" name="mobile"
+                                                                placeholder="Enter Mobile Number" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="email">Email <span class="text-danger">*</span></label>
+                                                            <input type="email" class="form-control" id="email" name="email"
+                                                                placeholder="Enter Email" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="password">Password <span class="text-danger">*</span></label>
+                                                            <input type="password" class="form-control" id="password" name="password"
+                                                                placeholder="Enter Password" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label>Gender <span class="text-danger">*</span></label><br />
+                                                            <div class="d-flex">
+                                                                <div class="form-check me-3">
+                                                                    <input class="form-check-input" type="radio" name="gender" value="Male" id="male" required>
+                                                                    <label class="form-check-label" for="male">Male</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="gender" value="Female" id="female" required>
+                                                                    <label class="form-check-label" for="female">Female</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="dob">Date of Birth <span class="text-danger">*</span></label>
+                                                            <input type="date" class="form-control" id="dob" name="dob" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                {{-- <h4>Upload Documents</h4>
+                                                <div class="mb-3">
+                                                    <label>Document Name: <span class="text-danger">*</span></label>
+                                                    <input type="text" name="name" class="form-control" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label>Document Type: <span class="text-danger">*</span></label>
+                                                    <select name="type" class="form-control" required>
+                                                        <option value="aadhar_card">Aadhar Card</option>
+                                                        <option value="pan_card">Pan Card</option>
+                                                        <option value="form_16">Form 16</option>
+                                                        <option value="rc_book">RC Book</option>
+                                                        <option value="bank_statement">Bank Statement</option>
+                                                        <option value="fd_statement">FD / Statement</option>
+                                                        <option value="loan_certificate">Loan / Interest Certificate</option>
+                                                        <option value="post">Post</option>
+                                                        <option value="purchase_bill">Purchase Bill</option>
+                                                        <option value="sales_bill">Sales Bill</option>
+                                                        <option value="gst_license">GST / Other License</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label>Upload File: <span class="text-danger">*</span></label>
+                                                    <input type="file" name="file" class="form-control" required>
+                                                </div> --}}
+
+                                                <button type="submit" class="btn btn-primary mt-3">Create User</button>
+                                            </div>
                                         </form>
 
                                     </div>
@@ -178,7 +297,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                    {{-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab">
                         <h3>Profile</h3>
                         <p>This is your profile information.</p>
@@ -334,7 +453,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
