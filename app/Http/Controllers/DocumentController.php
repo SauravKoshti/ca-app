@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class DocumentController extends Controller
 {
@@ -16,34 +17,46 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
+        $login_user_id = Auth::user()->id;
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'created_by' => 'required|exists:users,id',
-            'uploaded_by' => 'required|exists:users,id',
             'document_name' => 'required|string|max:255',
             'doc_type' => 'required|string|max:100',
-            'document_image' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'document_image_path' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
         // Store file
-        $path = $request->file('document_image')->store('documents', 'public');
+        $path = '';
+        if ($image = $request->file('document_image_path')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $path = $destinationPath.$profileImage;
+        }
 
         $document = Document::create([
             'user_id' => $request->user_id,
-            'created_by' => $request->created_by,
-            'uploaded_by' => $request->uploaded_by,
+            'created_by' => $login_user_id,
+            'uploaded_by' => $login_user_id,
             'document_name' => $request->document_name,
             'doc_type' => $request->doc_type,
             'document_image_path' => $path,
         ]);
 
-        return response()->json($document, 201);
+        return redirect()->route('users.document', $request->user_id)->with('success', 'Document created successfully.');
     }
 
     public function show($id)
     {
         $document = Document::with(['user', 'creator', 'uploader'])->findOrFail($id);
         return response()->json($document);
+    }
+    
+
+    public function documentDestroy(Request $request)
+    {
+        Document::where('id', $request->id)->delete();
+        return redirect()->route('users.document', $request->user_id)->with('success', 'Document deleted successfully.');
     }
 
     public function update(Request $request, $id)

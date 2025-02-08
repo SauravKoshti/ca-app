@@ -199,10 +199,14 @@
                                                         <i class="fas fa-download"></i> Download
                                                     </a>
 
-                                                    <form action="{{ route('users.destroy', $documentData->id) }}"
+                                                    <form action="{{ route('users.document.destroy') }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
-                                                        @method('DELETE')
+                                                        @method('post')
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $documentData->id }}">
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ $documentData->user_id }}">
                                                         <button type="submit"
                                                             class="btn btn-danger btn-sm">Delete</button>
                                                     </form>

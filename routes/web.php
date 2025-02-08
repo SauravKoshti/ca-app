@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,11 +51,11 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.e
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
-Route::delete('/users/document/{document}', [UserController::class, 'documentDestroy'])->name('users.document.destroy');
 
 Route::get('/users/document/{user}', [UserController::class, 'getDocument'])->name('users.document');
-Route::post('/users/document', [UserController::class, 'uploadDocument'])->name('users.upload.document');
+Route::post('/users/document', [DocumentController::class, 'store'])->name('users.upload.document');
 Route::get('/users/document/list', [UserController::class, 'documentList'])->name('users.document.list');
+Route::post('/users/document/destroy', [DocumentController::class, 'documentDestroy'])->name('users.document.destroy');
 
 // Group Routes
 Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
