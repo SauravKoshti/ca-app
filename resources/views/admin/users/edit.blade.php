@@ -216,10 +216,10 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="aadhaar_card">Aadhar Card</label>
-                                                    <input type="text" class="form-control" id="aadhaar_card"
-                                                        name="aadhaar_card"
-                                                        value="{{ old('aadhaar_card', $user->aadhaar_card) }}"
+                                                    <label for="aadhar_card">Aadhar Card</label>
+                                                    <input type="text" class="form-control" id="aadhar_card"
+                                                        name="aadhar_card"
+                                                        value="{{ old('aadhar_card', $user->aadhar_card) }}"
                                                         placeholder="Enter Aadhar Card Number">
                                                 </div>
                                             </div>

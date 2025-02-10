@@ -7,6 +7,7 @@ use Illuminate\Foundation\Providers\FoundationServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Document;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +44,7 @@ class UserController extends Controller
         //     'address' => 'required',
         //     'city' => 'required|string|max:255',
         //     'pincode' => 'required|string|max:10',
-        //     'aadhaar_card' => ['required', 'regex:/^\d{12}$/', 'unique:customers,aadhaar_card'], // Aadhar Card validation
+        //     'aadhar_card' => ['required', 'regex:/^\d{12}$/', 'unique:customers,aadhar_card'], // Aadhar Card validation
         //     'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/', 'unique:customers,pan_card'], // PAN Card validation
         //     'email' => 'required|email|unique:users,email',
         //     'gst_number' => 'nullable|string|unique:customers,gst_number',
@@ -67,7 +68,7 @@ class UserController extends Controller
             'email' => $request->email,
             'dob' => $request->birthdate,
             'pan_card' => $request->pan_card,
-            'aadhaar_card' => $request->aadhaar_card,
+            'aadhar_card' => $request->aadhar_card,
             'name' => $request->name,
             'address' => $request->address,
             'city' => $request->city,
@@ -89,8 +90,9 @@ class UserController extends Controller
     {
         $documentDataArray = Document::where('user_id', $user->id)->get();
         $loggedInUserId = '1';
+        $payments = Payment::where('user_id', $user->id)->get();
         // dd($user);
-        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId'));
+        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId','payments'));
     }
 
     /**
@@ -114,7 +116,7 @@ class UserController extends Controller
         //     'address' => 'required',
         //     'city' => 'required|string|max:255',
         //     'pincode' => 'required|string|max:10',
-        //     'aadhaar_card' => ['required', 'regex:/^\d{12}$/', 'unique:customers,aadhaar_card'], // Aadhar Card validation
+        //     'aadhar_card' => ['required', 'regex:/^\d{12}$/', 'unique:customers,aadhar_card'], // Aadhar Card validation
         //     'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/', 'unique:customers,pan_card'], // PAN Card validation
         //     'email' => 'required|email|unique:users,email',
         //     'gst_number' => 'nullable|string|unique:customers,gst_number',
@@ -130,7 +132,7 @@ class UserController extends Controller
         // }
         //        dd($request);
 
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user);
 
         // Update user fields
         $user->update([
@@ -141,7 +143,7 @@ class UserController extends Controller
             'email' => $request->email,
             'dob' => $request->dob,
             'pan_card' => $request->pan_card,
-            'aadhaar_card' => $request->aadhaar_card,
+            'aadhar_card' => $request->aadhar_card,
             'name' => $request->name,
             'address' => $request->address,
             'city' => $request->city,

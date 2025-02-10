@@ -4,10 +4,10 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Forms</h3>
+            <h3 class="fw-bold mb-3">User</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                    <a href="#">
+                <a href="{{ route('admin.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -15,13 +15,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Forms</a>
+                <a href="{{route('users.index')}}">User</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Basic Form</a>
+                    <a href="">User Create</a>
                 </li>
             </ul>
         </div>
@@ -56,7 +56,7 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title">Form Elements</div>
+                                    <div class="card-title">User Create</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -311,7 +311,7 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <div class="card-title">Form Elements</div>
+                                            <div class="card-title">Document Create</div>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">

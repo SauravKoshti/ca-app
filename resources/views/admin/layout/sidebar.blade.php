@@ -6,6 +6,9 @@
             <a href="index.html" class="logo">
                 <img src="{{ asset('assets/img/kaiadmin/logo_light.svg')}}" alt="navbar brand" class="navbar-brand"
                     height="20" />
+
+                <!-- <img src="{{ asset('assets/img/admin-backend.jpeg')}}" alt="navbar brand" class="navbar-brand img-fluid rounded"
+                    height="20" /> -->
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -30,15 +33,6 @@
                         <p>Dashboard</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="dashboard">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="../demo1/index.html">
-                                    <span class="sub-item">Dashboard 1</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#userManagement">
@@ -81,6 +75,13 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#contact" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <p>Contact Us</p>
+                        <span class="caret"></span>
+                    </a>
                 </li>
             </ul>
         </div>

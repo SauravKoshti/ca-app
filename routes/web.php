@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,10 +34,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'registration'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
+Route::get('/dashboard', [AuthController::class, 'index'])->name('admin.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+
+// Route::get('/dashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware('auth')->name('dashboard');
 
 
 //Route::prefix('admin')->name('admin.')->group(function () {
@@ -56,6 +60,13 @@ Route::get('/users/document/list', [UserController::class, 'documentList'])->nam
 Route::post('/users/document/destroy', [DocumentController::class, 'documentDestroy'])->name('users.document.destroy');
 Route::post('/users/download/documents', [DocumentController::class, 'mergeDocuments'])->name('users.download.documents');
 
+Route::get('/payment/{user}', [PaymentController::class, 'create'])->name('users.payment');
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('users.payment.store');
+Route::get('/payment/edit/{payment}', [PaymentController::class, 'edit'])->name('users.payment.edit');
+Route::get('/payment/list', [PaymentController::class, 'documentList'])->name('users.payment.list');
+Route::post('/payment/destroy', [PaymentController::class, 'destroy'])->name('users.payment.destroy');
+// Route::post('/payment/destroy/{payment}', [PaymentController::class, 'destroy'])->name('users.payment.destroy');
+
 // Group Routes
 Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
 Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
@@ -70,3 +81,7 @@ Route::post('/groups', [GroupController::class, 'storeUsersGroup'])->name('group
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
+
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');

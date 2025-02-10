@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // Show the login form
+    public function index()
+    {
+        $userTotal = User::get()->count();
+        $groupTotal = Group::get()->count();
+        $newUsers = User::latest()->take(10)->get();
+        return view('admin.dashboard', compact('userTotal', 'groupTotal','newUsers'));
+    }
+
     public function showLoginForm()
     {
         return view('users.auth.login');
@@ -41,7 +49,7 @@ class AuthController extends Controller
         // if ($validator->fails()) {
         //     return redirect()->back()->withErrors($validator)->withInput();
         // }
-    // dd($request->all());
+        // dd($request->all());
         // Save the user
         $user = User::create([
             'username' => $request->userName,
@@ -74,7 +82,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
             if ($user->user_type === 'admin') {
-                return redirect('users');
+                return redirect('dashboard');
             }
             return redirect('/');
         }

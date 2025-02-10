@@ -21,18 +21,17 @@ return new class extends Migration
             $table->text('address');
             $table->string('city');
             $table->string('pincode', 6);
-            $table->string('aadhaar_card')->unique();
+            $table->string('aadhar_card')->unique();
             $table->string('pan_card')->unique();
             $table->string('email')->unique();
             $table->string('gst_number')->nullable()->unique();
             $table->date('anniversary_date')->nullable();
             $table->string('mobile')->unique();
             $table->date('dob');
+            $table->boolean('gender')->default(1); 
             $table->enum('user_type', ['business', 'private','admin'])->default('private');
             $table->string('role')->default('user');
             $table->string('password');
-            // $table->foreignId('group_id')->nullable()->constrained('groups')->onDelete('set null');
-
             $table->timestamps();
         });
     }

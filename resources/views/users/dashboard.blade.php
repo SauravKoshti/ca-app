@@ -23,7 +23,7 @@
                 class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span> </a>
     </div>
 </section>
-<section class="hm-text-sec">
+<!-- <section class="hm-text-sec">
     <div class="container">
 
         <h1>Lorem Ipsum is simply dummy <span>text of the printing</span></h1>
@@ -38,7 +38,7 @@
             scrambled it to make a type specimen book.</p>
 
     </div>
-</section>
+</section> -->
 <section class="hm-services-sec">
     <div class="container">
         <h2>Our <span>Services</span></h2>
@@ -221,7 +221,7 @@
     </div>
   </div>
 </section> -->
-<section class="enquiry-sec">
+<!-- <section class="enquiry-sec">
     <div class="container">
         <h2>Request a <span>Call Back</span></h2>
         <div class="row">
@@ -255,5 +255,5 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 @endsection

@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Seed 50 users using UserFactory
-        // User::factory(50)->create();
+        User::factory(50)->create();
 
         // Alternatively, you can manually create users like this:
         /*
@@ -40,16 +40,17 @@ User::create([
     'mobile' => '1234567890',
     'email' => 'admin@admin.com',
     'dob' => '1990-01-01',
-    'password' => Hash::make('password'),
+    'password' => Hash::make('admin'),
     'father_full_name' => 'Admin Father',
     'name' => 'Admin Name',
     'address' => '123 Admin Street, Admin City',
     'city' => 'Admin City',
     'pincode' => '123456',
-    'aadhaar_card' => '1234-5678-9012',
+    'aadhar_card' => '123456789012',
     'pan_card' => 'ABCDE1234F',
-    'gst_number' => null, // Keeping it optional
-    'anniversary_date' => null, // Keeping it optional
+    'gst_number' => null, // Optional
+    'anniversary_date' => null, // Optional
+    'gender' => 1, // 1 for Male, 0 for Female
     'role' => 'admin',
     'created_at' => now(),
     'updated_at' => now(),

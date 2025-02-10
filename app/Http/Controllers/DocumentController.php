@@ -33,7 +33,7 @@ class DocumentController extends Controller
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $path = $destinationPath.$profileImage;
+            $path = $destinationPath . $profileImage;
         }
 
         $document = Document::create([
@@ -53,7 +53,7 @@ class DocumentController extends Controller
         $document = Document::with(['user', 'creator', 'uploader'])->findOrFail($id);
         return response()->json($document);
     }
-    
+
 
     public function documentDestroy(Request $request)
     {
@@ -98,64 +98,64 @@ class DocumentController extends Controller
             'document_ids' => 'required|array',
             'document_ids.*' => 'exists:documents,id',
         ]);
-    
+
         $documents = Document::whereIn('id', $request->document_ids)->get();
-    if ($request->type === 'pdf') {
-        return $this->downloadPdf($documents);
-    } else if ($request->type === 'zip') {
-        return $this->downloadZip($documents);
+        if ($request->type === 'pdf') {
+            return $this->downloadPdf($documents);
+        } else if ($request->type === 'zip') {
+            return $this->downloadZip($documents);
+        }
     }
-}
-     
+
     private function downloadPdf($documents)
     {
-          // Initialize FPDI
-          $pdf = new Fpdi();
-          $pdf->SetAutoPageBreak(true, 10); // Enable auto page break
-      
-          foreach ($documents as $document) {
-              $filePath = public_path( $document->document_image_path);
-              if (!file_exists($filePath)) {
-                  \Log::error("File not found: " . $filePath);
-                  continue; // Skip missing files
-              }
-      
-              $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
-      
-              if ($extension === 'pdf') {
-                  // Import PDF pages
-                  $pageCount = $pdf->setSourceFile($filePath);
-                  for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-                      $templateId = $pdf->importPage($pageNo);
-                      $size = $pdf->getTemplateSize($templateId);
-                      $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
-                      $pdf->useTemplate($templateId);
-                  }
-              } elseif (in_array($extension, ['jpg', 'jpeg', 'png'])) {
-                  // Add image to PDF
-                  list($width, $height) = getimagesize($filePath);
-                  
-                  if (!$width || !$height) {
-                      \Log::error("Invalid image file: " . $filePath);
-                      continue;
-                  }
-      
-                  $pdf->AddPage();
-                  $pdf->Image($filePath, 10, 10, 190);
-              } else {
-                  \Log::error("Unsupported file type: " . $filePath);
-              }
-          }
-      
-          // Check if pages were added
-          if ($pdf->PageNo() == 0) {
-              return response()->json(['error' => 'No valid pages were added to the PDF'], 400);
-          }
-      
-          $outputPath = storage_path('app/public/merged_document.pdf');
-          $pdf->Output($outputPath, 'F');
-      
-          return response()->download($outputPath)->deleteFileAfterSend(true);
+        // Initialize FPDI
+        $pdf = new Fpdi();
+        $pdf->SetAutoPageBreak(true, 10); // Enable auto page break
+
+        foreach ($documents as $document) {
+            $filePath = public_path($document->document_image_path);
+            if (!file_exists($filePath)) {
+                \Log::error("File not found: " . $filePath);
+                continue; // Skip missing files
+            }
+
+            $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+
+            if ($extension === 'pdf') {
+                // Import PDF pages
+                $pageCount = $pdf->setSourceFile($filePath);
+                for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+                    $templateId = $pdf->importPage($pageNo);
+                    $size = $pdf->getTemplateSize($templateId);
+                    $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+                    $pdf->useTemplate($templateId);
+                }
+            } elseif (in_array($extension, ['jpg', 'jpeg', 'png'])) {
+                // Add image to PDF
+                list($width, $height) = getimagesize($filePath);
+
+                if (!$width || !$height) {
+                    \Log::error("Invalid image file: " . $filePath);
+                    continue;
+                }
+
+                $pdf->AddPage();
+                $pdf->Image($filePath, 10, 10, 190);
+            } else {
+                \Log::error("Unsupported file type: " . $filePath);
+            }
+        }
+
+        // Check if pages were added
+        if ($pdf->PageNo() == 0) {
+            return response()->json(['error' => 'No valid pages were added to the PDF'], 400);
+        }
+
+        $outputPath = storage_path('app/public/merged_document.pdf');
+        $pdf->Output($outputPath, 'F');
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 
     private function downloadZip($documents)
@@ -170,9 +170,9 @@ class DocumentController extends Controller
         foreach ($documents as $document) {
             $filePath = public_path($document->document_image_path);
             if (file_exists($filePath)) {
-            $zip->addFile($filePath, basename($filePath));
+                $zip->addFile($filePath, basename($filePath));
             } else {
-            \Log::error("File not found: " . $filePath);
+                \Log::error("File not found: " . $filePath);
             }
         }
 
@@ -180,5 +180,4 @@ class DocumentController extends Controller
 
         return response()->download($zipFileName)->deleteFileAfterSend(true);
     }
-
 }

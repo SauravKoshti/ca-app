@@ -23,12 +23,13 @@ class User extends Authenticatable
         'address',
         'city',
         'pincode',
-        'aadhaar_card',
+        'aadhar_card',
         'pan_card',
         'email',
         'gst_number',
         'anniversary_date',
         'mobile',
+        'gender',
         'dob',
         'password',
         'father_full_name',
@@ -50,5 +51,10 @@ class User extends Authenticatable
     public function group()
     {
         return $this->belongsTo(Group::class);
+    }
+    
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }
