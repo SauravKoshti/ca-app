@@ -36,18 +36,21 @@ class PaymentController extends Controller
         return view('admin.users.editpayment', compact('payment'));
     }
 
-    public function update(Request $request, Payment $payment)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'discuss_fees' => 'required|numeric',
-        ]);
-
+        // Find the payment by ID
+        $payment = Payment::findOrFail($id);
+    
+        // Validate and update the payment
         $payment->update([
-            'discuss_fees' => $request->discuss_fees,
+            'discuss_fees' => $request->input('discuss_fees'),
+            'paid_fees' => $request->input('paid_fees')
         ]);
-
-        return redirect()->route('users.show', $payment->user_id)->with('success', 'Payment updated successfully.');
+    
+        // Redirect back with success message
+        return redirect()->route('users.index')->with('success', 'Payment updated successfully!');
     }
+    
 
     
     public function destroy(Request $request)

@@ -12,7 +12,7 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
-            'username' => $this->faker->unique()->userName,
+            'username' => $this->faker->unique()->username,
             'user_type' => $this->faker->randomElement(['business', 'private', 'admin']),
             'mobile' => $this->faker->unique()->numerify('##########'),
             'email' => $this->faker->unique()->safeEmail,

@@ -32,10 +32,16 @@
                                 <div class="form-group">
                                     <label for="name"><i class="fa fa-user text-primary"></i> Name</label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Your Name">
+                                    @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="email"><i class="fa fa-envelope text-primary"></i> Email</label>
                                     <input type="email" id="email" name="email" class="form-control" placeholder="Your Email">
+                                    @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="mobile"><i class="fa fa-user text-primary"></i> Phone Number</label>
@@ -44,6 +50,9 @@
                                 <div class="form-group">
                                     <label for="message"><i class="fa fa-comment text-primary"></i> Message</label>
                                     <textarea id="message" name="message" class="form-control" rows="4" placeholder="Your Message"></textarea>
+                                    @if ($errors->has('message'))
+                                    <span class="text-danger">{{ $errors->first('message') }}</span>
+                                    @endif
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block mt-3">
                                     <i class="fa fa-paper-plane"></i> Submit
@@ -53,7 +62,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -180,21 +180,21 @@
                                                         <div class="form-group">
                                                             <label for="firstname">First Name <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" id="firstname" name="firstname"
-                                                                placeholder="Enter First Name" required oninput="updateFullName()">
+                                                                placeholder="Enter First Name"  oninput="updateFullName()">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="lastname">Last Name <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" id="lastname" name="lastname"
-                                                                placeholder="Enter Last Name" required oninput="updateFullName()">
+                                                                placeholder="Enter Last Name"  oninput="updateFullName()">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="fullname">Full Name <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" id="fullname" name="fullname"
-                                                                placeholder="Full Name" required>
+                                                                placeholder="Full Name" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,14 +204,14 @@
                                                         <div class="form-group">
                                                             <label for="username">Username <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" id="username" name="username"
-                                                                placeholder="Enter Username" required>
+                                                                placeholder="Enter Username" >
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="mobile">Mobile <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" id="mobile" name="mobile"
-                                                                placeholder="Enter Mobile Number" required>
+                                                                placeholder="Enter Mobile Number" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,14 +221,14 @@
                                                         <div class="form-group">
                                                             <label for="email">Email <span class="text-danger">*</span></label>
                                                             <input type="email" class="form-control" id="email" name="email"
-                                                                placeholder="Enter Email" required>
+                                                                placeholder="Enter Email" >
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="password">Password <span class="text-danger">*</span></label>
                                                             <input type="password" class="form-control" id="password" name="password"
-                                                                placeholder="Enter Password" required>
+                                                                placeholder="Enter Password" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -239,11 +239,11 @@
                                                             <label>Gender <span class="text-danger">*</span></label><br />
                                                             <div class="d-flex">
                                                                 <div class="form-check me-3">
-                                                                    <input class="form-check-input" type="radio" name="gender" value="Male" id="male" required>
+                                                                    <input class="form-check-input" type="radio" name="gender" value="Male" id="male" >
                                                                     <label class="form-check-label" for="male">Male</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="gender" value="Female" id="female" required>
+                                                                    <input class="form-check-input" type="radio" name="gender" value="Female" id="female" >
                                                                     <label class="form-check-label" for="female">Female</label>
                                                                 </div>
                                                             </div>
@@ -252,7 +252,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="dob">Date of Birth <span class="text-danger">*</span></label>
-                                                            <input type="date" class="form-control" id="dob" name="dob" required>
+                                                            <input type="date" class="form-control" id="dob" name="dob" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,12 +262,12 @@
                                                 {{-- <h4>Upload Documents</h4>
                                                 <div class="mb-3">
                                                     <label>Document Name: <span class="text-danger">*</span></label>
-                                                    <input type="text" name="name" class="form-control" required>
+                                                    <input type="text" name="name" class="form-control" >
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label>Document Type: <span class="text-danger">*</span></label>
-                                                    <select name="type" class="form-control" required>
+                                                    <select name="type" class="form-control" >
                                                         <option value="aadhar_card">Aadhar Card</option>
                                                         <option value="pan_card">Pan Card</option>
                                                         <option value="form_16">Form 16</option>
@@ -284,7 +284,7 @@
 
                                                 <div class="mb-3">
                                                     <label>Upload File: <span class="text-danger">*</span></label>
-                                                    <input type="file" name="file" class="form-control" required>
+                                                    <input type="file" name="file" class="form-control" >
                                                 </div> --}}
 
                                                 <button type="submit" class="btn btn-primary mt-3">Create User</button>
@@ -417,12 +417,12 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Document Name:</label>
-                                                        <input type="text" name="name" class="form-control" required>
+                                                        <input type="text" name="name" class="form-control" >
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label>Document Type:</label>
-                                                        <select name="type" class="form-control" required>
+                                                        <select name="type" class="form-control" >
                                                             <option value="aadhar_card">Aadhar Card</option>
                                                             <option value="pan_card">Pan Card</option>
                                                             <option value="form_16">Form 16</option>
@@ -440,7 +440,7 @@
 
                                                     <div class="mb-3">
                                                         <label>Upload File:</label>
-                                                        <input type="file" name="file" class="form-control" required>
+                                                        <input type="file" name="file" class="form-control" >
                                                     </div>
 
                                                     <button type="submit" class="btn btn-success">Upload</button>

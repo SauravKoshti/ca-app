@@ -77,8 +77,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#contact" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-home"></i>
+                <a href="{{route('contacts.index')}}">
+                        <i class="fas fa-users"></i>
                         <p>Contact Us</p>
                         <span class="caret"></span>
                     </a>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,8 @@ class AuthController extends Controller
         $userTotal = User::get()->count();
         $groupTotal = Group::get()->count();
         $newUsers = User::latest()->take(10)->get();
-        return view('admin.dashboard', compact('userTotal', 'groupTotal','newUsers'));
+        $inquiry = Contact::get()->count();
+        return view('admin.dashboard', compact('userTotal', 'groupTotal','newUsers','inquiry'));
     }
 
     public function showLoginForm()
@@ -52,7 +54,7 @@ class AuthController extends Controller
         // dd($request->all());
         // Save the user
         $user = User::create([
-            'username' => $request->userName,
+            'username' => $request->username,
             'first_name' => $request->firstName,
             'last_name' => $request->lastName,
             'father_full_name' => $request->fatherFullName,
@@ -73,12 +75,14 @@ class AuthController extends Controller
     {
         // dd($request);
         // Validate the input
-        // $request->validate([
-        //     'username' => 'required|userName',
-        //     'password' => 'required',
-        // ]);
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+        // dd($request);
+        
         // Attempt to log the user in
-        if (Auth::attempt(['username' => $request->userName, 'password' => $request->password])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
             $user = Auth::user();
             if ($user->user_type === 'admin') {
@@ -88,9 +92,7 @@ class AuthController extends Controller
         }
 
         // Return with an error if login fails
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()->withErrors(['username' => 'Invalid credentials'])->withInput();
     }
 
     // Handle logout logic

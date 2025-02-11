@@ -54,146 +54,145 @@
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="card-header">
-                                <div class="card-title">Profile</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="firstname">First Name</label>
-                                                    <p class="form-control-static">{{ $user->first_name }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="lastname">Last Name</label>
-                                                    <p class="form-control-static">{{ $user->last_name }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="username">Username</label>
-                                                    <p class="form-control-static">{{ $user->username }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="mobile">Mobile</label>
-                                                    <p class="form-control-static">{{ $user->mobile }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="email">Email</label>
-                                                    <p class="form-control-static">{{ $user->email }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="password">Password</label>
-                                                    <p class="form-control-static">*******</p>
-                                                    <!-- Hide actual password -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="pancard">PAN Card</label>
-                                                    <p class="form-control-static">{{ $user->pan_card }}</p>
-                                                </div>
+                        <div class="card-header">
+                            <div class="card-title">Profile</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="firstname">First Name</label>
+                                                <p class="form-control-static">{{ $user->first_name }}</p>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="adharcard">Aadhar Card</label>
-                                                <p class="form-control-static">{{ $user->aadhar_card }}</p>
+                                                <label for="lastname">Last Name</label>
+                                                <p class="form-control-static">{{ $user->last_name }}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Gender</label>
-                                                    <p class="form-control-static">{{ $user->gender }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="dob">Date of Birth</label>
-                                                    <p class="form-control-static">{{ $user->dob }}</p>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Username</label>
+                                                <p class="form-control-static">{{ $user->username }}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <p class="form-control-static">{{ $user->name }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="fullname">Full Name</label>
-                                                    <p class="form-control-static">{{ $user->father_full_name }}</p>
-                                                </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="mobile">Mobile</label>
+                                                <p class="form-control-static">{{ $user->mobile }}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="address">Address</label>
-                                                    <p class="form-control-static">{{ $user->address }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="city">City</label>
-                                                    <p class="form-control-static">{{ $user->city }}</p>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <p class="form-control-static">{{ $user->email }}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="gst">GST Number</label>
-                                                    <p class="form-control-static">{{ $user->gst_number ?? 'N/A' }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="anniversary_date">Anniversary Date</label>
-                                                    <p class="form-control-static">
-                                                        {{ $user->anniversary_date ?? 'N/A' }}
-                                                    </p>
-                                                </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <p class="form-control-static">*******</p>
+                                                <!-- Hide actual password -->
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="usertype">User Type</label>
-                                                    <p class="form-control-static">{{ ucfirst($user->user_type) }}</p>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="pancard">PAN Card</label>
+                                                <p class="form-control-static">{{ $user->pan_card }}</p>
                                             </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="role">Role</label>
-                                                    <p class="form-control-static">{{ ucfirst($user->role) }}</p>
-                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="adharcard">Aadhar Card</label>
+                                            <p class="form-control-static">{{ $user->aadhar_card }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <p class="form-control-static">{{ $user->gender }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="dob">Date of Birth</label>
+                                                <p class="form-control-static">{{ $user->dob }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <p class="form-control-static">{{ $user->name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="fullname">Full Name</label>
+                                                <p class="form-control-static">{{ $user->father_full_name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address">Address</label>
+                                                <p class="form-control-static">{{ $user->address }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="city">City</label>
+                                                <p class="form-control-static">{{ $user->city }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="gst">GST Number</label>
+                                                <p class="form-control-static">{{ $user->gst_number ?? 'N/A' }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="anniversary_date">Anniversary Date</label>
+                                                <p class="form-control-static">
+                                                    {{ $user->anniversary_date ?? 'N/A' }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="usertype">User Type</label>
+                                                <p class="form-control-static">{{ ucfirst($user->user_type) }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="role">Role</label>
+                                                <p class="form-control-static">{{ ucfirst($user->role) }}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="user-profile-card">
@@ -208,21 +207,31 @@
                                     <input type="hidden" name="created_by" value="{{ $loggedInUserId }}">
                                     <div class="mb-3">
                                         <label>Document Name:</label>
-                                        <input type="text" name="document_name" class="form-control" required>
+                                        <input type="text" name="document_name" class="form-control">
+                                        @error('document_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
                                     </div>
                                     <div class="mb-3">
                                         <label>Document Type:</label>
-                                        <select name="doc_type" class="form-control" required>
+                                        <select name="doc_type" class="form-control">
                                             <option value="aadhar_card">Aadhar Card</option>
                                             <option value="pan_card">Pan Card</option>
                                             <option value="form_16">Form 16</option>
                                             <option value="rc_book">RC Book</option>
                                             <option value="bank_statement">Bank Statement</option>
                                         </select>
+                                        @error('doc_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label>Upload File:</label>
-                                        <input type="file" name="document_image_path" class="form-control" required>
+                                        <input type="file" name="document_image_path" class="form-control">
+                                        @error('document_image_path')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-success">Upload</button>
                                 </form>
@@ -234,7 +243,6 @@
                             <div class="card-header d-flex justify-content-between">
                                 <div class="card-title">Document List</div>
                                 <div>
-
                                     <button class="btn btn-primary" onclick="downloadSelected('pdf')">Download Pdf</button>
                                     <button class="btn btn-primary" onclick="downloadSelected('zip')">Download Zip</button>
                                 </div>
@@ -243,12 +251,10 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <!-- <th>#</th> -->
                                             <th>Select</th>
                                             <th>Document Name</th>
                                             <th>Document Type</th>
                                             <th>Document Image</th>
-                                            <!-- <th>Mobile</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -297,8 +303,14 @@
                                 <div class="Payment-card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="card-title">Payment List</div>
-                                        <div>
-                                            <a href="{{ route('users.payment', ['user' => $user->id]) }}">Add Payment</a>
+                                        <div class="d-flex align-items-center">
+                                            <a
+                                                href="{{ route('users.payment', ['user' => $user->id]) }}"
+                                                class="btn btn-primary btn-round ms-auto">
+                                                <!-- <i class="fa fa-money"></i> -->
+                                                <!-- <i class="fa-solid fa-indian-rupee-sign"></i> -->
+                                                Add Payment
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -318,10 +330,9 @@
                                                     <td>{{ $payment->paid_fees }}</td>
                                                     <td>{{ $payment->payment_date }}</td>
                                                     <td>
-                                                        <!-- <a href="{{ route('users.payment.edit', $payment->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
+                                                        <a href="{{ route('users.payment.edit', $payment->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
                                                             <i class="fa fa-edit"></i>
-                                                        </a> -->
-
+                                                        </a>
                                                         <form action="{{ route('users.payment.destroy') }}"
                                                             method="POST" style="display:inline;">
                                                             @csrf
@@ -332,13 +343,6 @@
                                                             <button type="submit"
                                                                 class="btn btn-danger btn-sm">Delete</button>
                                                         </form>
-                                                        <!-- <form action="{{ route('users.payment.destroy', $payment->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-
-                                        <button type="submit" class="btn btn-link btn-danger" data-bs-toggle="tooltip" title="Remove">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </form> -->
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -349,7 +353,7 @@
 
                             </div>
                         </div>
-                    </div> <!-- End of Document List Tab -->
+                    </div>
                 </div>
             </div>
         </div>

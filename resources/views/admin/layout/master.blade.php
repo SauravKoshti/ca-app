@@ -18,7 +18,7 @@
     </div>
     @include('admin.layout.change-theme-color')
 </div>
-{{--<div class="wrapper">--}}
+<!-- {{--<div class="wrapper">--}}
 {{--    @include('admin.layout.sidebar')--}}
 {{--    <div class="main-panel">--}}
 {{--        @include('admin.layout.header')--}}
@@ -27,7 +27,7 @@
 {{--        </div>--}}
 {{--        @include('admin.layout.footer')--}}
 {{--    </div>--}}
-{{--</div>--}}
+{{--</div>--}} -->
 @include('admin.layout.script')
 </body>
 </html>

@@ -28,14 +28,11 @@ class GroupController extends Controller
             'name' => 'required|unique:groups|max:255',
             'description' => 'nullable',
         ]);
-        if ($validator->fails()) {
-            dd($validator->errors(), $request->all());
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        Group::create([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+        // if ($validator->fails()) {
+        //     dd($validator->errors(), $request->all());
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+        Group::create($request->all());
         return redirect()->route('groups.index')->with('success', 'Group created successfully.');
     }
 

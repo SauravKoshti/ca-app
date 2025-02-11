@@ -62,10 +62,10 @@ Route::post('/users/download/documents', [DocumentController::class, 'mergeDocum
 
 Route::get('/payment/{user}', [PaymentController::class, 'create'])->name('users.payment');
 Route::post('/payment/store', [PaymentController::class, 'store'])->name('users.payment.store');
+Route::get('/payment/{user}', [PaymentController::class, 'create'])->name('users.payment');
 Route::get('/payment/edit/{payment}', [PaymentController::class, 'edit'])->name('users.payment.edit');
-Route::get('/payment/list', [PaymentController::class, 'documentList'])->name('users.payment.list');
+Route::put('/payment/{payment}', [PaymentController::class, 'update'])->name('users.payment.update');
 Route::post('/payment/destroy', [PaymentController::class, 'destroy'])->name('users.payment.destroy');
-// Route::post('/payment/destroy/{payment}', [PaymentController::class, 'destroy'])->name('users.payment.destroy');
 
 // Group Routes
 Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');

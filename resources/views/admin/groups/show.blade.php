@@ -49,7 +49,7 @@
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="card">
+                        <!-- <div class="card"> -->
                             <div class="card-header">
                                 <div class="card-title">Profile</div>
                             </div>
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="user-profile-card">

@@ -20,7 +20,7 @@
                             <div class="grid-item">
                                 <label for="userType" class="form-label">User Type</label>
                                 <select id="userType" name="userType" class="form-select form-control"
-                                    onchange="toggleGstNumberField()" required>
+                                    onchange="toggleGstNumberField()" >
                                     <option value="">Select an option</option>
                                     <option value="business">Business</option>
                                     <option value="private">Private User</option>
@@ -29,43 +29,43 @@
 
                             <div class="grid-item">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" id="username" name="userName" class="form-control"
-                                    placeholder="Enter your username" required>
+                                <input type="text" id="username" name="username" class="form-control"
+                                    placeholder="Enter your username" >
                             </div>
 
                             <div class="grid-item">
                                 <label for="firstName" class="form-label">First Name</label>
                                 <input type="text" id="firstName" name="firstName" class="form-control"
-                                    placeholder="Enter your first name" required>
+                                    placeholder="Enter your first name" >
                             </div>
 
                             <div class="grid-item">
                                 <label for="lastName" class="form-label">Last Name</label>
                                 <input type="text" id="lastName" name="lastName" class="form-control"
-                                    placeholder="Enter your last name" required>
+                                    placeholder="Enter your last name" >
                             </div>
 
                             <div class="grid-item">
                                 <label for="fatherFullName" class="form-label">Father's Full Name</label>
                                 <input type="text" id="fatherFullName" name="fatherFullName" class="form-control"
-                                    placeholder="Enter your father's full name" required>
+                                    placeholder="Enter your father's full name" >
                             </div>
 
                             <div class="grid-item">
                                 <label for="dob" class="form-label">Date of Birth</label>
-                                <input type="date" id="dob" name="dob" class="form-control" required>
+                                <input type="date" id="dob" name="dob" class="form-control" >
                             </div>
 
                             <div class="grid-item">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" id="email" name="email" class="form-control"
-                                    placeholder="Enter your email" required>
+                                    placeholder="Enter your email" >
                             </div>
 
                             <div class="grid-item">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" id="password" name="password" class="form-control"
-                                    placeholder="Enter your password" required>
+                                    placeholder="Enter your password" >
                             </div>
                         </div>
 

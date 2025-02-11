@@ -42,6 +42,7 @@
 
                             <!-- Second Column -->
                             <div class="col-md-6 about-box">
+                            <div class="services-box-item">
                                 <h3 class="fw-bold">Key Solutions</h3>
                                 <ul class="contact-us-list">
                                     <li>Providing clients with updated information on laws.</li>
@@ -50,6 +51,7 @@
                                     <li>Preparing challans for tax payments.</li>
                                     <li>Maintaining essential records.</li>
                                 </ul>
+                            </div>
                             </div>
                         </div> <!-- End Row -->
                     </div>
