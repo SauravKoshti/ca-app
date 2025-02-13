@@ -7,87 +7,110 @@
             <h2 class="fw-bold text-center mb-4 text-dark">Our Services</h2>
 
             <div class="row">
-                <div class="col-md-6">
-                    <h3>Mutual Fund</h3>
-                    <p>We perform for Indian sponsors in setting up private equity funds, venture capital funds, and
-                        mutual funds...</p>
-                    <ul>
-                        <li>Small Cap Fund</li>
-                        <li>Mid Cap Fund</li>
-                        <li>Large Cap Fund</li>
-                        <li>Multi-Cap Fund</li>
-                        <li>Flexi Cap Fund</li>
-                        <li>Hybrid Fund</li>
-                        <li>Balance Advantage Fund</li>
-                    </ul>
-                </div>
+    <div class="col-md-6">
+        <div class="service-box p-4 shadow-lg rounded">
+            <h3 class="fw-bold text-primary"><i class="fas fa-chart-line"></i> Mutual Fund</h3>
+            <p class="text-muted">
+                We perform for Indian sponsors in setting up private equity funds, venture capital funds, and mutual funds...
+            </p>
+            <ul class="service-list">
+                <li><i class="fas fa-check-circle text-success"></i> Small Cap Fund</li>
+                <li><i class="fas fa-check-circle text-success"></i> Mid Cap Fund</li>
+                <li><i class="fas fa-check-circle text-success"></i> Large Cap Fund</li>
+                <li><i class="fas fa-check-circle text-success"></i> Multi-Cap Fund</li>
+                <li><i class="fas fa-check-circle text-success"></i> Flexi Cap Fund</li>
+                <li><i class="fas fa-check-circle text-success"></i> Hybrid Fund</li>
+                <li><i class="fas fa-check-circle text-success"></i> Balance Advantage Fund</li>
+            </ul>
+        </div>
+    </div>
 
-                <div class="col-md-6">
-                    <h3>Taxation</h3>
-                    <p>We furnish quality income tax counseling and compliance with effective tax strategies...</p>
-                    <ul>
-                        <li>Income tax filing</li>
-                        <li>TDS returns</li>
-                        <li>Consultancy of income tax matters</li>
-                        <li>Tax refunds</li>
-                        <li>Tax planning & saving</li>
-                    </ul>
-                </div>
-            </div>
+    <div class="col-md-6">
+        <div class="service-box p-4 shadow-lg rounded">
+            <h3 class="fw-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> Taxation</h3>
+            <p class="text-muted">
+                We furnish quality income tax counseling and compliance with effective tax strategies...
+            </p>
+            <ul class="service-list">
+                <li><i class="fas fa-check-circle text-success"></i> Income tax filing</li>
+                <li><i class="fas fa-check-circle text-success"></i> TDS returns</li>
+                <li><i class="fas fa-check-circle text-success"></i> Consultancy of income tax matters</li>
+                <li><i class="fas fa-check-circle text-success"></i> Tax refunds</li>
+                <li><i class="fas fa-check-circle text-success"></i> Tax planning & saving</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-            <hr>
+<hr>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>GST</h3>
-                    <p>GST has been made known, and since then, our company has been functioning as the prime GST
-                        consultants...</p>
-                </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="service-box p-4 shadow-lg rounded">
+            <h3 class="fw-bold text-primary"><i class="fas fa-money-bill-wave"></i> GST</h3>
+            <p class="text-muted">
+                GST has been made known, and since then, our company has been functioning as the prime GST consultants...
+            </p>
+        </div>
+    </div>
 
-                <div class="col-md-6">
-                    <h3>Accounting</h3>
-                    <p>We provide complete accounting solutions for all types of companies and individual accounts...
-                    </p>
-                    <ul>
-                        <li>Partnership firm accounting</li>
-                        <li>Proprietorship firm accounting</li>
-                        <li>Financial preparation for accounts</li>
-                        <li>Inventory accounting</li>
-                        <li>Balance sheet finalization</li>
-                        <li>Support in annual audit activities</li>
-                    </ul>
-                </div>
-            </div>
+    <div class="col-md-6">
+        <div class="service-box p-4 shadow-lg rounded">
+            <h3 class="fw-bold text-primary"><i class="fas fa-calculator"></i> Accounting</h3>
+            <p class="text-muted">
+                We provide complete accounting solutions for all types of companies and individual accounts...
+            </p>
+            <ul class="service-list">
+                <li><i class="fas fa-check-circle text-success"></i> Partnership firm accounting</li>
+                <li><i class="fas fa-check-circle text-success"></i> Proprietorship firm accounting</li>
+                <li><i class="fas fa-check-circle text-success"></i> Financial preparation for accounts</li>
+                <li><i class="fas fa-check-circle text-success"></i> Inventory accounting</li>
+                <li><i class="fas fa-check-circle text-success"></i> Balance sheet finalization</li>
+                <li><i class="fas fa-check-circle text-success"></i> Support in annual audit activities</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-            <hr>
+<hr>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Pancards</h3>
-                    <p>We help you to make your PAN card because PAN card is required wherever ID and signature proof is
-                        required...</p>
-                </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="service-box p-4 shadow-lg rounded">
+            <h3 class="fw-bold text-primary"><i class="fas fa-id-card"></i> Pancards</h3>
+            <p class="text-muted">
+                We help you to make your PAN card because PAN card is required wherever ID and signature proof is required...
+            </p>
+        </div>
+    </div>
 
-                <div class="col-md-6">
-                    <h3>Our Mission</h3>
-                    <p>We began with the vocation of making it easier for our customers to start their businesses...</p>
-                </div>
-            </div>
+    <div class="col-md-6">
+        <div class="service-box p-4 shadow-lg rounded">
+            <h3 class="fw-bold text-primary"><i class="fas fa-bullseye"></i> Our Mission</h3>
+            <p class="text-muted">
+                We began with the vocation of making it easier for our customers to start their businesses...
+            </p>
+        </div>
+    </div>
+</div>
 
-            <hr>
+<hr>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Key Solutions</h3>
-                    <ul>
-                        <li>Providing information to clients on law updates</li>
-                        <li>Liaison with clients and departments on a regular basis</li>
-                        <li>Compilation of details needed for filing returns</li>
-                        <li>Preparation of challans needed for making tax payments</li>
-                        <li>Maintenance of records</li>
-                    </ul>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="service-box p-4 shadow-lg rounded">
+            <h3 class="fw-bold text-primary"><i class="fas fa-key"></i> Key Solutions</h3>
+            <ul class="service-list">
+                <li><i class="fas fa-lightbulb text-warning"></i> Providing information to clients on law updates</li>
+                <li><i class="fas fa-lightbulb text-warning"></i> Liaison with clients and departments on a regular basis</li>
+                <li><i class="fas fa-lightbulb text-warning"></i> Compilation of details needed for filing returns</li>
+                <li><i class="fas fa-lightbulb text-warning"></i> Preparation of challans needed for making tax payments</li>
+                <li><i class="fas fa-lightbulb text-warning"></i> Maintenance of records</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 
         </div>
     </div>

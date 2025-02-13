@@ -27,6 +27,34 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
+.about-box-content {
+    background: linear-gradient(to right, #ffffff, #f8f9fa);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* border-left: 5px solid #007bff; */
+}
+.about-us-box {
+	background: linear-gradient(to right, #ffffff, #f8f9fa);
+}
+.about-box-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.contact-us-list li {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.contact-us-list i {
+    margin-right: 10px;
+}
+
 .service-page-content,
 .contact-container {
     margin: 10px auto;
@@ -52,6 +80,7 @@
 
 .about-grid {
     display: flex;
+    /* background: linear-gradient(to right, #ffffff, #f8f9fa); */
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-between;
@@ -59,10 +88,11 @@
 
 .about-box {
     flex: 1;
-    background: $secondary-color;
+    /* background: $secondary-color; */
+    background: linear-gradient(to right, #ffffff, #f8f9fa);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .about-us-vertical {
