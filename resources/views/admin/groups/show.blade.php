@@ -32,7 +32,7 @@
                     <div class="card-title">Group Details</div>
                 </div>
                 <div class="card-body">
-                <ul class="nav nav-tabs nav-line nav-color-secondary" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs nav-line nav-color-secondary" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#home"
                                 type="button" role="tab" aria-controls="home" aria-selected="true">Group</button>
@@ -86,16 +86,22 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label>Add User in group:</label>
-                                        <select name="usersGroup[]" class="form-control select2"
-                                            aria-label="multiple select example" multiple>
-                                            @foreach ($userData as $user)
+                                        
+                                        <div class="container">
+                                            <div class='col-sm-6'>
+                                            <label>Add User in group:</label>
+                                                <select id="select2-multiple-input-sm"
+                                                    class="form-control input-sm select2-multiple" multiple>
+                                                    @foreach ($userData as $user)
                                             <option value="{{ $user->id }}">{{ $user->username }}</option>
                                             @endforeach
-                                        </select>
+                                                </select>
+                                            </div>
+                                        </div>
+                                       
                                         <input type="hidden" name="group_id" value="{{ $groupData->id }}">
                                     </div>
-                                    <button type="submit" class="btn btn-success">Upload</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </form>
                         </div>
