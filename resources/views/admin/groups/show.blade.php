@@ -90,7 +90,7 @@
                                         <div class="container">
                                             <div class='col-sm-6'>
                                             <label>Add User in group:</label>
-                                                <select id="select2-multiple-input-sm"
+                                                <select id="select2-multiple-input-sm"  name="usersGroup[]" 
                                                     class="form-control input-sm select2-multiple" multiple>
                                                     @foreach ($userData as $user)
                                             <option value="{{ $user->id }}">{{ $user->username }}</option>
@@ -98,10 +98,15 @@
                                                 </select>
                                             </div>
                                         </div>
-                                       
+                                        <!-- <select name="usersGroup[]" class=""
+                                            aria-label="multiple select example" multiple>
+                                            @foreach ($userData as $user)
+                                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                                            @endforeach
+                                        </select> -->
                                         <input type="hidden" name="group_id" value="{{ $groupData->id }}">
                                     </div>
-                                    <button type="submit" class="btn btn-success">Update</button>
+                                    <button type="submit" class="btn btn-success">Upload</button>
                                 </div>
                             </form>
                         </div>

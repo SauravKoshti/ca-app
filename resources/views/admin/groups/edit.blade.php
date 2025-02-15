@@ -60,12 +60,19 @@
                                         <!-- <select> -->
                                         <div class="col-6">
                                             <label for="name">Add User in group:</label>
-                                            <select name="groupUsers[]" class="form-control" multiple>
+                                            <select id="select2-multiple-input-sm" name="groupUsers[]" 
+                                                    class="form-control input-sm select2-multiple" multiple>
+                                                    @foreach ($userData as $user)
+                                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                                            @endforeach
+                                                </select>
+                                            </div>
+                                            <!-- <select name="groupUsers[]" class="form-control" multiple>
                                                 @foreach ($userData as $user )
                                                 <option value="aadhar_card">{{ $user->username }}
                                                 </option>
                                                 @endforeach
-                                            </select>
+                                            </select> -->
                                         </div>
                                     <!-- </div> -->
                                     <button type="submit" class="btn btn-primary mt-3">Update Group</button>

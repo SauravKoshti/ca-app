@@ -218,6 +218,23 @@
                                     </div>
                                     <div class="mb-3">
                                         <label>Document Type:</label>
+                                        <select id="gstDocument" name="gst_document" class="form-control" required>
+                <option value="computation">Computation</option>
+                <option value="trading">Trading</option>
+                <option value="p&l">P&L</option>
+                <option value="capital">Capital</option>
+                <option value="balance_sheet">Balance Sheet</option>
+                <option value="26a5">26A5</option>
+                <option value="aib">AIB</option>
+                <option value="ttb">TTB</option>
+                <option value="gstr_1_excel">GSTR 1 Excel</option>
+                <option value="gstr_1_json">GSTR 1 JSON</option>
+                <option value="gstr_1_pdf">GSTR 1 PDF</option>
+                <option value="gst_3b_pdf">GST 3B PDF</option>
+                <option value="gst_2b_pdf">GST 2B PDF</option>
+                <option value="gst_challan_pdf">GST Challan PDF</option>
+                <option value="gst_summary">GST Summary</option>
+            </select>
                                         <select name="doc_type" class="form-control">
                                             <option value="aadhar_card">Aadhar Card</option>
                                             <option value="pan_card">Pan Card</option>

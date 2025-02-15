@@ -76,7 +76,7 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a>
 
-                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
+                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit User">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
