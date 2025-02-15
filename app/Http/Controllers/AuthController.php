@@ -66,7 +66,7 @@ class AuthController extends Controller
             'first_name' => $validatedData['first_name'],
             'last_name' => $validatedData['last_name'],
             'father_full_name' => $validatedData['father_full_name'],
-            'name' => $validatedData['name'],
+            'name' => $validatedData['first_name'],
             'address' => $validatedData['address'],
             'city' => $validatedData['city'],
             'pincode' => $validatedData['pincode'],

@@ -8,12 +8,21 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::all();
+        $login_user = Auth::user();
+        if ($login_user->role == 'user') {
+            $groups = Group::leftJoin('users', 'users.group_id', '=', 'groups.id')
+            ->select('groups.*')
+            ->where('users.id', $login_user->id)
+            ->get();
+        } else {
+            $groups = Group::all();
+        }
         return view('admin.groups.index', compact('groups'));
     }
 
@@ -28,26 +37,36 @@ class GroupController extends Controller
             'name' => 'required|unique:groups|max:255',
             'description' => 'nullable',
         ]);
-        // if ($validator->fails()) {
-        //     dd($validator->errors(), $request->all());
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
-        Group::create($request->all());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $login_user = Auth::user();
+        $group_id = Group::create($request->all())->id;
+        if ($login_user->role == 'user') {
+            $user = User::findOrFail($login_user->id);
+            $user->update([
+                'group_id' => $group_id
+            ]);
+        }
         return redirect()->route('groups.index')->with('success', 'Group created successfully.');
     }
 
     public function show(Group $group)
     {
-        $groupData =Group::where('id', $group->id)->first();
-        $userData = User::all();
-        $userListData = User::where('group_id',$group->id)->get();
-        return view('admin.groups.show', compact('groupData','userData','userListData'));
+        $groupData = Group::where('id', $group->id)->first();
+        $userData = User::where('role','user')
+        ->whereNull('group_id')
+        ->get();
+        $userListData = User::where('group_id', $group->id)->get();
+        return view('admin.groups.show', compact('groupData', 'userData', 'userListData'));
     }
 
     public function edit(Group $group)
     {
-        $userData = User::all();    
-        return view('admin.groups.edit', compact('group','userData'));
+        $userData = User::where('role','user')
+        ->whereNull('group_id')
+        ->get();
+        return view('admin.groups.edit', compact('group', 'userData'));
     }
 
     public function update(Request $request, Group $group)
@@ -66,10 +85,10 @@ class GroupController extends Controller
         return redirect()->route('groups.index')->with('success', 'Group deleted successfully.');
     }
 
-    public function storeUsersGroup(Request $request) 
+    public function storeUsersGroup(Request $request)
     {
         if ($request->usersGroup) {
-            foreach($request->usersGroup as $userData) {
+            foreach ($request->usersGroup as $userData) {
                 // dd($request);
                 $user = User::findOrFail($userData);
                 $groupData = $user->update([
