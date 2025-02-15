@@ -7,7 +7,7 @@
             <h3 class="fw-bold mb-3">User</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                <a href="{{ route('admin.index') }}">
+                    <a href="{{ route('admin.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -15,7 +15,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                <a href="{{route('users.index')}}">User</a>
+                    <a href="{{route('users.index')}}">User</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -60,400 +60,179 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        {{-- <form action="{{ route('users.store') }}" method="POST">
+
+                                        <form action="{{ route('register') }}" method="POST">
                                             @csrf
-                                            <div class="col">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="firstname">First Name</label>
-                                                            <input type="text" class="form-control" id="firstname"
-                                                                name="firstname" placeholder="Enter First Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="lastname">Last Name</label>
-                                                            <input type="text" class="form-control" id="lastname"
-                                                                name="lastname" placeholder="Enter Last Name">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="username">Username</label>
-                                                            <input type="text" class="form-control" id="username"
-                                                                name="username" placeholder="Enter Username">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="mobile">Mobile</label>
-                                                            <input type="text" class="form-control" id="mobile"
-                                                                name="mobile" placeholder="Enter Mobile Number">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="email">Email</label>
-                                                            <input type="email" class="form-control" id="email"
-                                                                name="email" placeholder="Enter Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="password">Password</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                name="password" placeholder="Enter Password">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="pancard">PAN Card</label>
-                                                            <input type="text" class="form-control" id="pancard"
-                                                                name="pancard" placeholder="Enter PAN Card Number">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="adharcard">Aadhar Card</label>
-                                                            <input type="text" class="form-control" id="adharcard"
-                                                                name="adharcard" placeholder="Enter Aadhar Card Number">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label>Gender</label><br />
-                                                            <div class="d-flex">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault"
-                                                                        id="flexRadioDefault1" />
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault1">
-                                                                        Male
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault" id="flexRadioDefault2"
-                                                                        checked />
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault2">
-                                                                        Female
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="dob">Date of Birth</label>
-                                                            <input type="date" class="form-control" id="dob" name="dob">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="terms">
-                                                    <label class="form-check-label" for="terms">
-                                                        Agree with terms and conditions
-                                                    </label>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary mt-3">Create
-                                                    User</button>
-                                            </div>
-                                        </form> --}}
-
-                                        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="firstname">First Name <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" id="firstname" name="firstname"
-                                                                placeholder="Enter First Name"  oninput="updateFullName()">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="lastname">Last Name <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" id="lastname" name="lastname"
-                                                                placeholder="Enter Last Name"  oninput="updateFullName()">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="fullname">Full Name <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" id="fullname" name="fullname"
-                                                                placeholder="Full Name" >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="username">Username <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" id="username" name="username"
-                                                                placeholder="Enter Username" >
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="mobile">Mobile <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" id="mobile" name="mobile"
-                                                                placeholder="Enter Mobile Number" >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="email">Email <span class="text-danger">*</span></label>
-                                                            <input type="email" class="form-control" id="email" name="email"
-                                                                placeholder="Enter Email" >
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="password">Password <span class="text-danger">*</span></label>
-                                                            <input type="password" class="form-control" id="password" name="password"
-                                                                placeholder="Enter Password" >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label>Gender <span class="text-danger">*</span></label><br />
-                                                            <div class="d-flex">
-                                                                <div class="form-check me-3">
-                                                                    <input class="form-check-input" type="radio" name="gender" value="Male" id="male" >
-                                                                    <label class="form-check-label" for="male">Male</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="gender" value="Female" id="female" >
-                                                                    <label class="form-check-label" for="female">Female</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="dob">Date of Birth <span class="text-danger">*</span></label>
-                                                            <input type="date" class="form-control" id="dob" name="dob" >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <hr>
-
-                                                {{-- <h4>Upload Documents</h4>
-                                                <div class="mb-3">
-                                                    <label>Document Name: <span class="text-danger">*</span></label>
-                                                    <input type="text" name="name" class="form-control" >
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label>Document Type: <span class="text-danger">*</span></label>
-                                                    <select name="type" class="form-control" >
-                                                        <option value="aadhar_card">Aadhar Card</option>
-                                                        <option value="pan_card">Pan Card</option>
-                                                        <option value="form_16">Form 16</option>
-                                                        <option value="rc_book">RC Book</option>
-                                                        <option value="bank_statement">Bank Statement</option>
-                                                        <option value="fd_statement">FD / Statement</option>
-                                                        <option value="loan_certificate">Loan / Interest Certificate</option>
-                                                        <option value="post">Post</option>
-                                                        <option value="purchase_bill">Purchase Bill</option>
-                                                        <option value="sales_bill">Sales Bill</option>
-                                                        <option value="gst_license">GST / Other License</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label>Upload File: <span class="text-danger">*</span></label>
-                                                    <input type="file" name="file" class="form-control" >
-                                                </div> --}}
-
-                                                <button type="submit" class="btn btn-primary mt-3">Create User</button>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    {{-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                        aria-labelledby="v-pills-profile-tab">
-                        <h3>Profile</h3>
-                        <p>This is your profile information.</p>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-document" role="tabpanel"
-                        aria-labelledby="v-pills-document-tab">
-                        <h3>Document</h3>
-                        <div class="mb-3">
-                            <label>Document Type:</label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <div class="card-title">Document Create</div>
-                                        </div>
-                                        <div class="card-body">
                                             <div class="row">
-                                                <form action="{{ route('users.store') }}" method="POST">
-                                                    @csrf
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="firstname">First Name</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="firstname" name="firstname"
-                                                                        placeholder="Enter First Name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="lastname">Last Name</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="lastname" name="lastname"
-                                                                        placeholder="Enter Last Name">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="username">Username</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="username" name="username"
-                                                                        placeholder="Enter Username">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="mobile">Mobile</label>
-                                                                    <input type="text" class="form-control" id="mobile"
-                                                                        name="mobile" placeholder="Enter Mobile Number">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="email">Email</label>
-                                                                    <input type="email" class="form-control" id="email"
-                                                                        name="email" placeholder="Enter Email">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="password">Password</label>
-                                                                    <input type="password" class="form-control"
-                                                                        id="password" name="password"
-                                                                        placeholder="Enter Password">
-                                                                </div>
+                                                <!-- User Type -->
+                                                <div class="col-md-6">
+                                                    <label for="userType" class="form-label">User Type</label>
+                                                    <select id="userType" name="user_type" class="form-control"
+                                                        onchange="toggleGstNumberField()" required>
+                                                        <option value="private">Private User</option>
+                                                        <option value="business">Business</option>
+                                                    </select>
+                                                    @error('user_type') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
 
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Gender</label><br />
-                                                                    <div class="d-flex">
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="flexRadioDefault"
-                                                                                id="flexRadioDefault1" />
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault1">
-                                                                                Male
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="flexRadioDefault"
-                                                                                id="flexRadioDefault2" checked />
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault2">
-                                                                                Female
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="dob">Date of Birth</label>
-                                                                    <input type="date" class="form-control" id="dob"
-                                                                        name="dob">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="terms">
-                                                            <label class="form-check-label" for="terms">
-                                                                Agree with terms and conditions
-                                                            </label>
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary mt-3">Create
-                                                            User</button>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Document Name:</label>
-                                                        <input type="text" name="name" class="form-control" >
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label>Document Type:</label>
-                                                        <select name="type" class="form-control" >
-                                                            <option value="aadhar_card">Aadhar Card</option>
-                                                            <option value="pan_card">Pan Card</option>
-                                                            <option value="form_16">Form 16</option>
-                                                            <option value="rc_book">RC Book</option>
-                                                            <option value="bank_statement">Bank Statement</option>
-                                                            <option value="fd_statement">FD / Statement</option>
-                                                            <option value="loan_certificate">Loan / Interest Certificate
-                                                            </option>
-                                                            <option value="post">Post</option>
-                                                            <option value="purchase_bill">Purchase Bill</option>
-                                                            <option value="sales_bill">Sales Bill</option>
-                                                            <option value="gst_license">GST / Other License</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label>Upload File:</label>
-                                                        <input type="file" name="file" class="form-control" >
-                                                    </div>
-
-                                                    <button type="submit" class="btn btn-success">Upload</button>
-                                                </form>
-
+                                                <!-- Username -->
+                                                <div class="col-md-6">
+                                                    <label for="username" class="form-label">Username</label>
+                                                    <input type="text" id="username" name="username"
+                                                        class="form-control" required>
+                                                    @error('username') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        </div>
 
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" id="firstName" name="first_name"
+                                                        class="form-control" required>
+                                                    @error('first_name') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="lastName" class="form-label">Last Name</label>
+                                                    <input type="text" id="lastName" name="last_name"
+                                                        class="form-control" required>
+                                                    @error('last_name') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="fatherFullName" class="form-label">Father's Full
+                                                        Name</label>
+                                                    <input type="text" id="fatherFullName" name="father_full_name"
+                                                        class="form-control" required>
+                                                    @error('father_full_name') <span
+                                                        class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="dob" class="form-label">Date of Birth</label>
+                                                    <input type="date" id="dob" name="dob" class="form-control"
+                                                        required>
+                                                    @error('dob') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="email" class="form-label">Email</label>
+                                                    <input type="email" id="email" name="email" class="form-control"
+                                                        required>
+                                                    @error('email') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="mobile" class="form-label">Mobile</label>
+                                                    <input type="text" id="mobile" name="mobile" class="form-control"
+                                                        required>
+                                                    @error('mobile') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="aadharCard" class="form-label">Aadhar Card</label>
+                                                    <input type="text" id="aadharCard" name="aadhar_card"
+                                                        class="form-control" required>
+                                                    @error('aadhar_card') <span
+                                                        class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="panCard" class="form-label">PAN Card</label>
+                                                    <input type="text" id="panCard" name="pan_card" class="form-control"
+                                                        required>
+                                                    @error('pan_card') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6" id="gstNumberField" style="display: none;">
+                                                    <label for="gstNumber" class="form-label">GST Number</label>
+                                                    <input type="text" id="gstNumber" name="gst_number"
+                                                        class="form-control">
+                                                    @error('gst_number') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="address" class="form-label">Address</label>
+                                                    <textarea id="address" name="address" class="form-control"
+                                                        required></textarea>
+                                                    @error('address') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="city" class="form-label">City</label>
+                                                    <input type="text" id="city" name="city" class="form-control"
+                                                        required>
+                                                    @error('city') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="pincode" class="form-label">Pincode</label>
+                                                    <input type="text" id="pincode" name="pincode" class="form-control"
+                                                        required>
+                                                    @error('pincode') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="anniversaryDate" class="form-label">Anniversary
+                                                        Date</label>
+                                                    <input type="date" id="anniversaryDate" name="anniversary_date"
+                                                        class="form-control">
+                                                    @error('anniversary_date') <span
+                                                        class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="gender" class="form-label">Gender</label>
+                                                    <select id="gender" name="gender" class="form-control">
+                                                        <option value="1">Male</option>
+                                                        <option value="0">Female</option>
+                                                    </select>
+                                                    @error('gender') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="password" class="form-label">Password</label>
+                                                    <input type="password" id="password" name="password"
+                                                        class="form-control" required>
+                                                    @error('password') <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Register</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
