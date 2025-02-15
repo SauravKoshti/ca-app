@@ -40,7 +40,6 @@ class AuthController extends Controller
                 'last_name' => 'required|string|max:255',
                 'username' => 'required|string|max:255|unique:users,username',
                 'father_full_name' => 'required|string|max:255',
-                'name' => 'required|string|max:255',
                 'address' => 'required|string',
                 'city' => 'required|string|max:255',
                 'pincode' => 'required|digits:6',
@@ -53,7 +52,6 @@ class AuthController extends Controller
                 'dob' => 'required|date|before:today',
                 'gender' => 'required|boolean',
                 'user_type' => 'required|in:business,private,admin',
-                'role' => 'required|string|max:255',
                 'password' => 'required|string|min:8'
 ]);
 
