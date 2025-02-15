@@ -29,8 +29,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <!-- <div class="card-title">Form Elements</div> -->
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <div class="card-title">User Details</div>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs nav-line nav-color-secondary" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#home"
                                 type="button" role="tab" aria-controls="home" aria-selected="true">Profile</button>
@@ -54,9 +56,9 @@
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <div class="card-title">Profile</div>
-                        </div>
+                        </div> -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
@@ -121,7 +123,8 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>Gender</label>
-                                                <p class="form-control-static">{{ $user->gender }}</p>
+                                                <p class="form-control-static">
+                                                    {{ $user->gender == 1 ? 'Male' : 'Female' }}</p>
                                             </div>
                                         </div>
                                         <div class="col">
@@ -196,9 +199,9 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="user-profile-card">
-                            <div class="card-header">
+                            <!-- <div class="card-header">
                                 <div class="card-title">Upload Documents</div>
-                            </div>
+                            </div> -->
                             <div class="card-body">
                                 <form action="{{ route('users.upload.document', $user->id) }}" method="POST"
                                     enctype="multipart/form-data">
@@ -241,10 +244,12 @@
                     <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                         <div class="document-card">
                             <div class="card-header d-flex justify-content-between">
-                                <div class="card-title">Document List</div>
+                                <!-- <div class="card-title">Document List</div> -->
                                 <div>
-                                    <button class="btn btn-primary" onclick="downloadSelected('pdf')">Download Pdf</button>
-                                    <button class="btn btn-primary" onclick="downloadSelected('zip')">Download Zip</button>
+                                    <button class="btn btn-primary ms-auto" onclick="downloadSelected('pdf')">Download
+                                        Pdf</button>
+                                    <button class="btn btn-primary ms-auto" onclick="downloadSelected('zip')">Download
+                                        Zip</button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -263,7 +268,8 @@
                                         <tr>
                                             <!-- <td>{{ $documentData }}</td> -->
                                             <td>
-                                                <input type="checkbox" name="document_id" data-id="{{ $documentData->id }}">
+                                                <input type="checkbox" name="document_id"
+                                                    data-id="{{ $documentData->id }}">
                                             </td>
                                             <td>{{ $documentData->document_name }}</td>
                                             <td>{{ $documentData->doc_type }}</td>
@@ -279,15 +285,13 @@
                                                     <i class="fas fa-download"></i> Download
                                                 </a>
 
-                                                <form action="{{ route('users.document.destroy') }}"
-                                                    method="POST" style="display:inline;">
+                                                <form action="{{ route('users.document.destroy') }}" method="POST"
+                                                    style="display:inline;">
                                                     @csrf
-                                                    <input type="hidden" name="id"
-                                                        value="{{ $documentData->id }}">
+                                                    <input type="hidden" name="id" value="{{ $documentData->id }}">
                                                     <input type="hidden" name="user_id"
                                                         value="{{ $documentData->user_id }}">
-                                                    <button type="submit"
-                                                        class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -302,10 +306,9 @@
                             <div class="card-body">
                                 <div class="Payment-card">
                                     <div class="card-header d-flex justify-content-between">
-                                        <div class="card-title">Payment List</div>
-                                        <div class="d-flex align-items-center">
-                                            <a
-                                                href="{{ route('users.payment', ['user' => $user->id]) }}"
+                                        <!-- <div class="card-title">Payment List</div> -->
+                                        <div class="btn-primary btn-round ms-auto">
+                                            <a href="{{ route('users.payment', ['user' => $user->id]) }}"
                                                 class="btn btn-primary btn-round ms-auto">
                                                 <!-- <i class="fa fa-money"></i> -->
                                                 <!-- <i class="fa-solid fa-indian-rupee-sign"></i> -->
@@ -330,14 +333,15 @@
                                                     <td>{{ $payment->paid_fees }}</td>
                                                     <td>{{ $payment->payment_date }}</td>
                                                     <td>
-                                                        <a href="{{ route('users.payment.edit', $payment->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
+                                                        <a href="{{ route('users.payment.edit', $payment->id) }}"
+                                                            class="btn btn-link btn-primary btn-lg"
+                                                            data-bs-toggle="tooltip" title="Edit Task">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                         <form action="{{ route('users.payment.destroy') }}"
                                                             method="POST" style="display:inline;">
                                                             @csrf
-                                                            <input type="hidden" name="id"
-                                                                value="{{ $payment->id }}">
+                                                            <input type="hidden" name="id" value="{{ $payment->id }}">
                                                             <input type="hidden" name="user_id"
                                                                 value="{{ $payment->user_id }}">
                                                             <button type="submit"
@@ -361,41 +365,41 @@
 </div>
 @endsection
 <script>
-    function downloadSelected(type) {
-        let allIds = [];
-        var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
-        checkboxes.forEach(function(checkbox) {
-            allIds.push(checkbox.getAttribute('data-id'));
-        });
-        console.log(allIds); // Output the array of all checked data-id values
-        $.ajax({
-            url: "{{ route('users.download.documents') }}",
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                type: type,
-                document_ids: allIds
-            },
-            xhrFields: {
-                responseType: 'blob'
-            },
-            success: function(response) {
-                var blob = new Blob([response], {
-                    type: 'application/pdf'
-                });
-                var link = document.createElement('a');
-                if (type === 'pdf') {
-                    link.download = 'merged_document.pdf';
-                } else if (type === 'zip') {
-                    link.download = 'documents.zip';
-                }
-                link.href = window.URL.createObjectURL(blob);
-                link.click();
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                console.log('Response:', xhr.responseText);
+function downloadSelected(type) {
+    let allIds = [];
+    var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
+    checkboxes.forEach(function(checkbox) {
+        allIds.push(checkbox.getAttribute('data-id'));
+    });
+    console.log(allIds); // Output the array of all checked data-id values
+    $.ajax({
+        url: "{{ route('users.download.documents') }}",
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            type: type,
+            document_ids: allIds
+        },
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function(response) {
+            var blob = new Blob([response], {
+                type: 'application/pdf'
+            });
+            var link = document.createElement('a');
+            if (type === 'pdf') {
+                link.download = 'merged_document.pdf';
+            } else if (type === 'zip') {
+                link.download = 'documents.zip';
             }
-        });
-    }
+            link.href = window.URL.createObjectURL(blob);
+            link.click();
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+            console.log('Response:', xhr.responseText);
+        }
+    });
+}
 </script>

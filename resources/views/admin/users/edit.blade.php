@@ -4,7 +4,7 @@
     <div class="container">
         <div class="page-inner">
             <div class="page-header">
-                <h3 class="fw-bold mb-3">Forms</h3>
+                <h3 class="fw-bold mb-3">User</h3>
                 <ul class="breadcrumbs mb-3">
                     <li class="nav-home">
                         <a href="#">
@@ -15,7 +15,7 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Forms</a>
+                        <a href="#">User</a>
                     </li>
                     <li class="separator">
                         <i class="icon-arrow-right"></i>
@@ -233,13 +233,13 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="gender"
                                                                 value="Male" id="gender_male"
-                                                                {{ old('gender', $user->gender) == 'Male' ? 'checked' : '' }} />
+                                                                {{ old('gender', $user->gender) == 1 ? 'checked' : '' }} />
                                                             <label class="form-check-label" for="gender_male">Male</label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="gender"
                                                                 value="Female" id="gender_female"
-                                                                {{ old('gender', $user->gender) == 'Female' ? 'checked' : '' }} />
+                                                                {{ old('gender', $user->gender) == 0 ? 'checked' : '' }} />
                                                             <label class="form-check-label"
                                                                 for="gender_female">Female</label>
                                                         </div>

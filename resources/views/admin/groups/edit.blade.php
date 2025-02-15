@@ -4,7 +4,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Forms</h3>
+            <h3 class="fw-bold mb-3">Group</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="#">
@@ -15,7 +15,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Forms</a>
+                    <a href="#">Group</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -41,7 +41,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="name">First Name</label>
+                                                <label for="name">Group Name</label>
                                                 <input type="text" class="form-control" id="name" name="name"
                                                     placeholder="Enter Group Name"
                                                     value="{{ old('name', $group->name) }}">
@@ -49,21 +49,25 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="description">First Description</label>
+                                                <label for="description">Group Description</label>
                                                 <textarea class="form-control" id="description" name="description"
                                                     placeholder="Enter Description">
                                                         {{ old('description', $group->description) }}
                                                     </textarea>
                                             </div>
                                         </div>
+                                        </div>
                                         <!-- <select> -->
+                                        <div class="col-6">
+                                            <label for="name">Add User in group:</label>
                                             <select name="groupUsers[]" class="form-control" multiple>
                                                 @foreach ($userData as $user )
                                                 <option value="aadhar_card">{{ $user->username }}
                                                 </option>
                                                 @endforeach
-                                            </select>   
-                                    </div>
+                                            </select>
+                                        </div>
+                                    <!-- </div> -->
                                     <button type="submit" class="btn btn-primary mt-3">Update Group</button>
                                 </div>
                             </form>
