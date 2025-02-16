@@ -4,7 +4,7 @@
 <div class="main-panel">
     <div class="container service-page-content">
         <div class="page-inner">
-            <h2 class="fw-bold text-center mb-4 text-dark">Our Services</h2>
+            <h2 class="fw-bold text-center mb-4 text-dark service-title">Our Services</h2>
 
             <div class="row">
     <div class="col-md-6">
