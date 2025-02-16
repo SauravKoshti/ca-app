@@ -9,18 +9,17 @@
 <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
 <script>
-    $(document).ready(function () {
-        $("#basic-datatables").DataTable({});
-    });
-    layout: {
-        topStart: {
-            buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
-        }
+$(document).ready(function() {
+    $("#basic-datatables").DataTable({});
+});
+layout: {
+    topStart: {
+        buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
     }
-    $( ".select2-multiple" ).select2({
-  theme: "bootstrap",
-	placeholder: "Select a State",
-  containerCssClass: ':all:'
+}
+$(".select2-multiple").select2({
+    theme: "bootstrap",
+    placeholder: "Select a State",
+    containerCssClass: ':all:'
 });
 </script>
-

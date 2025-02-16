@@ -16,7 +16,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userType">User Type</label>
-                                    <select id="userType" name="user_type" class="form-control" required onchange="toggleGstNumberField()">
+                                    <select id="userType" name="user_type" class="form-control" required
+                                        onchange="toggleGstNumberField()">
                                         <option value="private">Private User</option>
                                         <option value="business">Business</option>
                                     </select>
@@ -134,11 +135,10 @@
 </div>
 @endsection
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("userType").addEventListener("change", function () {
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("userType").addEventListener("change", function() {
         var gstField = document.getElementById("gstNumberField");
         gstField.style.display = (this.value === "business") ? "block" : "none";
     });
 });
 </script>
-
