@@ -11,22 +11,39 @@
                     <h3>Register</h3>
                 </div>
                 <div class="panel-body">
-                    <form>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userType">User Type</label>
                                     <select id="userType" name="user_type" class="form-control" required
                                         onchange="toggleGstNumberField()">
-                                        <option value="private">Private User</option>
-                                        <option value="business">Business</option>
+                                        <option value="private" {{ old('user_type') == 'private' ? 'selected' : '' }}>Private User</option>
+                                        <option value="business" {{ old('user_type') == 'business' ? 'selected' : '' }}>Business</option>
                                     </select>
+                                    @error('user_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input type="text" id="username" name="username" class="form-control" required>
+                                    <input type="text" id="username" name="username" class="form-control" value="{{ old('username') }}" required>
+                                    @error('username')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -35,13 +52,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" id="firstName" name="first_name" class="form-control" required>
+                                    <input type="text" id="firstName" name="first_name" class="form-control" value="{{ old('first_name') }}" required>
+                                    @error('first_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" id="lastName" name="last_name" class="form-control" required>
+                                    <input type="text" id="lastName" name="last_name" class="form-control" value="{{ old('last_name') }}" required>
+                                    @error('last_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -50,13 +73,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="dob">Date of Birth</label>
-                                    <input type="date" id="dob" name="dob" class="form-control" required>
+                                    <input type="date" id="dob" name="dob" class="form-control" value="{{ old('dob') }}" required>
+                                    @error('dob')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" required>
+                                    <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -65,13 +94,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="mobile">Mobile</label>
-                                    <input type="text" id="mobile" name="mobile" class="form-control" required>
+                                    <input type="text" id="mobile" name="mobile" class="form-control" value="{{ old('mobile') }}" required>
+                                    @error('mobile')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="aadharCard">Aadhar Card</label>
-                                    <input type="text" id="aadharCard" name="aadhar_card" class="form-control" required>
+                                    <input type="text" id="aadharCard" name="aadhar_card" class="form-control" value="{{ old('aadhar_card') }}" required>
+                                    @error('aadhar_card')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -80,13 +115,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="panCard">PAN Card</label>
-                                    <input type="text" id="panCard" name="pan_card" class="form-control" required>
+                                    <input type="text" id="panCard" name="pan_card" class="form-control" value="{{ old('pan_card') }}" required>
+                                    @error('pan_card')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6" id="gstNumberField" style="display: none;">
                                 <div class="form-group">
                                     <label for="gstNumber">GST Number</label>
-                                    <input type="text" id="gstNumber" name="gst_number" class="form-control">
+                                    <input type="text" id="gstNumber" name="gst_number" class="form-control" value="{{ old('gst_number') }}">
+                                    @error('gst_number')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -95,13 +136,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text" id="city" name="city" class="form-control" required>
+                                    <input type="text" id="city" name="city" class="form-control" value="{{ old('city') }}" required>
+                                    @error('city')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="pincode">Pincode</label>
-                                    <input type="text" id="pincode" name="pincode" class="form-control" required>
+                                    <input type="text" id="pincode" name="pincode" class="form-control" value="{{ old('pincode') }}" required>
+                                    @error('pincode')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -111,15 +158,21 @@
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
                                     <select id="gender" name="gender" class="form-control">
-                                        <option value="1">Male</option>
-                                        <option value="0">Female</option>
+                                        <option value="1" {{ old('gender') == '1' ? 'selected' : '' }}>Male</option>
+                                        <option value="0" {{ old('gender') == '0' ? 'selected' : '' }}>Female</option>
                                     </select>
+                                    @error('gender')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" id="password" name="password" class="form-control" required>
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -134,11 +187,3 @@
     </div>
 </div>
 @endsection
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("userType").addEventListener("change", function() {
-        var gstField = document.getElementById("gstNumberField");
-        gstField.style.display = (this.value === "business") ? "block" : "none";
-    });
-});
-</script>
