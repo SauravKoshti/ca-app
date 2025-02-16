@@ -200,7 +200,5 @@ class UserController extends Controller
 
         Document::create($input);
         return redirect()->route('users.document', $request->user_id)->with('success', 'User deleted successfully.');
-        // return view('admin.users.document',$request->user_id)
-        //                 ->with('success','Product created successfully.');
     }
 }

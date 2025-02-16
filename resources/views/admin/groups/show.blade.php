@@ -120,20 +120,22 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <!-- <th>#</th> -->
                                             <th>User Name</th>
-                                            <!-- <th>Pan Card</th> -->
-                                            <!-- <th>Adhar Card</th> -->
-                                            <!-- <th>Mobile</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @if ($userListData->isEmpty())
+                                    <tr>
+                                        <td colspan="4" class="text-center">No User records found.</td>
+                                    </tr>
+                                    @else
                                         @foreach ( $userListData as $user )
                                         <tr>
                                             <td>{{ $user->username }}</td>
                                         </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

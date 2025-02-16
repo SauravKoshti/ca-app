@@ -31,7 +31,7 @@
             <h2>Opening Hours</h2>
             <ul class="list-foot padd-inft">
               <li><span> Mon - Sat : </span>
-                <div class="value pull-right">10.00 am - 7.30 pm</div>
+                <div class="value pull-right">09.00 am - 7.30 pm</div>
               </li>
               <li><span> Sun : </span>
                 <div class="value pull-right">Close</div>

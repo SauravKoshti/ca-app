@@ -25,7 +25,8 @@
     <script src="{{ asset('assets/user/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/bootstrap.min.js') }}"></script>
     <!-- <script src="{{ asset('assets/user/js/custom.js') }}"></script> -->
-
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script>
     $(document).ready(function() {
         $('.navbar a.dropdown-toggle').on('click', function(e) {
@@ -44,6 +45,7 @@
 
             return false;
         });
+        
     });
     </script>
     <script language="javascript">

@@ -54,6 +54,12 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                @if ($groups->isEmpty())
+                                    <tr>
+                                        <td colspan="4" class="text-center">No documet records found.</td>
+                                    </tr>
+                                    @else
+                                    
                                     @foreach($groups as $user)
                                     <tr>
                                         <td>{{ $user->name }} </td>
@@ -77,6 +83,7 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

@@ -1,7 +1,12 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+} 
+
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
-    gap: 20px; /* Space between grid items */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
 }
 
 .grid-item {
@@ -20,12 +25,12 @@
 }
 
 .login-box {
-    width: 400px;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 350px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .about-box-content {
@@ -33,9 +38,11 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     /* border-left: 5px solid #007bff; */
 }
+
 .about-us-box {
 	background: linear-gradient(to right, #ffffff, #f8f9fa);
 }
+
 .about-box-content:hover {
     transform: translateY(-5px);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
@@ -73,7 +80,7 @@
 }
 
 .about-section-heading {
-    color: $primary-color;
+    /* color: $primary-color; */
     text-align: center;
     margin-bottom: 30px;
 }
@@ -97,7 +104,7 @@
 
 .about-us-vertical {
     width: 3px;
-    background: $primary-color;
+    /* background: $primary-color; */
     height: 100%;
     border-radius: 5px;
 }
@@ -111,13 +118,13 @@
         padding-left: 25px;
         /* font-size: 1rem; */
         margin-bottom: 10px;
-        color: $text-color;
+        /* color: $text-color; */
 
         &::before {
             content: "✔";
             position: absolute;
             left: 0;
-            color: $btn-color;
+            /* color: $btn-color; */
             font-weight: bold;
         }
     }
@@ -269,13 +276,6 @@ h3 {
     margin-right: 8px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .service-card {
-        width: 100%;
-    }
-}
-
 /* Service Box */
 .service-box {
     background: #ffffff;
@@ -333,6 +333,114 @@ h3 {
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
 }
 
+#myCarousel .thumbnail {
+	margin-bottom: 0;
+}
+.carousel-control.left, .carousel-control.right {
+	background-image:none !important;
+}
+.carousel-control {
+	color:#fff;
+	top:40%;
+	color:#428BCA;
+	bottom:auto;
+	padding-top:4px;
+	width:30px;
+	height:30px;
+	text-shadow:none;
+	opacity:1;
+}
+.carousel-control:hover {
+	color: #d9534f;
+}
+.carousel-control.left, .carousel-control.right {
+	background-image:none !important;
+}
+.carousel-control.right {
+	left:auto;
+	right:-32px;
+}
+.carousel-control.left {
+	right:auto;
+	left:-32px;
+}
+.carousel-indicators {
+	bottom:-30px;
+}
+.carousel-indicators li {
+	border-radius:0;
+	width:10px;
+	height:10px;
+	background:#ccc;
+	border:1px solid #ccc;
+}
+.carousel-indicators .active {
+	width:12px;
+	height:12px;
+	background:#3276b1;
+	border-color:#3276b1;
+}
+
+
+
+/* Centering the Login Box */
+
+.login-box {
+    width: 350px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h2.text-center {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Input Fields */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group i {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.form-control {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Login Button */
+.button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -347,5 +455,8 @@ h3 {
     }
     .about-us-vertical {
         display: none;
+    }
+    .service-card {
+        width: 100%;
     }
 }
