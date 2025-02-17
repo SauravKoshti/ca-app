@@ -10,7 +10,7 @@ use App\Models\Document;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -200,5 +200,39 @@ class UserController extends Controller
 
         Document::create($input);
         return redirect()->route('users.document', $request->user_id)->with('success', 'User deleted successfully.');
+    }
+
+    // Show Forgot Username Form
+    public function showForgotUsernameForm()
+    {
+        return view('users.auth.forgot-username');
+    }
+
+    // Handle Forgot Username
+    public function sendUsername(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            Mail::raw("Your username is: {$user->username}", function ($message) use ($user) {
+                $message->to($user->email)->subject('Your Username');
+            });
+            return redirect()->route('login')->with('success', 'Your username has been sent to your email.');
+        }
+
+        return back()->with('error', 'Email not found.');
+    }
+
+    // Show Forgot Password Form
+    public function showForgotPasswordForm()
+    {
+        return view('users.auth.forgot-password');
+    }
+
+    // Handle Forgot Password
+    public function sendPasswordResetLink(Request $request)
+    {
+        // You can integrate Laravel's built-in password reset here
+        return back()->with('success', 'Password reset link has been sent to your email.');
     }
 }

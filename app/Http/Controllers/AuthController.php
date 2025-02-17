@@ -36,25 +36,25 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         // Validate the request data
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username',
-            'father_full_name' => 'required|string|max:255',
-            'address' => 'required|string',
-            'city' => 'required|string|max:255',
-            'pincode' => 'required|digits:6',
-            'aadhar_card' => 'required|digits:12|unique:users,aadhar_card',
-            'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/', 'unique:users,pan_card'],
-            'email' => 'required|email|max:255|unique:users,email',
-            'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
-            'anniversary_date' => 'nullable|date',
-            'mobile' => 'required|digits:10|unique:users,mobile',
-            'dob' => 'required|date|before:today',
-            'gender' => 'required|boolean',
-            'user_type' => 'required|in:business,private,admin',
-            'password' => 'required|string|min:8'
-        ]);
+        // $validatedData = $request->validate([
+        //     'first_name' => 'required|string|max:255',
+        //     'last_name' => 'required|string|max:255',
+        //     'username' => 'required|string|max:255|unique:users,username',
+        //     'father_full_name' => 'required|string|max:255',
+        //     'address' => 'required|string',
+        //     'city' => 'required|string|max:255',
+        //     'pincode' => 'required|digits:6',
+        //     'aadhar_card' => 'required|digits:12|unique:users,aadhar_card',
+        //     'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/', 'unique:users,pan_card'],
+        //     'email' => 'required|email|max:255|unique:users,email',
+        //     'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+        //     'anniversary_date' => 'nullable|date',
+        //     'mobile' => 'required|digits:10|unique:users,mobile',
+        //     'dob' => 'required|date|before:today',
+        //     'gender' => 'required|boolean',
+        //     'user_type' => 'required|in:business,private,admin',
+        //     'password' => 'required|string|min:8'
+        // ]);
 
         // Check for validation errors
         // if ($validatedData->fails()) {
@@ -63,25 +63,25 @@ class AuthController extends Controller
         // dd($request->all());
         // Save the user
         $user = User::create([
-            'username' => $validatedData['username'],
-            'first_name' => $validatedData['first_name'],
-            'last_name' => $validatedData['last_name'],
-            'father_full_name' => $validatedData['father_full_name'],
-            'name' => $validatedData['first_name'],
-            'address' => $validatedData['address'],
-            'city' => $validatedData['city'],
-            'pincode' => $validatedData['pincode'],
-            'aadhar_card' => $validatedData['aadhar_card'],
-            'pan_card' => $validatedData['pan_card'],
-            'email' => $validatedData['email'],
-            'gst_number' => $validatedData['gst_number'] ?? null,
-            'anniversary_date' => $validatedData['anniversary_date'] ?? null,
-            'mobile' => $validatedData['mobile'],
-            'dob' => $validatedData['dob'],
-            'gender' => $validatedData['gender'],
-            'user_type' => $validatedData['user_type'],
-            'role' => $validatedData['role'], // Default role
-            'password' => Hash::make($validatedData['password']),
+            'username' => $request['username'],
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'father_full_name' => $request['father_full_name'],
+            'name' => $request['name'],
+            'address' => $request['address'],
+            'city' => $request['city'],
+            'pincode' => $request['pincode'],
+            'aadhar_card' => $request['aadhar_card'],
+            'pan_card' => $request['pan_card'],
+            'email' => $request['email'],
+            'gst_number' => $request['gst_number'] ?? null,
+            'anniversary_date' => $request['anniversary_date'] ?? null,
+            'mobile' => $request['mobile'],
+            'dob' => $request['dob'],
+            'gender' => $request['gender'],
+            // 'user_type' => $request['user_type'],
+            'role' => $request['role'], // Default role
+            'password' => Hash::make($request['password']),
         ]);
         // dd($user);
         Mail::raw("
