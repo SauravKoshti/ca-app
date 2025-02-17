@@ -31,7 +31,6 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <!-- <div class="card"> -->
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="basic-datatables" class="display table table-striped table-hover">
@@ -65,7 +64,6 @@
                                         <td>{{ $user->first_name }} {{ $user->last_name }} </td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->username }}</td>
-                                        <!-- <td>{{ $user->pancard }}</td> -->
                                         <td>{{ $user->dob }}</td>
                                         <td>
                                             <div class="form-button-action">
@@ -98,9 +96,7 @@
                             </table>
                         </div>
                     </div>
-                    <!-- </div> -->
                 </div>
-
             </div>
         </div>
     </div>

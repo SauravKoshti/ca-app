@@ -57,8 +57,18 @@
                                         <form action="{{ route('users.payment.store') }}" method="POST">
                                             @csrf
                                             <div class="mb-3">
+                                                <label>Paid Fees:</label>
+                                                <select id="payament_mode" name="payament_mode" class="form-control">
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="Onlie">Onlie</option>
+                                                </select>
+                                                @error('payament_mode') <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
                                                 <label>Discuss Fees:</label>
-                                                <input type="number" step="0.01" name="discuss_fees" class="form-control">
+                                                <input type="number" step="0.01" name="discuss_fees"
+                                                    class="form-control">
                                             </div>
                                             <div class="mb-3">
                                                 <label>Paid Fees:</label>
@@ -69,7 +79,8 @@
                                                 <label>Payment Data Fees:</label>
                                                 <input type="date" name="payment_date" class="form-control">
                                             </div>
-                                            <input type="hidden" name="user_id" class="form-control" value="{{ $user }}">
+                                            <input type="hidden" name="user_id" class="form-control"
+                                                value="{{ $user }}">
                                             <button type="submit" class="btn btn-success">Save</button>
                                         </form>
                                     </div>

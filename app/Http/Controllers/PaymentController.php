@@ -22,6 +22,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'payament_mode' => 'required',
             'discuss_fees' => 'required|numeric',
             'user_id' => 'required|exists:users,id',
         ]);

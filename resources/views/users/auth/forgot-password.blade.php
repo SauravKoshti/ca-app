@@ -19,17 +19,19 @@
             @csrf
             <div class="form-group mb-3">
                 <label for="email">Enter your registered email</label>
-                <input type="email" id="email" name="email" class="form-control" required>
+                <input type="email" id="email" name="email" class="form-control">
+                @error('email') <p style="color: red;">{{ $message }}</p> @enderror
             </div>
 
             <div class="form-group mb-3">
                 <label for="password">New Password</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+                <input type="password" id="password" name="password" class="form-control">
+                @error('password') <p style="color: red;">{{ $message }}</p> @enderror
             </div>
 
             <div class="form-group mb-3">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control">
                 <small id="passwordError" class="text-danger" style="display: none;">Passwords do not match.</small>
             </div>
 

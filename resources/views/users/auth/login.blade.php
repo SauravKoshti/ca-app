@@ -1,9 +1,9 @@
-@extends('users.layouts.app')
+<!-- @extends('users.layouts.app')
 
 @section('title', 'Login')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
+<div class="container row d-flex justify-content-center align-items-center min-vh-100">
     <div class="login-box shadow p-4 bg-white rounded">
         <h2 class="text-center mb-4">Login</h2>
 
@@ -49,7 +49,7 @@
     </div>
 </div>
 
-<!-- <style>
+<style>
     .login-box {
         width: 400px;
         padding: 30px;
@@ -71,5 +71,33 @@
     .btn-primary:hover {
         background-color: #0056b3;
     }
-</style> -->
+</style>
+@endsection -->
+
+@extends('users.layouts.app')
+@section('title', 'Login')
+@section('content')
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="userName">UserName</label>
+                            <input type="text" id="userName" name="userName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

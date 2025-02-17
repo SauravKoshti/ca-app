@@ -9,11 +9,10 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['discuss_fees', 'paid_fees','payment_date', 'user_id'];
+    protected $fillable = ['payament_mode','discuss_fees', 'paid_fees','payment_date', 'user_id',];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 }
-

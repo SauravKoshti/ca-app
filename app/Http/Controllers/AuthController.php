@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
@@ -15,11 +16,13 @@ class AuthController extends Controller
 {
     public function index()
     {
+        $userLoggedIn = Auth::user();
         $userTotal = User::get()->count();
         $groupTotal = Group::get()->count();
         $newUsers = User::latest()->take(10)->get();
+        $paymentData = Payment::latest()->take(10)->get();
         $inquiry = Contact::get()->count();
-        return view('admin.dashboard', compact('userTotal', 'groupTotal', 'newUsers', 'inquiry'));
+        return view('admin.dashboard', compact('userLoggedIn','userTotal', 'groupTotal', 'newUsers', 'paymentData','inquiry'));
     }
 
     public function showLoginForm()
@@ -113,14 +116,12 @@ Best Regards,
     // Handle login logic
     public function login(Request $request)
     {
-        // dd($request);
         // Validate the input
         $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
-        // dd($request);
-
+     
         // Attempt to log the user in
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();

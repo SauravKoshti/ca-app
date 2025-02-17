@@ -57,7 +57,7 @@ Route::get('/forgot-username', [UserController::class, 'showForgotUsernameForm']
 Route::post('/forgot-username', [UserController::class, 'sendUsername']);
 
 Route::get('/forgot-password', [UserController::class, 'showForgotPasswordForm'])->name('forgot.password');
-Route::post('/forgot-password', [UserController::class, 'sendPasswordResetLink']);
+Route::post('/forgot-password', [UserController::class, 'sendPasswordResetLink'])->name('forgot.password');
 
 
 Route::get('/users/document/{user}', [UserController::class, 'getDocument'])->name('users.document');

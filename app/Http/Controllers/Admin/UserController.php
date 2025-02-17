@@ -232,7 +232,21 @@ class UserController extends Controller
     // Handle Forgot Password
     public function sendPasswordResetLink(Request $request)
     {
-        // You can integrate Laravel's built-in password reset here
-        return back()->with('success', 'Password reset link has been sent to your email.');
+
+           // Validate request
+    $request->validate([
+        'email' => 'required|email|exists:users,email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    // Find user by email
+    $user = User::where('email', $request->email)->firstOrFail();
+    
+        // Update user fields
+        $user->update([
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+        return redirect()->route('login')->with('success', 'Password has been updated successfully.');
     }
 }
