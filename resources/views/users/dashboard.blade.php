@@ -23,26 +23,11 @@
                 class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span> </a>
     </div>
 </section>
-<div class="container">
-
-    <h1>Lorem Ipsum is simply dummy <span>text of the printing</span></h1>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-        Aldus PageMaker including versions of Lorem Ipsum.</p>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.</p>
-
-</div>
-</section> -->
 <section class="hm-services-sec">
     <div class="container">
         <h2>Our <span>Services</span></h2>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-12">
                 <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                         <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
                         <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
@@ -57,7 +42,7 @@
                     <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-12">
                 <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                         <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
                         <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
@@ -70,7 +55,7 @@
                     <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-12">
                 <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                         <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
                         <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
@@ -96,7 +81,7 @@
                     <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-12">
                 <div class="services-box-item"> <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                         <line class="top" x1="0" y1="0" x2="900" y2="0"></line>
                         <line class="left" x1="0" y1="100%" x2="0" y2="-920"></line>
@@ -115,8 +100,6 @@
 <section>
     <div class="row">
         <div class="well col-md-8">
-            <!-- Carousel
-            ================================================== -->
             <div id="myCarousel" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="item active">

@@ -120,12 +120,11 @@
                                     <div class="status">{{$user->dob}}</div>
                                 </div>
                                 <button class="btn btn-icon btn-link op-8 me-1">
-                                <a href="{{ route('users.show', $user->id) }}">
-                                    <i class="far fa-envelope"></i>
+                                    <a href="{{ route('users.show', $user->id) }}">
+                                        <i class="far fa-envelope"></i>
                                     </a>
                                 </button>
                             </div>
-
                             @endforeach
                             @endif
                         </div>

@@ -12,13 +12,13 @@
                 </div>
                 <div class="panel-body">
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
 
                     <form action="{{ route('register') }}" method="POST">
@@ -29,21 +29,20 @@
                                     <label for="userType">User Type</label>
                                     <select id="userType" name="user_type" class="form-control" required
                                         onchange="toggleGstNumberField()">
-                                        <option value="private" {{ old('user_type') == 'private' ? 'selected' : '' }}>Private User</option>
-                                        <option value="business" {{ old('user_type') == 'business' ? 'selected' : '' }}>Business</option>
+                                        <option value="private" {{ old('user_type') == 'private' ? 'selected' : '' }}>
+                                            Private User</option>
+                                        <option value="business" {{ old('user_type') == 'business' ? 'selected' : '' }}>
+                                            Business</option>
                                     </select>
-                                    @error('user_type')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    @error('user_type') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input type="text" id="username" name="username" class="form-control" value="{{ old('username') }}" required>
-                                    @error('username')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <input type="text" id="username" name="username" class="form-control"
+                                        value="{{ old('username') }}" required>
+                                    @error('username') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -52,19 +51,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" id="firstName" name="first_name" class="form-control" value="{{ old('first_name') }}" required>
-                                    @error('first_name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <input type="text" id="firstName" name="first_name" class="form-control"
+                                        value="{{ old('first_name') }}" required>
+                                        @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" id="lastName" name="last_name" class="form-control" value="{{ old('last_name') }}" required>
-                                    @error('last_name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <input type="text" id="lastName" name="last_name" class="form-control"
+                                        value="{{ old('last_name') }}" required>
+                                        @error('last_name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -73,25 +70,24 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="dob">Date of Birth</label>
-                                    <input type="date" id="dob" name="dob" class="form-control" value="{{ old('dob') }}" required>
-                                    @error('dob')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <input type="date" id="dob" name="dob" class="form-control" value="{{ old('dob') }}"
+                                        required>
+                                        @error('dob') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
-                                    @error('email')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        value="{{ old('email') }}" required>
+                                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="name">name</label>
-                                    <input type="text" id="name" name="name" class="form-control" value="{{ old('email') }}" required>
+                                    <input type="text" id="name" name="name" class="form-control"
+                                        value="{{ old('email') }}" required>
                                     @error('email')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -101,18 +97,20 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="mobile">Mobile</label>
-                                    <input type="text" id="mobile" name="mobile" class="form-control" value="{{ old('mobile') }}" required>
+                                    <input type="text" id="mobile" name="mobile" class="form-control"
+                                        value="{{ old('mobile') }}" required>
                                     @error('mobile')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="aadharCard">Aadhar Card</label>
-                                    <input type="text" id="aadharCard" name="aadhar_card" class="form-control" value="{{ old('aadhar_card') }}" required>
+                                    <input type="text" id="aadharCard" name="aadhar_card" class="form-control"
+                                        value="{{ old('aadhar_card') }}" required>
                                     @error('aadhar_card')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -122,18 +120,20 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="panCard">PAN Card</label>
-                                    <input type="text" id="panCard" name="pan_card" class="form-control" value="{{ old('pan_card') }}" required>
+                                    <input type="text" id="panCard" name="pan_card" class="form-control"
+                                        value="{{ old('pan_card') }}" required>
                                     @error('pan_card')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6" id="gstNumberField" style="display: none;">
                                 <div class="form-group">
                                     <label for="gstNumber">GST Number</label>
-                                    <input type="text" id="gstNumber" name="gst_number" class="form-control" value="{{ old('gst_number') }}">
+                                    <input type="text" id="gstNumber" name="gst_number" class="form-control"
+                                        value="{{ old('gst_number') }}">
                                     @error('gst_number')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -143,34 +143,38 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text" id="city" name="city" class="form-control" value="{{ old('city') }}" required>
+                                    <input type="text" id="city" name="city" class="form-control"
+                                        value="{{ old('city') }}" required>
                                     @error('city')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="father_full_name">father_full_name</label>
-                                    <input type="text" id="father_full_name" name="father_full_name" class="form-control" value="{{ old('father_full_name') }}" required>
+                                    <input type="text" id="father_full_name" name="father_full_name"
+                                        class="form-control" value="{{ old('father_full_name') }}" required>
                                     @error('father_full_name')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="pincode">Pincode</label>
-                                    <input type="text" id="pincode" name="pincode" class="form-control" value="{{ old('pincode') }}" required>
+                                    <input type="text" id="pincode" name="pincode" class="form-control"
+                                        value="{{ old('pincode') }}" required>
                                     @error('pincode')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="address">address</label>
-                                    <input type="text" id="address" name="address" class="form-control" value="{{ old('address') }}" required>
+                                    <input type="text" id="address" name="address" class="form-control"
+                                        value="{{ old('address') }}" required>
                                     @error('address')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -185,7 +189,7 @@
                                         <option value="0" {{ old('gender') == '0' ? 'selected' : '' }}>Female</option>
                                     </select>
                                     @error('gender')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -194,7 +198,7 @@
                                     <label for="password">Password</label>
                                     <input type="password" id="password" name="password" class="form-control" required>
                                     @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>

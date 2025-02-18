@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
 {
     $schedule->command('email:birthday')->dailyAt('08:00');
     $schedule->command('email:anniversary')->dailyAt('08:30');
+    $schedule->command('send:business-reminder')->dailyAt('00:15');
+
 }
 
 

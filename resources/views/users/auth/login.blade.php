@@ -1,4 +1,4 @@
-<!-- @extends('users.layouts.app')
+@extends('users.layouts.app')
 
 @section('title', 'Login')
 
@@ -19,6 +19,9 @@
                 @error('username')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+                <div>
+                    <a href="{{ route('forgot.username') }}" class="text-primary">Forgot Username?</a>
+                </div>
             </div>
 
             <div class="form-group mb-3">
@@ -30,9 +33,7 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <div>
-                    <a href="{{ route('forgot.username') }}" class="text-primary">Forgot Username?</a>
-                </div>
+                
                 <div>
                     <a href="{{ route('forgot.password') }}" class="text-primary">Forgot Password?</a>
                 </div>
@@ -51,6 +52,7 @@
 
 <style>
     .login-box {
+        margin:10px;
         width: 400px;
         padding: 30px;
         background: #fff;
@@ -72,32 +74,4 @@
         background-color: #0056b3;
     }
 </style>
-@endsection -->
-
-@extends('users.layouts.app')
-@section('title', 'Login')
-@section('content')
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">Login</div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label for="userName">UserName</label>
-                            <input type="text" id="userName" name="userName" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
