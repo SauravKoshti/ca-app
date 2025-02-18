@@ -218,7 +218,17 @@
                                     </div>
                                     <div class="mb-3">
                                         <label>Document Type:</label>
-                                        <select id="gstDocument" name="gst_document" class="form-control" >
+                                        @if(auth()->user()->user_type == 'user')
+                                        <select name="doc_type" class="form-control">
+                                            <option value="aadhar_card">Aadhar Card</option>
+                                            <option value="pan_card">Pan Card</option>
+                                            <option value="form_16">Form 16</option>
+                                            <option value="rc_book">RC Book</option>
+                                            <option value="bank_statement">Bank Statement</option>
+                                        </select>
+
+                                        @elseif(auth()->user()->user_type == 'admin')
+                                        <select id="gstDocument" name="gst_document" class="form-control">
                                             <option value="computation">Computation</option>
                                             <option value="trading">Trading</option>
                                             <option value="p&l">P&L</option>
@@ -235,13 +245,8 @@
                                             <option value="gst_challan_pdf">GST Challan PDF</option>
                                             <option value="gst_summary">GST Summary</option>
                                         </select>
-                                        <select name="doc_type" class="form-control">
-                                            <option value="aadhar_card">Aadhar Card</option>
-                                            <option value="pan_card">Pan Card</option>
-                                            <option value="form_16">Form 16</option>
-                                            <option value="rc_book">RC Book</option>
-                                            <option value="bank_statement">Bank Statement</option>
-                                        </select>
+                                        @endif
+
                                         @error('doc_type')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -281,11 +286,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if ($documentDataArray->isEmpty())
-                                                <tr>
-                                                    <td colspan="4" class="text-center">No documet records found.</td>
-                                                </tr>
-                                                @else
+                                        @if ($documentDataArray->isEmpty())
+                                        <tr>
+                                            <td colspan="4" class="text-center">No documet records found.</td>
+                                        </tr>
+                                        @else
                                         @foreach ($documentDataArray as $documentData)
                                         <tr>
                                             <!-- <td>{{ $documentData }}</td> -->
