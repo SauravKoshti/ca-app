@@ -10,7 +10,6 @@
         @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group mb-3">
@@ -19,7 +18,7 @@
                 @error('username')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-                <div>
+                <div class="col align-self-end">
                     <a href="{{ route('forgot.username') }}" class="text-primary">Forgot Username?</a>
                 </div>
             </div>
