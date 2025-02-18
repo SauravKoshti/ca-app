@@ -6,7 +6,11 @@
 <div class="container row d-flex justify-content-center align-items-center min-vh-100">
     <div class="login-box shadow p-4 bg-white rounded">
         <h2 class="text-center mb-4">Login</h2>
-
+        @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
         @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif

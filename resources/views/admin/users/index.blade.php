@@ -24,6 +24,9 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h4 class="card-title">Users</h4>
+                        @if (!$users->isEmpty())
+                        <button class="btn btn-primary" onclick="downloadSelectedUserData()">Download User Data</button>
+                        @endif
                         <a href="{{route('users.create')}}" class="btn btn-primary btn-round ms-auto">
                             <i class="fa fa-plus"></i>
                             Add Users
@@ -36,6 +39,7 @@
                             <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
+                                        <th>select</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>UserName</th>
@@ -45,7 +49,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-
+                                        <th>select</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>UserName</th>
@@ -61,6 +65,9 @@
                                     @else
                                     @foreach($users as $user)
                                     <tr>
+                                        <td>
+                                            <input type="checkbox" name="user_id" data-id="{{ $user->id }}">
+                                        </td>
                                         <td>{{ $user->first_name }} {{ $user->last_name }} </td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->username }}</td>
@@ -102,3 +109,45 @@
     </div>
 </div>
 @endsection
+<script>
+function downloadSelectedUserData() {
+    let allIds = [];
+    
+    document.querySelectorAll('[name="user_id"]:checked').forEach(function(checkbox) {
+        allIds.push(checkbox.getAttribute('data-id'));
+    });
+
+    if (allIds.length === 0) {
+        alert("Please select at least one user.");
+        return;
+    }
+
+    // let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    $.ajax({
+        url: "/users/download/csv",  // Laravel route for CSV
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            user_id: allIds
+        },
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function(response) {
+            let blob = new Blob([response], { type: 'text/csv' });
+            let link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'users.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+            alert('Failed to download user data. Please try again.');
+        }
+    });
+}
+
+</script>

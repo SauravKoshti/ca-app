@@ -10,17 +10,12 @@
                 <div class="panel-heading text-center">
                     <h3>Register</h3>
                 </div>
+                @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
                 <div class="panel-body">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-
                     <form action="{{ route('register') }}" method="POST">
                         @csrf
                         <div class="row">

@@ -218,7 +218,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label>Document Type:</label>
-                                        <select id="gstDocument" name="gst_document" class="form-control" required>
+                                        <select id="gstDocument" name="gst_document" class="form-control" >
                                             <option value="computation">Computation</option>
                                             <option value="trading">Trading</option>
                                             <option value="p&l">P&L</option>
@@ -401,7 +401,6 @@ function downloadSelected(type) {
     checkboxes.forEach(function(checkbox) {
         allIds.push(checkbox.getAttribute('data-id'));
     });
-    console.log(allIds); // Output the array of all checked data-id values
     $.ajax({
         url: "{{ route('users.download.documents') }}",
         type: 'POST',

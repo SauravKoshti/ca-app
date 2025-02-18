@@ -39,25 +39,25 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         // Validate the request data
-        // $validatedData = $request->validate([
-        //     'first_name' => 'required|string|max:255',
-        //     'last_name' => 'required|string|max:255',
-        //     'username' => 'required|string|max:255|unique:users,username',
-        //     'father_full_name' => 'required|string|max:255',
-        //     'address' => 'required|string',
-        //     'city' => 'required|string|max:255',
-        //     'pincode' => 'required|digits:6',
-        //     'aadhar_card' => 'required|digits:12|unique:users,aadhar_card',
-        //     'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/', 'unique:users,pan_card'],
-        //     'email' => 'required|email|max:255|unique:users,email',
-        //     'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
-        //     'anniversary_date' => 'nullable|date',
-        //     'mobile' => 'required|digits:10|unique:users,mobile',
-        //     'dob' => 'required|date|before:today',
-        //     'gender' => 'required|boolean',
-        //     'user_type' => 'required|in:business,private,admin',
-        //     'password' => 'required|string|min:8'
-        // ]);
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'father_full_name' => 'required|string|max:255',
+            'address' => 'required|string',
+            'city' => 'required|string|max:255',
+            'pincode' => 'required|digits:6',
+            'aadhar_card' => 'required|digits:12|unique:users,aadhar_card',
+            'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/', 'unique:users,pan_card'],
+            'email' => 'required|email|max:255|unique:users,email',
+            'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+            'anniversary_date' => 'nullable|date',
+            'mobile' => 'required|digits:10|unique:users,mobile',
+            'dob' => 'required|date|before:today',
+            'gender' => 'required|boolean',
+            'user_type' => 'required|in:business,private,admin',
+            'password' => 'required|string|min:8'
+        ]);
 
         // Check for validation errors
         // if ($validatedData->fails()) {

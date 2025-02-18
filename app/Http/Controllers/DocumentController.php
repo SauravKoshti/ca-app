@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use setasign\Fpdi\Fpdi;
-use setasign\Fpdi\PdfReader;
 
 class DocumentController extends Controller
 {

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Providers\FoundationServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\Document;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
@@ -183,25 +183,6 @@ class UserController extends Controller
         return view('admin.users.document', compact('loggedInUserId', 'userId', 'userData', 'documentDataArray'));
     }
 
-    public function uploadDocument(Request $request)
-    {
-        $request->validate([
-            // 'name' => 'required',
-            // 'detail' => 'required',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $input = $request->all();
-        if ($image = $request->file('document_image_path')) {
-            $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['document_image_path'] = $destinationPath . $profileImage;
-        }
-
-        Document::create($input);
-        return redirect()->route('users.document', $request->user_id)->with('success', 'User deleted successfully.');
-    }
-
     // Show Forgot Username Form
     public function showForgotUsernameForm()
     {
@@ -249,4 +230,33 @@ class UserController extends Controller
         ]);
         return redirect()->route('login')->with('success', 'Password has been updated successfully.');
     }
+
+    public function downloadSelectedUsers(Request $request)
+{
+    $userIds = $request->user_id;
+
+    if (empty($userIds)) {
+        return response()->json(['error' => 'No users selected'], 400);
+    }
+
+    $users = User::whereIn('id', $userIds)->get();
+
+    $response = new StreamedResponse(function () use ($users) {
+        $handle = fopen('php://output', 'w');
+
+        // CSV Headers
+        fputcsv($handle, ['ID', 'Name', 'Email', 'Created At']);
+
+        foreach ($users as $user) {
+            fputcsv($handle, [$user->id, $user->name, $user->email, $user->created_at]);
+        }
+
+        fclose($handle);
+    });
+
+    $response->headers->set('Content-Type', 'text/csv');
+    $response->headers->set('Content-Disposition', 'attachment; filename="users.csv"');
+
+    return $response;
+}
 }
