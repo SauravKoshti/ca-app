@@ -228,7 +228,7 @@
                                         </select>
 
                                         @elseif(auth()->user()->user_type == 'admin')
-                                        <select id="gstDocument" name="gst_document" class="form-control">
+                                        <select name="doc_type" class="form-control">
                                             <option value="computation">Computation</option>
                                             <option value="trading">Trading</option>
                                             <option value="p&l">P&L</option>

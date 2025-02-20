@@ -40,8 +40,10 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="groupName">Group Name</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                    id="groupName" name="name" placeholder="Enter Group Name" value="{{ old('name') }}">
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    id="groupName" name="name" placeholder="Enter Group Name"
+                                                    value="{{ old('name') }}">
                                                 @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -50,8 +52,8 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="groupDescription">Group Description</label>
-                                                <textarea class="form-control" id="groupDescription"
-                                                    name="description" placeholder="Enter Last Name" rows="5">
+                                                <textarea class="form-control" id="groupDescription" name="description"
+                                                    placeholder="Enter Last Name" rows="5">
                                                         </textarea>
 
                                             </div>

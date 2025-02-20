@@ -24,7 +24,13 @@ class DocumentController extends Controller
             'document_name' => 'required|string|max:255',
             'doc_type' => 'required|string|max:100',
             'document_image_path' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        ], [
+            'document_image_path.required' => 'The document image file is required.',
+            'document_image_path.file' => 'The document must be a valid file.',
+            'document_image_path.mimes' => 'The document must be in JPG, JPEG, PNG, or PDF format.',
+            'document_image_path.max' => 'The document must not exceed 2MB in size.',
         ]);
+        
 
         // Store file
         $path = '';

@@ -149,3 +149,10 @@
 </div>
 </div>
 @endsection
+<script>
+    $(".select2-multiple").select2({
+    theme: "bootstrap",
+    placeholder: "Select a State",
+    containerCssClass: ':all:'
+});
+</script>

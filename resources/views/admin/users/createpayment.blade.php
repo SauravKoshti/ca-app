@@ -46,7 +46,7 @@
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                         aria-labelledby="v-pills-home-tab">
-                        <h3>Home</h3>
+                        <!-- <h3>Home</h3> -->
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">
@@ -69,6 +69,8 @@
                                                 <label>Discuss Fees:</label>
                                                 <input type="number" step="0.01" name="discuss_fees"
                                                     class="form-control">
+                                                    @error('discuss_fees') <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <label>Paid Fees:</label>
@@ -76,8 +78,10 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label>Payment Data Fees:</label>
+                                                <label>Payment Date Fees:</label>
                                                 <input type="date" name="payment_date" class="form-control">
+                                                @error('payment_date') <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <input type="hidden" name="user_id" class="form-control"
                                                 value="{{ $user }}">

@@ -39,7 +39,7 @@
                             <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>select</th>
+                                        <th><input type="checkbox" name="select_all" id="selectAll"></th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>UserName</th>
@@ -49,7 +49,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>select</th>
+                                        <th><input type="checkbox" name="select_all" id="selectAll"></th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>UserName</th>
@@ -112,7 +112,9 @@
 <script>
 function downloadSelectedUserData() {
     let allIds = [];
-    
+
+    let selectAllCheckbox = document.getElementById("selectAll");
+
     document.querySelectorAll('[name="user_id"]:checked').forEach(function(checkbox) {
         allIds.push(checkbox.getAttribute('data-id'));
     });
@@ -125,20 +127,31 @@ function downloadSelectedUserData() {
     // let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     $.ajax({
-        url: "/users/download/csv",  // Laravel route for CSV
+        url: "/users/download/csv",
         type: 'POST',
         data: {
             _token: '{{ csrf_token() }}',
-            user_id: allIds
+            user_ids: allIds
         },
         xhrFields: {
             responseType: 'blob'
         },
-        success: function(response) {
-            let blob = new Blob([response], { type: 'text/csv' });
+        success: function(response, status, xhr) {
+            let filename = "users.xlsx";
+
+            // Extract filename from response headers
+            let disposition = xhr.getResponseHeader('Content-Disposition');
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+                let match = disposition.match(/filename="(.+)"/);
+                if (match && match[1]) filename = match[1];
+            }
+
+            let blob = new Blob([response], {
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            });
             let link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.download = 'users.csv';
+            link.download = filename;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -149,5 +162,4 @@ function downloadSelectedUserData() {
         }
     });
 }
-
 </script>

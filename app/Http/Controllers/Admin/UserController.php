@@ -11,6 +11,8 @@ use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -91,7 +93,6 @@ class UserController extends Controller
         $documentDataArray = Document::where('user_id', $user->id)->get();
         $loggedInUserId = '1';
         $payments = Payment::where('user_id', $user->id)->get();
-        // dd($user);
         return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId','payments'));
     }
 
@@ -232,31 +233,13 @@ class UserController extends Controller
     }
 
     public function downloadSelectedUsers(Request $request)
-{
-    $userIds = $request->user_id;
+    {
+        $userIds = $request->input('user_ids', []);
 
-    if (empty($userIds)) {
-        return response()->json(['error' => 'No users selected'], 400);
-    }
-
-    $users = User::whereIn('id', $userIds)->get();
-
-    $response = new StreamedResponse(function () use ($users) {
-        $handle = fopen('php://output', 'w');
-
-        // CSV Headers
-        fputcsv($handle, ['ID', 'Name', 'Email', 'Created At']);
-
-        foreach ($users as $user) {
-            fputcsv($handle, [$user->id, $user->name, $user->email, $user->created_at]);
+        if (empty($userIds)) {
+            return response()->json(['error' => 'No users selected'], 400);
         }
 
-        fclose($handle);
-    });
-
-    $response->headers->set('Content-Type', 'text/csv');
-    $response->headers->set('Content-Disposition', 'attachment; filename="users.csv"');
-
-    return $response;
-}
+        return Excel::download(new UsersExport($userIds), 'users.xlsx');
+    }
 }

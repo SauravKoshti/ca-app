@@ -25,6 +25,7 @@ class PaymentController extends Controller
             'payament_mode' => 'required',
             'discuss_fees' => 'required|numeric',
             'user_id' => 'required|exists:users,id',
+            'payment_date' => 'required'
         ]);
 
         Payment::create($request->all());
