@@ -84,7 +84,8 @@ Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('grou
 Route::put('/groups/{group}', [GroupController::class, 'update'])->name('groups.update');
 Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
 Route::post('/groups', [GroupController::class, 'storeUsersGroup'])->name('groups.store.users');
-
+Route::post('/remove-user-from-group', [GroupController::class, 'removeUserFromGroup'])
+    ->name('user.remove.from.group');
 
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');

@@ -24,9 +24,10 @@ class PaymentController extends Controller
         $request->validate([
             'payament_mode' => 'required',
             'discuss_fees' => 'required|numeric',
+            'paid_fees' => 'nullable|numeric', 
             'user_id' => 'required|exists:users,id',
-            'payment_date' => 'required'
-        ]);
+            'payment_date' => 'required_if:paid_fees,!=,null'
+        ]);        
 
         Payment::create($request->all());
 

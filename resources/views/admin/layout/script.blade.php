@@ -19,7 +19,7 @@ layout: {
 }
 $(".select2-multiple").select2({
     theme: "bootstrap",
-    placeholder: "Select a State",
+    placeholder: "Select a User",
     containerCssClass: ':all:'
 });
 </script>

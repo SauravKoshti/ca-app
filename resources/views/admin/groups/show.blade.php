@@ -86,24 +86,18 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        
+
                                         <div class="container">
                                             <div class='col-sm-6'>
-                                            <label>Add User in group:</label>
-                                                <select id="select2-multiple-input-sm"  name="usersGroup[]" 
+                                                <label>Add User in group:</label>
+                                                <select id="select2-multiple-input-sm" name="usersGroup[]"
                                                     class="form-control input-sm select2-multiple" multiple>
                                                     @foreach ($userData as $user)
-                                            <option value="{{ $user->id }}">{{ $user->username }}</option>
-                                            @endforeach
+                                                    <option value="{{ $user->id }}">{{ $user->username }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <!-- <select name="usersGroup[]" class=""
-                                            aria-label="multiple select example" multiple>
-                                            @foreach ($userData as $user)
-                                            <option value="{{ $user->id }}">{{ $user->username }}</option>
-                                            @endforeach
-                                        </select> -->
                                         <input type="hidden" name="group_id" value="{{ $groupData->id }}">
                                     </div>
                                     <button type="submit" class="btn btn-success">Upload</button>
@@ -113,9 +107,12 @@
                     </div>
                     <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                         <div class="user-card">
-                            <!-- <div class="card-header">
-                                <div class="card-title">User List</div>
-                            </div> -->
+                            @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
@@ -125,14 +122,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if ($userListData->isEmpty())
-                                    <tr>
-                                        <td colspan="4" class="text-center">No User records found.</td>
-                                    </tr>
-                                    @else
+                                        @if ($userListData->isEmpty())
+                                        <tr>
+                                            <td colspan="4" class="text-center">No User records found.</td>
+                                        </tr>
+                                        @else
                                         @foreach ( $userListData as $user )
                                         <tr>
                                             <td>{{ $user->username }}</td>
+                                            <td>
+                                                <form action="{{ route('user.remove.from.group') }}" method="POST"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    <input type="hidden" name="user_id" value={{ $user->id }}>
+                                                    <input type="hidden" name="group_id" value={{ $user->group_id }}>
+                                                    <button type="submit" class="btn btn-link btn-danger"
+                                                        data-bs-toggle="tooltip" title="Remove">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         @endforeach
                                         @endif
@@ -150,9 +159,9 @@
 </div>
 @endsection
 <script>
-    $(".select2-multiple").select2({
+$(".select2-multiple").select2({
     theme: "bootstrap",
-    placeholder: "Select a State",
+    placeholder: "Select a User",
     containerCssClass: ':all:'
 });
 </script>
