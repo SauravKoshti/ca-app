@@ -30,8 +30,10 @@ class PaymentController extends Controller
         ]);        
 
         Payment::create($request->all());
-
-        return redirect()->route('users.show', $request->user_id)->with('success', 'Payment added successfully.');
+        return redirect()->route('users.show',  [
+            'user' => $request->user_id,
+            'tab' => 'payment-tab'
+        ])->with('success', 'Payment added successfully.');
     }
 
     public function edit(Payment $payment)
@@ -51,7 +53,10 @@ class PaymentController extends Controller
         ]);
     
         // Redirect back with success message
-        return redirect()->route('users.index')->with('success', 'Payment updated successfully!');
+        return redirect()->route('users.show',  [
+            'user' => $payment->user_id,
+            'tab' => 'payment-tab'
+        ])->with('success', 'Payment updated successfully!');
     }
     
 
