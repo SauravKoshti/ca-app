@@ -3,7 +3,7 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="{{route('admin.index')}}" class="logo">
+            <a href="{{route('home')}}" class="logo">
                 <img src="{{ asset('assets/img/kaiadmin/logo_light.svg')}}" alt="navbar brand" class="navbar-brand"
                     height="20" />
 
