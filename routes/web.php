@@ -93,15 +93,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
         Route::get('/services', [HomeController::class, 'services'])->name('services');
 
-<<<<<<< HEAD
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
         Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
         Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
+        Route::post('/contact/download/csv', [ContactController::class, 'downloadSelectedContact'])->name('contact.download.csv');
     });
 });
-=======
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
-Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
-Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
-Route::post('/contact/download/csv', [ContactController::class, 'downloadSelectedContact'])->name('contact.download.csv');
->>>>>>> 111ab33 (admin design fix)
