@@ -145,81 +145,151 @@
 
 </section>
 <style>
-
-.post-slide {
-  background: #fff;
-  margin: 20px 15px 20px;
-  border-radius: 15px;
-  padding-top: 1px;
-  box-shadow: 0px 14px 22px -9px #bbcbd8;
-}
-.post-slide .post-img {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  margin: -12px 15px 8px 15px;
-  margin-left: -10px;
-}
-.post-slide .post-img img {
-  width: 100%;
-  height: auto;
-  transform: scale(1, 1);
-  transition: transform 0.2s linear;
-}
-.post-slide:hover .post-img img {
-  transform: scale(1.1, 1.1);
-}
-
-.owl-controls .owl-buttons {
-  text-align: center;
-  margin-top: 20px;
-}
-.owl-controls .owl-buttons .owl-prev {
-  background: #fff;
-  position: absolute;
-  top: 40%;
-  left: 15px;
-  padding: 0 18px 0 15px;
-  border-radius: 50px;
-  box-shadow: 3px 14px 25px -10px #92b4d0;
-  transition: background 0.5s ease 0s;
-}
-.owl-controls .owl-buttons .owl-next {
-  background: #fff;
-  position: absolute;
-  top: 40%;
-  right: 15px;
-  padding: 0 15px 0 18px;
-  border-radius: 50px;
-  box-shadow: -3px 14px 25px -10px #92b4d0;
-  transition: background 0.5s ease 0s;
-}
-.owl-controls .owl-buttons .owl-prev:after,
-.owl-controls .owl-buttons .owl-next:after {
-  content: "\f104";
-  font-family: FontAwesome;
-  color: #333;
-  font-size: 30px;
-}
-.owl-controls .owl-buttons .owl-next:after {
-  content: "\f105";
-}
-
+  
+  /* Prevent horizontal scrolling */
+  html, body {
+      /* overflow-x: hidden !important; */
+      width: 100%;
+  }
+  
+  /* Main Carousel Wrapper */
+  #news-slider {
+      max-width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 20px 0;
+  }
+  
+  /* Post Slide Styles */
+  .post-slide {
+      background: #fff;
+      margin: 20px 15px;
+      border-radius: 15px;
+      padding-top: 1px;
+      box-shadow: 0px 14px 22px -9px #bbcbd8;
+      text-align: center;
+  }
+  
+  .post-slide .post-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: -12px 15px 8px;
+  }
+  
+  .post-slide .post-img img {
+      width: 100%;
+      height: auto;
+      transform: scale(1);
+      transition: transform 0.3s ease-in-out;
+  }
+  
+  .post-slide:hover .post-img img {
+      transform: scale(1.1);
+  }
+  
+  /* Owl Carousel Core Fixes */
+  .owl-carousel {
+      overflow: hidden;
+      position: relative;
+  }
+  
+  .owl-stage-outer {
+      overflow: hidden;
+  }
+  
+  .owl-stage {
+      display: flex;
+      align-items: center;
+  }
+  
+  /* Navigation Buttons */
+  .owl-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      left: 0;
+      right: 0;
+      z-index: 10;
+  }
+  
+  .owl-prev, .owl-next {
+      background: rgba(255, 255, 255, 0.897) !important;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+  }
+  
+  .owl-prev { left: 10px; }
+  .owl-next { right: 10px; }
+  
+  .owl-prev:hover, .owl-next:hover {
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Font Awesome Arrows */
+  .owl-prev i, .owl-next i {
+      font-size: 20px;
+      color: #333;
+  }
+  
+  /* Dots Pagination */
+  .owl-dots {
+      text-align: center;
+      margin-top: 10px;
+  }
+  
+  .owl-dot {
+      width: 12px;
+      height: 12px;
+      margin: 5px;
+      background: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background 0.3s;
+  }
+  
+  .owl-dot.active {
+      background: #333;
+  }
+  
 </style>
 @endsection
 @section('section_script')
 <script>
-    $(document).ready(function () {
-        $("#news-slider").owlCarousel({
-            items: 3,
-            itemsDesktop: [1199, 3],
-            itemsDesktopSmall: [980, 2],
-            itemsMobile: [600, 1],
-            navigation: true,
-            navigationText: ["", ""],
-            pagination: true,
-            autoPlay: true
-        });
-        });
+   $(document).ready(function () {
+    // Set Owl Carousel width to device width - 10px
+    $("#news-slider").css("width", $(window).width() - 10);
+    $("#news-slider").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 15,
+        nav: true,
+        navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        responsive: {
+            0: { items: 1 }, 
+            600: { items: 2 }, 
+            1000: { items: 3 } 
+        }
+    });
+    // Adjust width on window resize
+    $(window).resize(function() {
+        $("#news-slider").css("width", $(window).width() - 10);
+    });
+});
 </script>
 @endsection

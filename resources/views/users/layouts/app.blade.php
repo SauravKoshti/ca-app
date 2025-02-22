@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{{ asset('assets/user/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/user/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/user/css/custom.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap 3 CSS -->
@@ -30,7 +31,7 @@
     <script src="{{ asset('assets/user/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/bootstrap.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script>
     $(document).ready(function() {
         $('.navbar a.dropdown-toggle').on('click', function(e) {
