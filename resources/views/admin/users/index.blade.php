@@ -22,15 +22,19 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex align-items-center">
-                        <h4 class="card-title">Users</h4>
-                        @if (!$users->isEmpty())
-                        <button class="btn btn-primary" onclick="downloadSelectedUserData()">Download User Data</button>
-                        @endif
-                        <a href="{{route('users.create')}}" class="btn btn-primary btn-round ms-auto">
-                            <i class="fa fa-plus"></i>
-                            Add Users
-                        </a>
+                    <div class="d-flex bd-highlight mb-2">
+                        <div class="me-auto p-2 bd-highlight">
+                            <h4 class="card-title">Users</h4>
+                        </div>
+                        <div class="d-grid d-md-flex justify-content-md-end">
+                            @if (!$users->isEmpty())
+                            <button class="btn btn-primary me-md-2" type="button"
+                                onclick="downloadSelectedUserData()">Download User Data</button>
+                            @endif
+                            <a href="{{ route('users.create') }}" class="btn btn-primary btn-round">
+                                <i class="fa fa-plus"></i> Add Users
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -124,8 +128,6 @@ function downloadSelectedUserData() {
         return;
     }
 
-    // let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
     $.ajax({
         url: "/users/download/csv",
         type: 'POST',
@@ -138,8 +140,6 @@ function downloadSelectedUserData() {
         },
         success: function(response, status, xhr) {
             let filename = "users.xlsx";
-
-            // Extract filename from response headers
             let disposition = xhr.getResponseHeader('Content-Disposition');
             if (disposition && disposition.indexOf('attachment') !== -1) {
                 let match = disposition.match(/filename="(.+)"/);

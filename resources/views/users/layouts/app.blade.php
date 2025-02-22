@@ -60,19 +60,6 @@
     });
     </script>
     <script>
-    function toggleGstNumberField() {
-        const userType = document.getElementById('userType').value; // Get the selected value
-        const gstField = document.getElementById('gstNumberField'); // GST Number field container
-
-        // Show GST field if "business" is selected, otherwise hide it
-        if (userType === 'business') {
-            gstField.classList.remove('hidden'); // Show field
-        } else {
-            gstField.classList.add('hidden'); // Hide field
-        }
-    }
-    </script>
-    <script>
     $(document).ready(function() {
         $('.carousel').carousel({
             interval: 3000 // Change image every 3 seconds
