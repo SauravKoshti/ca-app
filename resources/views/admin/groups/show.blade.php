@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Create User')
+@section('title', 'Create Group')
 @section('content')
 <div class="container">
     <!-- <div class="page-inner">

@@ -98,7 +98,6 @@ function downloadSelectedUserData() {
         success: function(response, status, xhr) {
             let filename = "users.xlsx";
 
-            // Extract filename from response headers
             let disposition = xhr.getResponseHeader('Content-Disposition');
             if (disposition && disposition.indexOf('attachment') !== -1) {
                 let match = disposition.match(/filename="(.+)"/);

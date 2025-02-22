@@ -1,5 +1,5 @@
 @extends('users.layouts.app')
-@section('title', 'Homepage')
+@section('title', 'Home')
 @section('content')
 <section class="banner-sec">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
