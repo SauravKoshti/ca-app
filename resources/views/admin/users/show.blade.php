@@ -38,7 +38,7 @@
                                 type="button" role="tab" aria-controls="home" aria-selected="true">Profile</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            <button class="nav-link" id="document-tab" data-bs-toggle="tab" data-bs-target="#profile"
                                 type="button" role="tab" aria-controls="profile" aria-selected="false">Document</button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -399,6 +399,18 @@
     </div>
 </div>
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let params = new URLSearchParams(window.location.search);
+        let tab = params.get('tab');
+        if (tab) {
+            let tabElement = document.querySelector(`[id="${tab}"]`);
+            if (tabElement) {
+                new bootstrap.Tab(tabElement).show();
+            }
+        }
+    });
+</script>
 <script>
 function downloadSelected(type) {
     let allIds = [];

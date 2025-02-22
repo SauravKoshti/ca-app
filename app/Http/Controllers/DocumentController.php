@@ -50,7 +50,11 @@ class DocumentController extends Controller
             'document_image_path' => $path,
         ]);
 
-        return redirect()->route('users.show', $request->user_id)->with('success', 'Document created successfully.');
+        return redirect()->route('users.show', [
+            'user' => $request->user_id,
+            'tab' => 'document-tab'
+        ])->with('success', 'Document created successfully.');
+        
     }
 
     public function show($id)

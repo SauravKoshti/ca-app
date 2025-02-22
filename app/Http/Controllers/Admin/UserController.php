@@ -21,7 +21,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->get();
+        $login_user = Auth::user();
+        if ($login_user->role == 'user') {
+            $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+        } else {
+            $users = User::orderBy('id', 'desc')->get();
+        }
         return view('admin.users.index', compact('users'));
     }
 
@@ -93,7 +98,7 @@ class UserController extends Controller
         $documentDataArray = Document::where('user_id', $user->id)->get();
         $loggedInUserId = '1';
         $payments = Payment::where('user_id', $user->id)->get();
-        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId','payments'));
+        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments'));
     }
 
     /**
@@ -109,7 +114,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-       // $validated = $request->validate([
+        // $validated = $request->validate([
         //     'name' => 'required|string|max:255',
         //     'firstname' => 'required|string|max:255',
         //     'lastname' => 'required|string|max:255',
