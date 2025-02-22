@@ -140,22 +140,5 @@
     </div>
 
 </section>
-<style>
-    .carousel {
-    width: 80%;
-    margin: auto;
-}
 
-.carousel img {
-    width: 100%;
-    height: auto;
-}
-
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    border-radius: 5px;
-}
-
-</style>
 @endsection
