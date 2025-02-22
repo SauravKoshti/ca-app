@@ -89,13 +89,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/remove-user-from-group', [GroupController::class, 'removeUserFromGroup'])
             ->name('user.remove.from.group');
 
-        Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
-        Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
-        Route::get('/services', [HomeController::class, 'services'])->name('services');
-
-        Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
-        Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
-        Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
-        Route::post('/contact/download/csv', [ContactController::class, 'downloadSelectedContact'])->name('contact.download.csv');
     });
 });
+Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
+Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
+Route::get('/services', [HomeController::class, 'services'])->name('services');
+
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
+Route::post('/contact/download/csv', [ContactController::class, 'downloadSelectedContact'])->name('contact.download.csv');

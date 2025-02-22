@@ -36,7 +36,7 @@
       <div class="navbar-collapse collapse" id="myNavbar" aria-expanded="false" style="height: 1px;">
         <div class="container">
           <ul class="nav navbar-nav">
-            <li><a href="">Home</a></li>
+            <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('services') }}">Services</a></li>
             <li><a href="{{ route('about-us') }}">About Us</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
