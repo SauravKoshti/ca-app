@@ -10,7 +10,7 @@
                         <h2 class="text-center fw-bold about-section-heading display-2 text-decoration">About Us</h2>
                         <div class="row">
                             <div class="col-md-6">
-                            <img src="https://picsum.photos/id/237/200/300" width="500px" height="500px"/>
+                                <img src="https://picsum.photos/id/237/200/300" width="500px" height="500px" />
                             </div>
                             <div class="col-md-6">
                                 <p>
@@ -36,7 +36,6 @@
                     </div>
                     <hr>
                     <div class="row about-grid">
-                        <!-- First Column -->
                         <div class="col-md-6 about-box">
                             <div class="about-box-content p-4 shadow-lg rounded bg-light">
                                 <h3 class="fw-bold text-primary">Our Unique Services</h3>
@@ -60,8 +59,6 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <!-- Second Column -->
                         <div class="col-md-6 about-box">
                             <div class="about-box-content p-4 shadow-lg rounded bg-light">
                                 <h3 class="fw-bold text-primary">Key Solutions</h3>
@@ -79,8 +76,7 @@
                                 </ul>
                             </div>
                         </div>
-
-                    </div> <!-- End Row -->
+                    </div>
                 </div>
             </div>
         </div>
