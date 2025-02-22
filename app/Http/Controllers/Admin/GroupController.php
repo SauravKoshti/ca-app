@@ -17,9 +17,9 @@ class GroupController extends Controller
         $login_user = Auth::user();
         if ($login_user->role == 'user') {
             $groups = Group::leftJoin('users', 'users.group_id', '=', 'groups.id')
-            ->select('groups.*')
-            ->where('users.id', $login_user->id)
-            ->get();
+                ->select('groups.*')
+                ->where('users.id', $login_user->id)
+                ->get();
         } else {
             $groups = Group::all();
         }
@@ -54,18 +54,18 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         $groupData = Group::where('id', $group->id)->first();
-        $userData = User::where('role','user')
-        ->whereNull('group_id')
-        ->get();
+        $userData = User::where('role', 'user')
+            ->whereNull('group_id')
+            ->get();
         $userListData = User::where('group_id', $group->id)->get();
         return view('admin.groups.show', compact('groupData', 'userData', 'userListData'));
     }
 
     public function edit(Group $group)
     {
-        $userData = User::where('role','user')
-        ->whereNull('group_id')
-        ->get();
+        $userData = User::where('role', 'user')
+            ->whereNull('group_id')
+            ->get();
         return view('admin.groups.edit', compact('group', 'userData'));
     }
 
@@ -98,4 +98,13 @@ class GroupController extends Controller
             return redirect()->route('groups.store.users')->with('success', 'Group updated successfully.');
         }
     }
+    public function removeUserFromGroup(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $groupData = $user->update([
+            'group_id' => null
+        ]);
+        return redirect()->route('groups.show', $request->group_id)->with('success', 'User remove from group successfully.');
+    }
+
 }

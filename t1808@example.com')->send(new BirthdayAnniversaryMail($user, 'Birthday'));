@@ -1,0 +1,29 @@
+[90m= [39m[34;4mApp\Models\User[39;24m {#5207
+    [34mid[39m: [35m1[39m,
+    [34musername[39m: "[32msaurav-1907[39m",
+    [34mfirst_name[39m: "[32mSaurav [39m",
+    [34mlast_name[39m: "[32mKoshti[39m",
+    [34mfather_full_name[39m: "[32mSydnie Kihn[39m",
+    [34mname[39m: "[32mElwin Kirlin[39m",
+    [34maddress[39m: """
+      [32m22085 Laurine Field Apt. 067[39m\n
+      [32mOtisberg, PA 73346[39m
+      """,
+    [34mcity[39m: "[32mSouth Una[39m",
+    [34mpincode[39m: "[32m468150[39m",
+    [34maadhar_card[39m: "[32m208601230277[39m",
+    [34mpan_card[39m: "[32mHPHOG6034L[39m",
+    [34memail[39m: "[32mdeotest1808@gmail.com[39m",
+    [34mgst_number[39m: [36mnull[39m,
+    [34manniversary_date[39m: [36mnull[39m,
+    [34mmobile[39m: "[32m3338758650[39m",
+    [34mdob[39m: "[32m1989-02-15[39m",
+    [34mgender[39m: [35m0[39m,
+    [34muser_type[39m: "[32mprivate[39m",
+    [34mrole[39m: "[32muser[39m",
+    #[33mpassword[39m: "[32m$2y$12$C.YO4u/9k0fEN4WvCFdCauIOlXLZtMuaWtg8mZodSpBzSxRLDzjf6[39m",
+    [34mcreated_at[39m: "[32m2025-02-14 15:49:50[39m",
+    [34mupdated_at[39m: "[32m2025-02-14 15:49:50[39m",
+    [34mgroup_id[39m: [35m8[39m,
+  }
+

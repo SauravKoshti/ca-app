@@ -26,7 +26,7 @@
             <div class="info col-md-6">
               <ul>
                 <li><img src="{{ asset('assets/user/images/time.png') }}">
-                  <p> <span class="heading">Contact Time</span> <span>Mon-Sat: 10.00AM -7:30PM</span> </p>
+                  <p> <span class="heading">Contact Time</span> <span>Mon-Sat: 09.00AM -7:30PM</span> </p>
                 </li>
               </ul>
             </div>

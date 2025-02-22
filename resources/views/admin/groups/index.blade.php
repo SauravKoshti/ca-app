@@ -54,16 +54,22 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                @if ($groups->isEmpty())
+                                    <tr>
+                                        <td colspan="4" class="text-center">No documet records found.</td>
+                                    </tr>
+                                    @else
+                                    
                                     @foreach($groups as $user)
                                     <tr>
                                         <td>{{ $user->name }} </td>
                                         <td>{{ $user->description }}</td>
                                         <td>
-                                            <a href="{{ route('groups.show', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Show User">
+                                            <a href="{{ route('groups.show', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Show Group">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <div class="form-button-action">
-                                                <a href="{{ route('groups.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task">
+                                                <a href="{{ route('groups.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Group">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('groups.destroy', $user->id) }}" method="POST" style="display:inline;">
@@ -77,6 +83,7 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

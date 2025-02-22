@@ -26,27 +26,17 @@
             </ul>
         </div>
         <div class="row">
-            {{-- <div class="col-md-3">
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <!-- Vertical Tabs -->
-                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
-                                aria-orientation="vertical">
-                                <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                                    aria-selected="true">Home</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             <div class="col">
                 <!-- Tab Content -->
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                         aria-labelledby="v-pills-home-tab">
-                        <h3>Home</h3>
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">
@@ -57,8 +47,20 @@
                                         <form action="{{ route('users.payment.store') }}" method="POST">
                                             @csrf
                                             <div class="mb-3">
+                                                <label>Paid Fees:</label>
+                                                <select id="payament_mode" name="payament_mode" class="form-control">
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="Onlie">Onlie</option>
+                                                </select>
+                                                @error('payament_mode') <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
                                                 <label>Discuss Fees:</label>
-                                                <input type="number" step="0.01" name="discuss_fees" class="form-control">
+                                                <input type="number" step="0.01" name="discuss_fees"
+                                                    class="form-control">
+                                                @error('discuss_fees') <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <label>Paid Fees:</label>
@@ -66,10 +68,13 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label>Payment Data Fees:</label>
+                                                <label>Payment Date Fees:</label>
                                                 <input type="date" name="payment_date" class="form-control">
+                                                @error('payment_date') <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
-                                            <input type="hidden" name="user_id" class="form-control" value="{{ $user }}">
+                                            <input type="hidden" name="user_id" class="form-control"
+                                                value="{{ $user }}">
                                             <button type="submit" class="btn btn-success">Save</button>
                                         </form>
                                     </div>

@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Providers\FoundationServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\Document;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -96,7 +98,6 @@ class UserController extends Controller
         $documentDataArray = Document::where('user_id', $user->id)->get();
         $loggedInUserId = '1';
         $payments = Payment::where('user_id', $user->id)->get();
-        // dd($user);
         return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments'));
     }
 
@@ -188,24 +189,62 @@ class UserController extends Controller
         return view('admin.users.document', compact('loggedInUserId', 'userId', 'userData', 'documentDataArray'));
     }
 
-    public function uploadDocument(Request $request)
+    // Show Forgot Username Form
+    public function showForgotUsernameForm()
     {
-        $request->validate([
-            // 'name' => 'required',
-            // 'detail' => 'required',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $input = $request->all();
-        if ($image = $request->file('document_image_path')) {
-            $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['document_image_path'] = $destinationPath . $profileImage;
+        return view('users.auth.forgot-username');
+    }
+
+    // Handle Forgot Username
+    public function sendUsername(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            Mail::raw("Your username is: {$user->username}", function ($message) use ($user) {
+                $message->to($user->email)->subject('Your Username');
+            });
+            return redirect()->route('login')->with('success', 'Your username has been sent to your email.');
         }
 
-        Document::create($input);
-        return redirect()->route('users.document', $request->user_id)->with('success', 'User deleted successfully.');
-        // return view('admin.users.document',$request->user_id)
-        //                 ->with('success','Product created successfully.');
+        return back()->with('error', 'Email not found.');
+    }
+
+    // Show Forgot Password Form
+    public function showForgotPasswordForm()
+    {
+        return view('users.auth.forgot-password');
+    }
+
+    // Handle Forgot Password
+    public function sendPasswordResetLink(Request $request)
+    {
+
+           // Validate request
+    $request->validate([
+        'email' => 'required|email|exists:users,email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    // Find user by email
+    $user = User::where('email', $request->email)->firstOrFail();
+    
+        // Update user fields
+        $user->update([
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+        return redirect()->route('login')->with('success', 'Password has been updated successfully.');
+    }
+
+    public function downloadSelectedUsers(Request $request)
+    {
+        $userIds = $request->input('user_ids', []);
+
+        if (empty($userIds)) {
+            return response()->json(['error' => 'No users selected'], 400);
+        }
+
+        return Excel::download(new UsersExport($userIds), 'users.xlsx');
     }
 }

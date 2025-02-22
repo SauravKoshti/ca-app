@@ -218,6 +218,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label>Document Type:</label>
+                                        @if(auth()->user()->user_type == 'user')
                                         <select name="doc_type" class="form-control">
                                             <option value="aadhar_card">Aadhar Card</option>
                                             <option value="pan_card">Pan Card</option>
@@ -225,6 +226,27 @@
                                             <option value="rc_book">RC Book</option>
                                             <option value="bank_statement">Bank Statement</option>
                                         </select>
+
+                                        @elseif(auth()->user()->user_type == 'admin')
+                                        <select name="doc_type" class="form-control">
+                                            <option value="computation">Computation</option>
+                                            <option value="trading">Trading</option>
+                                            <option value="p&l">P&L</option>
+                                            <option value="capital">Capital</option>
+                                            <option value="balance_sheet">Balance Sheet</option>
+                                            <option value="26a5">26A5</option>
+                                            <option value="aib">AIB</option>
+                                            <option value="ttb">TTB</option>
+                                            <option value="gstr_1_excel">GSTR 1 Excel</option>
+                                            <option value="gstr_1_json">GSTR 1 JSON</option>
+                                            <option value="gstr_1_pdf">GSTR 1 PDF</option>
+                                            <option value="gst_3b_pdf">GST 3B PDF</option>
+                                            <option value="gst_2b_pdf">GST 2B PDF</option>
+                                            <option value="gst_challan_pdf">GST Challan PDF</option>
+                                            <option value="gst_summary">GST Summary</option>
+                                        </select>
+                                        @endif
+
                                         @error('doc_type')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -264,6 +286,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if ($documentDataArray->isEmpty())
+                                        <tr>
+                                            <td colspan="4" class="text-center">No documet records found.</td>
+                                        </tr>
+                                        @else
                                         @foreach ($documentDataArray as $documentData)
                                         <tr>
                                             <!-- <td>{{ $documentData }}</td> -->
@@ -296,6 +323,7 @@
                                             </td>
                                         </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -327,6 +355,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @if ($payments->isEmpty())
+                                                <tr>
+                                                    <td colspan="4" class="text-center">No payment records found.</td>
+                                                </tr>
+                                                @else
                                                 @foreach ($payments as $payment)
                                                 <tr>
                                                     <td>{{ $payment->discuss_fees }}</td>
@@ -350,9 +383,11 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -383,7 +418,6 @@ function downloadSelected(type) {
     checkboxes.forEach(function(checkbox) {
         allIds.push(checkbox.getAttribute('data-id'));
     });
-    console.log(allIds); // Output the array of all checked data-id values
     $.ajax({
         url: "{{ route('users.download.documents') }}",
         type: 'POST',
