@@ -40,75 +40,83 @@ class AuthController extends Controller
     {
         // Validate the request data
         $validatedData = $request->validate([
+            'user_type' => 'required|in:business,private,admin',
+            'username' => 'required|string|max:255|unique:users,username',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username',
-            'father_full_name' => 'required|string|max:255',
+            'full_name' => 'required|string|max:255',
             'address' => 'required|string',
             'city' => 'required|string|max:255',
             'pincode' => 'required|digits:6',
             'aadhar_card' => 'required|digits:12|unique:users,aadhar_card',
             'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/', 'unique:users,pan_card'],
-            'email' => 'required|email|max:255|unique:users,email',
-            'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
-            'anniversary_date' => 'nullable|date',
-            'mobile' => 'required|digits:10|unique:users,mobile',
             'dob' => 'required|date|before:today',
+            'mobile' => 'required|digits:10|unique:users,mobile',
+            'anniversary_date' => 'nullable|date',
+            'profile' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8',
+            'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+            'father_full_name' => 'required|string|max:255',
+            'business_name' => 'nullable|string|max:255',
             'gender' => 'required|boolean',
-            'user_type' => 'required|in:business,private,admin',
-            'password' => 'required|string|min:8'
+            'refer' => 'nullable|string|max:255',
         ]);
 
-        // Check for validation errors
-        // if ($validatedData->fails()) {
-        //     return redirect()->back()->withErrors($validatedData)->withInput();
-        // }
-        // dd($request->all());
+        // Handle file upload
+        if ($request->hasFile('profile_image')) {
+            $profilePath = $request->file('profile_image')->store('profiles', 'public');
+        } else {
+            $profilePath = null;
+        }
+
         // Save the user
         $user = User::create([
+            'user_type' => $request['user_type'],
             'username' => $request['username'],
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
-            'father_full_name' => $request['father_full_name'],
-            'name' => $request['name'],
+            'full_name' => $request['full_name'],
             'address' => $request['address'],
             'city' => $request['city'],
             'pincode' => $request['pincode'],
             'aadhar_card' => $request['aadhar_card'],
             'pan_card' => $request['pan_card'],
-            'email' => $request['email'],
-            'gst_number' => $request['gst_number'] ?? null,
-            'anniversary_date' => $request['anniversary_date'] ?? null,
-            'mobile' => $request['mobile'],
             'dob' => $request['dob'],
-            'gender' => $request['gender'],
-            // 'user_type' => $request['user_type'],
-            'role' => $request['role'], // Default role
+            'mobile' => $request['mobile'],
+            'anniversary_date' => $request['anniversary_date'] ?? null,
+            'profile_image' => $profilePath,
+            'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            'gst_number' => $request['gst_number'] ?? null,
+            'father_full_name' => $request['father_full_name'],
+            'business_name' => $request['business_name'] ?? null,
+            'gender' => $request['gender'],
+            'refer' => $request['refer'] ?? null,
         ]);
         // dd($user);
-        Mail::raw("
-Dear {$user->first_name},  
+//         Mail::raw("
+// Dear {$user->first_name},  
 
-Welcome to **[Company Name]**! 🎉  
+// Welcome to **[Company Name]**! 🎉  
 
-Your registration was successful, and we’re excited to have you onboard. Here are your login details:  
+// Your registration was successful, and we’re excited to have you onboard. Here are your login details:  
 
-👤 **Username:** {$user->username}  
-📧 **Email:** {$user->email}  
+// 👤 **Username:** {$user->username}  
+// 📧 **Email:** {$user->email}  
 
-You can now log in and start exploring. If you have any questions, feel free to contact us.  
+// You can now log in and start exploring. If you have any questions, feel free to contact us.  
 
-Enjoy your journey with us! 🚀  
+// Enjoy your journey with us! 🚀  
 
-Best Regards,  
-[Company Name]  
-[Company Email]  
-[Company Website]  
-", function ($message) use ($user) {
-            $message->to($user->email)
-                ->subject('🎉 Welcome to [Company Name], ' . $user->first_name . '!');
-        });
+// Best Regards,  
+// [Company Name]  
+// [Company Email]  
+// [Company Website]  
+// ", function ($message) use ($user) {
+//             $message->to($user->email)
+//                 ->subject('🎉 Welcome to [Company Name], ' . $user->first_name . '!');
+//         });
         return redirect('login')->with('success', 'Registration successful!');
     }
 

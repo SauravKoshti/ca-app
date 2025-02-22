@@ -8,7 +8,7 @@
         <h2 class="text-center mb-4">Login</h2>
         @if(session()->has('success'))
     <div class="alert alert-success">
-        {{ session()->get('message') }}
+        {{ session()->get('success') }}
     </div>
 @endif
         @if(session('error'))

@@ -10,13 +10,14 @@ return new class extends Migration {
         Schema::table('users', function (Blueprint $table) {
             $table->string('company_name')->nullable()->after('user_type');
             $table->string('profile_image')->nullable()->after('company_name');
+            $table->string('refer')->nullable()->after('profile_image');
         });
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['company_name', 'profile_image']);
+            $table->dropColumn(['company_name', 'profile_image','refer']);
         });
     }
 };

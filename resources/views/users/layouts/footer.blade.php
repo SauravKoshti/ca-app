@@ -7,22 +7,19 @@
               <div class="col-md-4">
                 <h2>Quik Links</h2>
                 <ul class="foot-link-list">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                  <li><a href="#">Career</a></li>
-                  <li><a href="#">News</a></li>
-                  <li><a href="#">Blog</a></li>
+                  <li><a href="{{ route('home') }}">Home</a></li>
+                  <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                  <li><a href="{{ route('about-us') }}">About Us</a></li>
                 </ul>
               </div>
               <div class="col-md-8">
                 <h2>Services</h2>
                 <ul class="foot-link-list">
-                  <li><a href="#">Mutual Fund</a></li>
-                  <li><a href="#">Taxation</a></li>
-                  <li><a href="#">GST</a></li>
-                  <li><a href="#">Accounting</a></li>
-                  <li><a href="#">Pancards</a></li>
-                  <li><a href="#">Our Mision</a></li>
+                  <li><a href="{{ route('services')}}">Mutual Fund</a></li>
+                  <li><a href="{{ route('services')}}">Taxation</a></li>
+                  <li><a href="{{ route('services')}}">GST</a></li>
+                  <li><a href="{{ route('services')}}">Accounting</a></li>
+                  <li><a href="{{ route('services')}}">Pancards</a></li>
                 </ul>
               </div>
             </div>
@@ -49,16 +46,5 @@
         </div>
       </div>
     </div>
-    <div class=" copy-right">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7">
-            <p>Copyright © SAG Infotech Private Limited. All Rights reserved.</p>
-          </div>
-          <div class="col-md-5 text-right">
-            <p>Designed &amp; Developed by: SAG Infotech Pvt Ltd</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </footer>
