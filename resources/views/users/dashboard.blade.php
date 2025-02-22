@@ -1,5 +1,5 @@
 @extends('users.layouts.app')
-@section('title', 'Login')
+@section('title', 'Homepage')
 @section('content')
 <section class="banner-sec">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -96,69 +96,130 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid">
+        <h2>Achieve<span>ment</span></h2>
+        <div class="row">
+          <div class="col-md-12">
+            <div id="news-slider" class="owl-carousel">
+              <div class="post-slide">
+                <div class="post-img">
+                  <img src="https://images.unsplash.com/photo-1596265371388-43edbaadab94?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
+                </div>
+              </div>
+      
+              <div class="post-slide">
+                <div class="post-img">
+                  <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=303&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=503" alt="">
+                </div>
+              </div>
+      
+              <div class="post-slide">
+                <div class="post-img">
+                  <img src="https://images.unsplash.com/photo-1564979268369-42032c5ca998?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=500" alt="">
+                </div>
+              </div>
+      
+              <div class="post-slide">
+                <div class="post-img">
+                  <img src="https://images.unsplash.com/photo-1576659531892-0f4991fca82b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
+                </div>
+              </div>
+      
+              <div class="post-slide">
+                <div class="post-img">
+                  <img src="https://images.unsplash.com/photo-1586083702768-190ae093d34d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=305&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=505" alt="">
+                </div>
+              </div>
+      
+              <div class="post-slide">
+                <div class="post-img">
+                  <img src="https://images.unsplash.com/photo-1484656551321-a1161420a2a0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=306&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=506" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </section>
 <section>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="https://img.freepik.com/free-vector/night-ocean-landscape-full-moon-stars-shine_107791-7397.jpg" alt="Slide 1">
-                <div class="carousel-caption">
-                    <h3>First Slide</h3>
-                    <p>This is the first slide description.</p>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="https://via.placeholder.com/800x400" alt="Slide 2">
-                <div class="carousel-caption">
-                    <h3>Second Slide</h3>
-                    <p>This is the second slide description.</p>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="https://img.freepik.com/free-vector/night-ocean-landscape-full-moon-stars-shine_107791-7397.jpg" alt="Slide 3">
-                <div class="carousel-caption">
-                    <h3>Third Slide</h3>
-                    <p>This is the third slide description.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-    </div>
 
 </section>
 <style>
-    .carousel {
-    width: 80%;
-    margin: auto;
+
+.post-slide {
+  background: #fff;
+  margin: 20px 15px 20px;
+  border-radius: 15px;
+  padding-top: 1px;
+  box-shadow: 0px 14px 22px -9px #bbcbd8;
+}
+.post-slide .post-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin: -12px 15px 8px 15px;
+  margin-left: -10px;
+}
+.post-slide .post-img img {
+  width: 100%;
+  height: auto;
+  transform: scale(1, 1);
+  transition: transform 0.2s linear;
+}
+.post-slide:hover .post-img img {
+  transform: scale(1.1, 1.1);
 }
 
-.carousel img {
-    width: 100%;
-    height: auto;
+.owl-controls .owl-buttons {
+  text-align: center;
+  margin-top: 20px;
 }
-
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    border-radius: 5px;
+.owl-controls .owl-buttons .owl-prev {
+  background: #fff;
+  position: absolute;
+  top: 40%;
+  left: 15px;
+  padding: 0 18px 0 15px;
+  border-radius: 50px;
+  box-shadow: 3px 14px 25px -10px #92b4d0;
+  transition: background 0.5s ease 0s;
+}
+.owl-controls .owl-buttons .owl-next {
+  background: #fff;
+  position: absolute;
+  top: 40%;
+  right: 15px;
+  padding: 0 15px 0 18px;
+  border-radius: 50px;
+  box-shadow: -3px 14px 25px -10px #92b4d0;
+  transition: background 0.5s ease 0s;
+}
+.owl-controls .owl-buttons .owl-prev:after,
+.owl-controls .owl-buttons .owl-next:after {
+  content: "\f104";
+  font-family: FontAwesome;
+  color: #333;
+  font-size: 30px;
+}
+.owl-controls .owl-buttons .owl-next:after {
+  content: "\f105";
 }
 
 </style>
+@endsection
+@section('section_script')
+<script>
+    $(document).ready(function () {
+        $("#news-slider").owlCarousel({
+            items: 3,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [980, 2],
+            itemsMobile: [600, 1],
+            navigation: true,
+            navigationText: ["", ""],
+            pagination: true,
+            autoPlay: true
+        });
+        });
+</script>
 @endsection
