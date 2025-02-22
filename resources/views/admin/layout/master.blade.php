@@ -29,5 +29,6 @@
 {{--    </div>--}}
 {{--</div>--}} -->
 @include('admin.layout.script')
+@yield('section_script')
 </body>
 </html>

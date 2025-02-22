@@ -50,6 +50,7 @@ class DocumentController extends Controller
             'document_image_path' => $path,
         ]);
 
+        session()->flash('success', 'Document created successfully');
         return redirect()->route('users.show', [
             'user' => $request->user_id,
             'tab' => 'document-tab'

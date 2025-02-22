@@ -126,6 +126,7 @@ Best Regards,
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
             $user = Auth::user();
+            session()->flash('success', 'Login successful! Welcome back.');
             if ($user->user_type === 'admin') {
                 return redirect('dashboard');
             }

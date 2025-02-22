@@ -8,6 +8,8 @@
 <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+ <!-- Bootstrap Notify -->
+ <script src="{{asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
 <script>
 $(document).ready(function() {
     $("#basic-datatables").DataTable({});
@@ -22,4 +24,26 @@ $(".select2-multiple").select2({
     placeholder: "Select a User",
     containerCssClass: ':all:'
 });
+function successMessage(message){
+    var content = {};
+    content.message = '';
+    content.title = message;
+    content.icon = "fa fa-bell";
+    $.notify(content, {
+        type: 'success',
+        placement: {
+            from: 'top',
+            align: 'center',
+        },
+        time: 1000,
+        delay: 5000,  // Notification disappears after 5 seconds
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        }
+    });
+}
+@if(session('success'))
+    successMessage("{{ session('success') }}");
+@endif
 </script>
