@@ -19,7 +19,6 @@ class UserFactory extends Factory
             'dob' => $this->faker->date,
             'password' => Hash::make('password'),
             'father_full_name' => $this->faker->name,
-            'name' => $this->faker->name,
             'address' => $this->faker->address,
             'city' => $this->faker->city,
             'pincode' => $this->faker->unique()->numerify('######'),

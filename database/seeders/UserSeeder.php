@@ -44,7 +44,6 @@ for ($i = 0; $i < 10; $i++) {
     $users[] = [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
-        'name' => $faker->name,
         'username' => $faker->unique()->userName,
         'user_type' => $faker->randomElement(['business', 'private', 'admin']),
         'mobile' => $faker->unique()->numerify('##########'),

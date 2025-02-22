@@ -23,7 +23,11 @@ class UserController extends Controller
     {
         $login_user = Auth::user();
         if ($login_user->role == 'user') {
-            $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+            if($login_user->group_id){
+                $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+            }else{
+                $users = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
+            }
         } else {
             $users = User::orderBy('id', 'desc')->get();
         }
