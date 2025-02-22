@@ -40,8 +40,12 @@
             <li><a href="{{ route('services') }}">Services</a></li>
             <li><a href="{{ route('about-us') }}">About Us</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
-            <li><a href="{{ route('login') }}">Login</a></li>
-            <li><a href="{{ route('register') }}">Registration</a></li>
+            @if(auth()->check())
+              <li><a href="{{ route('admin.index') }}">Dashboard</a></li>
+            @else
+              <li><a href="{{ route('login') }}">Login</a></li>
+              <li><a href="{{ route('register') }}">Registration</a></li>
+            @endif
           </ul>
         </div>
       </div>

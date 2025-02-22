@@ -3,7 +3,7 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
+            <a href="{{route('admin.index')}}" class="logo">
                 <img src="{{ asset('assets/img/kaiadmin/logo_light.svg')}}" alt="navbar brand" class="navbar-brand"
                     height="20" />
 
@@ -27,19 +27,19 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
-                <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                <li class="nav-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.index')}}" >
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#userManagement">
+                <li class="nav-item {{ request()->routeIs('users.*') ? 'active submenu' : '' }}">
+                    <a data-bs-toggle="collapse" href="#userManagement" aria-expanded="{{ request()->routeIs('users.*') ? 'true' : 'false' }}">
                         <i class="fas fa-user"></i>
                         <p>Users Management</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="userManagement">
+                    <div class="collapse {{ request()->routeIs('users.*') ? 'show' : '' }}" id="userManagement">
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="{{route('users.index')}}">
@@ -54,13 +54,13 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#groupManagement">
+                <li class="nav-item {{ request()->routeIs('groups.*') ? 'active submenu' : '' }}">
+                    <a data-bs-toggle="collapse" href="#groupManagement" aria-expanded="{{ request()->routeIs('groups.*') ? 'true' : 'false' }}">
                         <i class="fas fa-users"></i>
                         <p>Group Management</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="groupManagement">
+                    <div class="collapse {{ request()->routeIs('groups.*') ? 'show' : '' }}" id="groupManagement">
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="{{route('groups.index')}}">
@@ -75,11 +75,10 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                <a href="{{route('contacts.index')}}">
+                <li class="nav-item {{ request()->routeIs('contacts.index') ? 'active' : '' }}">
+                    <a href="{{route('contacts.index')}}">
                         <i class="fas fa-users"></i>
                         <p>Contact Us</p>
-                        <span class="caret"></span>
                     </a>
                 </li>
             </ul>
