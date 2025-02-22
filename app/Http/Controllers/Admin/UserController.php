@@ -70,14 +70,24 @@ class UserController extends Controller
         //     return redirect()->back()->withErrors($validated)->withInput();
         // }
         //        dd($request);
+        // Store file
+        $path = '';
+        if ($image = $request->file('document_image_path')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $path = $destinationPath . $profileImage;
+        }
         User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'username' => $request->username,
             'mobile' => $request->mobile_number,
+            'company_name' => $request->company_name,
             'password' => Hash::make($request->password),
             'email' => $request->email,
-            'dob' => $request->birthdate,
+            'dob' => $request->dob,
+            'profile_image' => $path,
             'pan_card' => $request->pan_card,
             'aadhar_card' => $request->aadhar_card,
             'name' => $request->name,
@@ -241,7 +251,7 @@ class UserController extends Controller
         return redirect()->route('login')->with('success', 'Password has been updated successfully.');
     }
 
-    public function downloadSelectedUsers(Request $request)
+    public function downloadSelectedContact(Request $request)
     {
         $userIds = $request->input('user_ids', []);
 

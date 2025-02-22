@@ -95,4 +95,3 @@
     </div>
 </div>
 @endsection
-{{--@include('admin.layout.change-theme-color')--}}

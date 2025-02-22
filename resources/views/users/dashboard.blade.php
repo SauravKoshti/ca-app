@@ -39,7 +39,7 @@
                     <h4>Mutual Fund</h4>
                     <p>A mutual fund is a company that pools money from many investors and invests the money in
                         securities such as stocks, bonds, and short-term debt.</p>
-                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                    <div class="more"><a href={{ route('services') }}>Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12">
@@ -52,7 +52,7 @@
                     <div class="icons"><img src="{{ asset('assets/user/images/taxation.png')}}" alt="" title=""></div>
                     <h4>Taxation</h4>
                     <p>Taxes are of 4 types: Direct tax, Indirect tax, Business tax, and Property and Sales Tax.</p>
-                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                    <div class="more"><a href={{ route('services') }}>Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12">
@@ -65,7 +65,7 @@
                     <div class="icons"><img src="{{ asset('assets/user/images/gst.png')}}" alt="" title=""></div>
                     <h4>GST</h4>
                     <p>Goods and Services Rates</p>
-                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                    <div class="more"><a href={{ route('services') }}>Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
             <div class="col-md-4 col-md-offset-2">
@@ -78,7 +78,7 @@
                     <div class="icons"><img src="{{asset('assets/user/images/accounting.png')}}" alt="" title=""></div>
                     <h4>Accounting</h4>
                     <p>Bank Statutory Audits, Concurrent Audits and Stock Audits.</p>
-                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                    <div class="more"><a href={{ route('services') }}>Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12">
@@ -91,7 +91,7 @@
                     <div class="icons"><img src="{{ asset('assets/user/images/pancard.png')}}" alt="" title=""></div>
                     <h4>Pancard</h4>
                     <p>Permanent Account Number</p>
-                    <div class="more"><a href="#">Read More <i class="fa fa-long-arrow-right"></i></a></div>
+                    <div class="more"><a href="{{ route('services') }}">Read More <i class="fa fa-long-arrow-right"></i></a></div>
                 </div>
             </div>
         </div>
