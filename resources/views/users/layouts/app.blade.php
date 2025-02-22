@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/user/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/user/css/custom.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap 3 CSS -->
 <!-- jQuery (required for Bootstrap's JavaScript plugins) -->
