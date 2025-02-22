@@ -45,7 +45,7 @@
                         </div>
                         <span class="profile-username">
                             <span class="op-7">Hi,</span>
-                            <span class="fw-bold">Hizrian</span>
+                            <span class="fw-bold">{{auth()->user()->first_name}}</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -66,7 +66,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('users.show', auth()->user()->id) }}">My Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <form action="{{ route('logout') }}" method="POST">
+                                <form action="{{ route('logout') }}" method="get">
                                     @csrf
                                     <button type="submit" class="dropdown-item">Logout</button>
                                 </form>
