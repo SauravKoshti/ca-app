@@ -10,7 +10,7 @@
                         <h2 class="text-center fw-bold about-section-heading display-2 text-decoration">About Us</h2>
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="https://picsum.photos/id/237/200/300" width="500px" height="500px" />
+                                <img src="https://laravel.hrnikunjprajapati.in/assets/user/images/custom-banner-2.JPG"  />
                             </div>
                             <div class="col-md-6">
                                 <p>

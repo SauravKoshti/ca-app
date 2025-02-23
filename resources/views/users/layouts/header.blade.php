@@ -3,13 +3,12 @@
       <div class="container">
         <div class="container-inner">
           <div class="row">
-            <div class="col-md-6 dt-sc-contact-number"> <a href="tel:01414072000"> <span class="fa fa-phone"></span>99740 25198</a> <a href="mailto:vishaljagani403@gmail.com"> <span class="fa fa-envelope-o"></span> vishaljagani403@gmail.com</a> </div>
+            <div class="col-md-6 dt-sc-contact-number"> <a href="tel:8200267836"> <span class="fa fa-phone"></span>82002 67836</a> <a href="mailto:vbjagani403@gmail.com"> <span class="fa fa-envelope-o"></span> vbjagani403@gmail.com</a> </div>
             <div class="col-md-6">
               <ul class="dt-sc-social-icons">
                 <li><a title="Facebook" href="#" target="_blank"><span class="fa fa-facebook"></span></a></li>
-                <li><a title="Twitter" href="#" target="_blank"><span class="fa fa-twitter"></span></a></li>
-                <li><a title="Youtube" href="#" target="_blank"><span class="fa fa-youtube"></span></a></li>
-                <li><a title="Linkedin" href="#" target="_blank"><span class="fa fa-linkedin"></span></a></li>
+                <li><a title="Whatsapp" href="https://wa.me/8200267836" target="_blank"><span class="fa fa-whatsapp"></span></a></li>
+                <li><a title="Instagram" href="#" target="_blank"><span class="fa fa-instagram"></span></a></li>
               </ul>
             </div>
           </div>
@@ -26,7 +25,7 @@
             <div class="info col-md-6">
               <ul>
                 <li><img src="{{ asset('assets/user/images/time.png') }}">
-                  <p> <span class="heading">Contact Time</span> <span>Mon-Sat: 09.00AM -7:30PM</span> </p>
+                  <p> <span class="heading">Contact Time</span> <span>Mon-Sat: 09.00AM - 07:30PM</span> </p>
                 </li>
               </ul>
             </div>
@@ -37,7 +36,15 @@
         <div class="container">
           <ul class="nav navbar-nav">
             <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="{{ route('services') }}">Services</a></li>
+            <li class="dropdown"> <a href="{{ route('services') }}" class="dropdown-toggle" data-toggle="dropdown">Services</a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ route('services.mutualfunds') }}">Mutualfund</a></li>
+              <li><a href="{{ route('services.taxation') }}">Taxation</a></li>
+              <li><a href="{{ route('services.gst') }}">Gst</a></li>
+              <li><a href="{{ route('services.accounting') }}">Accounting</a></li>
+              <li><a href="{{ route('services.pancard') }}">Pancard</a></li>
+            </ul>
+          </li>
             <li><a href="{{ route('about-us') }}">About Us</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
             @if(auth()->check())

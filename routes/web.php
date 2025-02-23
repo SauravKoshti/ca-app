@@ -92,7 +92,12 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
-Route::get('/services', [HomeController::class, 'services'])->name('services');
+Route::get('/services', action: [HomeController::class, 'services'])->name('services');
+Route::get('/services/mutualfunds', [HomeController::class, 'mutualfunds'])->name('services.mutualfunds');
+Route::get('/services/taxation', [HomeController::class, 'taxation'])->name('services.taxation');
+Route::get('/services/gst', [HomeController::class, 'gst'])->name('services.gst');
+Route::get('/services/accounting', [HomeController::class, 'accounting'])->name('services.accounting');
+Route::get('/services/pancard', [HomeController::class, 'pancard'])->name('services.pancard');
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
