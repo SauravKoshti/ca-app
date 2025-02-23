@@ -73,6 +73,7 @@ class AuthController extends Controller
         // Save the user
         $referUser = User::where('username', $request['refer'])->first();
         $referUserId = $referUser ? $referUser->id : null;
+        // dd($referUserId);
         $path = $request->profile_image;
         if ($image = $request->file('profile_image')) {
             $destinationPath = 'profiles/';

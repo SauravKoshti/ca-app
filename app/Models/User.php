@@ -36,7 +36,8 @@ class User extends Authenticatable
         'password',
         'father_full_name',
         'user_type',
-        'group_id'
+        'group_id',
+        'refer'
     ];
 
     // The attributes that should be hidden for arrays

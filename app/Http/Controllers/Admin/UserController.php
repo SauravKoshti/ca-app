@@ -108,7 +108,9 @@ class UserController extends Controller
         $documentDataArray = Document::where('user_id', $user->id)->get();
         $loggedInUserId = '1';
         $payments = Payment::where('user_id', $user->id)->get();
-        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments'));
+        $referData = User::where('refer', $user->id)->get();
+        // $referData = '1';
+        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments','referData'));
     }
 
     /**
@@ -160,7 +162,7 @@ class UserController extends Controller
       $image->move($destinationPath, $profileImage);
       $path = $destinationPath . $profileImage;
   }
-//   dd($path);
+
         // Update user fields
         $user->update([
             'firstname' => $request->firstname,
