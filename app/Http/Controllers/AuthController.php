@@ -71,6 +71,9 @@ class AuthController extends Controller
         }
 
         // Save the user
+        $referUser = User::where('username', $request['refer'])->first();
+        $referUserId = $referUser ? $referUser->id : null;
+
         $user = User::create([
             'user_type' => $request['user_type'],
             'username' => $request['username'],
@@ -92,8 +95,9 @@ class AuthController extends Controller
             'father_full_name' => $request['father_full_name'],
             'business_name' => $request['business_name'] ?? null,
             'gender' => $request['gender'],
-            'refer' => $request['refer'] ?? null,
+            'refer' => $referUserId,
         ]);
+        // ]);
         // dd($user);
 //         Mail::raw("
 // Dear {$user->first_name},  

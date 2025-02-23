@@ -2,9 +2,9 @@
 @section('title', 'Create User')
 @section('content')
     <div class="container">
-        <!-- <div class="page-inner">
-            <div class="page-header">
-                <h3 class="fw-bold mb-3">Forms</h3>
+        <div class="page-inner">
+                            <div class="page-header">
+                <h3 class="fw-bold mb-3">User</h3>
                 <ul class="breadcrumbs mb-3">
                     <li class="nav-home">
                         <a href="#">
@@ -15,16 +15,16 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Forms</a>
+                        <a href="#">User</a>
                     </li>
                     <li class="separator">
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Basic Form</a>
+                        <a href="#">Show User</a>
                     </li>
                 </ul>
-            </div> -->
+            </div>
         <div class="row mt-5">
             <div class="col-md-12">
                 <div class="card">
@@ -39,8 +39,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="document-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                    type="button" role="tab" aria-controls="profile"
-                                    aria-selected="false">Document</button>
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">Document</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="list-tab" data-bs-toggle="tab" data-bs-target="#list"
@@ -52,148 +51,178 @@
                                     type="button" role="tab" aria-controls="payment" aria-selected="false">Payment
                                     List</button>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="refer-tab" data-bs-toggle="tab" data-bs-target="#refer"
+                                    type="button" role="tab" aria-controls="refer" aria-selected="false">Refer
+                                    List</button>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
-                            <!-- <div class="card-header">
-                                <div class="card-title">Profile</div>
-                            </div> -->
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
+                                                    <label for="usertype">User Type</label>
+                                                    <p class="form-control-static">{{ $user->user_type ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="username">Username</label>
+                                                    <p class="form-control-static">{{ $user->username ?? 'N/A'}}</p>
+                                                    <!-- <input type="text" class="form-control" id="username" name="username"
+                                                        value="{{ old('username', $user->username) }}"
+                                                        placeholder="Enter Username" /> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
                                                     <label for="firstname">First Name</label>
-                                                    <p class="form-control-static">{{ $user->first_name }}</p>
+                                                    <p class="form-control-static">{{ $user->first_name ?? 'N/A' }}</p>
+                                                    <!-- <input type="text" class="form-control" id="firstname" name="firstname"
+                                                        value="{{ old('firstname', $user->first_name) }}"
+                                                        placeholder="Enter First Name" /> -->
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="lastname">Last Name</label>
-                                                    <p class="form-control-static">{{ $user->last_name }}</p>
+                                                    <p class="form-control-static">{{ $user->lastname ?? 'N/A'}}</p>
+                                                    <!-- <input type="text" class="form-control" id="lastname" name="lastname"
+                                                        value="{{ old('lastname', $user->last_name) }}"
+                                                        placeholder="Enter Last Name" /> -->
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="username">Username</label>
-                                                    <p class="form-control-static">{{ $user->username }}</p>
+                                                    <label for="fullname">Full Name</label>
+                                                    <p class="form-control-static">{{ $user->father_full_name ?? 'N/A' }}</p>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="mobile">Mobile</label>
-                                                    <p class="form-control-static">{{ $user->mobile }}</p>
+                                                    <label for="address">Address</label>
+                                                    <p class="form-control-static">{{ $user->address ?? 'N/A' }}</p>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="city">City</label>
+                                                    <p class="form-control-static">{{ $user->city ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="pincode">Pincode</label>
+                                                    <p class="form-control-static">{{ $user->pincode ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="adharcard">Aadhar Card</label>
+                                                    <p class="form-control-static">{{ $user->aadhar_card ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="pancard">PAN Card</label>
+                                                    <p class="form-control-static">{{ $user->pan_card ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="dob">Date of Birth</label>
+                                                    <p class="form-control-static">{{ $user->dob ?? 'N/A' }}</p>
+                                                    <!-- <input type="date" class="form-control" id="dob" name="dob"
+                                                        value="{{ old('dob', $user->dob) }}" /> -->
+                                                </div>
+                                            </div>
+
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="mobile">Mobile</label>
+                                                    <p class="form-control-static">{{ $user->mobile ?? 'N/A' }}
+                                                    <!-- <input type="text" class="form-control" id="mobile" name="mobile"
+                                                        value="{{ old('mobile', $user->mobile) }}"
+                                                        placeholder="Enter Mobile Number" /> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="anniversary_date">Anniversary Date</label>
+                                                    <p class="form-control-static">{{ $user->anniversary_date ?? 'N/A' }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="profile_image">Profile Image</label>
+                                                    <br>
+                                                    <!-- <input type="file" class="form-control" id="profile_image"
+                                                        name="profile_image" /> -->
+                                                    <!-- @if($user->profile_image) -->
+                                                        <img src="{{ asset($user->profile_image) }}"
+                                                            alt="Profile Image" class="img-thumbnail mt-2" width="150" />
+                                                    <!-- @endif -->
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <p class="form-control-static">{{ $user->email }}</p>
+                                                    <p class="form-control-static">{{ $user->email ?? 'N/A' }}</p>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="password">Password</label>
                                                     <p class="form-control-static">*******</p>
-                                                    <!-- Hide actual password -->
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="pancard">PAN Card</label>
-                                                    <p class="form-control-static">{{ $user->pan_card }}</p>
+                                                    <label for="company-name">Company Name</label>
+                                                    <p class="form-control-static">{{ $user->business_name ?? 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>Gender</label><br />
+                                                    <div class="d-flex">
+                                                        <div class="form-check">
+                                                        <p class="form-control-static">{{
+  $user->gender == 0 ? 'Female' : ($user->gender == 1 ? 'Male' : 'N/A');
+ }}</p>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="adharcard">Aadhar Card</label>
-                                                <p class="form-control-static">{{ $user->aadhar_card }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Gender</label>
-                                                    <p class="form-control-static">
-                                                        {{ $user->gender == 1 ? 'Male' : 'Female' }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="dob">Date of Birth</label>
-                                                    <p class="form-control-static">{{ $user->dob }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <p class="form-control-static">{{ $user->name }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="fullname">Full Name</label>
-                                                    <p class="form-control-static">{{ $user->father_full_name }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="address">Address</label>
-                                                    <p class="form-control-static">{{ $user->address }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="city">City</label>
-                                                    <p class="form-control-static">{{ $user->city }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="gst">GST Number</label>
-                                                    <p class="form-control-static">{{ $user->gst_number ?? 'N/A' }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="anniversary_date">Anniversary Date</label>
-                                                    <p class="form-control-static">
-                                                        {{ $user->anniversary_date ?? 'N/A' }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="usertype">User Type</label>
-                                                    <p class="form-control-static">{{ ucfirst($user->user_type) }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="role">Role</label>
-                                                    <p class="form-control-static">{{ ucfirst($user->role) }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -201,8 +230,8 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="user-profile-card">
                                 <!-- <div class="card-header">
-                                    <div class="card-title">Upload Documents</div>
-                                </div> -->
+                                                    <div class="card-title">Upload Documents</div>
+                                                </div> -->
                                 <div class="card-body">
                                     <form action="{{ route('users.upload.document', $user->id) }}" method="POST"
                                         enctype="multipart/form-data">
@@ -307,20 +336,18 @@
                                                         </td>
 
                                                         <td>
-                                                            <a href="{{ asset($documentData->document_image_path) }}"
-                                                                download class="btn btn-success">
+                                                            <a href="{{ asset($documentData->document_image_path) }}" download
+                                                                class="btn btn-success">
                                                                 <i class="fas fa-download"></i> Download
                                                             </a>
 
-                                                            <form action="{{ route('users.document.destroy') }}"
-                                                                method="POST" style="display:inline;">
+                                                            <form action="{{ route('users.document.destroy') }}" method="POST"
+                                                                style="display:inline;">
                                                                 @csrf
-                                                                <input type="hidden" name="id"
-                                                                    value="{{ $documentData->id }}">
+                                                                <input type="hidden" name="id" value="{{ $documentData->id }}">
                                                                 <input type="hidden" name="user_id"
                                                                     value="{{ $documentData->user_id }}">
-                                                                <button type="submit"
-                                                                    class="btn btn-danger btn-sm">Delete</button>
+                                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -377,14 +404,47 @@
                                                                     <form action="{{ route('users.payment.destroy') }}"
                                                                         method="POST" style="display:inline;">
                                                                         @csrf
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $payment->id }}">
+                                                                        <input type="hidden" name="id" value="{{ $payment->id }}">
                                                                         <input type="hidden" name="user_id"
                                                                             value="{{ $payment->user_id }}">
                                                                         <button type="submit"
                                                                             class="btn btn-danger btn-sm">Delete</button>
                                                                     </form>
                                                                 </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="refer" role="tabpanel" aria-labelledby="refer-tab">
+                            <div class="document-card">
+                                <div class="card-body">
+                                    <div class="Refer-card">
+                                        <div class="card-body">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>User Name</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if ($referData->isEmpty())
+                                                        <tr>
+                                                            <td colspan="4" class="text-center">No payment records
+                                                                found.</td>
+                                                        </tr>
+                                                    @else
+                                                        @foreach ($referData as $refer)
+                                                            <tr>
+                                                                <td>{{ $payment->discuss_fees }}</td>
+                                                                <td>{{ $payment->paid_fees }}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif
@@ -404,53 +464,53 @@
     </div>
 @endsection
 @section('section_script')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let params = new URLSearchParams(window.location.search);
-        let tab = params.get('tab');
-        if (tab) {
-            let tabElement = document.querySelector(`[id="${tab}"]`);
-            if (tabElement) {
-                new bootstrap.Tab(tabElement).show();
-            }
-        }
-    });
-
-    function downloadSelected(type) {
-        let allIds = [];
-        var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
-        checkboxes.forEach(function(checkbox) {
-            allIds.push(checkbox.getAttribute('data-id'));
-        });
-        $.ajax({
-            url: "{{ route('users.download.documents') }}",
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                type: type,
-                document_ids: allIds
-            },
-            xhrFields: {
-                responseType: 'blob'
-            },
-            success: function(response) {
-                var blob = new Blob([response], {
-                    type: 'application/pdf'
-                });
-                var link = document.createElement('a');
-                if (type === 'pdf') {
-                    link.download = 'merged_document.pdf';
-                } else if (type === 'zip') {
-                    link.download = 'documents.zip';
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let params = new URLSearchParams(window.location.search);
+            let tab = params.get('tab');
+            if (tab) {
+                let tabElement = document.querySelector(`[id="${tab}"]`);
+                if (tabElement) {
+                    new bootstrap.Tab(tabElement).show();
                 }
-                link.href = window.URL.createObjectURL(blob);
-                link.click();
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                console.log('Response:', xhr.responseText);
             }
         });
-    }
-</script>
+
+        function downloadSelected(type) {
+            let allIds = [];
+            var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
+            checkboxes.forEach(function (checkbox) {
+                allIds.push(checkbox.getAttribute('data-id'));
+            });
+            $.ajax({
+                url: "{{ route('users.download.documents') }}",
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    type: type,
+                    document_ids: allIds
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (response) {
+                    var blob = new Blob([response], {
+                        type: 'application/pdf'
+                    });
+                    var link = document.createElement('a');
+                    if (type === 'pdf') {
+                        link.download = 'merged_document.pdf';
+                    } else if (type === 'zip') {
+                        link.download = 'documents.zip';
+                    }
+                    link.href = window.URL.createObjectURL(blob);
+                    link.click();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    console.log('Response:', xhr.responseText);
+                }
+            });
+        }
+    </script>
 @endsection

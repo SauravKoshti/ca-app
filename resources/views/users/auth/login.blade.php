@@ -38,7 +38,7 @@
             <div class="d-flex justify-content-between">
                 
                 <div>
-                    <a href="{{ route('forgot.password') }}" class="text-primary">Forgot Password?</a>
+                    <a href="{{ route('forgot.password.form') }}" class="text-primary">Forgot Password?</a>
                 </div>
             </div>
 

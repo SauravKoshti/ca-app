@@ -15,7 +15,7 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-        <form method="POST" action="{{ route('forgot.password') }}" id="resetPasswordForm">
+        <form method="POST" action="{{ route('forgot.password.send') }}" id="resetPasswordForm">
             @csrf
             <div class="form-group mb-3">
                 <label for="email">Enter your registered email</label>

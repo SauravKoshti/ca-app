@@ -23,11 +23,7 @@ class UserController extends Controller
     {
         $login_user = Auth::user();
         if ($login_user->role == 'user') {
-            if($login_user->group_id){
-                $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
-            }else{
-                $users = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
-            }
+            $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
         } else {
             $users = User::orderBy('id', 'desc')->get();
         }
@@ -126,8 +122,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+        // dd($request);
         // $validated = $request->validate([
         //     'name' => 'required|string|max:255',
         //     'firstname' => 'required|string|max:255',
@@ -150,27 +147,40 @@ class UserController extends Controller
         //     dd($validated->errors());
         //     return redirect()->back()->withErrors($validated)->withInput();
         // }
-        //        dd($request);
+            //    dd($id,
+            //    $request->all());
 
-        $user = User::findOrFail($user);
-
+        $user = User::findOrFail($id);
+        // dd($user);
+  // Store file
+  $path = $user->profile_image;
+  if ($image = $request->file('profile_image')) {
+      $destinationPath = 'profiles/';
+      $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+      $image->move($destinationPath, $profileImage);
+      $path = $destinationPath . $profileImage;
+  }
+//   dd($path);
         // Update user fields
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
+            'profile_image' => $request->profile_image,
+            'business_name' => $request->business_name,
             'username' => $request->username,
             'mobile' => $request->mobile,
             'email' => $request->email,
             'dob' => $request->dob,
+            'profile_image' => $path,
             'pan_card' => $request->pan_card,
             'aadhar_card' => $request->aadhar_card,
-            'name' => $request->name,
+            // 'name' => $request->name,
             'address' => $request->address,
             'city' => $request->city,
             'pincode' => $request->pincode,
             'gst_number' => $request->gst_number ?? null,
             'anniversary_date' => $request->anniversary_date ?? null,
-            'user_type' => $request->user_type,
+            // 'user_type' => $request->user_type,
             'role' => $request->role,
         ]);
 
