@@ -23,42 +23,41 @@
             <div class="card">
                 <div class="col-md-12">
                     <div class="card-body">
-                        @if (!$contacts->isEmpty())
+                        <!-- @if (!$contacts->isEmpty())
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
                             <button class="btn btn-primary me-md-2" type="button"
                                 onclick="downloadSelectedUserData()">Download Data</button>
                         </div>
-                        @endif
+                        @endif -->
                         <div class="table-responsive">
                             <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th><input type="checkbox" name="select_all" id="selectAll"></th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Message</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th><input type="checkbox" name="select_all" id="selectAll"></th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Message</th>
+                                        <th>Date</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     @foreach($contacts as $contact)
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" name="contact_id" data-id="{{ $contact->id }}">
-                                        </td>
+                                        
                                         <td>{{ $contact->name }} </td>
                                         <td>{{ $contact->email }} </td>
                                         <td>{{ $contact->mobile }} </td>
                                         <td>{{ $contact->message }} </td>
+                                        <td>{{ $contact->created_at }} </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -72,6 +71,16 @@
 </div>
 @endsection
 <script>
+      document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("selectAll").addEventListener("change", function() {
+        let isChecked = this.checked;
+        
+        // Select or deselect all individual checkboxes based on the "Select All" checkbox
+        document.querySelectorAll('[name="contact_id"]').forEach(function(checkbox) {
+            checkbox.checked = isChecked;
+        });
+    });
+});
 function downloadSelectedUserData() {
     let allIds = [];
 

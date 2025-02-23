@@ -40,8 +40,12 @@
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
-                                class="avatar-img rounded-circle" />
+                            @if(auth()->user()->profile_image)
+                                <img src="{{ asset($user->profile_image) }}" alt="..." class="avatar-img rounded-rounded" />
+                            @else
+                                <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
+                                    class="avatar-img rounded-rounded" />
+                            @endif
                         </div>
                         <span class="profile-username">
                             <span class="op-7">Hi,</span>
@@ -53,8 +57,14 @@
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="{{ asset('assets/img/profile.jpg') }}" alt="image profile"
-                                            class="avatar-img rounded" />
+                                        @if(auth()->user()->profile_image)
+                                            <img src="{{ asset($user->profile_image) }}" alt="..."
+                                                class="avatar-img rounded-rounded" />
+                                        @else
+                                            <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
+                                                class="avatar-img rounded-rounded" />
+                                        @endif
+
                                     </div>
                                     <div class="u-text">
                                         <h4>{{  auth()->user()->username }}</h4>
@@ -64,7 +74,8 @@
                             </li>
                             <li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('users.show', auth()->user()->id) }}">My Profile</a>
+                                <a class="dropdown-item" href="{{ route('users.show', auth()->user()->id) }}">My
+                                    Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="get">
                                     @csrf

@@ -53,7 +53,8 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th><input type="checkbox" name="select_all" id="selectAll"></th>
+                                        <th></th>
+                                        <!-- <th><input type="checkbox" name="select_all" id="selectAll"></th> -->
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>UserName</th>
@@ -114,12 +115,24 @@
 </div>
 @endsection
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("selectAll").addEventListener("change", function() {
+        let isChecked = this.checked;
+        
+        // Select or deselect all individual checkboxes based on the "Select All" checkbox
+        document.querySelectorAll('[name="user_id"]').forEach(function(checkbox) {
+            checkbox.checked = isChecked;
+        });
+    });
+});
 function downloadSelectedUserData() {
     let allIds = [];
 
     let selectAllCheckbox = document.getElementById("selectAll");
 
     document.querySelectorAll('[name="user_id"]:checked').forEach(function(checkbox) {
+        console.log("checkbox",checkbox);
+        
         allIds.push(checkbox.getAttribute('data-id'));
     });
 

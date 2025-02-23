@@ -3,7 +3,7 @@
       <div class="container">
         <div class="container-inner">
           <div class="row">
-            <div class="col-md-6 dt-sc-contact-number"> <a href="tel:01414072000"> <span class="fa fa-phone"></span>99740 25198</a> <a href="mailto:caportal@sagipl.com"> <span class="fa fa-envelope-o"></span> vishaljagani403@gmail.com</a> </div>
+            <div class="col-md-6 dt-sc-contact-number"> <a href="tel:01414072000"> <span class="fa fa-phone"></span>99740 25198</a> <a href="mailto:vishaljagani403@gmail.com"> <span class="fa fa-envelope-o"></span> vishaljagani403@gmail.com</a> </div>
             <div class="col-md-6">
               <ul class="dt-sc-social-icons">
                 <li><a title="Facebook" href="#" target="_blank"><span class="fa fa-facebook"></span></a></li>
