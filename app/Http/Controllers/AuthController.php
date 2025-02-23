@@ -73,13 +73,21 @@ class AuthController extends Controller
         // Save the user
         $referUser = User::where('username', $request['refer'])->first();
         $referUserId = $referUser ? $referUser->id : null;
-
+        $path = $request->profile_image;
+        if ($image = $request->file('profile_image')) {
+            $destinationPath = 'profiles/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $path = $destinationPath . $profileImage;
+        }
+        
         $user = User::create([
             'user_type' => $request['user_type'],
             'username' => $request['username'],
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'full_name' => $request['full_name'],
+            'profile_image' => $path,
             'address' => $request['address'],
             'city' => $request['city'],
             'pincode' => $request['pincode'],
