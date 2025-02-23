@@ -21,6 +21,39 @@ class UserController extends Controller
      */
     public function index()
     {
+        $apiKey = 'NmIzNDZkNjYzNjU3Njc3NDc1NTQ0NTMwMzk3MTY4Mzc=';  
+$numbers = array('7567405227');  
+$sender = urlencode('TextLocal');  
+$message = rawurlencode('This is your message');  
+
+$numbers = implode(',', $numbers);
+
+// Prepare data for POST request
+$data = array(
+    'apikey' => $apiKey,
+    'numbers' => $numbers,
+    'sender' => $sender,
+    'message' => $message
+);
+
+// Send the POST request with cURL
+$ch = curl_init('https://api.textlocal.in/send/');
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+dd($response);
+// Check if cURL encountered an error
+if (curl_errno($ch)) {
+    echo 'Curl error: ' . curl_error($ch);  // Capture and display any cURL error
+} else {
+    echo 'Response: ' . $response;  // Print the response from TextLocal
+}
+
+curl_close($ch);
+
+dd($ch);
         $login_user = Auth::user();
         if ($login_user->role == 'user') {
             $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();

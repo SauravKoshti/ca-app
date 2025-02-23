@@ -11,7 +11,8 @@
             <li data-target="#myCarousel" data-slide-to="4"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="item active"> <img src="{{ asset('assets/user/images/custom-banner-1.JPG')}}" alt="banner1"> </div>
+            <div class="item active"> <img src="{{ asset('assets/user/images/custom-banner-1.JPG')}}" alt="banner1">
+            </div>
             <div class="item"> <img src="{{ asset('assets/user/images/custom-banner-2.JPG')}}" alt="banner2"> </div>
             <div class="item"> <img src="{{ asset('assets/user/images/custom-banner-3.JPG')}}" alt="banner3"> </div>
             <div class="item"> <img src="{{ asset('assets/user/images/custom-banner-4.JPG')}}" alt="banner4"> </div>
