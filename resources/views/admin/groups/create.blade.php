@@ -53,7 +53,7 @@
                                             <div class="form-group">
                                                 <label for="groupDescription">Group Description</label>
                                                 <textarea class="form-control" id="groupDescription" name="description"
-                                                    placeholder="Enter Last Name" rows="5">
+                                                    placeholder="Enter Last Name">
                                                         </textarea>
 
                                             </div>

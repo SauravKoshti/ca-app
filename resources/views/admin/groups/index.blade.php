@@ -72,6 +72,7 @@
                                                 <a href="{{ route('groups.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Group">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                @if(auth()->user()->user_type == 'admin')
                                                 <form action="{{ route('groups.destroy', $user->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
@@ -79,6 +80,7 @@
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

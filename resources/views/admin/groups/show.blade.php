@@ -68,7 +68,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="description">Description</label>
-                                                <p class="form-control-static">{{ $groupData->description }}</p>
+                                                <p class="form-control-static">{{ $groupData->description ?? 'N/A' }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -113,12 +113,15 @@
                             </div>
                             @endif
 
-                            <div class="card-body">
-                                <table class="table table-bordered">
+                            <div class="card-body"> 
+                            <table id="basic-datatables" class=" display table table-striped table-hover">
+                                <!-- <table class="table table-bordered"> -->
                                     <thead>
                                         <tr>
                                             <th>User Name</th>
+                                            @if(auth()->user()->user_type == 'admin')
                                             <th>Actions</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -130,6 +133,7 @@
                                         @foreach ( $userListData as $user )
                                         <tr>
                                             <td>{{ $user->username }}</td>
+                                            @if(auth()->user()->user_type == 'admin')
                                             <td>
                                                 <form action="{{ route('user.remove.from.group') }}" method="POST"
                                                     style="display:inline;">
@@ -142,6 +146,7 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         @endif
