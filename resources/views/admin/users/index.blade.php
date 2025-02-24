@@ -27,13 +27,18 @@
                             <h4 class="card-title">Users</h4>
                         </div>
                         <div class="d-grid d-md-flex justify-content-md-end">
-                            @if (!$users->isEmpty())
-                            <button class="btn btn-primary me-md-2" type="button"
-                                onclick="downloadSelectedUserData()">Download User Data</button>
+                            @if (!$users->isEmpty() || auth()->user()->user_type == 'admin')
+                            @if (!$users->isEmpty() && auth()->user()->user_type == 'admin')
+                            <button class="btn btn-primary me-md-2" type="button" onclick="downloadSelectedUserData()">
+                                Download User Data
+                            </button>
                             @endif
+                            @if (auth()->user()->user_type == 'admin')
                             <a href="{{ route('users.create') }}" class="btn btn-primary btn-round">
                                 <i class="fa fa-plus"></i> Add Users
                             </a>
+                            @endif
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -90,6 +95,8 @@
                                                     title="Edit User">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+
+                                                @if(auth()->user()->user_type == 'admin')
                                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST"
                                                     style="display:inline;">
                                                     @csrf
@@ -99,6 +106,7 @@
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -115,24 +123,25 @@
 </div>
 @endsection
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("selectAll").addEventListener("change", function() {
         let isChecked = this.checked;
-        
+
         // Select or deselect all individual checkboxes based on the "Select All" checkbox
         document.querySelectorAll('[name="user_id"]').forEach(function(checkbox) {
             checkbox.checked = isChecked;
         });
     });
 });
+
 function downloadSelectedUserData() {
     let allIds = [];
 
     let selectAllCheckbox = document.getElementById("selectAll");
 
     document.querySelectorAll('[name="user_id"]:checked').forEach(function(checkbox) {
-        console.log("checkbox",checkbox);
-        
+        console.log("checkbox", checkbox);
+
         allIds.push(checkbox.getAttribute('data-id'));
     });
 

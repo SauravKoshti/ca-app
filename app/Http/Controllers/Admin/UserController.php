@@ -21,45 +21,29 @@ class UserController extends Controller
      */
     public function index()
     {
-//             $apiKey = 'NmIzNDZkNjYzNjU3Njc3NDc1NTQ0NTMwMzk3MTY4Mzc=';  
-//     $numbers = array('7567405227');  
-//     $sender = urlencode('TextLocal');  
-//     $message = rawurlencode('This is your message');  
-
-//     $numbers = implode(',', $numbers);
-
-//     // Prepare data for POST request
-//     $data = array(
-//         'apikey' => $apiKey,
-//         'numbers' => $numbers,
-//         'sender' => $sender,
-//         'message' => $message
-//     );
-
-//     // Send the POST request with cURL
-//     $ch = curl_init('https://api.textlocal.in/send/');
-//     curl_setopt($ch, CURLOPT_POST, true);
-//     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-//     $response = curl_exec($ch);
-// dd($response);
-// // Check if cURL encountered an error
-// if (curl_errno($ch)) {
-//     echo 'Curl error: ' . curl_error($ch);  // Capture and display any cURL error
-// } else {
-//     echo 'Response: ' . $response;  // Print the response from TextLocal
-// }
-
-// curl_close($ch);
-
-// dd($ch);
         $login_user = Auth::user();
         if ($login_user->role == 'user') {
-            $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+            $users = collect();
+
+            if ($login_user->group_id) {
+                $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+            }
+
+            // Always include the logged-in user
+            $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
+
+            // Merge both collections and remove duplicates if needed
+            $users = $users->merge($singleUser)->unique('id');
+
+            // dd("Hellssso",$users);
+            // dd($users);
+            // $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+            // dd("Helssdlo",$users);
         } else {
             $users = User::orderBy('id', 'desc')->get();
+            // dd("Hellssso", $users);
         }
+        // dd("Hello", $users);
         return view('admin.users.index', compact('users'));
     }
 
@@ -143,7 +127,7 @@ class UserController extends Controller
         $payments = Payment::where('user_id', $user->id)->get();
         $referData = User::where('refer', $user->id)->get();
         // $referData = '1';
-        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments','referData'));
+        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments', 'referData'));
     }
 
     /**
@@ -182,19 +166,19 @@ class UserController extends Controller
         //     dd($validated->errors());
         //     return redirect()->back()->withErrors($validated)->withInput();
         // }
-            //    dd($id,
-            //    $request->all());
+        //    dd($id,
+        //    $request->all());
 
         $user = User::findOrFail($id);
         // dd($user);
-  // Store file
-  $path = $user->profile_image;
-  if ($image = $request->file('profile_image')) {
-      $destinationPath = 'profiles/';
-      $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-      $image->move($destinationPath, $profileImage);
-      $path = $destinationPath . $profileImage;
-  }
+        // Store file
+        $path = $user->profile_image;
+        if ($image = $request->file('profile_image')) {
+            $destinationPath = 'profiles/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $path = $destinationPath . $profileImage;
+        }
 
         // Update user fields
         $user->update([
@@ -279,15 +263,15 @@ class UserController extends Controller
     public function sendPasswordResetLink(Request $request)
     {
 
-           // Validate request
-    $request->validate([
-        'email' => 'required|email|exists:users,email',
-        'password' => 'required|min:8|confirmed',
-    ]);
+        // Validate request
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:8|confirmed',
+        ]);
 
-    // Find user by email
-    $user = User::where('email', $request->email)->firstOrFail();
-    
+        // Find user by email
+        $user = User::where('email', $request->email)->firstOrFail();
+
         // Update user fields
         $user->update([
             'email' => $request->email,

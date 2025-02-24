@@ -41,10 +41,10 @@
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="avatar-sm">
                             @if(auth()->user()->profile_image)
-                                <img src="{{ asset(auth()->user()->profile_image) }}" alt="..." class="avatar-img rounded-rounded" />
+                                <img src="{{ asset(auth()->user()->profile_image) }}" alt="..." class="avatar-img rounded-rounded rounded-circle" />
                             @else
                                 <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
-                                    class="avatar-img rounded-rounded" />
+                                    class="avatar-img rounded-rounded rounded-circle" />
                             @endif
                         </div>
                         <span class="profile-username">
@@ -59,7 +59,7 @@
                                     <div class="avatar-lg">
                                         @if(auth()->user()->profile_image)
                                             <img src="{{ asset(auth()->user()->profile_image) }}" alt="..."
-                                                class="avatar-img rounded-rounded" />
+                                                class="avatar-img rounded-rounded rounded-circle" />
                                         @else
                                             <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
                                                 class="avatar-img rounded-rounded" />

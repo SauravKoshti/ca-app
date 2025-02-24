@@ -366,6 +366,7 @@
                             <div class="document-card">
                                 <div class="card-body">
                                     <div class="Payment-card">
+                                    @if (auth()->user()->user_type == 'admin')
                                         <div class="card-header d-flex justify-content-between">
                                             <!-- <div class="card-title">Payment List</div> -->
                                             <div class="btn-primary btn-round ms-auto">
@@ -377,6 +378,7 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        @endif
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <thead>

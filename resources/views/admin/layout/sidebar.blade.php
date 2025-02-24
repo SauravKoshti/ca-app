@@ -28,13 +28,14 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <li class="nav-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
-                    <a href="{{route('admin.index')}}" >
+                    <a href="{{route('admin.index')}}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('users.*') ? 'active submenu' : '' }}">
-                    <a data-bs-toggle="collapse" href="#userManagement" aria-expanded="{{ request()->routeIs('users.*') ? 'true' : 'false' }}">
+                    <a data-bs-toggle="collapse" href="#userManagement"
+                        aria-expanded="{{ request()->routeIs('users.*') ? 'true' : 'false' }}">
                         <i class="fas fa-user"></i>
                         <p>Users Management</p>
                         <span class="caret"></span>
@@ -46,16 +47,19 @@
                                     <span class="sub-item">Users</span>
                                 </a>
                             </li>
+                            @if (auth()->user()->user_type == 'admin')
                             <li>
                                 <a href="{{route('users.create')}}">
                                     <span class="sub-item">Create User</span>
                                 </a>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item {{ request()->routeIs('groups.*') ? 'active submenu' : '' }}">
-                    <a data-bs-toggle="collapse" href="#groupManagement" aria-expanded="{{ request()->routeIs('groups.*') ? 'true' : 'false' }}">
+                    <a data-bs-toggle="collapse" href="#groupManagement"
+                        aria-expanded="{{ request()->routeIs('groups.*') ? 'true' : 'false' }}">
                         <i class="fas fa-users"></i>
                         <p>Group Management</p>
                         <span class="caret"></span>
@@ -75,12 +79,14 @@
                         </ul>
                     </div>
                 </li>
+                @if (auth()->user()->user_type == 'admin')
                 <li class="nav-item {{ request()->routeIs('contacts.index') ? 'active' : '' }}">
                     <a href="{{route('contacts.index')}}">
                         <i class="fas fa-users"></i>
                         <p>Contact Us</p>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
     </div>

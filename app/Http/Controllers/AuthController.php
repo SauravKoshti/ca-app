@@ -74,14 +74,14 @@ class AuthController extends Controller
         $referUser = User::where('username', $request['refer'])->first();
         $referUserId = $referUser ? $referUser->id : null;
         // dd($referUserId);
-        $path = $request->profile_image;
+        $path = '';
         if ($image = $request->file('profile_image')) {
             $destinationPath = 'profiles/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $path = $destinationPath . $profileImage;
         }
-        
+        // dd($path,$image);
         $user = User::create([
             'user_type' => $request['user_type'],
             'username' => $request['username'],
@@ -97,7 +97,7 @@ class AuthController extends Controller
             'dob' => $request['dob'],
             'mobile' => $request['mobile'],
             'anniversary_date' => $request['anniversary_date'] ?? null,
-            'profile_image' => $profilePath,
+            'profile_image' => $path,
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'gst_number' => $request['gst_number'] ?? null,
