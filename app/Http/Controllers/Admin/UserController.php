@@ -97,7 +97,7 @@ class UserController extends Controller
             'pincode' => $request->pincode,
             'gst_number' => $request->gst_number ?? null,
             'anniversary_date' => $request->anniversary_date ?? null,
-            'user_type' => $request->user_type ?? 'private',
+            'user_type' => $request->user_type ?? 'personal',
             'role' => $request->role ?? 'user',
         ]);
 

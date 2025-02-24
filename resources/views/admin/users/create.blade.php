@@ -69,8 +69,8 @@
                                                     <label for="userType" class="form-label">User Type</label>
                                                     <select id="userType" name="user_type" class="form-control"
                                                         onchange="toggleGstNumberField()" >
-                                                        <option value="private">Private User</option>
-                                                        <option value="business">Business</option>
+                                                        <option value="personal">Personal User</option>
+                                                        <option value="gst">GST</option>
                                                     </select>
                                                     @error('user_type') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -88,7 +88,7 @@
 
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label for="firstName" class="form-label">First Name</label>
+                                                <label for="first_name">First Name (Applicant Name):</label>
                                                     <input type="text" id="firstName" name="first_name"
                                                         class="form-control" >
                                                     @error('first_name') <span class="text-danger">{{ $message }}</span>
@@ -96,7 +96,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label for="lastName" class="form-label">Last Name</label>
+                                                <label for="last_name">Last Name (Surname):</label>
                                                     <input type="text" id="lastName" name="last_name"
                                                         class="form-control" >
                                                     @error('last_name') <span class="text-danger">{{ $message }}</span>

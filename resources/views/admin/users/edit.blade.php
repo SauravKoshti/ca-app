@@ -58,8 +58,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <div class="form-group">
-                                                    <label for="firstname">First Name</label>
+                                                <div class="form-group">  
+                                                    <label for="first_name">First Name (Applicant Name):</label>
                                                     <input type="text" class="form-control" id="firstname" name="firstname"
                                                         value="{{ old('firstname', $user->first_name) }}"
                                                         placeholder="Enter First Name" />
@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="lastname">Last Name</label>
+                                                <label for="last_name">Last Name (Surname):</label>
                                                     <input type="text" class="form-control" id="lastname" name="lastname"
                                                         value="{{ old('lastname', $user->last_name) }}"
                                                         placeholder="Enter Last Name" />

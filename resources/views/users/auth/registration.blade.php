@@ -27,10 +27,10 @@
                                         <label for="userType">User Type</label>
                                         <select id="userType" name="user_type" class="form-control" required
                                             onchange="toggleGstNumberField()">
-                                            <option value="private" {{ old('user_type') == 'private' ? 'selected' : '' }}>
-                                                Private User</option>
-                                            <option value="business" {{ old('user_type') == 'business' ? 'selected' : '' }}>
-                                                Business</option>
+                                            <option value="personal" {{ old('user_type') == 'personal' ? 'selected' : '' }}>
+                                            Personal User</option>
+                                            <option value="gst" {{ old('user_type') == 'gst' ? 'selected' : '' }}>
+                                                GST User</option>
                                         </select>
                                         @error('user_type')
                                             <span class="text-danger">{{ $message }}</span>
@@ -52,7 +52,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="firstName">First Name</label>
+                                    <label for="first_name">First Name (Applicant Name):</label>
                                         <input type="text" id="firstName" name="first_name" class="form-control"
                                             value="{{ old('first_name') }}" required>
                                         @error('first_name')
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="lastName">Last Name</label>
+                                    <label for="last_name">Last Name (Surname):</label>
                                         <input type="text" id="lastName" name="last_name" class="form-control"
                                             value="{{ old('last_name') }}" required>
                                         @error('last_name')

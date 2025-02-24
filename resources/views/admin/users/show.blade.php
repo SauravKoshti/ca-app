@@ -86,7 +86,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="firstname">First Name</label>
+                                                <label for="first_name">First Name (Applicant Name):</label>
                                                     <p class="form-control-static">{{ $user->first_name ?? 'N/A' }}</p>
                                                     <!-- <input type="text" class="form-control" id="firstname" name="firstname"
                                                         value="{{ old('firstname', $user->first_name) }}"
@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="lastname">Last Name</label>
+                                                <label for="last_name">Last Name (Surname):</label>
                                                     <p class="form-control-static">{{ $user->lastname ?? 'N/A'}}</p>
                                                     <!-- <input type="text" class="form-control" id="lastname" name="lastname"
                                                         value="{{ old('lastname', $user->last_name) }}"
@@ -249,7 +249,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Document Type:</label>
-                                            @if (auth()->user()->user_type == 'user')
+                                            @if (auth()->user()->user_type == 'personal' || auth()->user()->user_type == 'gst')
                                             <select name="doc_type" class="form-control">
                                                 <option value="aadhar_card">Aadhar Card</option>
                                                 <option value="pan_card">Pan Card</option>
