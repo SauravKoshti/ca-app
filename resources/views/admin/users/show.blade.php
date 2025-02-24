@@ -151,7 +151,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="dob">Date of Birth</label>
-                                                    <p class="form-control-static">{{ $user->dob ?? 'N/A' }}</p>
+                                                    <p class="form-control-static">{{ \Carbon\Carbon::parse($user->dob)->format('d-m-Y') ?? 'N/A' }}</p>
                                                     <!-- <input type="date" class="form-control" id="dob" name="dob"
                                                         value="{{ old('dob', $user->dob) }}" /> -->
                                                 </div>
@@ -172,7 +172,7 @@
                                                 <div class="form-group">
                                                     <label for="anniversary_date">Anniversary Date</label>
                                                     <p class="form-control-static">
-                                                        {{ $user->anniversary_date ?? 'N/A' }}
+                                                        {{ \Carbon\Carbon::parse($user->anniversary_date)->format('d-m-Y') ?? 'N/A' }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -204,7 +204,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="company-name">Company Name</label>
+                                                    <label for="company-name">Business Name</label>
                                                     <p class="form-control-static">{{ $user->business_name ?? 'N/A' }}
                                                     </p>
                                                 </div>

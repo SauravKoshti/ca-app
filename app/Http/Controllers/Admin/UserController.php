@@ -24,26 +24,14 @@ class UserController extends Controller
         $login_user = Auth::user();
         if ($login_user->role == 'user') {
             $users = collect();
-
             if ($login_user->group_id) {
                 $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
             }
-
-            // Always include the logged-in user
             $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
-
-            // Merge both collections and remove duplicates if needed
             $users = $users->merge($singleUser)->unique('id');
-
-            // dd("Hellssso",$users);
-            // dd($users);
-            // $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
-            // dd("Helssdlo",$users);
         } else {
             $users = User::orderBy('id', 'desc')->get();
-            // dd("Hellssso", $users);
         }
-        // dd("Hello", $users);
         return view('admin.users.index', compact('users'));
     }
 

@@ -64,6 +64,64 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="container contact-container-info">
+                <div class="row text-center">
+                    <!-- Call Now Card -->
+                    <div class="col-md-4">
+                        <div class="contact-card">
+                            <div class="icon-container">
+                                <i class="glyphicon glyphicon-earphone"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h5>Call Now</h5>
+                                <a href="tel:+918200267836">+91 8200267836</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Now Card -->
+                    <div class="col-md-4">
+                        <div class="contact-card">
+                            <div class="icon-container icon-email">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h5>Email Now</h5>
+                                <a href="mailto:vbjagani403@gmail.com">vbjagani403@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visit Now Card -->
+                    <div class="col-md-4">
+                        <div class="contact-card">
+                            <div class="icon-container icon-location">
+                                <i class="glyphicon glyphicon-map-marker"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h5>Visit Now</h5>
+                                <p style="margin: 0;">
+                                    Station Rd, opp. Bhagvatsinhji High School, Venkateshwara Nagar, Dhoraji, Gujarat
+                                    360410
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- <h3>Location:</h3> -->
+                    <div class="map-container-data">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093706!2d144.95373631531598!3d-37.81627977975179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5df1df5f1f%3A0x5045675218ce6e0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sin!4v1638932608698!5m2!1sen!2sin"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

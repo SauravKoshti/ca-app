@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="business_name">Company Name</label>
+                                        <label for="business_name">Business Name</label>
                                         <input type="text" id="business_name" name="business_name"
                                             class="form-control" value="{{ old('business_name') }}">
                                         @error('business_name')

@@ -38,9 +38,9 @@
             <li><a href="{{ route('home') }}">Home</a></li>
             <li class="dropdown"> <a href="{{ route('services') }}" class="dropdown-toggle" data-toggle="dropdown">Services</a>
             <ul class="dropdown-menu">
-              <li><a href="{{ route('services.mutualfunds') }}">Mutualfund</a></li>
+              <li><a href="{{ route('services.mutualfunds') }}">Mutual Fund</a></li>
               <li><a href="{{ route('services.taxation') }}">Taxation</a></li>
-              <li><a href="{{ route('services.gst') }}">Gst</a></li>
+              <li><a href="{{ route('services.gst') }}">GST</a></li>
               <li><a href="{{ route('services.accounting') }}">Accounting</a></li>
               <li><a href="{{ route('services.pancard') }}">Pancard</a></li>
             </ul>

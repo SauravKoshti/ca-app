@@ -68,7 +68,7 @@
                                                 <div class="col-md-6">
                                                     <label for="userType" class="form-label">User Type</label>
                                                     <select id="userType" name="user_type" class="form-control"
-                                                        onchange="toggleGstNumberField()" required>
+                                                        onchange="toggleGstNumberField()" >
                                                         <option value="private">Private User</option>
                                                         <option value="business">Business</option>
                                                     </select>
@@ -80,7 +80,7 @@
                                                 <div class="col-md-6">
                                                     <label for="username" class="form-label">Username</label>
                                                     <input type="text" id="username" name="username"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                     @error('username') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -90,7 +90,7 @@
                                                 <div class="col-md-6">
                                                     <label for="firstName" class="form-label">First Name</label>
                                                     <input type="text" id="firstName" name="first_name"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                     @error('first_name') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -98,7 +98,7 @@
                                                 <div class="col-md-6">
                                                     <label for="lastName" class="form-label">Last Name</label>
                                                     <input type="text" id="lastName" name="last_name"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                     @error('last_name') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -109,7 +109,7 @@
                                                     <label for="fatherFullName" class="form-label">Father's Full
                                                         Name</label>
                                                     <input type="text" id="fatherFullName" name="father_full_name"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                     @error('father_full_name') <span
                                                         class="text-danger">{{ $message }}</span> @enderror
                                                 </div>
@@ -117,7 +117,7 @@
                                                 <div class="col-md-6">
                                                     <label for="dob" class="form-label">Date of Birth</label>
                                                     <input type="date" id="dob" name="dob" class="form-control"
-                                                        required>
+                                                        >
                                                     @error('dob') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -127,7 +127,7 @@
                                                 <div class="col-md-6">
                                                     <label for="email" class="form-label">Email</label>
                                                     <input type="email" id="email" name="email" class="form-control"
-                                                        required>
+                                                        >
                                                     @error('email') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -135,7 +135,7 @@
                                                 <div class="col-md-6">
                                                     <label for="mobile" class="form-label">Mobile</label>
                                                     <input type="text" id="mobile" name="mobile" class="form-control"
-                                                        required>
+                                                        >
                                                     @error('mobile') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -145,7 +145,7 @@
                                                 <div class="col-md-6">
                                                     <label for="aadharCard" class="form-label">Aadhar Card</label>
                                                     <input type="text" id="aadharCard" name="aadhar_card"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                     @error('aadhar_card') <span
                                                         class="text-danger">{{ $message }}</span> @enderror
                                                 </div>
@@ -153,7 +153,7 @@
                                                 <div class="col-md-6">
                                                     <label for="panCard" class="form-label">PAN Card</label>
                                                     <input type="text" id="panCard" name="pan_card" class="form-control"
-                                                        required>
+                                                        >
                                                     @error('pan_card') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -171,7 +171,7 @@
                                                 <div class="col-md-6">
                                                     <label for="address" class="form-label">Address</label>
                                                     <textarea id="address" name="address" class="form-control"
-                                                        required></textarea>
+                                                        ></textarea>
                                                     @error('address') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -181,7 +181,7 @@
                                                 <div class="col-md-6">
                                                     <label for="city" class="form-label">City</label>
                                                     <input type="text" id="city" name="city" class="form-control"
-                                                        required>
+                                                        >
                                                     @error('city') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -189,7 +189,7 @@
                                                 <div class="col-md-6">
                                                     <label for="pincode" class="form-label">Pincode</label>
                                                     <input type="text" id="pincode" name="pincode" class="form-control"
-                                                        required>
+                                                        >
                                                     @error('pincode') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -220,7 +220,7 @@
                                                 <div class="col-md-6">
                                                     <label for="password" class="form-label">Password</label>
                                                     <input type="password" id="password" name="password"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                     @error('password') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>

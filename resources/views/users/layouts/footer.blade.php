@@ -27,10 +27,31 @@
           <div class="col-md-3">
             <h2>Opening Hours</h2>
             <ul class="list-foot padd-inft">
-              <li><span> Mon - Sat : </span>
-                <div class="value pull-right">09.00 am - 07:30 pm</div>
+              <li><span> Monday </span>
+                <div class="value pull-right">09.00 AM - 07:30 PM</div>
               </li>
-              <li><span> Sun : </span>
+              <hr>
+              <li><span> Tuesday </span>
+                <div class="value pull-right">09.00 AM - 07:30 PM</div>
+              </li>
+              <hr>
+              <li><span> Wednesday </span>
+                <div class="value pull-right">09.00 AM - 07:30 PM</div>
+              </li>
+              <hr>
+              <li><span> Thursday </span>
+                <div class="value pull-right">09.00 AM - 07:30 PM</div>
+              </li>
+              <hr>
+              <li><span> Friday </span>
+                <div class="value pull-right">09.00 AM - 07:30 PM</div>
+              </li>
+              <hr>
+              <li><span> Saturday </span>
+                <div class="value pull-right">09.00 AM - 07:30 PM</div>
+              </li>
+              <hr>
+              <li><span> Sunday </span>
                 <div class="value pull-right">Close</div>
               </li>
             </ul>

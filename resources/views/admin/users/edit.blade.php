@@ -193,7 +193,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="company-name">Company Name</label>
+                                                    <label for="company-name">Business Name</label>
                                                     <input type="text" class="form-control" id="business_name"
                                                         name="business_name"
                                                         value="{{ old('business_name', $user->business_name) }}"

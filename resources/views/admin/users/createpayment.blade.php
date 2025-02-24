@@ -50,7 +50,7 @@
                                                 <label>Paid Fees:</label>
                                                 <select id="payament_mode" name="payament_mode" class="form-control">
                                                     <option value="Cash">Cash</option>
-                                                    <option value="Onlie">Onlie</option>
+                                                    <option value="Online">Online</option>
                                                 </select>
                                                 @error('payament_mode') <span class="text-danger">{{ $message }}</span>
                                                 @enderror

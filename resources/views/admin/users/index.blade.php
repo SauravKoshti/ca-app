@@ -81,7 +81,7 @@
                                         <td>{{ $user->first_name }} {{ $user->last_name }} </td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->username }}</td>
-                                        <td>{{ $user->dob }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($user->dob)->format('d-m-Y') }}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <a href="{{ route('users.show', $user->id) }}"
@@ -98,7 +98,7 @@
 
                                                 @if(auth()->user()->user_type == 'admin')
                                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                    style="display:inline;">
+                                                    style="display:inline;" onsubmit="return confirmDelete(event)">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-link btn-danger"
@@ -184,4 +184,12 @@ function downloadSelectedUserData() {
         }
     });
 }
+
+function confirmDelete(userId) {
+        let deleteForm = document.getElementById('deleteForm');
+        deleteForm.action = "/users/" + userId; // Update form action dynamically
+
+        let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show(); // Show the Bootstrap modal
+    }
 </script>
