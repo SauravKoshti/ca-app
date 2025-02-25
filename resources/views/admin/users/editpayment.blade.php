@@ -19,6 +19,15 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
+                                <label>Paid Fees:</label>
+                                <select id="payament_mode" name="payament_mode" class="form-control" >
+                                    <option value="Cash" {{ $payment->payament_mode == 'Cash' ? 'selected' : ''}} >Cash</option>
+                                    <option value="Online" {{ $payment->payament_mode == 'Online' ? 'selected' : ''}} >Online</option>
+                                </select>
+                                @error('payament_mode') <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
                                 <label>Discuss Fees:</label>
                                 <input type="text" step="0.01" name="discuss_fees" class="form-control amount" value="{{ $payment->discuss_fees }}">
                             </div>
