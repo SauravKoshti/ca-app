@@ -28,7 +28,7 @@
                                         <select id="userType" name="user_type" class="form-control" required
                                             onchange="toggleGstNumberField()">
                                             <option value="personal" {{ old('user_type') == 'personal' ? 'selected' : '' }}>
-                                            Personal User</option>
+                                                Personal User</option>
                                             <option value="gst" {{ old('user_type') == 'gst' ? 'selected' : '' }}>
                                                 GST User</option>
                                         </select>
@@ -52,7 +52,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <label for="first_name">First Name (Applicant Name):</label>
+                                        <label for="first_name">First Name (Applicant Name):</label>
                                         <input type="text" id="firstName" name="first_name" class="form-control"
                                             value="{{ old('first_name') }}" required>
                                         @error('first_name')
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <label for="last_name">Last Name (Surname):</label>
+                                        <label for="last_name">Last Name (Surname):</label>
                                         <input type="text" id="lastName" name="last_name" class="form-control"
                                             value="{{ old('last_name') }}" required>
                                         @error('last_name')
@@ -115,7 +115,8 @@
                                     <div class="form-group">
                                         <label for="aadharCard">Aadhar Card</label>
                                         <input type="text" id="aadharCard" name="aadhar_card" class="form-control"
-                                            value="{{ old('aadhar_card') }}" required>
+                                            value="{{ old('aadhar_card') }}" placeholder="XXXX XXXX XXXX" maxlength="14"
+                                            required>
                                         @error('aadhar_card')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -125,7 +126,7 @@
                                     <div class="form-group">
                                         <label for="panCard">PAN Card</label>
                                         <input type="text" id="panCard" name="pan_card" class="form-control"
-                                            value="{{ old('pan_card') }}" required>
+                                            value="{{ old('pan_card') }}" placeholder="ABCDE1234F" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]" maxlength="10" required>
                                         @error('pan_card')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -255,4 +256,44 @@
             </div>
         </div>
     </div>
+@endsection
+@section('section_script')
+    <script>
+        $(document).ready(function() {
+            // aadhar card number format XXXX XXXX XXXX
+            $("#aadharCard").on("input", function() {
+                let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
+                if (value.length > 12) value = value.substring(0, 12); // Limit to 12 digits
+
+                // Format as XXXX XXXX XXXX
+                let formattedValue = value.replace(/(\d{4})/g, "$1 ").trim();
+
+                $(this).val(formattedValue);
+            });
+
+            // pancard number format XXXXXXXXXX
+            $("#panCard").on("keydown", function(event) {
+                event.preventDefault(); // Prevent default input
+
+                let value = $(this).val();
+                let currentLength = value.length;
+
+                // Allow Backspace
+                if (event.key === "Backspace") {
+                    $(this).val(value.slice(0, -1));
+                    return;
+                }
+
+                // Allow only specific characters based on position
+                let isAlpha = (currentLength < 5 || currentLength === 9);
+                let isNumeric = (currentLength >= 5 && currentLength < 9);
+
+                if (isAlpha && /^[a-zA-Z]$/.test(event.key)) {
+                    $(this).val(value + event.key.toUpperCase());
+                } else if (isNumeric && /^[0-9]$/.test(event.key)) {
+                    $(this).val(value + event.key);
+                }
+            });
+        });
+    </script>
 @endsection
