@@ -63,168 +63,96 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="usertype">User Type</label>
-                                                    <p class="form-control-static">{{ $user->user_type ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="username">Username</label>
-                                                    <p class="form-control-static">{{ $user->username ?? 'N/A'}}</p>
-                                                    <!-- <input type="text" class="form-control" id="username" name="username"
-                                                        value="{{ old('username', $user->username) }}"
-                                                        placeholder="Enter Username" /> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                <label for="first_name">First Name (Applicant Name):</label>
-                                                    <p class="form-control-static">{{ $user->first_name ?? 'N/A' }}</p>
-                                                    <!-- <input type="text" class="form-control" id="firstname" name="firstname"
-                                                        value="{{ old('firstname', $user->first_name) }}"
-                                                        placeholder="Enter First Name" /> -->
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                <label for="last_name">Last Name (Surname):</label>
-                                                    <p class="form-control-static">{{ $user->lastname ?? 'N/A'}}</p>
-                                                    <!-- <input type="text" class="form-control" id="lastname" name="lastname"
-                                                        value="{{ old('lastname', $user->last_name) }}"
-                                                        placeholder="Enter Last Name" /> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="fullname">Full Name</label>
-                                                    <p class="form-control-static">
-                                                        {{ $user->father_full_name ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="address">Address</label>
-                                                    <p class="form-control-static">{{ $user->address ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="city">City</label>
-                                                    <p class="form-control-static">{{ $user->city ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="pincode">Pincode</label>
-                                                    <p class="form-control-static">{{ $user->pincode ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="adharcard">Aadhar Card</label>
-                                                    <p class="form-control-static">{{ $user->aadhar_card ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
+                            <div class="profile-card">
+                            
+                                @if (!empty($user->profile_image))
+    <img src="{{ asset($user->profile_image) }}" alt="Profile Image" class="profile-img">
+@else
+    <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image" class="profile-img">
+@endif
 
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="pancard">PAN Card</label>
-                                                    <p class="form-control-static">{{ $user->pan_card ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
+                                <div class="profile-info">
+                                    <h3>{{ $user->first_name }} {{ $user->lastname }}</h3>
+                                    <div class="row">
+                                        <div class="col">
+                                        <label class="form-label">Username</label>
+                                        <p> {{ $user->user_type ?? 'N/A' }}</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="dob">Date of Birth</label>
-                                                    <p class="form-control-static">{{ \Carbon\Carbon::parse($user->dob)->format('d-m-Y') ?? 'N/A' }}</p>
-                                                    <!-- <input type="date" class="form-control" id="dob" name="dob"
-                                                        value="{{ old('dob', $user->dob) }}" /> -->
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="mobile">Mobile</label>
-                                                    <p class="form-control-static">{{ $user->mobile ?? 'N/A' }}
-                                                        <!-- <input type="text" class="form-control" id="mobile" name="mobile"
-                                                        value="{{ old('mobile', $user->mobile) }}"
-                                                        placeholder="Enter Mobile Number" /> -->
-                                                </div>
-                                            </div>
+                                        <div class="col">
+                                        <label class="form-label">Username</label>
+                                            <p>{{ $user->username ?? 'N/A' }}</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="anniversary_date">Anniversary Date</label>
-                                                    <p class="form-control-static">
-                                                        {{ \Carbon\Carbon::parse($user->anniversary_date)->format('d-m-Y') ?? 'N/A' }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="profile_image">Profile Image</label>
-                                                    <br>
-                                                    <img src="{{ asset($user->profile_image) }}" alt="Profile Image"
-                                                        class="img-thumbnail mt-2" width="150" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="email">Email</label>
-                                                    <p class="form-control-static">{{ $user->email ?? 'N/A' }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="password">Password</label>
-                                                    <p class="form-control-static">*******</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="company-name">Business Name</label>
-                                                    <p class="form-control-static">{{ $user->business_name ?? 'N/A' }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Gender</label><br />
-                                                    <div class="d-flex">
-                                                        <div class="form-check">
-                                                            <p class="form-control-static">{{
-  $user->gender == 0 ? 'Female' : ($user->gender == 1 ? 'Male' : 'N/A');
- }}</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Full Name</label>
+                                            <p>{{ $user->father_full_name ?? 'N/A' }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">Address</label>
+                                            <p>{{ $user->address ?? 'N/A' }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">City</label>
+                                            <p>{{ $user->city ?? 'N/A' }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">Pincode</label>
+                                            <p>{{ $user->pincode ?? 'N/A' }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Aadhar Card</label>
+                                            <p>{{ $user->aadhar_card ?? 'N/A' }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">PAN Card</label>
+                                            <p>{{ $user->pan_card ?? 'N/A' }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Date of Birth</label>
+                                            <p>{{ \Carbon\Carbon::parse($user->dob)->format('d-m-Y') ?? 'N/A' }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">Mobile</label>
+                                            <p>{{ $user->mobile ?? 'N/A' }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Anniversary Date</label>
+                                            <p>{{ \Carbon\Carbon::parse($user->anniversary_date)->format('d-m-Y') ?? 'N/A' }}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">Email</label>
+                                            <p>{{ $user->email ?? 'N/A' }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Business Name</label>
+                                            <p>{{ $user->business_name ?? 'N/A' }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">Gender</label>
+                                            <p>
+                                                {{ $user->gender == 0 ? 'Female' : ($user->gender == 1 ? 'Male' : 'N/A') }}
+                                            </p>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -249,7 +177,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Document Type:</label>
-                                            @if (auth()->user()->user_type == 'personal' || auth()->user()->user_type == 'gst')
+                                            @if (auth()->user()->user_type == 'personal' || auth()->user()->user_type ==
+                                            'gst')
                                             <select name="doc_type" class="form-control">
                                                 <option value="aadhar_card">Aadhar Card</option>
                                                 <option value="pan_card">Pan Card</option>
@@ -366,7 +295,7 @@
                             <div class="document-card">
                                 <div class="card-body">
                                     <div class="Payment-card">
-                                    @if (auth()->user()->user_type == 'admin')
+                                        @if (auth()->user()->user_type == 'admin')
                                         <div class="card-header d-flex justify-content-between">
                                             <!-- <div class="card-title">Payment List</div> -->
                                             <div class="btn-primary btn-round ms-auto">
@@ -517,4 +446,58 @@
         });
     }
     </script>
+    <style>
+    .profile-card {
+        /* max-width: 800px; */
+        background: #fff;
+        /* border-radius: 10px; */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        /* padding: 20px;
+        margin: 50px auto; */
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 4px solid #007bff;
+        object-fit: cover;
+    }
+
+    .profile-info {
+        flex: 1;
+        margin-left: 20px;
+    }
+
+    .profile-info h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .profile-info p {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .profile-info .row {
+        margin-bottom: 10px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #444;
+    }
+
+    .form-control-static {
+        background: #f8f9fa;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    </style>
     @endsection
