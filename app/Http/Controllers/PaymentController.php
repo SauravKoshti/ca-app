@@ -49,7 +49,8 @@ class PaymentController extends Controller
         // Validate and update the payment
         $payment->update([
             'discuss_fees' => $request->input('discuss_fees'),
-            'paid_fees' => $request->input('paid_fees')
+            'paid_fees' => $request->input('paid_fees'),
+            'payament_mode' => $request->input('payament_mode')
         ]);
     
         // Redirect back with success message
