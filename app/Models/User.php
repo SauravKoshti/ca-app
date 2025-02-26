@@ -70,4 +70,13 @@ class User extends Authenticatable
     {
         return date('d-m-Y', strtotime($value));
     }
+    public function setDobAttribute($value)
+    {
+        $this->attributes['dob'] = date('Y-m-d', strtotime($value));
+    }
+
+    public function setAnniversaryDateAttribute($value)
+    {
+        $this->attributes['anniversary_date'] = date('Y-m-d', strtotime($value));
+    }
 }

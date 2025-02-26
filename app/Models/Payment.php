@@ -20,4 +20,8 @@ class Payment extends Model
     {
         return date('d-m-Y', strtotime($value));
     }
+    public function setPaymentDateAttribute($value)
+    {
+        $this->attributes['payment_date'] = date('Y-m-d', strtotime($value));
+    }
 }
