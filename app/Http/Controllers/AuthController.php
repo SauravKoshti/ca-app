@@ -90,7 +90,6 @@ class AuthController extends Controller
             'last_name' => $request['last_name'],
             'middle_name' => $request['middle_name'],
             'full_name' => $request['full_name'],
-            'profile_image' => $path,
             'address' => $request['address'],
             'city' => $request['city'],
             'pincode' => $request['pincode'],
