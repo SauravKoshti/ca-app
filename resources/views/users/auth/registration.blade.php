@@ -72,6 +72,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="middle_name">Middle Name (Father Name/Husband):</label>
+                                        <input type="text" id="middleName" name="middle_name" class="form-control"
+                                            value="{{ old('middle_name') }}" required>
+                                        @error('middle_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="full_name">Full name <small>(as per pancard)</small></label>
                                         <input type="text" id="full_name" name="full_name" class="form-control"
                                             value="{{ old('full_name') }}" required>
@@ -238,7 +248,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="refer">Refer UserName</label>
+                                        <label for="refer">Refer User Name</label>
                                         <input type="text" id="refer" name="refer" class="form-control"
                                             value="{{ old('refer') }}" required>
                                         @error('refer')
