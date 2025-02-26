@@ -98,7 +98,7 @@
                                                             </a>
 
                                                             @if (auth()->user()->user_type == 'admin')
-                                                                <button type="button" id="{{ $user->id }}" data-type="user"
+                                                                <button type="button" onClick="removeData({{$user->id}}, 'user')"
                                                                     class="btn btn-link btn-danger remove_data"
                                                                     data-bs-toggle="tooltip" title="Remove">
                                                                     <i class="fa fa-times"></i>

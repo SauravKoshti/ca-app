@@ -21,66 +21,62 @@
         }).attr("placeholder", "DD-MM-YY");
 
 
-        $(".remove_data").click(function(e) {
-            let id = e.currentTarget.id;
-            console.log(e.currentTarget.getAttribute("data-type"));
-
-            let type = e.currentTarget.getAttribute("data-type");;
-
-            swal({
-                title: "Enter Your Password",
-                content: {
-                    element: "input",
-                    attributes: {
-                        type: "password",
-                        placeholder: "Enter Password",
-                        id: "password-field",
-                        className: "form-control",
-                        autocomplete: "new-password",
-                    },
-                },
-                buttons: {
-                    cancel: {
-                        visible: true,
-                        className: "btn btn-danger",
-                    },
-                    confirm: {
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((value) => {
-                if (value) {
-                    let password = document.getElementById("password-field").value;
-
-                    fetch('/confirm-password', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector(
-                                        'meta[name="csrf-token"]')
-                                    .getAttribute('content'),
-                            },
-                            body: JSON.stringify({
-                                password: password,
-                                id: id,
-                                type: type
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                swal("Success", data.message, "success");
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 1000); // Reload after 1 second
-                            } else {
-                                swal("Error", data.message, "error");
-                            }
-                        });
-                }
-            });
-        });
     });
+
+    function removeData(id, type) {
+        swal({
+            title: "Enter Your Password",
+            content: {
+                element: "input",
+                attributes: {
+                    type: "password",
+                    placeholder: "Enter Password",
+                    id: "password-field",
+                    className: "form-control",
+                    autocomplete: "new-password",
+                },
+            },
+            buttons: {
+                cancel: {
+                    visible: true,
+                    className: "btn btn-danger",
+                },
+                confirm: {
+                    className: "btn btn-success",
+                },
+            },
+        }).then((value) => {
+            if (value) {
+                let password = document.getElementById("password-field").value;
+
+                fetch('/confirm-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]')
+                                .getAttribute('content'),
+                        },
+                        body: JSON.stringify({
+                            password: password,
+                            id: id,
+                            type: type
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            swal("Success", data.message, "success");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000); // Reload after 1 second
+                        } else {
+                            swal("Error", data.message, "error");
+                        }
+                    });
+            }
+        });
+    }
     layout: {
         topStart: {
             buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']

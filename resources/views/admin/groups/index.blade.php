@@ -73,7 +73,7 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @if(auth()->user()->user_type == 'admin')
-                                                    <button id="{{$user->id}}" data-type="group" class="btn btn-link btn-danger remove_data" data-bs-toggle="tooltip" title="Remove">
+                                                    <button onClick="removeData({{$user->id}}, 'group')" class="btn btn-link btn-danger remove_data" data-bs-toggle="tooltip" title="Remove">
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 @endif
