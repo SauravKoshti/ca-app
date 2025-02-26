@@ -172,7 +172,6 @@ class UserController extends Controller
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'profile_image' => $request->profile_image,
             'business_name' => $request->business_name,
             'username' => $request->username,
             'mobile' => $request->mobile,
