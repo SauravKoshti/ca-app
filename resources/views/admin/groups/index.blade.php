@@ -73,13 +73,9 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @if(auth()->user()->user_type == 'admin')
-                                                <form action="{{ route('groups.destroy', $user->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-link btn-danger" data-bs-toggle="tooltip" title="Remove">
+                                                    <button id="{{$user->id}}" data-type="group" class="btn btn-link btn-danger remove_data" data-bs-toggle="tooltip" title="Remove">
                                                         <i class="fa fa-times"></i>
                                                     </button>
-                                                </form>
                                                 @endif
                                             </div>
                                         </td>

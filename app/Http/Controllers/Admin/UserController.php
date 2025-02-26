@@ -8,6 +8,7 @@ use App\Models\User;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\Document;
 use App\Models\Payment;
+use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -286,7 +287,15 @@ class UserController extends Controller
         ]);
 
         if (Hash::check($request->password, Auth::user()->password)) {
-            User::where('id', $request->id)->delete();
+            switch($request->type) {
+                case 'user':
+                    User::where('id', $request->id)->delete();
+                    break;
+                case 'group':
+                    User::where('group_id', $request->id)->update(['group_id' => null]);
+                    Group::where('id', $request->id)->delete();
+                    break;
+            }
             return response()->json(['success' => true, 'message' => 'User deleted successfully']);
         } else {
             return response()->json(['success' => false, 'message' => 'Password does not match']);

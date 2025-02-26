@@ -98,8 +98,8 @@
                                                             </a>
 
                                                             @if (auth()->user()->user_type == 'admin')
-                                                                <button type="button" id="{{ $user->id }}"
-                                                                    class="btn btn-link btn-danger remove_user"
+                                                                <button type="button" id="{{ $user->id }}" data-type="user"
+                                                                    class="btn btn-link btn-danger remove_data"
                                                                     data-bs-toggle="tooltip" title="Remove">
                                                                     <i class="fa fa-times"></i>
                                                                 </button>
@@ -191,59 +191,5 @@
             deleteModal.show(); // Show the Bootstrap modal
         }
 
-        $(".remove_user").click(function(e) {
-            let id = e.currentTarget.id;
-
-            swal({
-                title: "Enter Your Password",
-                content: {
-                    element: "input",
-                    attributes: {
-                        type: "password",
-                        placeholder: "Enter Password",
-                        id: "password-field",
-                        className: "form-control",
-                        autocomplete: "new-password",
-                    },
-                },
-                buttons: {
-                    cancel: {
-                        visible: true,
-                        className: "btn btn-danger",
-                    },
-                    confirm: {
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((value) => {
-                if (value) {
-                    let password = document.getElementById("password-field").value;
-
-                    fetch('/confirm-password', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                    .getAttribute('content'),
-                            },
-                            body: JSON.stringify({
-                                password: password,
-                                id: id
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                swal("Success", data.message, "success");
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 1000); // Reload after 1 second
-                            } else {
-                                swal("Error", data.message, "error");
-                            }
-                        });
-                }
-            });
-        });
     </script>
 @endsection
