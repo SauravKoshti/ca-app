@@ -270,12 +270,22 @@ class UserController extends Controller
 
     public function downloadSelectedUsers(Request $request)
     {
-        $userIds = $request->input('user_ids', []);
+        $userIds = $request->input(key: 'user_ids');
 
         if (empty($userIds)) {
             return response()->json(['error' => 'No users selected'], 400);
         }
-
+        if ($request->is_select_all) {
+            $login_user = Auth::user();
+            if ($login_user->role == 'user') {
+                if ($login_user->group_id) {
+                    $userIds = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->pluck('id')->toArray();
+                }
+                $userIds = User::where('id', $login_user->id)->orderBy('id', 'desc')->pluck('id')->toArray();
+            } else {
+                $userIds = User::orderBy('id', 'desc')->pluck('id')->toArray();
+            }
+        }
         return Excel::download(new UsersExport($userIds), 'users.xlsx');
     }
 
@@ -287,7 +297,7 @@ class UserController extends Controller
         ]);
 
         if (Hash::check($request->password, Auth::user()->password)) {
-            switch($request->type) {
+            switch ($request->type) {
                 case 'user':
                     User::where('id', $request->id)->delete();
                     break;
