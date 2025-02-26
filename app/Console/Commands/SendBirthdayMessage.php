@@ -40,9 +40,9 @@ class SendBirthdayMessage extends Command
                     ]
                 );
 
-                $this->info("Birthday SMS sent to: {$user->phone}");
+                $this->info("Birthday SMS sent to: {$user->mobile}");
             } catch (\Exception $e) {
-                $this->error("Failed to send SMS to {$user->phone}: " . $e->getMessage());
+                $this->error("Failed to send SMS to {$user->mobile}: " . $e->getMessage());
             }
         }
     }

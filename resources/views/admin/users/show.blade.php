@@ -64,22 +64,22 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="profile-card">
-                            
+
                                 @if (!empty($user->profile_image))
-    <img src="{{ asset($user->profile_image) }}" alt="Profile Image" class="profile-img">
-@else
-    <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image" class="profile-img">
-@endif
+                                <img src="{{ asset($user->profile_image) }}" alt="Profile Image" class="profile-img">
+                                @else
+                                <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image" class="profile-img">
+                                @endif
 
                                 <div class="profile-info">
                                     <h3>{{ $user->first_name }} {{ $user->lastname }}</h3>
                                     <div class="row">
                                         <div class="col">
-                                        <label class="form-label">Username</label>
-                                        <p> {{ $user->user_type ?? 'N/A' }}</p>
+                                            <label class="form-label">Username</label>
+                                            <p> {{ $user->user_type ?? 'N/A' }}</p>
                                         </div>
                                         <div class="col">
-                                        <label class="form-label">Username</label>
+                                            <label class="form-label">Username</label>
                                             <p>{{ $user->username ?? 'N/A' }}</p>
                                         </div>
                                     </div>
@@ -180,11 +180,34 @@
                                             @if (auth()->user()->user_type == 'personal' || auth()->user()->user_type ==
                                             'gst')
                                             <select name="doc_type" class="form-control">
-                                                <option value="aadhar_card">Aadhar Card</option>
-                                                <option value="pan_card">Pan Card</option>
-                                                <option value="form_16">Form 16</option>
-                                                <option value="rc_book">RC Book</option>
-                                                <option value="bank_statement">Bank Statement</option>
+                                                <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
+                                                <option value="pan_card">PAN Card / પાન કાર્ડ</option>
+                                                <option value="form_16">Form 16 / ફોર્મ 16</option>
+                                                <option value="election_card">Election Card / ચૂંટણી કાર્ડ </option>
+                                                <option value="rc_copy">RC Copy / આરસી કોપી</option>
+                                                <option value="bank_statement">Bank Statement / Passbook / બેંક
+                                                    સ્ટેટમેન્ટ /પાસબુક</option>
+                                                <option value="fd_statement">FD Statement / Certificate / એફડી
+                                                    સ્ટેટમેન્ટ / પ્રમાણપત્ર</option>
+                                                <option value="loan_statement">Loan Statement / Loan Letter / લોન
+                                                    સ્ટેટમેન્ટ / લોન પત્ર</option>
+                                                <option value="driving_license">Driving License / ડ્રાઈવિંગ લાયસન્સ
+                                                </option>
+                                                <option value="passport_copy">Passport Copy (if available) / પાસપોર્ટ
+                                                    કોપી (જો હોય તો)</option>
+                                                <option value="residential_proof">Residential Proof / રહેઠાણ પુરાવો
+                                                </option>
+                                                <option value="property_tax_receipt">Property Tax Receipt / મિલ્કત કર
+                                                    રસીદ</option>
+                                                <option value="electricity_bill">Latest Electricity or Telephone Bill /
+                                                    તાજેતરની વીજળી અથવા ટેલિફોન બીલ</option>
+                                                <option value="business_proof">Business Proof / Registration Certificate
+                                                    / વ્યવસાય પુરાવો / નોંધણી પ્રમાણપત્ર</option>
+                                                <option value="etc">ETC (Toll, FASTag, Other) / ETC (ટોલ, ફાસ્ટેગ, અન્ય)
+                                                </option>
+                                                <option value="purchase_bill">Purchase Bill / ખરીદી બિલ</option>
+                                                <option value="sales_bill">Sales Bill / વેચાણ બિલ</option>
+                                                <option value="expense_bill">Expense Bill / ખર્ચ બિલ</option>
                                             </select>
                                             @elseif(auth()->user()->user_type == 'admin')
                                             <select name="doc_type" class="form-control">
@@ -193,7 +216,7 @@
                                                 <option value="p&l">P&L</option>
                                                 <option value="capital">Capital</option>
                                                 <option value="balance_sheet">Balance Sheet</option>
-                                                <option value="26a5">26A5</option>
+                                                <option value="26aS">26AS</option>
                                                 <option value="aib">AIB</option>
                                                 <option value="ttb">TTB</option>
                                                 <option value="gstr_1_excel">GSTR 1 Excel</option>

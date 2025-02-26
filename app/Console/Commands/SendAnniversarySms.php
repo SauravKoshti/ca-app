@@ -44,9 +44,9 @@ class SendAnniversarySms extends Command
                     ]
                 );
 
-                $this->info("Anniversary SMS sent to: {$user->phone}");
+                $this->info("Anniversary SMS sent to: {$user->mobile}");
             } catch (\Exception $e) {
-                $this->error("Failed to send SMS to {$user->phone}: " . $e->getMessage());
+                $this->error("Failed to send SMS to {$user->mobile}: " . $e->getMessage());
             }
         }
     }
