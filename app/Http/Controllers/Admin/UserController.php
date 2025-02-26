@@ -109,7 +109,6 @@ class UserController extends Controller
             'dob' => $request['dob'],
             'mobile' => $request['mobile'],
             'anniversary_date' => $request['anniversary_date'] ?? null,
-            'profile_image' => $path,
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'gst_number' => $request['gst_number'] ?? null,
