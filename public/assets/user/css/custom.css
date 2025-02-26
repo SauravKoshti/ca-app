@@ -467,6 +467,14 @@ h2.text-center {
     background: #0056b3;
 }
 
+.carousel-caption {
+    text-align: left;
+}
+
+.large-heading {
+    font-size: 50x;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .contact-card {
