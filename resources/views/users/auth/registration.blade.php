@@ -25,8 +25,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="userType">User Type</label>
-                                        <select id="userType" name="user_type" class="form-control" required
-                                            onchange="toggleGstNumberField()">
+                                        <select id="userType" name="user_type" class="form-control" required >
                                             <option value="personal" {{ old('user_type') == 'personal' ? 'selected' : '' }}>
                                                 Personal User</option>
                                             <option value="gst" {{ old('user_type') == 'gst' ? 'selected' : '' }}>
@@ -195,19 +194,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input type="password" id="password" name="password" class="form-control"
+                                        <input type="password" id="password" name="password" class="form-control" autocomplete="new-password"
                                             required>
                                         @error('password')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6" id="gstNumberField" style="display: none;">
-                                    <div class="form-group">
-                                        <label for="gstNumber">GST Number</label>
-                                        <input type="text" id="gstNumber" name="gst_number" class="form-control"
-                                            value="{{ old('gst_number') }}">
-                                        @error('gst_number')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -222,12 +211,22 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 gstNumberField">
                                     <div class="form-group">
                                         <label for="business_name">Business Name</label>
                                         <input type="text" id="business_name" name="business_name"
                                             class="form-control" value="{{ old('business_name') }}">
                                         @error('business_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 gstNumberField">
+                                    <div class="form-group">
+                                        <label for="gstNumber">GST Number</label>
+                                        <input type="text" id="gstNumber" name="gst_number" class="form-control"
+                                            value="{{ old('gst_number') }}">
+                                        @error('gst_number')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -270,6 +269,25 @@
 @section('section_script')
     <script>
         $(document).ready(function() {
+            $('.gstNumberField').hide();
+            $('#userType').on('change', function() {
+                $('.gstNumberField').hide();
+                if ($(this).val() === 'gst') {
+                    $('.gstNumberField').show();
+                }
+            });
+
+            // pincode  format
+            $("#pincode").on("input", function() {
+                let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
+                
+                if (value.length > 7) value = value.substring(0, 6); // Limit to 6 digits
+
+                let formattedValue = value.replace(/(\d{4})/g, "$1").trim();
+
+                $(this).val(formattedValue);
+            });
+
             // aadhar card number format XXXX XXXX XXXX
             $("#aadharCard").on("input", function() {
                 let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
@@ -294,6 +312,10 @@
 
             // pancard number format XXXXXXXXXX
             $("#panCard").on("keydown", function(event) {
+                // Allow Tab key to move to the next field
+                if (event.key === "Tab") {
+                    return true; // Let the default behavior occur
+                }
                 event.preventDefault(); // Prevent default input
 
                 let value = $(this).val();
