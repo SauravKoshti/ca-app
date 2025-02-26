@@ -138,12 +138,11 @@
             let selectAllCheckbox = document.getElementById("selectAll");
 
             document.querySelectorAll('[name="user_id"]:checked').forEach(function(checkbox) {
-                console.log("checkbox", checkbox);
 
                 allIds.push(checkbox.getAttribute('data-id'));
             });
 
-            if (allIds.length === 0) {
+            if (allIds.length === 0  && !selectAllCheckbox.checked) {
                 alert("Please select at least one user.");
                 return;
             }
@@ -153,7 +152,8 @@
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    user_ids: allIds
+                    user_ids: allIds,
+                    is_select_all: selectAllCheckbox.checked
                 },
                 xhrFields: {
                     responseType: 'blob'
