@@ -278,4 +278,19 @@ class UserController extends Controller
 
         return Excel::download(new UsersExport($userIds), 'users.xlsx');
     }
+
+    public function confirmPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (Hash::check($request->password, Auth::user()->password)) {
+            User::where('id', $request->id)->delete();
+            return response()->json(['success' => true, 'message' => 'User deleted successfully']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Password does not match']);
+        }
+    }
 }

@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::post('/users/download/csv', [UserController::class, 'downloadSelectedUsers'])->name('users.download.csv');
+        Route::post('/confirm-password', [UserController::class, 'confirmPassword'])->name('users.confirm_password');
 
         // Forgot Username & Password Routes
         Route::get('/forgot-username', [UserController::class, 'showForgotUsernameForm'])->name('forgot.username');
