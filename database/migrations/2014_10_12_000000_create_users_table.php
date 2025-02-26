@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('mobile')->unique();
             $table->date('dob');
             $table->boolean('gender')->default(1); 
-            $table->enum('user_type', ['gst', 'personal','admin'])->default('personal');
+            $table->enum('user_type', ['business', 'private','admin'])->default('private');
             $table->string('role')->default('user');
             $table->string('password');
             $table->timestamps();

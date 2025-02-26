@@ -8,6 +8,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,3 +105,12 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
 Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
 Route::post('/contact/download/csv', [ContactController::class, 'downloadSelectedContact'])->name('contact.download.csv');
+
+
+Route::get('/google-reviews', [GoogleReviewController::class, 'fetchReviews']);
+
+
+// Route::get('/google-reviews', [GoogleReviewController::class, 'fetchGoogleReviews'])->name('google.reviews');
+Route::get('/reviews', function () {
+    return view('reviews');
+});
