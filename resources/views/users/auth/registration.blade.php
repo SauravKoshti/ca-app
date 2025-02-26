@@ -281,6 +281,17 @@
                 $(this).val(formattedValue);
             });
 
+             // contact number format XXXX XXXX XXXX
+             $("#mobile").on("input", function() {
+                let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
+                if (value.length > 11) value = value.substring(0, 10); // Limit to 12 digits
+
+                // Format as XXXX XXXX XXXX
+                let formattedValue = value.replace(/(\d{4})/g, "$1").trim();
+
+                $(this).val(formattedValue);
+            });
+
             // pancard number format XXXXXXXXXX
             $("#panCard").on("keydown", function(event) {
                 event.preventDefault(); // Prevent default input
