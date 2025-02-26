@@ -8,11 +8,15 @@
 <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <!-- Bootstrap Notify -->
  <script src="{{asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
 <script>
 $(document).ready(function() {
     $("#basic-datatables").DataTable({});
+    $(".datepicker").datepicker({
+        dateFormat: "dd-mm-yy"
+    }).attr("placeholder", "DD-MM-YY");
 });
 layout: {
     topStart: {

@@ -135,7 +135,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dob">Date of Birth</label>
-                                        <input type="date" id="dob" name="dob" class="form-control"
+                                        <input id="dob" name="dob" class="form-control datepicker"
                                             value="{{ old('dob') }}" required>
                                         @error('dob')
                                             <span class="text-danger">{{ $message }}</span>
@@ -155,8 +155,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="anniversary_date">Anniversary Date</label>
-                                        <input type="date" id="anniversary_date" name="anniversary_date"
-                                            class="form-control" value="{{ old('anniversary_date') }}">
+                                        <input id="anniversary_date" name="anniversary_date"
+                                            class="form-control datepicker" value="{{ old('anniversary_date') }}">
                                         @error('anniversary_date')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

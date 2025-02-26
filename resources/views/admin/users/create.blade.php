@@ -116,7 +116,7 @@
 
                                                 <div class="col-md-6">
                                                     <label for="dob" class="form-label">Date of Birth</label>
-                                                    <input type="date" id="dob" name="dob" class="form-control"
+                                                    <input id="dob" name="dob" class="form-control datepicker"
                                                         >
                                                     @error('dob') <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -199,8 +199,8 @@
                                                 <div class="col-md-6">
                                                     <label for="anniversaryDate" class="form-label">Anniversary
                                                         Date</label>
-                                                    <input type="date" id="anniversaryDate" name="anniversary_date"
-                                                        class="form-control">
+                                                    <input id="anniversaryDate" name="anniversary_date"
+                                                        class="form-control datepicker">
                                                     @error('anniversary_date') <span
                                                         class="text-danger">{{ $message }}</span> @enderror
                                                 </div>

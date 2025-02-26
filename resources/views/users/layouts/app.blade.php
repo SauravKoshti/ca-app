@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Bootstrap 3 CSS -->
 <!-- jQuery (required for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -32,6 +33,7 @@
     <script src="{{ asset('assets/user/js/bootstrap.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
     $(document).ready(function() {
         $('.navbar a.dropdown-toggle').on('click', function(e) {
@@ -63,6 +65,9 @@
         $('.carousel').carousel({
             interval: 3000 // Change image every 3 seconds
         });
+        $(".datepicker").datepicker({
+            dateFormat: "dd-mm-yy"
+        }).attr("placeholder", "DD-MM-YY");
     });
     </script>
     @yield('section_script')

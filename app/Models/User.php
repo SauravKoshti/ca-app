@@ -60,4 +60,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function getDobAttribute($value)
+    {
+        return date('d-m-Y', strtotime($value));
+    }
+
+    public function getAnniversaryDateAttribute($value)
+    {
+        return date('d-m-Y', strtotime($value));
+    }
 }

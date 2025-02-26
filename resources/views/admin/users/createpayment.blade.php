@@ -69,7 +69,7 @@
 
                                             <div class="mb-3">
                                                 <label>Payment Date Fees:</label>
-                                                <input type="date" name="payment_date" class="form-control">
+                                                <input name="payment_date" class="form-control datepicker">
                                                 @error('payment_date') <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>

@@ -135,7 +135,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="dob">Date of Birth</label>
-                                                    <input type="date" class="form-control" id="dob" name="dob"
+                                                    <input class="form-control datepicker" id="dob" name="dob"
                                                         value="{{ old('dob', $user->dob) }}" />
                                                 </div>
                                             </div>
@@ -153,7 +153,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="anniversary_date">Anniversary Date</label>
-                                                    <input type="date" class="form-control" id="anniversary_date"
+                                                    <input class="form-control datepicker" id="anniversary_date"
                                                         name="anniversary_date"
                                                         value="{{ old('anniversary_date', $user->anniversary_date) }}" />
                                                 </div>

@@ -15,4 +15,9 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getPaymentDateAttribute($value)
+    {
+        return date('d-m-Y', strtotime($value));
+    }
 }
