@@ -1,5 +1,5 @@
 @extends('users.layouts.app')
-@section('title', 'Services')
+@section('title', 'Matual Fund')
 @section('content')
     <div class="main-panel">
         <div class="container service-page-content">
