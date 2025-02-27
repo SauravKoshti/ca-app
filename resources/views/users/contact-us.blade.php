@@ -139,6 +139,7 @@
     width: 100%;
     padding-top: 56.25%; /* 16:9 Aspect Ratio */
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .gmap_iframe {

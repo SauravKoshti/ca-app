@@ -185,6 +185,10 @@ body {
     border-radius: 5px;
 }
 
+.about-us-p1, .about-us-p2 {
+    text-indent: 20px;
+}
+
 .contact-us-list {
     list-style: none;
     padding-left: 0;
