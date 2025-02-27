@@ -188,8 +188,10 @@
         </div>
     </section>
     <section>
-
+    
+    <div class="elfsight-app-8ccdc8f9-8724-45b5-bc12-394326dc6bc5" data-elfsight-app-lazy></div>
     </section>
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
     <style>
         /* Prevent horizontal scrolling */
         html,

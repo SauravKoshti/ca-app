@@ -44,7 +44,7 @@ class UsersExport implements FromCollection, WithHeadings
                     'gst_number' => $user->gst_number,
                     'anniversary_date' => $user->anniversary_date,
                     'mobile' => $user->mobile,
-                    'gender' => $user->gender == 0 ? 'Male' : 'Female', // Convert 0 -> Male, 1 -> Female
+                    'gender' => $user->gender == 0 ? 'Male' : 'Female',
                     'dob' => $user->dob,
                     'father_full_name' => $user->father_full_name,
                     'user_type' => $user->user_type
