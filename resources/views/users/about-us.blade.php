@@ -13,7 +13,7 @@
                                 <img src="https://laravel.hrnikunjprajapati.in/assets/user/images/custom-banner-2.JPG"  />
                             </div>
                             <div class="col-md-6">
-                                <p>
+                            <p class="about-us-p1">
                                     Vishal Jagani is one of the best , highly skilled and zestful tax consultant in
                                     dhoraji rajkot. who has helped many individuals and organizations to set up business
                                     in gujarat since 2016. We have attained many certificates, shields and medals. We
@@ -25,7 +25,7 @@
                                     that our clients work without a jerk in India. our drive to deliver excellent
                                     services is installed in our deep-rooted commitment to our clients.
                                 </p>
-                                <p>
+                                <p class="about-us-p2">
                                     We are unique in Taxation, Accounting, Insurance and Wealth Management Services
                                     such as Income Tax Return File, Gst Return File, Gst Registration, Systematic
                                     Investment Plan (SIP), Mutual fund, Life Insurance, Health Insurance, Vehicle
