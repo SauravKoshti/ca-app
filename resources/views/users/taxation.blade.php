@@ -6,7 +6,7 @@
             <section class="hm-services-sec">
                 <div class="container">
                     <div class="page-inner">
-                        <h2>Taxt <span> tion</span></h2>
+                        <h2>Taxa<span> tion</span></h2>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="service-box p-4 shadow-lg rounded">
