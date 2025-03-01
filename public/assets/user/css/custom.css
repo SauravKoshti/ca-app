@@ -188,6 +188,9 @@ body {
 .about-us-p1, .about-us-p2 {
     text-indent: 10px;
 }
+.registration-mark {
+    margin-left: 2px;
+}
 
 .contact-us-list {
     list-style: none;

@@ -124,11 +124,11 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("selectAll").addEventListener("change", function() {
                 let isChecked = this.checked;
-
                 // Select or deselect all individual checkboxes based on the "Select All" checkbox
                 document.querySelectorAll('[name="user_id"]').forEach(function(checkbox) {
                     checkbox.checked = isChecked;
                 });
+
             });
         });
 

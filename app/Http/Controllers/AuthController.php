@@ -36,6 +36,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        // dd($request->all());
         // Validate the request data
         $validatedData = $request->validate([
             'user_type' => 'required|in:gst,personal,admin',
@@ -46,6 +47,7 @@ class AuthController extends Controller
             'user_full_name' => 'required|string|max:255',
             'address' => 'required|string',
             'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
             'pincode' => 'required|digits:6',
             'aadhar_card' => 'required|unique:users,aadhar_card',
             'pan_card' => ['required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/', 'unique:users,pan_card'],
@@ -55,16 +57,16 @@ class AuthController extends Controller
             'profile' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8',
-            'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+            // 'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
             'father_full_name' => 'required|string|max:255',
-            'business_name' => 'nullable|string|max:255',
+            // 'business_name' => 'nullable|string|max:255',
             'gender' => 'required|boolean',
             'refer' => 'nullable|string|max:255',
         ]);
         if ($request['user_type'] === 'gst') {
             $request->validate([
                 'gst_number' => ['required', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
-                'business_name' => 'required|string|max:255',
+                // 'business_name' => 'required|string|max:255',
             ]);
         }
         if ($request->hasFile('profile_image')) {

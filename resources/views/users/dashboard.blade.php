@@ -1,73 +1,27 @@
 @extends('users.layouts.app')
 @section('title', 'Home')
 @section('content')
-    <section class="banner-sec">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-                <li data-target="#myCarousel" data-slide-to="4"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="{{ asset('assets/user/images/custom-banner-1.JPG') }}" alt="banner1">
-                    <div class="carousel-caption">
-                        <h2>Financial Services</h2>
-                        <h1 class='large-heading'>Financial Services Financial Services Financial Services Financial Services Financial Services 
-                            Financial Services Financial Services Financial Services Financial Services Financial Services 
-                        </h1>
-                        <a class='btn btn-primary'>Contact Now</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{{ asset('assets/user/images/custom-banner-2.JPG') }}" alt="banner2">
-                    <div class="carousel-caption">
-                        <h2>Financial Services</h2>
-                        <h1 class='large-heading'>Financial Services Financial Services Financial Services Financial Services Financial Services 
-                            Financial Services Financial Services Financial Services Financial Services Financial Services 
-                        </h1>
-                        <a class='btn btn-primary'>Contact Now</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{{ asset('assets/user/images/custom-banner-3.JPG') }}" alt="banner3">
-                    <div class="carousel-caption">
-                        <h2>Financial Services</h2>
-                        <h1 class='large-heading'>Financial Services Financial Services Financial Services Financial Services Financial Services 
-                            Financial Services Financial Services Financial Services Financial Services Financial Services 
-                        </h1>
-                        <a class='btn btn-primary'>Contact Now</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{{ asset('assets/user/images/custom-banner-4.JPG') }}" alt="banner4">
-                    <div class="carousel-caption">
-                        <h2>Financial Services</h2>
-                        <h1 class='large-heading'>Financial Services Financial Services Financial Services Financial Services Financial Services 
-                            Financial Services Financial Services Financial Services Financial Services Financial Services 
-                        </h1>
-                        <a class='btn btn-primary'>Contact Now</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{{ asset('assets/user/images/custom-banner-5.JPG') }}" alt="banner5">
-                    <div class="carousel-caption">
-                        <h2>Financial Services</h2>
-                        <h1 class='large-heading'>Financial Services Financial Services Financial Services Financial Services Financial Services 
-                            Financial Services Financial Services Financial Services Financial Services Financial Services 
-                        </h1>
-                        <a class='btn btn-primary'>Contact Now</a>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span
-                    class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span> </a> <a
-                class="right carousel-control" href="#myCarousel" data-slide="next"> <span
-                    class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span> </a>
-        </div>
-    </section>
+    
+
+<section class="banner-sec">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+    <div class="item active"> <img src="{{ asset('assets/user/images/banner1.jpg')}} " alt="banner1"> </div>
+      <div class="item"> <img src="{{ asset('assets/user/images/banner2.jpg') }}" alt="banner2"> </div>
+      <div class="item"> <img src="{{ asset('assets/user/images/banner3.jpg') }}" alt="banner3"> </div>
+      <div class="item"> <img src="{{ asset('assets/user/images/banner4.jpg') }}" alt="banner4"> </div>
+      <div class="item"> <img src="{{ asset('assets/user/images/banner5.jpg') }}" alt="banner5"> </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#myCarousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span> </a> </div>
+</section>
+
     <section class="hm-services-sec">
         <div class="container">
             <h2>Our <span>Services</span></h2>
@@ -188,10 +142,8 @@
         </div>
     </section>
     <section>
-    
-    <div class="elfsight-app-8ccdc8f9-8724-45b5-bc12-394326dc6bc5" data-elfsight-app-lazy></div>
+
     </section>
-    <script src="https://static.elfsight.com/platform/platform.js" async></script>
     <style>
         /* Prevent horizontal scrolling */
         html,

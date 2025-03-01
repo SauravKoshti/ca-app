@@ -55,7 +55,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="refer-tab" data-bs-toggle="tab" data-bs-target="#refer"
-                                    type="button" role="tab" aria-controls="refer" aria-selected="false">Refer
+                                    type="button" role="tab" aria-controls="refer" aria-selected="false">Reference
                                     List</button>
                             </li>
                         </ul>
@@ -183,18 +183,15 @@
                                                 <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
                                                 <option value="pan_card">PAN Card / પાન કાર્ડ</option>
                                                 <option value="form_16">Form 16 / ફોર્મ 16</option>
-                                                <option value="election_card">Election Card / ચૂંટણી કાર્ડ </option>
-                                                <option value="rc_copy">RC Copy / આરસી કોપી</option>
+                                                <!-- <option value="election_card">Election Card / ચૂંટણી કાર્ડ </option> -->
+                                                <option value="rc_book">RC Book / આરસી બુક</option>
                                                 <option value="bank_statement">Bank Statement / Passbook / બેંક
                                                     સ્ટેટમેન્ટ /પાસબુક</option>
-                                                <option value="fd_statement">FD Statement / Certificate / એફડી
-                                                    સ્ટેટમેન્ટ / પ્રમાણપત્ર</option>
-                                                <option value="loan_statement">Loan Statement / Loan Letter / લોન
+                                                <option value="fd_statement">Fixed Deposit statment & Certicate / બાંધી મુદતની થાપણ / પ્રમાણપત્ર</option>
+                                                <option value="loan_statement">Loan Statement & Loan Letter / લોન
                                                     સ્ટેટમેન્ટ / લોન પત્ર</option>
                                                 <option value="driving_license">Driving License / ડ્રાઈવિંગ લાયસન્સ
                                                 </option>
-                                                <option value="passport_copy">Passport Copy (if available) / પાસપોર્ટ
-                                                    કોપી (જો હોય તો)</option>
                                                 <option value="residential_proof">Residential Proof / રહેઠાણ પુરાવો
                                                 </option>
                                                 <option value="property_tax_receipt">Property Tax Receipt / મિલ્કત કર
@@ -235,7 +232,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Upload File:</label>
-                                            <input type="file" name="document_image_path" class="form-control">
+                                            <input type="file" if name="document_image_path" class="form-control">
                                             @error('document_image_path')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -266,6 +263,7 @@
                                                 <th>Document Name</th>
                                                 <th>Document Type</th>
                                                 <th>Document Image</th>
+                                                <th>Uploaded By</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -289,14 +287,18 @@
                                                         alt="Document Image" height="100" width="100">
 
                                                 </td>
-
+                                                <td>
+                                                    <p> {{ $documentData->uploaded_by }}</p>
+                                                    <p> {{ $user->id }}</p>
+                                                    <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }} </p>
+                                                </td>
                                                 <td>
                                                     <a href="{{ asset($documentData->document_image_path) }}" download
                                                         class="btn btn-success">
-                                                        <i class="fas fa-download"></i> Download
+                                                        <i class="fas fa-download"></i>
                                                     </a>
 
-                                                    <form action="{{ route('users.document.destroy') }}" method="POST"
+                                                    <form action="{{ route('users.document.destroy') }}" id="documentUpload" method="POST"
                                                         style="display:inline;">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $documentData->id }}">
@@ -306,7 +308,7 @@
                                                             class="btn btn-danger btn-sm">Delete</button>
                                                     </form>
                                                 </td>
-                                            </tr>
+                                                </tr>
                                             @endforeach
                                             @endif
                                         </tbody>
@@ -353,6 +355,7 @@
                                                         <td>{{ $payment->discuss_fees }}</td>
                                                         <td>{{ $payment->paid_fees }}</td>
                                                         <td>{{ $payment->payment_date }}</td>
+                                                        @if (auth()->user()->user_type == 'admin')
                                                         <td>
                                                             <a href="{{ route('users.payment.edit', $payment->id) }}"
                                                                 class="btn btn-link btn-primary btn-lg"
@@ -362,14 +365,21 @@
                                                             <form action="{{ route('users.payment.destroy') }}"
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
+
+                                                                <button type="button" onClick="removeData({{$user->id}}, 'user')"
+                                                                    class="btn btn-link btn-danger remove_data"
+                                                                    data-bs-toggle="tooltip" title="Remove">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
                                                                 <input type="hidden" name="id"
                                                                     value="{{ $payment->id }}">
                                                                 <input type="hidden" name="user_id"
                                                                     value="{{ $payment->user_id }}">
-                                                                <button type="submit"
+                                                                <button type="submit" onClick="removeData
                                                                     class="btn btn-danger btn-sm">Delete</button>
                                                             </form>
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                     @endforeach
                                                     @endif

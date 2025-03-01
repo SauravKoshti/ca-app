@@ -65,7 +65,7 @@ class PaymentController extends Controller
     public function destroy(Request $request)
     {
         Payment::where('id', $request->id)->delete();
-        return redirect()->route('users.show', $request->user_id)->with('success', 'Document deleted successfully.');
+        return redirect()->route('users.show', $request->user_id)->with('success', 'Payment deleted successfully.');
     }
     
 }

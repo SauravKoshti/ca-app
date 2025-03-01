@@ -110,4 +110,25 @@
     @if (session('success'))
         successMessage("{{ session('success') }}");
     @endif
+
+    function uploadFile() {
+            let progressBar = document.getElementById('progressBar');
+            let fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) {
+                alert('Please select a file first.');
+                return;
+            }
+            
+            let progress = 0;
+            let interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                progressBar.setAttribute('aria-valuenow', progress);
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    alert('File uploaded successfully!');
+                }
+            }, 300);
+        }
+        
 </script>

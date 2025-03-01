@@ -103,6 +103,7 @@ class UserController extends Controller
             'profile_image' => $path,
             'address' => $request['address'],
             'city' => $request['city'],
+            'state' => $request['state'],
             'pincode' => $request['pincode'],
             'aadhar_card' => $request['aadhar_card'],
             'pan_card' => $request['pan_card'],
@@ -123,7 +124,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $documentDataArray = Document::where('user_id', $user->id)->get();
-        $loggedInUserId = '1';
+        $loggedInUserId = Auth::user()->id;
         $payments = Payment::where('user_id', $user->id)->get();
         $referData = User::where('refer', $user->id)->get();
         // $referData = '1';
@@ -151,6 +152,7 @@ class UserController extends Controller
             'user_full_name' => 'required|string|max:255',
             'address' => 'required|string',
             'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
             'pincode' => 'required|digits:6',
             'aadhar_card' => [
                 'required',
@@ -209,6 +211,7 @@ class UserController extends Controller
             'user_full_name' => $request->user_full_name,
             'address' => $request->address,
             'city' => $request->city,
+            'state' => $request->state,
             'pincode' => $request->pincode,
             'gst_number' => $request->gst_number ?? null,
             'anniversary_date' => $request->anniversary_date ?? null,
