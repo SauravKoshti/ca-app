@@ -134,6 +134,10 @@
                                                 </div>
                                                 
                                                 <div class="col-md-6">
+                                                <!-- <div class="col"> -->
+                                    <label>Same as above</label>
+                                    <input type="checkbox" id="fullName">
+                                <!-- </div> -->
                                                     <div class="form-group">
                                                         <label for="user_full_name">Full name <small>(as per
                                                                 pancard)</small></label>
@@ -428,6 +432,20 @@ $(document).ready(function() {
             $(this).val(value + event.key.toUpperCase());
         } else if (isNumeric && /^[0-9]$/.test(event.key)) {
             $(this).val(value + event.key);
+        }
+    });
+
+    $("#fullName").change(function() {
+        if ($(this).is(":checked")) {
+            let firstName = $("#firstName").val().trim();
+            let middleName = $("#middleName").val().trim();
+            let lastName = $("#lastName").val().trim();
+
+            let fullName = [firstName, middleName, lastName].filter(name => name !== "").join(" ");
+
+            $("#user_full_name").val(fullName).prop("disabled", true);
+        } else {
+            $("#user_full_name").val("").prop("disabled", false);;
         }
     });
 });

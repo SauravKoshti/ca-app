@@ -158,15 +158,18 @@
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="user-profile-card">
-                                <!-- <div class="card-header">
-                                                    <div class="card-title">Upload Documents</div>
-                                                </div> -->
                                 <div class="card-body">
                                     <form action="{{ route('users.upload.document', $user->id) }}" method="POST"
-                                        enctype="multipart/form-data">
+                                        id="fileUploadForm" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                                         <input type="hidden" name="created_by" value="{{ $loggedInUserId }}">
+                                        <div class="col-3">
+                                            <label>Select Financial Year</label>
+                                            <select class="form-control" id="financial_year">
+                                                <option value="" selected disabled>Select Financial Year</option>
+                                            </select>
+                                        </div>
                                         <div class="mb-3">
                                             <label>Document Name:</label>
                                             <input type="text" name="document_name" class="form-control">
@@ -177,8 +180,10 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Document Type:</label>
-                                            @if (auth()->user()->user_type == 'personal' || auth()->user()->user_type ==
-                                            'gst')
+                                            @if (
+                                            auth()->user()->user_type == 'personal' || auth()->user()->user_type ==
+                                            'gst'
+                                            )
                                             <select name="doc_type" class="form-control">
                                                 <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
                                                 <option value="pan_card">PAN Card / પાન કાર્ડ</option>
@@ -187,7 +192,8 @@
                                                 <option value="rc_book">RC Book / આરસી બુક</option>
                                                 <option value="bank_statement">Bank Statement / Passbook / બેંક
                                                     સ્ટેટમેન્ટ /પાસબુક</option>
-                                                <option value="fd_statement">Fixed Deposit statment & Certicate / બાંધી મુદતની થાપણ / પ્રમાણપત્ર</option>
+                                                <option value="fd_statement">Fixed Deposit statment & Certicate / બાંધી
+                                                    મુદતની થાપણ / પ્રમાણપત્ર</option>
                                                 <option value="loan_statement">Loan Statement & Loan Letter / લોન
                                                     સ્ટેટમેન્ટ / લોન પત્ર</option>
                                                 <option value="driving_license">Driving License / ડ્રાઈવિંગ લાયસન્સ
@@ -232,7 +238,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Upload File:</label>
-                                            <input type="file" if name="document_image_path" class="form-control">
+                                            <input type="file" if name="document_image_path" class="form-control"
+                                                accept="image/*,.pdf">
                                             @error('document_image_path')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -245,7 +252,6 @@
                         <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                             <div class="document-card">
                                 <div class="card-header d-flex justify-content-between">
-                                    <!-- <div class="card-title">Document List</div> -->
                                     <div>
                                         <button class="btn btn-primary ms-auto"
                                             onclick="downloadSelected('pdf')">Download
@@ -290,7 +296,8 @@
                                                 <td>
                                                     <p> {{ $documentData->uploaded_by }}</p>
                                                     <p> {{ $user->id }}</p>
-                                                    <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }} </p>
+                                                    <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
+                                                    </p>
                                                 </td>
                                                 <td>
                                                     <a href="{{ asset($documentData->document_image_path) }}" download
@@ -298,8 +305,8 @@
                                                         <i class="fas fa-download"></i>
                                                     </a>
 
-                                                    <form action="{{ route('users.document.destroy') }}" id="documentUpload" method="POST"
-                                                        style="display:inline;">
+                                                    <form action="{{ route('users.document.destroy') }}"
+                                                        id="documentUpload" method="POST" style="display:inline;">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $documentData->id }}">
                                                         <input type="hidden" name="user_id"
@@ -308,7 +315,7 @@
                                                             class="btn btn-danger btn-sm">Delete</button>
                                                     </form>
                                                 </td>
-                                                </tr>
+                                            </tr>
                                             @endforeach
                                             @endif
                                         </tbody>
@@ -366,7 +373,8 @@
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
 
-                                                                <button type="button" onClick="removeData({{$user->id}}, 'user')"
+                                                                <button type="button"
+                                                                    onClick="removeData({{$user->id}}, 'user')"
                                                                     class="btn btn-link btn-danger remove_data"
                                                                     data-bs-toggle="tooltip" title="Remove">
                                                                     <i class="fa fa-times"></i>
@@ -376,7 +384,8 @@
                                                                 <input type="hidden" name="user_id"
                                                                     value="{{ $payment->user_id }}">
                                                                 <button type="submit" onClick="removeData
-                                                                    class="btn btn-danger btn-sm">Delete</button>
+                                                                                    class=" btn btn-danger
+                                                                    btn-sm">Delete</button>
                                                             </form>
                                                         </td>
                                                         @endif
@@ -386,9 +395,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -487,7 +494,7 @@
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         overflow: hidden;
         /* padding: 20px;
-        margin: 50px auto; */
+            margin: 50px auto; */
         display: flex;
         align-items: center;
     }

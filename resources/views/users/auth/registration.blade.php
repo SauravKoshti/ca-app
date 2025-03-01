@@ -24,7 +24,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="userType">User Type<span class="text-danger registration-mark">*</span></label>
+                                    <label for="userType">User Type<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <select id="userType" name="user_type" class="form-control" required>
                                         <option value="personal" {{ old('user_type') == 'personal' ? 'selected' : '' }}>
                                             Personal User</option>
@@ -38,7 +39,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="username">Username<span class="text-danger registration-mark">*</span></label>
+                                    <label for="username">Username<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="username" name="username" class="form-control"
                                         value="{{ old('username') }}" required>
                                     @error('username')
@@ -51,7 +53,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="first_name">First Name (Applicant Name)<span class="text-danger registration-mark">*</span></label>
+                                    <label for="first_name">First Name (Applicant Name)<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="firstName" name="first_name" class="form-control"
                                         value="{{ old('first_name') }}" required>
                                     @error('first_name')
@@ -61,7 +64,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="middle_name">Middle Name (Father Name/Husband)<span class="text-danger registration-mark">*</span></label>
+                                    <label for="middle_name">Middle Name (Father Name/Husband)<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="middleName" name="middle_name" class="form-control"
                                         value="{{ old('middle_name') }}" required>
                                     @error('middle_name')
@@ -71,7 +75,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="last_name">Last Name (Surname)<span class="text-danger registration-mark">*</span></label>
+                                    <label for="last_name">Last Name (Surname)<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="lastName" name="last_name" class="form-control"
                                         value="{{ old('last_name') }}" required>
                                     @error('last_name')
@@ -81,8 +86,13 @@
                             </div>
 
                             <div class="col-md-6">
+                                <div class="col">
+                                    <label>Same as above</label>
+                                    <input type="checkbox" id="fullName">
+                                </div>
                                 <div class="form-group">
-                                    <label for="user_full_name">Full name <small>(as per pancard)</small><span class="text-danger registration-mark">*</span></label>
+                                    <label for="user_full_name">Full name <small>(as per pancard)</small><span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="user_full_name" name="user_full_name" class="form-control"
                                         value="{{ old('user_full_name') }}" required>
                                     @error('user_full_name')
@@ -92,7 +102,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="father_full_name">Father Full Name<span class="text-danger registration-mark">*</span></label>
+                                    <label for="father_full_name">Father Full Name<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="father_full_name" name="father_full_name"
                                         class="form-control" value="{{ old('father_full_name') }}" required>
                                     @error('father_full_name')
@@ -103,7 +114,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="aadharCard">Aadhar Card<span class="text-danger registration-mark">*</span></label>
+                                    <label for="aadharCard">Aadhar Card<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="aadharCard" name="aadhar_card" class="form-control"
                                         value="{{ old('aadhar_card') }}" placeholder="XXXX XXXX XXXX" maxlength="14"
                                         required>
@@ -114,7 +126,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="panCard">PAN Card<span class="text-danger registration-mark">*</span></label>
+                                    <label for="panCard">PAN Card<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="panCard" name="pan_card" class="form-control"
                                         value="{{ old('pan_card') }}" placeholder="ABCDE1234F"
                                         pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]" maxlength="10" required>
@@ -125,7 +138,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="dob">Date of Birth<span class="text-danger registration-mark">*</span></label>
+                                    <label for="dob">Date of Birth<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input id="dob" name="dob" class="form-control datepicker" value="{{ old('dob') }}"
                                         required>
                                     @error('dob')
@@ -157,7 +171,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="password">Password<span class="text-danger registration-mark">*</span></label>
+                                    <label for="password">Password<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="password" id="password" name="password" class="form-control"
                                         autocomplete="new-password" required>
                                     @error('password')
@@ -168,7 +183,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="address">Address<span class="text-danger registration-mark">*</span></label>
+                                    <label for="address">Address<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="address" name="address" class="form-control"
                                         value="{{ old('address') }}" required>
                                     @error('address')
@@ -199,7 +215,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="pincode">Pincode<span class="text-danger registration-mark">*</span></label>
+                                    <label for="pincode">Pincode<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="pincode" name="pincode" class="form-control"
                                         value="{{ old('pincode') }}" required>
                                     @error('pincode')
@@ -210,7 +227,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="mobile">Mobile <small>(linked with aadhar)</small><span class="text-danger registration-mark">*</span></label>
+                                    <label for="mobile">Mobile <small>(linked with aadhar)</small><span
+                                            class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="mobile" name="mobile" class="form-control"
                                         value="{{ old('mobile') }}" required>
                                     @error('mobile')
@@ -230,7 +248,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="gender">Gender<span class="text-danger registration-mark">*</span></label>
+                                    <label for="gender">Gender<span
+                                            class="text-danger registration-mark">*</span></label>
                                     <select id="gender" name="gender" class="form-control">
                                         <option value="1" {{ old('gender') == '1' ? 'selected' : '' }}>Male
                                         </option>
@@ -353,6 +372,20 @@ $(document).ready(function() {
             $(this).val(value + event.key.toUpperCase());
         } else if (isNumeric && /^[0-9]$/.test(event.key)) {
             $(this).val(value + event.key);
+        }
+    });
+
+    $("#fullName").change(function() {
+        if ($(this).is(":checked")) {
+            let firstName = $("#firstName").val().trim();
+            let middleName = $("#middleName").val().trim();
+            let lastName = $("#lastName").val().trim();
+
+            let fullName = [firstName, middleName, lastName].filter(name => name !== "").join(" ");
+
+            $("#user_full_name").val(fullName).prop("disabled", true);
+        } else {
+            $("#user_full_name").val("").prop("disabled", false);;
         }
     });
 });
