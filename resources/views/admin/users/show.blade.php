@@ -188,7 +188,8 @@
 
                                             </div>
                                             <div class="mb-3">
-                                                <select id="documentSelect select2-multiple-input-sm select2-multiple" name="documentData[]"  multiple>
+                                                <select id="documentSelect select2-multiple-input-sm" select2-multiple" name="documentData[]"  multiple>
+
                                                     <option value="">Select Document</option>
                                                     <optgroup label="Income Tax Return (ITR)">
                                                         <option value="pan_card">PAN Card</option>

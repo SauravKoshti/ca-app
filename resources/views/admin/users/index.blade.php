@@ -182,14 +182,5 @@
                 }
             });
         }
-
-        function confirmDelete(userId) {
-            let deleteForm = document.getElementById('deleteForm');
-            deleteForm.action = "/users/" + userId; // Update form action dynamically
-
-            let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            deleteModal.show(); // Show the Bootstrap modal
-        }
-
     </script>
 @endsection
