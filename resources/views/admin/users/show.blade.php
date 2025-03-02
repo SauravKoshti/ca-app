@@ -353,9 +353,9 @@
                                 aria-labelledby="download-document-tab">
                                 <div class="download-document-card">
                                     <div class="card-header d-flex justify-content-between">
-                                        <div>
-                                            <label for="yearSelect">Select Year:</label>
-                                            <select id="downloadYearSelect" onchange="handleYearChange(this.value)"
+                                        <div class="d-flex align-items-center" style="width: 220px;">
+                                            <label for="yearSelect" class="w-100">Select Year:</label>
+                                            <select id="downloadYearSelect" class="form-control" onchange="handleYearChange(this.value)"
                                                 name="year">
                                                 <option value="">Select Year</option>
                                             </select>
@@ -375,7 +375,7 @@
                                                 id="downloadDocTable">
                                                 <thead>
                                                     <tr>
-                                                        <th>Select All <input type="checkbox" name="select_all"></th>
+                                                        <th><input type="checkbox" name="select_all"></th>
                                                         <th>Document Name</th>
                                                         <th>Document Type</th>
                                                         <th>Upload Type</th>

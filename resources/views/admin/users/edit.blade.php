@@ -66,6 +66,14 @@
                                                 </div>
                                             </div>
                                             <div class="col">
+                                                <div class="form-group">  
+                                                    <label for="middleName">Middle Name (Father Name/Husband):</label>
+                                                    <input type="text" class="form-control" id="middleName" name="middleName"
+                                                        value="{{ old('middleName', $user->middleName) }}"
+                                                        placeholder="Enter Middle Name" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
                                                 <div class="form-group">
                                                 <label for="last_name">Last Name (Surname):</label>
                                                     <input type="text" class="form-control" id="lastname" name="lastname"
@@ -99,6 +107,14 @@
                                                     <label for="city">City</label>
                                                     <input type="text" class="form-control" id="city" name="city"
                                                         value="{{ old('city', $user->city) }}" placeholder="Enter City" />
+
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="state">State</label>
+                                                    <input type="text" class="form-control" id="state" name="state"
+                                                        value="{{ old('state', $user->state) }}" placeholder="Enter State" />
 
                                                 </div>
                                             </div>
