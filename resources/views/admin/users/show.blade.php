@@ -181,8 +181,8 @@
                                                     <label>Select Type</label>
                                                     <select class="form-control" name="upload_type"
                                                         onclick="changeType(this.value)">
-                                                        <option value="online">Online</option>
-                                                        <option value="manual">Manual</option>
+                                                        <option value="Online">Online</option>
+                                                        <option value="Manual">Manual</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-6">
@@ -286,7 +286,8 @@
                             <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                                 <div class="document-card">
                                     <div class="card-body">
-                                        <table class="datatables table table-bordered">
+                                        <table class="datatables table table-bordered" id="documentTable"
+                                            data-order='[]'>
                                             <thead>
                                                 <tr>
                                                     <th>Document Name</th>
@@ -299,7 +300,7 @@
                                             <tbody>
                                                 @if ($documentDataArray->isEmpty())
                                                     <tr>
-                                                        <td colspan="4" class="text-center">No documet records found.
+                                                        <td colspan="4" class="text-center">No document records found.
                                                         </td>
                                                     </tr>
                                                 @else
@@ -309,7 +310,9 @@
                                                             <td>
                                                                 @if ($documentData->doc_type)
                                                                     @foreach (explode(',', $documentData->doc_type) as $doc_type)
-                                                                        <p class="mb-0">{{ $doc_type }}</p>
+                                                                        <p class="mb-0">
+                                                                            {{ Config::get('constant.doc_type')[$doc_type] }}
+                                                                        </p>
                                                                     @endforeach
                                                                 @endif
                                                             </td>
@@ -352,11 +355,10 @@
                                     <div class="card-header d-flex justify-content-between">
                                         <div>
                                             <label for="yearSelect">Select Year:</label>
-                                            <select id="downloadYearSelect" name="year">
+                                            <select id="downloadYearSelect" onchange="handleYearChange(this.value)"
+                                                name="year">
                                                 <option value="">Select Year</option>
                                             </select>
-
-
                                         </div>
                                         <div>
                                             <button class="btn btn-primary ms-auto"
@@ -369,10 +371,11 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="datatables display table table-striped table-hover">
+                                            <table class="datatables display table table-striped table-hover"
+                                                id="downloadDocTable">
                                                 <thead>
                                                     <tr>
-                                                        <th>Select</th>
+                                                        <th>Select All <input type="checkbox" name="select_all"></th>
                                                         <th>Document Name</th>
                                                         <th>Document Type</th>
                                                         <th>Upload Type</th>
@@ -383,7 +386,7 @@
                                                 <tbody>
                                                     @if ($documentDataArray->isEmpty())
                                                         <tr>
-                                                            <td colspan="6" class="text-center">No documet records
+                                                            <td colspan="6" class="text-center">No document records
                                                                 found.
                                                             </td>
                                                         </tr>
@@ -399,7 +402,9 @@
                                                                 <td>
                                                                     @if ($documentData->doc_type)
                                                                         @foreach (explode(',', $documentData->doc_type) as $doc_type)
-                                                                            <p class="mb-0">{{ $doc_type }}</p>
+                                                                            <p class="mb-0">
+                                                                                {{ Config::get('constant.doc_type')[$doc_type] }}
+                                                                            </p>
                                                                         @endforeach
                                                                     @endif
                                                                 </td>
@@ -549,6 +554,29 @@
     @endsection
     @section('section_script')
         <script>
+            function handleYearChange(year) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: "/fetch-images",
+                    type: "POST",
+                    data: {
+                        year: year
+                    },
+                    success: function(response) {
+                        $('#downloadDocTable tbody').html(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
                 let params = new URLSearchParams(window.location.search);
                 let tab = params.get('tab');
@@ -560,43 +588,18 @@
                 }
             });
             $(document).ready(function() {
-                function loadImages() {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $.ajax({
-                        url: "/fetch-images",
-                        type: "POST",
-                        data: {
-                            someData: "value"
-                        },
-                        success: function(response) {
-                            console.log(response);
-                        },
-                        error: function(xhr) {
-                            console.log(xhr.responseText);
-                        }
-                    });
-
-                }
-
                 // Load images on page load
-                loadImages();
-
-                // Reload images when year filter is changed
-                $('#year').on('change', loadImages);
-
+                handleYearChange();
                 // Select/Deselect all checkboxes
-                $('#select-all').on('change', function() {
-                    $('.image-checkbox').prop('checked', $(this).prop('checked'));
-                });
+
+            });
+
+            $('[name="select_all"]').on('change', function() {
+                $('[name="document_id"]').prop('checked', this.checked);
             });
 
             function changeType(uploadType) {
-                if (uploadType === 'manual') {
+                if (uploadType === 'Manual') {
                     $('#doc_type').prop('multiple', true).attr('name', 'doc_type[]').select2();
                 } else {
                     $('#doc_type').prop('multiple', false).attr('name', 'doc_type').select2();
@@ -617,7 +620,9 @@
                     data: {
                         _token: '{{ csrf_token() }}',
                         type: type,
-                        document_ids: allIds
+                        document_ids: allIds,
+                        select_all: $('[name="select_all"]').val(),
+                        year: year
                     },
                     xhrFields: {
                         responseType: 'blob'
@@ -650,7 +655,7 @@
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
                 overflow: hidden;
                 /* padding: 20px;
-                                            margin: 50px auto; */
+                                                        margin: 50px auto; */
                 display: flex;
                 align-items: center;
             }

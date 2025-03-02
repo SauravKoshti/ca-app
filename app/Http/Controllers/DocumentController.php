@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use setasign\Fpdi\Fpdi;
+use Config;
 
 class DocumentController extends Controller
 {
@@ -121,7 +122,12 @@ class DocumentController extends Controller
             'document_ids.*' => 'exists:documents,id',
         ]);
 
-        $documents = Document::whereIn('id', $request->document_ids)->get();
+        $year = $request->input('year');
+        if ($year) {
+            $documents = Document::where('financial_year', $year)->latest()->get();
+        } else {
+            $documents = Document::whereIn('id', $request->document_ids)->get();
+        }
         if ($request->type === 'pdf') {
             return $this->downloadPdf($documents);
         } else if ($request->type === 'zip') {
@@ -208,10 +214,41 @@ class DocumentController extends Controller
         // Fetch images based on the selected year
         $year = $request->input('year');
         if ($year) {
-            $images = Document::where('year', $year)->get();
+            $images = Document::where('financial_year', $year)->latest()->get();
         } else {
-            $images = Document::get();
+            $images = Document::latest()->get();
         }
-        return response()->json($images);
+        $imagesHtml = '';
+        if ($images->isEmpty()) {
+            return response()->json('<tr><td colspan="6" class="text-center">No images found</td></tr>');
+        }
+        foreach ($images as $documentData) {
+            $imagesHtml .= '<tr>';
+            $imagesHtml .= '<td><input type="checkbox" name="document_id" data-id="' . $documentData->id . '"></td>';
+            $imagesHtml .= '<td>' . $documentData->document_name . '</td>';
+            $imagesHtml .= '<td>';
+            if ($documentData->doc_type) {
+                foreach (explode(',', $documentData->doc_type) as $doc_type) {
+                    $imagesHtml .= '<p class="mb-0">'.Config::get('constant.doc_type')[$doc_type].'</p>';
+                }
+            }
+            $imagesHtml .= '</td>';
+            $imagesHtml .= '<td>' . $documentData->upload_type . '</td>';
+            $imagesHtml .= '<td>';
+            $imagesHtml .= '<p>' . $documentData->uploader->user_full_name . '</p>';
+            $imagesHtml .= '<p>' . \Carbon\Carbon::parse($documentData->created_at)->format('d-m-Y H:i:s') . '</p>';
+            $imagesHtml .= '</td>';
+            $imagesHtml .= '<td>';
+            $imagesHtml .= '<a href="' . asset($documentData->document_image_path) . '" download class="btn btn-success"><i class="fas fa-download"></i></a>';
+            $imagesHtml .= '<form action="' . route('users.document.destroy') . '" id="documentUpload" method="POST" style="display:inline;">';
+            $imagesHtml .= csrf_field();
+            $imagesHtml .= '<input type="hidden" name="id" value="' . $documentData->id . '">';
+            $imagesHtml .= '<input type="hidden" name="user_id" value="' . $documentData->user_id . '">';
+            $imagesHtml .= '<button type="submit" class="btn btn-danger btn-sm">Delete</button>';
+            $imagesHtml .= '</form>';
+            $imagesHtml .= '</td>';
+            $imagesHtml .= '</tr>';
+        }
+        return response()->json($imagesHtml);
     }
 }
