@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         $login_user = Auth::user();
-        if ($login_user->role == 'user') {
+        if ($login_user->user_type == 'user') {
             $users = collect();
             if ($login_user->group_id) {
                 $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
@@ -290,7 +290,7 @@ class UserController extends Controller
         }
         if ($request->is_select_all) {
             $login_user = Auth::user();
-            if ($login_user->role == 'user') {
+            if ($login_user->user_type == 'user') {
                 if ($login_user->group_id) {
                     $userIds = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->pluck('id')->toArray();
                 }
@@ -310,16 +310,23 @@ class UserController extends Controller
         ]);
 
         if (Hash::check($request->password, Auth::user()->password)) {
+            $message = '';
             switch ($request->type) {
                 case 'user':
                     User::where('id', $request->id)->delete();
+                    $message = 'User deleted successfully'; 
+                    break;
+                case 'payment':
+                    Payment::where('id', $request->id)->delete();
+                    $message = 'Payment deleted successfully'; 
                     break;
                 case 'group':
                     User::where('group_id', $request->id)->update(['group_id' => null]);
                     Group::where('id', $request->id)->delete();
+                    $message = 'Group deleted successfully'; 
                     break;
             }
-            return response()->json(['success' => true, 'message' => 'User deleted successfully']);
+            return response()->json(['success' => true, 'message' => $message]);
         } else {
             return response()->json(['success' => false, 'message' => 'Password does not match']);
         }

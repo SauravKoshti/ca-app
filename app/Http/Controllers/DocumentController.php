@@ -193,10 +193,13 @@ class DocumentController extends Controller
 
     public function fetchImages(Request $request)
     {
-        dd($request);
         // Fetch images based on the selected year
         $year = $request->input('year');
-        $images = Document::where('year', $year)->get();   
+        if($year){
+            $images = Document::where('year', $year)->get();   
+        }else{
+            $images = Document::get();   
+        }
         return response()->json($images);
     }
 }

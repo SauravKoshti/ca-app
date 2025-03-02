@@ -14,8 +14,10 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastName,
             'username' => $this->faker->userName,
             'user_full_name' => fn ($attributes) => $attributes['first_name'] . ' ' . $attributes['last_name'],
+            'father_full_name' => $this->faker->firstName,
             'address' => $this->faker->address,
             'city' => $this->faker->city,
+            'state' => $this->faker->state,
             'pincode' => $this->faker->numerify('######'),
             'aadhar_card' => $this->faker->numerify('####-####-####'),
             'pan_card' => strtoupper($this->faker->bothify('?????####?')),
@@ -28,7 +30,6 @@ class UserFactory extends Factory
             'gender' => $this->faker->boolean(),
             'dob' => $this->faker->date(),
             'password' => bcrypt('password'), // Default password
-            'father_full_name' => $this->faker->name,
             'user_type' => $this->faker->randomElement(['gst', 'personal', 'admin']),
             // 'group_id' => $this->faker->numberBetween(1, 10),
             'refer' => $this->faker->optional()->userName,

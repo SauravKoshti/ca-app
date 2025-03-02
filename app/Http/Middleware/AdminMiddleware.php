@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (in_array(Auth::user()->role, $roles))  {
+        if (in_array(Auth::user()->user_type, $roles))  {
             return $next($request);
         }
         return redirect('/login');
