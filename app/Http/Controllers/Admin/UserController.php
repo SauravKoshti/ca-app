@@ -124,9 +124,9 @@ class UserController extends Controller
     }
     public function show(User $user)
     {
-        $documentDataArray = Document::where('user_id', $user->id)->get();
+        $documentDataArray = Document::where('user_id', $user->id)->latest()->get();
         $loggedInUserId = Auth::user()->id;
-        $payments = Payment::where('user_id', $user->id)->get();
+        $payments = Payment::where('user_id', $user->id)->latest()->get();
         $referData = User::where('refer', $user->id)->get();
         // $referData = '1';
         return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments', 'referData'));
@@ -235,7 +235,7 @@ class UserController extends Controller
     public function getDocument($user)
     {
         $userId = $user;
-        $documentDataArray = Document::where('user_id', $userId)->get();
+        $documentDataArray = Document::where('user_id', $userId)->latest()->get();
         $userData = User::where('id', $userId)->first();
         $loggedInUserId = Auth::user()->id;
         return view('admin.users.document', compact('loggedInUserId', 'userId', 'userData', 'documentDataArray'));

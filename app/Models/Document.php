@@ -16,6 +16,10 @@ class Document extends Model
         'document_name',
         'doc_type',
         'document_image_path',
+        'upload_type',
+        'financial_year',
+        'date_from',
+        'date_to',
     ];
 
     // Relationships
@@ -32,5 +36,15 @@ class Document extends Model
     public function uploader()
     {
         return $this->belongsTo(User::class, 'uploaded_by');
+    }
+
+    public function setDateFromAttribute($value)
+    {
+        $this->attributes['date_from'] = date('Y-m-d', strtotime($value));
+    }
+
+    public function setDateToAttribute($value)
+    {
+        $this->attributes['date_to'] = date('Y-m-d', strtotime($value));
     }
 }

@@ -19,18 +19,26 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $login_user_id = Auth::user()->id;
-        $request->validate([
+        $validator = \Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
             'document_name' => 'required|string|max:255',
-            'doc_type' => 'required|string|max:100',
-            'document_image_path' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'doc_type' => 'required|max:300',
+            'document_image_path' => 'required_if:upload_type,online|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ], [
             'document_image_path.required' => 'The document image file is required.',
             'document_image_path.file' => 'The document must be a valid file.',
             'document_image_path.mimes' => 'The document must be in JPG, JPEG, PNG, or PDF format.',
             'document_image_path.max' => 'The document must not exceed 2MB in size.',
         ]);
-        
+
+        if ($validator->fails()) {
+            return redirect()->route('users.show', [
+                'user' => $request->user_id,
+                'tab' => 'document-tab'
+            ])->withErrors($validator)
+                ->withInput();
+        }
+
 
         // Store file
         $path = '';
@@ -41,12 +49,16 @@ class DocumentController extends Controller
             $path = $destinationPath . $profileImage;
         }
 
-        $document = Document::create([
+        Document::create([
             'user_id' => $request->user_id,
             'created_by' => $login_user_id,
             'uploaded_by' => $login_user_id,
             'document_name' => $request->document_name,
-            'doc_type' => $request->doc_type,
+            'doc_type' => (is_array($request->doc_type)) ? implode(',', $request->doc_type) : $request->doc_type,
+            'upload_type' => $request->upload_type,
+            'financial_year' => $request->financial_year,
+            'date_from' => $request->date_from,
+            'date_to' => $request->date_to,
             'document_image_path' => $path,
         ]);
 
@@ -55,7 +67,7 @@ class DocumentController extends Controller
             'user' => $request->user_id,
             'tab' => 'document-tab'
         ])->with('success', 'Document created successfully.');
-        
+
     }
 
     public function show($id)
@@ -195,10 +207,10 @@ class DocumentController extends Controller
     {
         // Fetch images based on the selected year
         $year = $request->input('year');
-        if($year){
-            $images = Document::where('year', $year)->get();   
-        }else{
-            $images = Document::get();   
+        if ($year) {
+            $images = Document::where('year', $year)->get();
+        } else {
+            $images = Document::get();
         }
         return response()->json($images);
     }

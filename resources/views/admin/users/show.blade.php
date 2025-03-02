@@ -70,13 +70,16 @@
                         </div>
 
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                aria-labelledby="profile-tab">
                                 <div class="profile-card">
 
                                     @if (!empty($user->profile_image))
-                                        <img src="{{ asset($user->profile_image) }}" alt="Profile Image" class="profile-img">
+                                        <img src="{{ asset($user->profile_image) }}" alt="Profile Image"
+                                            class="profile-img">
                                     @else
-                                        <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image" class="profile-img">
+                                        <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image"
+                                            class="profile-img">
                                     @endif
 
                                     <div class="profile-info">
@@ -173,11 +176,31 @@
                                             @csrf
                                             <input type="hidden" name="user_id" value="{{ $user->id }}">
                                             <input type="hidden" name="created_by" value="{{ $loggedInUserId }}">
-                                            <div class="col-3">
-                                                <label>Select Financial Year</label>
-                                                <select class="form-control" id="financial_year">
-                                                    <option value="" selected disabled>Select Financial Year</option>
-                                                </select>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label>Select Type</label>
+                                                    <select class="form-control" name="upload_type"
+                                                        onclick="changeType(this.value)">
+                                                        <option value="online">Online</option>
+                                                        <option value="manual">Manual</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>Select Financial Year</label>
+                                                    <select class="form-control" name="financial_year"
+                                                        id="financial_year">
+                                                        <option value="" selected disabled>Select Financial Year
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>Date From</label>
+                                                    <input name="date_from" class="form-control datepicker">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>Date To</label>
+                                                    <input name="date_to" class="form-control datepicker">
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label>Document Name:</label>
@@ -188,79 +211,42 @@
 
                                             </div>
                                             <div class="mb-3">
-                                                <select id="documentSelect select2-multiple-input-sm" select2-multiple" name="documentData[]"  multiple>
-
-                                                    <option value="">Select Document</option>
-                                                    <optgroup label="Income Tax Return (ITR)">
-                                                        <option value="pan_card">PAN Card</option>
-                                                        <option value="aadhar_card">Aadhar Card</option>
-                                                        <option value="form_16">Form 16 (For Salaried Individuals)</option>
-                                                        <option value="salary_slips">Salary Slips (Last 3 Months)</option>
-                                                        <option value="bank_statements">Bank Statements (Last 6 Months)
-                                                        </option>
-                                                        <option value="investment_proofs">Investment Proofs (LIC, PPF, ELSS,
-                                                            etc.)</option>
-                                                        <option value="rental_income_docs">Rental Income Documents</option>
-                                                        <option value="loan_interest_certificates">Home Loan Interest
-                                                            Certificate</option>
-                                                        <option value="capital_gains_statements">Capital Gains Statements
-                                                            (If Any)</option>
-                                                        <option value="other_income_proofs">Other Income Proofs (FD
-                                                            Interest, etc.)</option>
-                                                    </optgroup>
-
-                                                    <optgroup label="Goods and Services Tax (GST)">
-                                                        <option value="gst_certificate">GST Registration Certificate
-                                                        </option>
-                                                        <option value="gstin">GSTIN (GST Identification Number)</option>
-                                                        <option value="sales_purchase_bills">Sales & Purchase Bills</option>
-                                                        <option value="input_tax_credit_docs">Input Tax Credit Documents
-                                                        </option>
-                                                        <option value="gst_return_filings">Previous GST Return Filings
-                                                        </option>
-                                                        <option value="bank_statements_gst">Bank Statements (For GST
-                                                            Transactions)</option>
-                                                        <option value="stock_register">Stock Register</option>
-                                                        <option value="expense_bills">Expense Bills</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
                                                 <label>Document Type:</label>
-                                                @if (
-                                                    auth()->user()->user_type == 'personal' || auth()->user()->user_type ==
-                                                    'gst'
-                                                )
-                                                                                                <select name="doc_type" class="form-control">
-                                                                                                    <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
-                                                                                                    <option value="pan_card">PAN Card / પાન કાર્ડ</option>
-                                                                                                    <option value="form_16">Form 16 / ફોર્મ 16</option>
-                                                                                                    <!-- <option value="election_card">Election Card / ચૂંટણી કાર્ડ </option> -->
-                                                                                                    <option value="rc_book">RC Book / આરસી બુક</option>
-                                                                                                    <option value="bank_statement">Bank Statement / Passbook / બેંક
-                                                                                                        સ્ટેટમેન્ટ /પાસબુક</option>
-                                                                                                    <option value="fd_statement">Fixed Deposit statment & Certicate / બાંધી
-                                                                                                        મુદતની થાપણ / પ્રમાણપત્ર</option>
-                                                                                                    <option value="loan_statement">Loan Statement & interest certificate /
-                                                                                                        લોન સ્ટેટમેન્ટ / લોન પત્ર</option>
-                                                                                                    <option value="driving_license">Driving License / ડ્રાઈવિંગ લાયસન્સ
-                                                                                                    </option>
-                                                                                                    <option value="residential_proof">Residential Proof / રહેઠાણ પુરાવો
-                                                                                                    </option>
-                                                                                                    <option value="property_tax_receipt">Property Tax Receipt / મિલ્કત કર
-                                                                                                        રસીદ</option>
-                                                                                                    <option value="electricity_bill">Latest Electricity or Telephone Bill /
-                                                                                                        તાજેતરની વીજળી અથવા ટેલિફોન બીલ</option>
-                                                                                                    <option value="business_proof">Business Proof / Registration Certificate
-                                                                                                        / વ્યવસાય પુરાવો / નોંધણી પ્રમાણપત્ર</option>
-                                                                                                    <option value="etc">ETC (Toll, FASTag, Other) / ETC (ટોલ, ફાસ્ટેગ, અન્ય)
-                                                                                                    </option>
-                                                                                                    <option value="purchase_bill">Purchase Bill / ખરીદી બિલ</option>
-                                                                                                    <option value="sales_bill">Sales Bill / વેચાણ બિલ</option>
-                                                                                                    <option value="expense_bill">Expense Bill / ખર્ચ બિલ</option>
-                                                                                                </select>
-                                                @elseif(auth()->user()->user_type == 'admin')
-                                                    <select name="doc_type" class="form-control">
+                                                <select name="doc_type" id="doc_type"
+                                                    class="form-control select2-multiple">
+                                                    <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
+                                                    <option value="pan_card">PAN Card / પાન કાર્ડ</option>
+                                                    <option value="form_16">Form 16 / ફોર્મ 16</option>
+                                                    <!-- <option value="election_card">Election Card / ચૂંટણી કાર્ડ </option> -->
+                                                    <option value="rc_book">RC Book / આરસી બુક</option>
+                                                    <option value="bank_statement">Bank Statement / Passbook / બેંક
+                                                        સ્ટેટમેન્ટ /પાસબુક</option>
+                                                    <option value="fd_statement">Fixed Deposit statment & Certicate /
+                                                        બાંધી
+                                                        મુદતની થાપણ / પ્રમાણપત્ર</option>
+                                                    <option value="loan_statement">Loan Statement & interest
+                                                        certificate /
+                                                        લોન સ્ટેટમેન્ટ / લોન પત્ર</option>
+                                                    <option value="driving_license">Driving License / ડ્રાઈવિંગ લાયસન્સ
+                                                    </option>
+                                                    <option value="residential_proof">Residential Proof / રહેઠાણ પુરાવો
+                                                    </option>
+                                                    <option value="property_tax_receipt">Property Tax Receipt / મિલ્કત
+                                                        કર
+                                                        રસીદ</option>
+                                                    <option value="electricity_bill">Latest Electricity or Telephone
+                                                        Bill /
+                                                        તાજેતરની વીજળી અથવા ટેલિફોન બીલ</option>
+                                                    <option value="business_proof">Business Proof / Registration
+                                                        Certificate
+                                                        / વ્યવસાય પુરાવો / નોંધણી પ્રમાણપત્ર</option>
+                                                    <option value="etc">ETC (Toll, FASTag, Other) / ETC (ટોલ,
+                                                        ફાસ્ટેગ, અન્ય)
+                                                    </option>
+                                                    <option value="purchase_bill">Purchase Bill / ખરીદી બિલ</option>
+                                                    <option value="sales_bill">Sales Bill / વેચાણ બિલ</option>
+                                                    <option value="expense_bill">Expense Bill / ખર્ચ બિલ</option>
+                                                    @if (auth()->user()->user_type == 'admin')
                                                         <option value="computation">Computation</option>
                                                         <option value="trading">Trading</option>
                                                         <option value="p&l">P&L</option>
@@ -276,8 +262,8 @@
                                                         <option value="gst_2b_pdf">GST 2B PDF</option>
                                                         <option value="gst_challan_pdf">GST Challan PDF</option>
                                                         <option value="gst_summary">GST Summary</option>
-                                                    </select>
-                                                @endif
+                                                    @endif
+                                                </select>
 
                                                 @error('doc_type')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -317,7 +303,7 @@
                                                     <th>Select</th>
                                                     <th>Document Name</th>
                                                     <th>Document Type</th>
-                                                    <th>Document Image</th>
+                                                    <th>Upload Type</th>
                                                     <th>Uploaded By</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -325,7 +311,8 @@
                                             <tbody>
                                                 @if ($documentDataArray->isEmpty())
                                                     <tr>
-                                                        <td colspan="4" class="text-center">No documet records found.</td>
+                                                        <td colspan="4" class="text-center">No documet records found.
+                                                        </td>
                                                     </tr>
                                                 @else
                                                     @foreach ($documentDataArray as $documentData)
@@ -336,28 +323,31 @@
                                                                     data-id="{{ $documentData->id }}">
                                                             </td>
                                                             <td>{{ $documentData->document_name }}</td>
-                                                            <td>{{ $documentData->doc_type }}</td>
                                                             <td>
-                                                                <img src="{{ asset($documentData->document_image_path) }}"
-                                                                    alt="Document Image" height="100" width="100">
-
+                                                                @if ($documentData->doc_type)
+                                                                    @foreach (explode(',', $documentData->doc_type) as $doc_type)
+                                                                        <p class="mb-0">{{ $doc_type }}</p>
+                                                                    @endforeach
+                                                                @endif
                                                             </td>
+                                                            <td>{{ $documentData->upload_type }} </td>
                                                             <td>
-                                                                <p> {{ $documentData->uploaded_by }}</p>
-                                                                <p> {{ $user->id }}</p>
+                                                                <p> {{ $documentData->uploader->user_full_name }}</p>
                                                                 <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
                                                                 </p>
                                                             </td>
                                                             <td>
-                                                                <a href="{{ asset($documentData->document_image_path) }}" download
-                                                                    class="btn btn-success">
+                                                                <a href="{{ asset($documentData->document_image_path) }}"
+                                                                    download class="btn btn-success">
                                                                     <i class="fas fa-download"></i>
                                                                 </a>
 
                                                                 <form action="{{ route('users.document.destroy') }}"
-                                                                    id="documentUpload" method="POST" style="display:inline;">
+                                                                    id="documentUpload" method="POST"
+                                                                    style="display:inline;">
                                                                     @csrf
-                                                                    <input type="hidden" name="id" value="{{ $documentData->id }}">
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $documentData->id }}">
                                                                     <input type="hidden" name="user_id"
                                                                         value="{{ $documentData->user_id }}">
                                                                     <button type="submit"
@@ -405,7 +395,7 @@
                                                     <th>Select</th>
                                                     <th>Document Name</th>
                                                     <th>Document Type</th>
-                                                    <th>Document Image</th>
+                                                    <th>Upload Type</th>
                                                     <th>Uploaded By</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -413,7 +403,8 @@
                                             <tbody>
                                                 @if ($documentDataArray->isEmpty())
                                                     <tr>
-                                                        <td colspan="4" class="text-center">No documet records found.</td>
+                                                        <td colspan="4" class="text-center">No documet records found.
+                                                        </td>
                                                     </tr>
                                                 @else
                                                     @foreach ($documentDataArray as $documentData)
@@ -424,28 +415,31 @@
                                                                     data-id="{{ $documentData->id }}">
                                                             </td>
                                                             <td>{{ $documentData->document_name }}</td>
-                                                            <td>{{ $documentData->doc_type }}</td>
                                                             <td>
-                                                                <img src="{{ asset($documentData->document_image_path) }}"
-                                                                    alt="Document Image" height="100" width="100">
-
+                                                                @if ($documentData->doc_type)
+                                                                    @foreach (explode(',', $documentData->doc_type) as $doc_type)
+                                                                        <p class="mb-0">{{ $doc_type }}</p>
+                                                                    @endforeach
+                                                                @endif
                                                             </td>
+                                                            <td>{{ $documentData->upload_type }} </td>
                                                             <td>
-                                                                <p> {{ $documentData->uploaded_by }}</p>
-                                                                <p> {{ $user->id }}</p>
+                                                                <p> {{ $documentData->uploader->user_full_name }}</p>
                                                                 <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
                                                                 </p>
                                                             </td>
                                                             <td>
-                                                                <a href="{{ asset($documentData->document_image_path) }}" download
-                                                                    class="btn btn-success">
+                                                                <a href="{{ asset($documentData->document_image_path) }}"
+                                                                    download class="btn btn-success">
                                                                     <i class="fas fa-download"></i>
                                                                 </a>
 
                                                                 <form action="{{ route('users.document.destroy') }}"
-                                                                    id="documentUpload" method="POST" style="display:inline;">
+                                                                    id="documentUpload" method="POST"
+                                                                    style="display:inline;">
                                                                     @csrf
-                                                                    <input type="hidden" name="id" value="{{ $documentData->id }}">
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $documentData->id }}">
                                                                     <input type="hidden" name="user_id"
                                                                         value="{{ $documentData->user_id }}">
                                                                     <button type="submit"
@@ -503,26 +497,30 @@
                                                                         <td>
                                                                             <a href="{{ route('users.payment.edit', $payment->id) }}"
                                                                                 class="btn btn-link btn-primary btn-lg"
-                                                                                data-bs-toggle="tooltip" title="Edit Task">
+                                                                                data-bs-toggle="tooltip"
+                                                                                title="Edit Task">
                                                                                 <i class="fa fa-edit"></i>
                                                                             </a>
-                                                                            <form action="{{ route('users.payment.destroy') }}"
+                                                                            <form
+                                                                                action="{{ route('users.payment.destroy') }}"
                                                                                 method="POST" style="display:inline;">
                                                                                 @csrf
 
                                                                                 <button type="button"
-                                                                                    onClick="removeData({{$user->id}}, 'user')"
+                                                                                    onClick="removeData({{ $user->id }}, 'user')"
                                                                                     class="btn btn-link btn-danger remove_data"
-                                                                                    data-bs-toggle="tooltip" title="Remove">
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    title="Remove">
                                                                                     <i class="fa fa-times"></i>
                                                                                 </button>
                                                                                 <input type="hidden" name="id"
                                                                                     value="{{ $payment->id }}">
                                                                                 <input type="hidden" name="user_id"
                                                                                     value="{{ $payment->user_id }}">
-                                                                                <button type="submit" onClick="removeData
-                                                                                                    class=" btn btn-danger
-                                                                                    btn-sm">Delete</button>
+                                                                                <button type="submit"
+                                                                                    onClick="removeData
+                                                                                                    class="
+                                                                                    btn btn-danger btn-sm">Delete</button>
                                                                             </form>
                                                                         </td>
                                                                     @endif
@@ -572,10 +570,10 @@
                 </div>
             </div>
         </div>
-@endsection
+    @endsection
     @section('section_script')
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 let params = new URLSearchParams(window.location.search);
                 let tab = params.get('tab');
                 if (tab) {
@@ -585,7 +583,7 @@
                     }
                 }
             });
-            $(document).ready(function () {
+            $(document).ready(function() {
                 function loadImages() {
                     $.ajaxSetup({
                         headers: {
@@ -599,10 +597,10 @@
                         data: {
                             someData: "value"
                         },
-                        success: function (response) {
+                        success: function(response) {
                             console.log(response);
                         },
-                        error: function (xhr) {
+                        error: function(xhr) {
                             console.log(xhr.responseText);
                         }
                     });
@@ -616,17 +614,25 @@
                 $('#year').on('change', loadImages);
 
                 // Select/Deselect all checkboxes
-                $('#select-all').on('change', function () {
+                $('#select-all').on('change', function() {
                     $('.image-checkbox').prop('checked', $(this).prop('checked'));
                 });
             });
+
+            function changeType(uploadType) {
+                if (uploadType === 'manual') {
+                    $('#doc_type').prop('multiple', true).attr('name', 'doc_type[]').select2();
+                } else {
+                    $('#doc_type').prop('multiple', false).attr('name', 'doc_type').select2();
+                }
+            }
 
             function downloadSelected(type) {
                 const year = $('#downloadYearSelect').val();
                 // console.log(year);
                 let allIds = [];
                 var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
-                checkboxes.forEach(function (checkbox) {
+                checkboxes.forEach(function(checkbox) {
                     allIds.push(checkbox.getAttribute('data-id'));
                 });
                 $.ajax({
@@ -640,7 +646,7 @@
                     xhrFields: {
                         responseType: 'blob'
                     },
-                    success: function (response) {
+                    success: function(response) {
                         var blob = new Blob([response], {
                             type: 'application/pdf'
                         });
@@ -653,7 +659,7 @@
                         link.href = window.URL.createObjectURL(blob);
                         link.click();
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error('Error:', error);
                         console.log('Response:', xhr.responseText);
                     }
@@ -668,7 +674,7 @@
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
                 overflow: hidden;
                 /* padding: 20px;
-                margin: 50px auto; */
+                                margin: 50px auto; */
                 display: flex;
                 align-items: center;
             }
