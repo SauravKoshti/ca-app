@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/users/document/list', [UserController::class, 'documentList'])->name('users.document.list');
         Route::post('/users/document/destroy', [DocumentController::class, 'documentDestroy'])->name('users.document.destroy');
         Route::post('/users/download/documents', [DocumentController::class, 'mergeDocuments'])->name('users.download.documents');
-
+        Route::post('/fetch-images', [DocumentController::class, 'fetchImages'])->name('users.fetch.images');
         Route::get('/payment/{user}', [PaymentController::class, 'create'])->name('users.payment');
         Route::post('/payment/store', [PaymentController::class, 'store'])->name('users.payment.store');
         Route::get('/payment/{user}', [PaymentController::class, 'create'])->name('users.payment');
@@ -105,12 +105,3 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
 Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
 Route::post('/contact/download/csv', [ContactController::class, 'downloadSelectedContact'])->name('contact.download.csv');
-
-
-Route::get('/google-reviews', [GoogleReviewController::class, 'fetchReviews']);
-
-
-// Route::get('/google-reviews', [GoogleReviewController::class, 'fetchGoogleReviews'])->name('google.reviews');
-Route::get('/reviews', function () {
-    return view('reviews');
-});

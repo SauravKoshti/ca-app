@@ -14522,3 +14522,21 @@ Harberfurt, RI 89109, Bashirianshire, 165911, 0668-5161-1459, YHRIW2871T, Baumba
 #57 /var/www/html/ca-app/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #58 {main}
 "} 
+[2025-03-02 03:14:08] local.ERROR: Command "route:config" is not defined.
+
+Did you mean one of these?
+    route:cache
+    route:clear
+    route:list {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"route:config\" is not defined.
+
+Did you mean one of these?
+    route:cache
+    route:clear
+    route:list at /var/www/html/ca-app/vendor/symfony/console/Application.php:737)
+[stacktrace]
+#0 /var/www/html/ca-app/vendor/symfony/console/Application.php(266): Symfony\\Component\\Console\\Application->find()
+#1 /var/www/html/ca-app/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#2 /var/www/html/ca-app/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run()
+#3 /var/www/html/ca-app/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle()
+#4 {main}
+"} 

@@ -4,7 +4,7 @@
 <div class="main-panel">
     <div class="container contact-container">
         <div class="page-inner">
-            <h2 class="fw-bold text-center mb-4 text-dark">Get in Touch</h2>
+            <h2 class="fw-bold text-center contact-us-title">Get in Touch</h2>
             <div class="row">
                 <div class="col-md-6">
                     <div class="card contact-card">
@@ -114,7 +114,6 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <!-- <h3>Location:</h3> -->
                     <div class="map-container">
                         <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                             src="https://maps.google.com/maps?hl=en&amp;q=vishal%20b%20jagani&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">

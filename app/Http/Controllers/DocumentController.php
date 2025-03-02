@@ -190,4 +190,13 @@ class DocumentController extends Controller
 
         return response()->download($zipFileName)->deleteFileAfterSend(true);
     }
+
+    public function fetchImages(Request $request)
+    {
+        dd($request);
+        // Fetch images based on the selected year
+        $year = $request->input('year');
+        $images = Document::where('year', $year)->get();   
+        return response()->json($images);
+    }
 }

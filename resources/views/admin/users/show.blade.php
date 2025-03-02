@@ -49,6 +49,14 @@
                                     List</button>
                             </li>
                             <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="download-document-tab" data-bs-toggle="tab"
+                                    data-bs-target="#download-document" type="button" role="tab"
+                                    aria-controls="download-document" aria-selected="false">
+                                    Download Document
+                                </button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
                                     type="button" role="tab" aria-controls="payment" aria-selected="false">Payment
                                     List</button>
@@ -85,9 +93,9 @@
                                     </div>
 
                                     <div class="row">
+                                        <p>{{ $user->father_full_name ?? 'N/A' }}</p>
                                         <div class="col">
                                             <label class="form-label">Full Name</label>
-                                            <p>{{ $user->father_full_name ?? 'N/A' }}</p>
                                         </div>
                                         <div class="col">
                                             <label class="form-label">Address</label>
@@ -156,6 +164,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="user-profile-card">
                                 <div class="card-body">
@@ -194,8 +203,8 @@
                                                     સ્ટેટમેન્ટ /પાસબુક</option>
                                                 <option value="fd_statement">Fixed Deposit statment & Certicate / બાંધી
                                                     મુદતની થાપણ / પ્રમાણપત્ર</option>
-                                                <option value="loan_statement">Loan Statement & Loan Letter / લોન
-                                                    સ્ટેટમેન્ટ / લોન પત્ર</option>
+                                                <option value="loan_statement">Loan Statement & interest certificate /
+                                                    લોન સ્ટેટમેન્ટ / લોન પત્ર</option>
                                                 <option value="driving_license">Driving License / ડ્રાઈવિંગ લાયસન્સ
                                                 </option>
                                                 <option value="residential_proof">Residential Proof / રહેઠાણ પુરાવો
@@ -249,10 +258,100 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                             <div class="document-card">
                                 <div class="card-header d-flex justify-content-between">
+
                                     <div>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="downloadSelected('pdf')">Download
+                                            Pdf</button>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="downloadSelected('zip')">Download
+                                            Zip</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Select</th>
+                                                <th>Document Name</th>
+                                                <th>Document Type</th>
+                                                <th>Document Image</th>
+                                                <th>Uploaded By</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($documentDataArray->isEmpty())
+                                            <tr>
+                                                <td colspan="4" class="text-center">No documet records found.</td>
+                                            </tr>
+                                            @else
+                                            @foreach ($documentDataArray as $documentData)
+                                            <tr>
+                                                <!-- <td>{{ $documentData }}</td> -->
+                                                <td>
+                                                    <input type="checkbox" name="document_id"
+                                                        data-id="{{ $documentData->id }}">
+                                                </td>
+                                                <td>{{ $documentData->document_name }}</td>
+                                                <td>{{ $documentData->doc_type }}</td>
+                                                <td>
+                                                    <img src="{{ asset($documentData->document_image_path) }}"
+                                                        alt="Document Image" height="100" width="100">
+
+                                                </td>
+                                                <td>
+                                                    <p> {{ $documentData->uploaded_by }}</p>
+                                                    <p> {{ $user->id }}</p>
+                                                    <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ asset($documentData->document_image_path) }}" download
+                                                        class="btn btn-success">
+                                                        <i class="fas fa-download"></i>
+                                                    </a>
+
+                                                    <form action="{{ route('users.document.destroy') }}"
+                                                        id="documentUpload" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $documentData->id }}">
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ $documentData->user_id }}">
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="download-document" role="tabpanel"
+                            aria-labelledby="download-document-tab">
+                            <div class="download-document-card">
+                                <div class="card-header d-flex justify-content-between">
+
+                                    <div>
+                                        <label for="yearSelect">Select Year:</label>
+                                        <select id="downloadYearSelect" name="year">
+                                            <option value="">Select Year</option>
+                                            @php
+                                            $currentYear = date('Y');
+                                            for ($i = $currentYear; $i >= $currentYear - 10; $i--) {
+                                            echo "<option value='$i'>$i</option>";
+                                            }
+                                            @endphp
+                                        </select>
+
                                         <button class="btn btn-primary ms-auto"
                                             onclick="downloadSelected('pdf')">Download
                                             Pdf</button>
@@ -448,8 +547,45 @@
             }
         }
     });
+    $(document).ready(function() {
+        function loadImages() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: "/fetch-images",
+                type: "POST",
+                data: {
+                    someData: "value"
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+
+        }
+
+        // Load images on page load
+        loadImages();
+
+        // Reload images when year filter is changed
+        $('#year').on('change', loadImages);
+
+        // Select/Deselect all checkboxes
+        $('#select-all').on('change', function() {
+            $('.image-checkbox').prop('checked', $(this).prop('checked'));
+        });
+    });
 
     function downloadSelected(type) {
+        const year = $('#downloadYearSelect').val();
+        // console.log(year);
         let allIds = [];
         var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
         checkboxes.forEach(function(checkbox) {
