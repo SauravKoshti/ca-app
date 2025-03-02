@@ -14,9 +14,9 @@
         @include('admin.layout.sidebar')
         <div class="main-panel">
             @include('admin.layout.header')
-            <div class="container">
+            <!-- <div class="container"> -->
                 @yield('content')
-            </div>
+            <!-- </div> -->
             @include('admin.layout.footer')
         </div>
     </div>

@@ -49,7 +49,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         // Validate the request data
+         // Validate the request data\
+        //  dd($request->all());
          $validatedData = $request->validate([
             'user_type' => 'required|in:gst,personal,admin',
             'username' => 'required|string|max:255|unique:users,username',

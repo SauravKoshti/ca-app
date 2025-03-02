@@ -60,7 +60,7 @@
                                 <div class="card-body">
                                     <div class="row">
 
-                                        <form action="{{ route('register') }}" method="POST">
+                                        <form action="{{ route('users.store') }}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-6">

@@ -77,11 +77,9 @@
                                     <!-- </div> -->
                                     <button type="submit" class="btn btn-primary mt-3">Update Group</button>
                                 </div>
-                            </form>
-
+                            </form> 
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
