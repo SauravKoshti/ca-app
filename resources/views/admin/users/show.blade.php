@@ -285,22 +285,10 @@
 
                             <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                                 <div class="document-card">
-                                    <div class="card-header d-flex justify-content-between">
-
-                                        <div>
-                                            <button class="btn btn-primary ms-auto"
-                                                onclick="downloadSelected('pdf')">Download
-                                                Pdf</button>
-                                            <button class="btn btn-primary ms-auto"
-                                                onclick="downloadSelected('zip')">Download
-                                                Zip</button>
-                                        </div>
-                                    </div>
                                     <div class="card-body">
-                                        <table class="table table-bordered">
+                                        <table class="datatables table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Select</th>
                                                     <th>Document Name</th>
                                                     <th>Document Type</th>
                                                     <th>Upload Type</th>
@@ -317,11 +305,6 @@
                                                 @else
                                                     @foreach ($documentDataArray as $documentData)
                                                         <tr>
-                                                            <!-- <td>{{ $documentData }}</td> -->
-                                                            <td>
-                                                                <input type="checkbox" name="document_id"
-                                                                    data-id="{{ $documentData->id }}">
-                                                            </td>
                                                             <td>{{ $documentData->document_name }}</td>
                                                             <td>
                                                                 @if ($documentData->doc_type)
@@ -367,19 +350,15 @@
                                 aria-labelledby="download-document-tab">
                                 <div class="download-document-card">
                                     <div class="card-header d-flex justify-content-between">
-
                                         <div>
                                             <label for="yearSelect">Select Year:</label>
                                             <select id="downloadYearSelect" name="year">
                                                 <option value="">Select Year</option>
-                                                @php
-                                                    $currentYear = date('Y');
-                                                    for ($i = $currentYear; $i >= $currentYear - 10; $i--) {
-                                                        echo "<option value='$i'>$i</option>";
-                                                    }
-                                                @endphp
                                             </select>
 
+
+                                        </div>
+                                        <div>
                                             <button class="btn btn-primary ms-auto"
                                                 onclick="downloadSelected('pdf')">Download
                                                 Pdf</button>
@@ -389,68 +368,71 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Select</th>
-                                                    <th>Document Name</th>
-                                                    <th>Document Type</th>
-                                                    <th>Upload Type</th>
-                                                    <th>Uploaded By</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if ($documentDataArray->isEmpty())
+                                        <div class="table-responsive">
+                                            <table class="datatables display table table-striped table-hover">
+                                                <thead>
                                                     <tr>
-                                                        <td colspan="4" class="text-center">No documet records found.
-                                                        </td>
+                                                        <th>Select</th>
+                                                        <th>Document Name</th>
+                                                        <th>Document Type</th>
+                                                        <th>Upload Type</th>
+                                                        <th>Uploaded By</th>
+                                                        <th>Actions</th>
                                                     </tr>
-                                                @else
-                                                    @foreach ($documentDataArray as $documentData)
+                                                </thead>
+                                                <tbody>
+                                                    @if ($documentDataArray->isEmpty())
                                                         <tr>
-                                                            <!-- <td>{{ $documentData }}</td> -->
-                                                            <td>
-                                                                <input type="checkbox" name="document_id"
-                                                                    data-id="{{ $documentData->id }}">
-                                                            </td>
-                                                            <td>{{ $documentData->document_name }}</td>
-                                                            <td>
-                                                                @if ($documentData->doc_type)
-                                                                    @foreach (explode(',', $documentData->doc_type) as $doc_type)
-                                                                        <p class="mb-0">{{ $doc_type }}</p>
-                                                                    @endforeach
-                                                                @endif
-                                                            </td>
-                                                            <td>{{ $documentData->upload_type }} </td>
-                                                            <td>
-                                                                <p> {{ $documentData->uploader->user_full_name }}</p>
-                                                                <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <a href="{{ asset($documentData->document_image_path) }}"
-                                                                    download class="btn btn-success">
-                                                                    <i class="fas fa-download"></i>
-                                                                </a>
-
-                                                                <form action="{{ route('users.document.destroy') }}"
-                                                                    id="documentUpload" method="POST"
-                                                                    style="display:inline;">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id"
-                                                                        value="{{ $documentData->id }}">
-                                                                    <input type="hidden" name="user_id"
-                                                                        value="{{ $documentData->user_id }}">
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger btn-sm">Delete</button>
-                                                                </form>
+                                                            <td colspan="6" class="text-center">No documet records
+                                                                found.
                                                             </td>
                                                         </tr>
-                                                    @endforeach
-                                                @endif
-                                            </tbody>
-                                        </table>
+                                                    @else
+                                                        @foreach ($documentDataArray as $documentData)
+                                                            <tr>
+                                                                <!-- <td>{{ $documentData }}</td> -->
+                                                                <td>
+                                                                    <input type="checkbox" name="document_id"
+                                                                        data-id="{{ $documentData->id }}">
+                                                                </td>
+                                                                <td>{{ $documentData->document_name }}</td>
+                                                                <td>
+                                                                    @if ($documentData->doc_type)
+                                                                        @foreach (explode(',', $documentData->doc_type) as $doc_type)
+                                                                            <p class="mb-0">{{ $doc_type }}</p>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{ $documentData->upload_type }} </td>
+                                                                <td>
+                                                                    <p> {{ $documentData->uploader->user_full_name }}</p>
+                                                                    <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="{{ asset($documentData->document_image_path) }}"
+                                                                        download class="btn btn-success">
+                                                                        <i class="fas fa-download"></i>
+                                                                    </a>
+
+                                                                    <form action="{{ route('users.document.destroy') }}"
+                                                                        id="documentUpload" method="POST"
+                                                                        style="display:inline;">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id"
+                                                                            value="{{ $documentData->id }}">
+                                                                        <input type="hidden" name="user_id"
+                                                                            value="{{ $documentData->user_id }}">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -472,63 +454,54 @@
                                                 </div>
                                             @endif
                                             <div class="card-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Payment Discuss</th>
-                                                            <th>Paid Amount</th>
-                                                            <th>Payment Date</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @if ($payments->isEmpty())
+                                                <div class="table-responsive">
+                                                    <table class="datatables display table table-striped table-hover">
+                                                        <thead>
                                                             <tr>
-                                                                <td colspan="4" class="text-center">No payment records
-                                                                    found.</td>
+                                                                <th>Payment Discuss</th>
+                                                                <th>Paid Amount</th>
+                                                                <th>Payment Date</th>
+                                                                <th>Actions</th>
                                                             </tr>
-                                                        @else
-                                                            @foreach ($payments as $payment)
+                                                        </thead>
+                                                        <tbody>
+                                                            @if ($payments->isEmpty())
                                                                 <tr>
-                                                                    <td>{{ $payment->discuss_fees }}</td>
-                                                                    <td>{{ $payment->paid_fees }}</td>
-                                                                    <td>{{ $payment->payment_date }}</td>
-                                                                    @if (auth()->user()->user_type == 'admin')
-                                                                        <td>
-                                                                            <a href="{{ route('users.payment.edit', $payment->id) }}"
-                                                                                class="btn btn-link btn-primary btn-lg"
-                                                                                data-bs-toggle="tooltip"
-                                                                                title="Edit Task">
-                                                                                <i class="fa fa-edit"></i>
-                                                                            </a>
-                                                                            <form
-                                                                                action="{{ route('users.payment.destroy') }}"
-                                                                                method="POST" style="display:inline;">
-                                                                                @csrf
+                                                                    <td colspan="4" class="text-center">No payment
+                                                                        records
+                                                                        found.</td>
+                                                                </tr>
+                                                            @else
+                                                                @foreach ($payments as $payment)
+                                                                    <tr>
+                                                                        <td>{{ $payment->discuss_fees }}</td>
+                                                                        <td>{{ $payment->paid_fees }}</td>
+                                                                        <td>{{ $payment->payment_date }}</td>
+                                                                        @if (auth()->user()->user_type == 'admin')
+                                                                            <td>
+                                                                                <a href="{{ route('users.payment.edit', $payment->id) }}"
+                                                                                    class="btn btn-link btn-primary btn-lg"
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    title="Edit Task">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                </a>
 
                                                                                 <button type="button"
-                                                                                    onClick="removeData({{ $user->id }}, 'user')"
+                                                                                    onClick="removeData({{ $payment->id }}, 'payment')"
                                                                                     class="btn btn-link btn-danger remove_data"
                                                                                     data-bs-toggle="tooltip"
                                                                                     title="Remove">
                                                                                     <i class="fa fa-times"></i>
                                                                                 </button>
-                                                                                <input type="hidden" name="id"
-                                                                                    value="{{ $payment->id }}">
-                                                                                <input type="hidden" name="user_id"
-                                                                                    value="{{ $payment->user_id }}">
-                                                                                <button type="submit"
-                                                                                    onClick="removeData
-                                                                                                    class="
-                                                                                    btn btn-danger btn-sm">Delete</button>
-                                                                            </form>
-                                                                        </td>
-                                                                    @endif
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    </tbody>
-                                                </table>
+                                                                                </form>
+                                                                            </td>
+                                                                        @endif
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -539,27 +512,30 @@
                                     <div class="card-body">
                                         <div class="Refer-card">
                                             <div class="card-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>User Name</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @if ($referData->isEmpty())
+                                                <div class="table-responsive">
+                                                    <table class="datatables display table table-striped table-hover">
+                                                        <thead>
                                                             <tr>
-                                                                <td colspan="4" class="text-center">No payment records
-                                                                    found.</td>
+                                                                <th>User Name</th>
                                                             </tr>
-                                                        @else
-                                                            @foreach ($referData as $refer)
+                                                        </thead>
+                                                        <tbody>
+                                                            @if ($referData->isEmpty())
                                                                 <tr>
-                                                                    <td>{{ $refer->username }}</td>
+                                                                    <td colspan="4" class="text-center">No payment
+                                                                        records
+                                                                        found.</td>
                                                                 </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    </tbody>
-                                                </table>
+                                                            @else
+                                                                @foreach ($referData as $refer)
+                                                                    <tr>
+                                                                        <td>{{ $refer->username }}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -674,7 +650,7 @@
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
                 overflow: hidden;
                 /* padding: 20px;
-                                margin: 50px auto; */
+                                            margin: 50px auto; */
                 display: flex;
                 align-items: center;
             }
