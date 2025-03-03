@@ -8,7 +8,7 @@
                 <div class="page-inner">
                     <h2>Accou <span> nting</span></h2>
                     <div class="row">
-                        <div class="col-md-6">
+                        {{--<div class="col-md-6">
                             <div class="service-box p-4 shadow-lg rounded">
                                 <h3 class="fw-bold text-primary"><i class="fa fa-money-bill-wave"></i> GST</h3>
                                 <p class="text-muted">
@@ -17,7 +17,7 @@
                                     consultants...
                                 </p>
                             </div>
-                        </div>
+                        </div>--}}
 
                         <div class="col-md-6">
                             <div class="service-box p-4 shadow-lg rounded">

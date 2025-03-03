@@ -17,15 +17,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="service-box p-4 shadow-lg rounded">
-                                    <h3 class="fw-bold text-primary"><i class="fa fa-bullseye"></i> Our Mission</h3>
-                                    <p class="text-muted">
-                                        We began with the vocation of making it easier for our customers to start their
-                                        businesses...
-                                    </p>
-                                </div>
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <div class="service-box p-4 shadow-lg rounded">--}}
+{{--                                    <h3 class="fw-bold text-primary"><i class="fa fa-bullseye"></i> Our Mission</h3>--}}
+{{--                                    <p class="text-muted">--}}
+{{--                                        We began with the vocation of making it easier for our customers to start their--}}
+{{--                                        businesses...--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
 
                         <hr>

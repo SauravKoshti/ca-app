@@ -39,18 +39,40 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="business_name">Business Name</label>
+                                    <input type="text" id="business_name" name="business_name" class="form-control"
+                                           value="{{ old('business_name') }}">
+                                    @error('business_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="username">Username<span
-                                            class="text-danger registration-mark">*</span></label>
+                                                class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="username" name="username" class="form-control"
-                                        value="{{ old('username') }}" required>
+                                           value="{{ old('username') }}" required>
                                     @error('username')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">Password<span
+                                                class="text-danger registration-mark">*</span></label>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                           autocomplete="new-password" required>
+                                    @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="first_name">First Name (Applicant Name)<span
@@ -58,6 +80,17 @@
                                     <input type="text" id="firstName" name="first_name" class="form-control"
                                         value="{{ old('first_name') }}" required>
                                     @error('first_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address">Address<span
+                                                class="text-danger registration-mark">*</span></label>
+                                    <input type="text" id="address" name="address" class="form-control"
+                                           value="{{ old('address') }}" required>
+                                    @error('address')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -73,6 +106,18 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="city">City<span class="text-danger registration-mark">*</span></label>
+                                    <input type="text" id="city" name="city" class="form-control"
+                                           value="{{ old('city') }}" required>
+                                    @error('city')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="last_name">Last Name (Surname)<span
@@ -85,6 +130,16 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="state">State<span class="text-danger registration-mark">*</span></label>
+                                    <input type="text" id="state" name="state" class="form-control"
+                                           value="{{ old('state') }}" required>
+                                    @error('state')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="col">
                                     <label>Same as above</label>
@@ -102,6 +157,18 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="mobile">Mobile <small>(linked with aadhar)</small><span
+                                                class="text-danger registration-mark">*</span></label>
+                                    <input type="text" id="mobile" name="mobile" class="form-control"
+                                           value="{{ old('mobile') }}" required>
+                                    @error('mobile')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="father_full_name">Father Full Name<span
                                             class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="father_full_name" name="father_full_name"
@@ -111,7 +178,16 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email<span class="text-danger registration-mark">*</span></label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                           value="{{ old('email') }}" required>
+                                    @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="aadharCard">Aadhar Card<span
@@ -120,6 +196,21 @@
                                         value="{{ old('aadhar_card') }}" placeholder="XXXX XXXX XXXX" maxlength="14"
                                         required>
                                     @error('aadhar_card')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="gender">Gender<span
+                                                class="text-danger registration-mark">*</span></label>
+                                    <select id="gender" name="gender" class="form-control">
+                                        <option value="1" {{ old('gender') == '1' ? 'selected' : '' }}>Male
+                                        </option>
+                                        <option value="0" {{ old('gender') == '0' ? 'selected' : '' }}>Female
+                                        </option>
+                                    </select>
+                                    @error('gender')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -138,7 +229,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="dob">Date of Birth<span
+                                    <label for="dob">Date of Birth <span
                                             class="text-danger registration-mark">*</span></label>
                                     <input id="dob" name="dob" class="form-control datepicker" value="{{ old('dob') }}"
                                         required>
@@ -158,61 +249,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="business_name">Business Name</label>
-                                    <input type="text" id="business_name" name="business_name" class="form-control"
-                                        value="{{ old('business_name') }}">
-                                    @error('business_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="password">Password<span
-                                            class="text-danger registration-mark">*</span></label>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        autocomplete="new-password" required>
-                                    @error('password')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="address">Address<span
-                                            class="text-danger registration-mark">*</span></label>
-                                    <input type="text" id="address" name="address" class="form-control"
-                                        value="{{ old('address') }}" required>
-                                    @error('address')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="city">City<span class="text-danger registration-mark">*</span></label>
-                                    <input type="text" id="city" name="city" class="form-control"
-                                        value="{{ old('city') }}" required>
-                                    @error('city')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="state">State<span class="text-danger registration-mark">*</span></label>
-                                    <input type="text" id="state" name="state" class="form-control"
-                                        value="{{ old('state') }}" required>
-                                    @error('state')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="pincode">Pincode<span
@@ -225,42 +262,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="mobile">Mobile <small>(linked with aadhar)</small><span
-                                            class="text-danger registration-mark">*</span></label>
-                                    <input type="text" id="mobile" name="mobile" class="form-control"
-                                        value="{{ old('mobile') }}" required>
-                                    @error('mobile')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email">Email<span class="text-danger registration-mark">*</span></label>
-                                    <input type="email" id="email" name="email" class="form-control"
-                                        value="{{ old('email') }}" required>
-                                    @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="gender">Gender<span
-                                            class="text-danger registration-mark">*</span></label>
-                                    <select id="gender" name="gender" class="form-control">
-                                        <option value="1" {{ old('gender') == '1' ? 'selected' : '' }}>Male
-                                        </option>
-                                        <option value="0" {{ old('gender') == '0' ? 'selected' : '' }}>Female
-                                        </option>
-                                    </select>
-                                    @error('gender')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="profile-image">Profile Image</label>
@@ -273,7 +275,8 @@
                             </div>
                             <div class="col-md-6 gstNumberField">
                                 <div class="form-group">
-                                    <label for="gstNumber">GST Number</label>
+                                    <label for="gstNumber">GST Number<span
+                                                class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="gstNumber" name="gst_number" class="form-control"
                                         value="{{ old('gst_number') }}">
                                     @error('gst_number')
@@ -284,7 +287,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="refer">Refer User Name</label>
+                                    <label for="refer">Reference By</label>
                                     <input type="text" id="refer" name="refer" class="form-control"
                                         value="{{ old('refer') }}">
                                     @error('refer')

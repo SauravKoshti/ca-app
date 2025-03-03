@@ -8,25 +8,25 @@
                     <div class="page-inner">
                         <h2>Taxa<span> tion</span></h2>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="service-box p-4 shadow-lg rounded">
-                                    <h3 class="fw-bold text-primary"><i class="fa fa-line-chart"></i> Mutual Fund</h3>
-                                    <p class="text-muted">
-                                        We perform for Indian sponsors in setting up private equity funds, venture capital
-                                        funds,
-                                        and mutual funds...
-                                    </p>
-                                    <ul class="service-list">
-                                        <li><i class="fa fa-check-circle text-success"></i> Small Cap Fund</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Mid Cap Fund</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Large Cap Fund</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Multi-Cap Fund</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Flexi Cap Fund</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Hybrid Fund</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Balance Advantage Fund</li>
-                                    </ul>
-                                </div>
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <div class="service-box p-4 shadow-lg rounded">--}}
+{{--                                    <h3 class="fw-bold text-primary"><i class="fa fa-line-chart"></i> Mutual Fund</h3>--}}
+{{--                                    <p class="text-muted">--}}
+{{--                                        We perform for Indian sponsors in setting up private equity funds, venture capital--}}
+{{--                                        funds,--}}
+{{--                                        and mutual funds...--}}
+{{--                                    </p>--}}
+{{--                                    <ul class="service-list">--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Small Cap Fund</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Mid Cap Fund</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Large Cap Fund</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Multi-Cap Fund</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Flexi Cap Fund</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Hybrid Fund</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Balance Advantage Fund</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
                             <div class="col-md-6">
                                 <div class="service-box p-4 shadow-lg rounded">

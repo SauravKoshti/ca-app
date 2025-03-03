@@ -25,7 +25,7 @@ class ContactController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            // 'mobile' => 'required|email|max:255',
+             'mobile' => 'required|email|max:255',
             'message' => 'required|string',
         ]);        
         Contact::create($request->all());

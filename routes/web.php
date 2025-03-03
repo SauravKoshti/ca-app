@@ -100,6 +100,7 @@ Route::get('/services/taxation', [HomeController::class, 'taxation'])->name('ser
 Route::get('/services/gst', [HomeController::class, 'gst'])->name('services.gst');
 Route::get('/services/accounting', [HomeController::class, 'accounting'])->name('services.accounting');
 Route::get('/services/pancard', [HomeController::class, 'pancard'])->name('services.pancard');
+//Route::get('/our-mission', [HomeController::class, 'ourMission'])->name('our-mission');
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');

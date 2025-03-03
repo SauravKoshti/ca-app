@@ -29,7 +29,8 @@
                             <form action="{{ route('contacts.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name"><i class="fa fa-user text-primary"></i> Name</label>
+                                    <label for="name"><i class="fa fa-user text-primary"></i> User Name<span
+                                                class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="name" name="name" class="form-control"
                                         placeholder="Your Name">
                                     @if ($errors->has('name'))
@@ -37,7 +38,8 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="email"><i class="fa fa-envelope text-primary"></i> Email</label>
+                                    <label for="email"><i class="fa fa-envelope text-primary"></i> Email<span
+                                                class="text-danger registration-mark">*</span></label>
                                     <input type="email" id="email" name="email" class="form-control"
                                         placeholder="Your Email">
                                     @if ($errors->has('email'))
@@ -45,12 +47,17 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="mobile"><i class="fa fa-user text-primary"></i> Phone Number</label>
+                                    <label for="mobile"><i class="fa fa-user text-primary"></i> Phone Number<span
+                                                class="text-danger registration-mark">*</span></label>
                                     <input type="text" id="mobile" name="mobile" class="form-control"
                                         placeholder="Your number">
+                                    @if ($errors->has('mobile'))
+                                        <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="message"><i class="fa fa-comment text-primary"></i> Message</label>
+                                    <label for="message"><i class="fa fa-comment text-primary"></i> Message<span
+                                                class="text-danger registration-mark">*</span></label>
                                     <textarea id="message" name="message" class="form-control" rows="4"
                                         placeholder="Your Message"></textarea>
                                     @if ($errors->has('message'))

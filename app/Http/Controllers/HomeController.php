@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //
-
     public function aboutUs()
     {
         return view('users.about-us');
@@ -45,5 +43,10 @@ class HomeController extends Controller
     public function services()
     {
         return view('users.services');
-    }    
+    }
+
+    public function ourMission()
+    {
+        return view('our-mission');
+    }
 }

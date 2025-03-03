@@ -8,8 +8,8 @@
             <li data-target="#myCarousel" data-slide-to="4"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="item active"> <img src="images/banner1.jpg" alt="banner1"> </div>
-            <div class="item"> <img src="images/banner2.jpg"  alt="banner2"> </div>
+{{--            <div class="item active"> <img src="images/banner1.jpg" alt="banner1"> </div>--}}
+            <div class="item active"> <img src="images/banner2.jpg"  alt="banner2"> </div>
             <div class="item"> <img src="images/banner3.jpg" alt="banner3"> </div>
             <div class="item"> <img src="images/banner4.jpg" alt="banner4"> </div>
             <div class="item"> <img src="images/banner5.jpg" alt="banner5"> </div>

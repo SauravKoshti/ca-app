@@ -26,23 +26,23 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="service-box p-4 shadow-lg rounded">
-                                    <h3 class="fw-bold text-primary"><i class="fa fa-file-invoice-dollar"></i> Taxation</h3>
-                                    <p class="text-muted">
-                                        We furnish quality income tax counseling and compliance with effective tax
-                                        strategies...
-                                    </p>
-                                    <ul class="service-list">
-                                        <li><i class="fa fa-check-circle text-success"></i> Income tax filing</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> TDS returns</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Consultancy of income tax
-                                            matters</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Tax refunds</li>
-                                        <li><i class="fa fa-check-circle text-success"></i> Tax planning & saving</li>
-                                    </ul>
-                                </div>
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <div class="service-box p-4 shadow-lg rounded">--}}
+{{--                                    <h3 class="fw-bold text-primary"><i class="fa fa-file-invoice-dollar"></i> Taxation</h3>--}}
+{{--                                    <p class="text-muted">--}}
+{{--                                        We furnish quality income tax counseling and compliance with effective tax--}}
+{{--                                        strategies...--}}
+{{--                                    </p>--}}
+{{--                                    <ul class="service-list">--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Income tax filing</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> TDS returns</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Consultancy of income tax--}}
+{{--                                            matters</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Tax refunds</li>--}}
+{{--                                        <li><i class="fa fa-check-circle text-success"></i> Tax planning & saving</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                         <hr>
                     </div>
