@@ -47,6 +47,6 @@ class HomeController extends Controller
 
     public function ourMission()
     {
-        return view('our-mission');
+        return view('users.our-mission');
     }
 }

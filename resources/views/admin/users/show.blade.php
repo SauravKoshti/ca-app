@@ -171,8 +171,7 @@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="user-profile-card">
                                     <div class="card-body">
-                                        <form action="{{ route('users.upload.document', $user->id) }}" method="POST"
-                                            id="fileUploadForm" enctype="multipart/form-data">
+                                        <form id="fileUploadForm" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="user_id" value="{{ $user->id }}">
                                             <input type="hidden" name="created_by" value="{{ $loggedInUserId }}">
@@ -271,14 +270,22 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label>Upload File:</label>
-                                                <input type="file" if name="document_image_path" class="form-control"
-                                                    accept="image/*,.pdf">
+                                                <input type="file" if name="document_image_path" id="fileInput"
+                                                    class="form-control" accept="image/*,.pdf">
                                                 @error('document_image_path')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
                                             <button type="submit" class="btn btn-success">Upload</button>
                                         </form>
+                                        <div class="progress mt-3" style="display: none;">
+                                            <div id="progressBar" class="progress-bar" role="progressbar"
+                                                style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100">0%</div>
+                                        </div>
+
+                                        <div id="message" class="mt-3"></div>
                                     </div>
                                 </div>
                             </div>
@@ -355,8 +362,8 @@
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="d-flex align-items-center" style="width: 220px;">
                                             <label for="yearSelect" class="w-100">Select Year:</label>
-                                            <select id="downloadYearSelect" class="form-control" onchange="handleYearChange(this.value)"
-                                                name="year">
+                                            <select id="downloadYearSelect" class="form-control"
+                                                onchange="handleYearChange(this.value)" name="year">
                                                 <option value="">Select Year</option>
                                             </select>
                                         </div>
@@ -591,6 +598,58 @@
                 // Load images on page load
                 handleYearChange();
                 // Select/Deselect all checkboxes
+                $('#fileUploadForm').on('submit', function(event) {
+                    event.preventDefault();
+
+                    let formData = new FormData(this);
+                    let file = $('#fileInput')[0].files[0];
+
+                    if (!file) {
+                        alert("Please select a file to upload.");
+                        return;
+                    }
+
+                    $('.progress').show();
+                    $('#progressBar').css('width', '0%').text('0%');
+                    // Disable form fields and button
+                    $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop('disabled', true);
+                    $.ajax({
+                        url: "{{ route('users.upload.document', $user->id) }}",
+                        type: "POST",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                        },
+                        xhr: function() {
+                            let xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function(evt) {
+                                if (evt.lengthComputable) {
+                                    let percentComplete = Math.round((evt.loaded / evt
+                                        .total) * 100);
+                                    $('#progressBar').css('width', percentComplete + '%')
+                                        .text(percentComplete + '%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                        success: function(response) {
+                            successMessage('Document created successfully.')
+                            $('#progressBar').css('width', '100%').text('Upload Complete');
+                        },
+                        error: function(xhr) {
+                            $('#message').html(
+                                '<div class="alert alert-danger">Error uploading file.</div>');
+                            $('#progressBar').css('width', '0%').text('0%');
+                        },
+                        complete: function() {
+                            // Enable form fields and button after upload completes
+                            $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop(
+                                'disabled', false);
+                        }
+                    });
+                });
 
             });
 
@@ -655,7 +714,7 @@
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
                 overflow: hidden;
                 /* padding: 20px;
-                                                        margin: 50px auto; */
+                                                                        margin: 50px auto; */
                 display: flex;
                 align-items: center;
             }

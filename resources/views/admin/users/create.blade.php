@@ -163,19 +163,19 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+                                                    
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="state">State</label>
+                                                            <label for="pincode">Pincode</label>
                                                             <span class="text-danger ms-1">*</span>
-                                                            <input type="text" id="state" name="state"
-                                                                   class="form-control" value="{{ old('state') }}"
-                                                                   required>
-                                                            @error('state')
-                                                            <span class="text-danger">{{ $message }}</span>
+                                                            <input type="text" id="pincode" name="pincode"
+                                                                class="form-control" value="{{ old('pincode') }}"
+                                                                required>
+                                                            @error('pincode')
+                                                                <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="user_full_name"
@@ -195,6 +195,20 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="state">State</label>
+                                                            <span class="text-danger ms-1">*</span>
+                                                            <input type="text" id="state" name="state"
+                                                                   class="form-control" value="{{ old('state') }}"
+                                                                   required>
+                                                            @error('state')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -300,20 +314,6 @@
                                                                 class="form-control datepicker"
                                                                 value="{{ old('anniversary_date') }}">
                                                             @error('anniversary_date')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="pincode">Pincode</label>
-                                                            <span class="text-danger ms-1">*</span>
-                                                            <input type="text" id="pincode" name="pincode"
-                                                                class="form-control" value="{{ old('pincode') }}"
-                                                                required>
-                                                            @error('pincode')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>

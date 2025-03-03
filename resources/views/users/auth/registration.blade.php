@@ -130,16 +130,19 @@
                                 </div>
                             </div>
 
+                            
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="state">State<span class="text-danger registration-mark">*</span></label>
-                                    <input type="text" id="state" name="state" class="form-control"
-                                           value="{{ old('state') }}" required>
-                                    @error('state')
+                                    <label for="pincode">Pincode<span
+                                            class="text-danger registration-mark">*</span></label>
+                                    <input type="text" id="pincode" name="pincode" class="form-control"
+                                        value="{{ old('pincode') }}" required>
+                                    @error('pincode')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+                            
                             <div class="col-md-6">
                                 <div class="col">
                                     <label>Same as above</label>
@@ -151,6 +154,17 @@
                                     <input type="text" id="user_full_name" name="user_full_name" class="form-control"
                                         value="{{ old('user_full_name') }}" required>
                                     @error('user_full_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="state">State<span class="text-danger registration-mark">*</span></label>
+                                    <input type="text" id="state" name="state" class="form-control"
+                                           value="{{ old('state') }}" required>
+                                    @error('state')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -249,19 +263,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="pincode">Pincode<span
-                                            class="text-danger registration-mark">*</span></label>
-                                    <input type="text" id="pincode" name="pincode" class="form-control"
-                                        value="{{ old('pincode') }}" required>
-                                    @error('pincode')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
 
                             <div class="col-md-6">
                                 <div class="form-group">
