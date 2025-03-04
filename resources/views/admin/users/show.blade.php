@@ -493,12 +493,18 @@
                                                                         <td>{{ $payment->payment_date }}</td>
                                                                         @if (auth()->user()->user_type == 'admin')
                                                                             <td>
-                                                                                <a href="{{ route('users.payment.edit', $payment->id) }}" onClick="editData({{ $payment->id }}, 'payment')"
+                                                                            <button type="button"
+                                                    onClick="editData('{{ route('users.payment.edit', $payment->id) }}')"
+                                                    class="btn btn-link btn-primary btn-lg edit_data"
+                                                    data-bs-toggle="tooltip" title="edit">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                                                <!-- <a href="{{ route('users.payment.edit', $payment->id) }}" onClick="editData({{ $payment->id }}, 'payment')"
                                                                                     class="btn btn-link btn-primary btn-lg"
                                                                                     data-bs-toggle="tooltip"
                                                                                     title="Edit Task">
                                                                                     <i class="fa fa-edit"></i>
-                                                                                </a>
+                                                                                </a> -->
 
                                                                                 <button type="button"
                                                                                     onClick="removeData({{ $payment->id }}, 'payment')"

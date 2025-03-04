@@ -69,9 +69,15 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <div class="form-button-action">
-                                                <a href="{{ route('groups.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Group">
+                                                <!-- <a href="{{ route('groups.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Group">
                                                     <i class="fa fa-edit"></i>
-                                                </a>
+                                                </a> -->
+                                                <button type="button"
+                                                    onClick="editData('{{ route('groups.edit', $user->id) }}')"
+                                                    class="btn btn-link btn-primary btn-lg edit_data"
+                                                    data-bs-toggle="tooltip" title="edit">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
                                                 @if(auth()->user()->user_type == 'admin')
                                                     <button onClick="removeData({{ $user->id }}, 'group')" class="btn btn-link btn-danger remove_data" data-bs-toggle="tooltip" title="Remove">
                                                         <i class="fa fa-times"></i>
