@@ -1,16 +1,16 @@
 <!-- Core JS Files -->
-<script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/js/core/jquery-3.7.1.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/core/popper.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/core/bootstrap.min.js')); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.full.min.js"></script>
 <!-- Additional Plugins -->
-<script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/plugin/chart.js/chart.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/plugin/datatables/datatables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/kaiadmin.min.js')); ?>"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Bootstrap Notify -->
-<script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')); ?>"></script>
 <!-- Sweet Alert -->
 <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
@@ -22,6 +22,8 @@ $(document).ready(function() {
     $(".datepicker").datepicker({
         dateFormat: "dd-mm-yy"
     }).attr("placeholder", "DD-MM-YY");
+
+
 });
 
 function removeData(id, type) {
@@ -78,60 +80,6 @@ function removeData(id, type) {
         }
     });
 }
-
-function editData(url) {
-    swal({
-        title: "Enter Your Password",
-        content: {
-            element: "input",
-            attributes: {
-                type: "password",
-                placeholder: "Enter Password",
-                id: "password-field",
-                className: "form-control",
-                autocomplete: "new-password",
-            },
-        },
-        buttons: {
-            cancel: {
-                visible: true,
-                className: "btn btn-danger",
-            },
-            confirm: {
-                className: "btn btn-success",
-            },
-        },
-    }).then((value) => {
-        if (value) {
-            let password = document.getElementById("password-field").value;
-
-            fetch('/confirm-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector(
-                                'meta[name="csrf-token"]')
-                            .getAttribute('content'),
-                    },
-                    body: JSON.stringify({
-                        password: password,
-                        action:'edit'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        swal("Success", data.message, "success");
-                        setTimeout(() => {
-                            window.location.href = url;
-                        }, 1000); 
-                    } else {
-                        swal("Error", data.message, "error");
-                    }
-                });
-        }
-    });
-}
 layout: {
     topStart: {
         buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
@@ -162,9 +110,9 @@ function successMessage(message) {
         }
     });
 }
-@if(session('success'))
-successMessage("{{ session('success') }}");
-@endif
+<?php if(session('success')): ?>
+successMessage("<?php echo e(session('success')); ?>");
+<?php endif; ?>
 
 function uploadFile() {
     let progressBar = document.getElementById('progressBar');
@@ -190,7 +138,6 @@ function uploadFile() {
 <script>
 let currentYear = new Date().getFullYear();
 let selectBox = document.getElementById("financial_year");
-let filterBox = document.getElementById("downloadYearSelect");
 
 // Generate financial years (Example: 2022-2023, 2023-2024)
 for (let year = currentYear; year >= 2000; year--) {
@@ -198,10 +145,5 @@ for (let year = currentYear; year >= 2000; year--) {
     let option = new Option(financialYear, financialYear);
     selectBox.add(option);
 }
-for (let year = currentYear; year >= 2000; year--) {
-    let financialYear = `${year - 1}-${year}`;
-    let option = new Option(financialYear, financialYear);
-    filterBox.add(option);
-}
 
-</script>
+</script><?php /**PATH /var/www/html/ca-app/resources/views/admin/layout/script.blade.php ENDPATH**/ ?>

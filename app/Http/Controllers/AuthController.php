@@ -65,7 +65,8 @@ class AuthController extends Controller
         ]);
         if ($request['user_type'] === 'gst') {
             $request->validate([
-                'gst_number' => ['required', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+                // 'gst_number' => ['required', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+                'gst_number' => ['required', 'unique:users,gst_number'],
                 // 'business_name' => 'required|string|max:255',
             ]);
         }

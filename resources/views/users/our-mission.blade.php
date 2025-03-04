@@ -6,9 +6,9 @@
             <section class="hm-services-sec">
                 <div class="container">
                     <div class="page-inner">
-                        <h2>Pan <span> card</span></h2>
+                        <h2>Our <span> mission</span></h2>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="service-box p-4 shadow-lg rounded">
                                     <h3 class="fw-bold text-primary"><i class="fa fa-bullseye"></i> Our Mission</h3>
                                     <p class="text-muted">
@@ -22,8 +22,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <hr>
                     </div>
                 </div>
             </section>

@@ -171,6 +171,12 @@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="user-profile-card">
                                     <div class="card-body">
+
+                                    <div class="progress mt-3" style="display: none;">
+                                            <div id="progressBar" class="progress-bar" role="progressbar"
+                                                style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100">0%</div>
+                                        </div>
                                         <form id="fileUploadForm" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -216,7 +222,6 @@
                                                     <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
                                                     <option value="pan_card">PAN Card / પાન કાર્ડ</option>
                                                     <option value="form_16">Form 16 / ફોર્મ 16</option>
-                                                    <!-- <option value="election_card">Election Card / ચૂંટણી કાર્ડ </option> -->
                                                     <option value="rc_book">RC Book / આરસી બુક</option>
                                                     <option value="bank_statement">Bank Statement / Passbook / બેંક
                                                         સ્ટેટમેન્ટ /પાસબુક</option>
@@ -279,12 +284,6 @@
 
                                             <button type="submit" class="btn btn-success">Upload</button>
                                         </form>
-                                        <div class="progress mt-3" style="display: none;">
-                                            <div id="progressBar" class="progress-bar" role="progressbar"
-                                                style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-                                                aria-valuemax="100">0%</div>
-                                        </div>
-
                                         <div id="message" class="mt-3"></div>
                                     </div>
                                 </div>
@@ -301,6 +300,7 @@
                                                     <th>Document Type</th>
                                                     <th>Upload Type</th>
                                                     <th>Uploaded By</th>
+                                                    <th>Uploaded Date</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -326,8 +326,10 @@
                                                             <td>{{ $documentData->upload_type }} </td>
                                                             <td>
                                                                 <p> {{ $documentData->uploader->user_full_name }}</p>
-                                                                <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                            <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
+                                                            </p>
                                                             </td>
                                                             <td>
                                                                 <a href="{{ asset($documentData->document_image_path) }}"
@@ -491,7 +493,7 @@
                                                                         <td>{{ $payment->payment_date }}</td>
                                                                         @if (auth()->user()->user_type == 'admin')
                                                                             <td>
-                                                                                <a href="{{ route('users.payment.edit', $payment->id) }}"
+                                                                                <a href="{{ route('users.payment.edit', $payment->id) }}" onClick="editData({{ $payment->id }}, 'payment')"
                                                                                     class="btn btn-link btn-primary btn-lg"
                                                                                     data-bs-toggle="tooltip"
                                                                                     title="Edit Task">

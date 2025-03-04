@@ -62,8 +62,8 @@
                   <li><a href="{{ route('login') }}">Login</a></li>
                 </ul>
               </li>
-              <li><a href="{{ route('login') }}">Login</a></li>
-              <li><a href="{{ route('register') }}">Registration</a></li>
+              <!-- <li><a href="{{ route('login') }}">Login</a></li>
+              <li><a href="{{ route('register') }}">Registration</a></li> -->
             @endif
 {{--            <li><a href="{{ route('our-mission') }}">Our Mission</a></li>--}}
           </ul>
