@@ -493,7 +493,7 @@
                                                                         <td>{{ $payment->payment_date }}</td>
                                                                         @if (auth()->user()->user_type == 'admin')
                                                                             <td>
-                                                                                <a href="{{ route('users.payment.edit', $payment->id) }}"
+                                                                                <a href="{{ route('users.payment.edit', $payment->id) }}" onClick="editData({{ $payment->id }}, 'payment')"
                                                                                     class="btn btn-link btn-primary btn-lg"
                                                                                     data-bs-toggle="tooltip"
                                                                                     title="Edit Task">
