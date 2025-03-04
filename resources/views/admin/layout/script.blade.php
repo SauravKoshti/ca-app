@@ -18,12 +18,10 @@
 
 <script>
 $(document).ready(function() {
-    $("#basic-datatables, .datatables").DataTable({});
+    $("#basic-datatables").DataTable({});
     $(".datepicker").datepicker({
         dateFormat: "dd-mm-yy"
     }).attr("placeholder", "DD-MM-YY");
-
-
 });
 
 function removeData(id, type) {

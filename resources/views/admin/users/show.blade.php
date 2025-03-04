@@ -194,11 +194,11 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label>Date From</label>
-                                                    <input name="date_from" class="form-control datepicker">
+                                                    <input name="date_from" id="date_from" class="form-control datepicker">
                                                 </div>
                                                 <div class="col-6">
                                                     <label>Date To</label>
-                                                    <input name="date_to" class="form-control datepicker">
+                                                    <input name="date_to" id="date_to" class="form-control datepicker">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -705,6 +705,35 @@
                     }
                 });
             }
+
+            $(document).ready(function() {
+                $(".datepicker").prop("disabled", true);
+
+                // Function to set date range based on selected financial year
+                $("#financial_year").change(function() {
+                    var financialYear = $(this).val();
+                    var years = financialYear.split("-"); // Split into [startYear, endYear]
+                    var startDate = `04/01/${years[0]}`; // April 1st of start year
+                    var endDate = `03/31/${years[1]}`;   // March 31st of end year
+
+                    if (startDate && endDate) {
+                        $("#date_from").datepicker("destroy").datepicker({
+                            dateFormat: "mm/dd/yy",
+                            minDate: new Date(startDate),
+                            maxDate: new Date(endDate)
+                        }).val(startDate);
+
+                        $("#date_to").datepicker("destroy").datepicker({
+                            dateFormat: "mm/dd/yy",
+                            minDate: new Date(startDate),
+                            maxDate: new Date(endDate)
+                        }).val(endDate);
+
+                        $(".datepicker").prop("disabled", false); // Enable date pickers
+                    }
+                });
+                $(".datatables").DataTable({});
+            });
         </script>
         <style>
             .profile-card {
@@ -714,7 +743,7 @@
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
                 overflow: hidden;
                 /* padding: 20px;
-                                                                        margin: 50px auto; */
+                                                                                margin: 50px auto; */
                 display: flex;
                 align-items: center;
             }
