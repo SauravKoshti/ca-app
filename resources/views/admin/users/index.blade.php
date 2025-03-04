@@ -26,16 +26,17 @@
                         <div class="me-auto p-2 bd-highlight">
                             <h4 class="card-title">Users</h4>
                         </div>
-                        <div class="d-grid d-md-flex justify-content-md-end">
+                        <div class="d-flex justify-content-end align-items-center gap-2">
                             @if (!$users->isEmpty() || auth()->user()->user_type == 'admin')
                             @if (!$users->isEmpty() && auth()->user()->user_type == 'admin')
-                            <button class="btn btn-primary me-md-2" type="button" onclick="downloadSelectedUserData()">
-                                Download User Data
+                            <button class="btn btn-primary d-flex align-items-center" type="button"
+                                onclick="downloadSelectedUserData()">
+                                <i class="fa fa-download me-1"></i> Download User Data
                             </button>
                             @endif
                             @if (auth()->user()->user_type == 'admin')
-                            <a href="{{ route('users.create') }}" class="btn btn-primary btn-round">
-                                <i class="fa fa-plus"></i> Add Users
+                            <a href="{{ route('users.create') }}" class="btn btn-info d-flex align-items-center">
+                                <i class="fa fa-plus me-1"></i> Add Users
                             </a>
                             @endif
                             @endif
@@ -89,12 +90,6 @@
                                                     title="Show User">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-
-                                                <!-- <a href="{{ route('users.edit', $user->id) }}"
-                                                                class="btn btn-link btn-primary btn-lg"
-                                                                data-bs-toggle="tooltip" title="Edit User">
-                                                                <i class="fa fa-edit"></i>
-                                                            </a> -->
                                                 <button type="button"
                                                     onClick="editData('{{ route('users.edit', $user->id) }}')"
                                                     class="btn btn-link btn-primary btn-lg edit_data"
