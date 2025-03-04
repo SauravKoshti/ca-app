@@ -49,9 +49,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         // Validate the request data\
+        // Validate the request data\
         //  dd($request->all());
-         $validatedData = $request->validate([
+        $validatedData = $request->validate([
             'user_type' => 'required|in:gst,personal,admin',
             'username' => 'required|string|max:255|unique:users,username',
             'first_name' => 'required|string|max:255',
@@ -87,7 +87,7 @@ class UserController extends Controller
         }
         $referUser = User::where('username', $request['refer'])->first();
         $referUserId = $referUser ? $referUser->id : null;
-    
+
         $path = '';
         if ($image = $request->file('profile_image')) {
             $destinationPath = 'profiles/';
@@ -145,7 +145,9 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'user_type' => ['required', Rule::in(['gst', 'personal', 'admin'])],
             'username' => [
-                'required', 'string', 'max:255',
+                'required',
+                'string',
+                'max:255',
                 Rule::unique('users', 'username')->ignore($id),
             ],
             'first_name' => 'required|string|max:255',
@@ -161,18 +163,22 @@ class UserController extends Controller
                 Rule::unique('users', 'aadhar_card')->ignore($id),
             ],
             'pan_card' => [
-                'required', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/',
+                'required',
+                'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/',
                 Rule::unique('users', 'pan_card')->ignore($id),
             ],
             'dob' => 'required|date|before:today',
             'mobile' => [
-                'required', 'digits:10',
+                'required',
+                'digits:10',
                 Rule::unique('users', 'mobile')->ignore($id),
             ],
             'anniversary_date' => 'nullable|date',
             'profile' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => [
-                'required', 'email', 'max:255',
+                'required',
+                'email',
+                'max:255',
                 Rule::unique('users', 'email')->ignore($id),
             ],
             'father_full_name' => 'required|string|max:255',
@@ -183,12 +189,13 @@ class UserController extends Controller
         if ($request->user_type === 'gst') {
             $request->validate([
                 'gst_number' => [
-                    'required', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/',
+                    'required',
+                    'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/',
                     Rule::unique('users', 'gst_number')->ignore($id),
                 ],
                 'business_name' => 'required|string|max:255',
             ]);
-        } 
+        }
         $user = User::findOrFail($id);
         $path = $user->profile_image;
         if ($image = $request->file('profile_image')) {
@@ -307,28 +314,28 @@ class UserController extends Controller
     {
         $request->validate([
             'password' => 'required',
-            'id' => 'required',
+            'id' => 'nullable',
         ]);
 
         if (Hash::check($request->password, Auth::user()->password)) {
-            $message = '';
+            $message = 'Password matched';
             if ($request->action != 'edit') {
-            switch ($request->type) {
-                case 'user':
-                    User::where('id', $request->id)->delete();
-                    $message = 'User deleted successfully'; 
-                    break;
-                case 'payment':
-                    Payment::where('id', $request->id)->delete();
-                    $message = 'Payment deleted successfully'; 
-                    break;
-                case 'group':
-                    User::where('group_id', $request->id)->update(['group_id' => null]);
-                    Group::where('id', $request->id)->delete();
-                    $message = 'Group deleted successfully'; 
-                    break;
+                switch ($request->type) {
+                    case 'user':
+                        User::where('id', $request->id)->delete();
+                        $message = 'User deleted successfully';
+                        break;
+                    case 'payment':
+                        Payment::where('id', $request->id)->delete();
+                        $message = 'Payment deleted successfully';
+                        break;
+                    case 'group':
+                        User::where('group_id', $request->id)->update(['group_id' => null]);
+                        Group::where('id', $request->id)->delete();
+                        $message = 'Group deleted successfully';
+                        break;
+                }
             }
-        }
             return response()->json(['success' => true, 'message' => $message]);
         } else {
             return response()->json(['success' => false, 'message' => 'Password does not match']);
