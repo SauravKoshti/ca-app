@@ -81,7 +81,7 @@ function removeData(id, type) {
     });
 }
 
-function editData(id, type) {
+function editData(url) {
     swal({
         title: "Enter Your Password",
         content: {
@@ -117,8 +117,7 @@ function editData(id, type) {
                     },
                     body: JSON.stringify({
                         password: password,
-                        id: id,
-                        type: type
+                        action:'edit'
                     })
                 })
                 .then(response => response.json())
@@ -126,8 +125,8 @@ function editData(id, type) {
                     if (data.success) {
                         swal("Success", data.message, "success");
                         setTimeout(() => {
-                            location.reload();
-                        }, 1000); // Reload after 1 second
+                            window.location.href = url;
+                        }, 1000); 
                     } else {
                         swal("Error", data.message, "error");
                     }

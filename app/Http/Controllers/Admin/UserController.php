@@ -75,7 +75,8 @@ class UserController extends Controller
         ]);
         if ($request['user_type'] === 'gst') {
             $request->validate([
-                'gst_number' => ['required', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+                // 'gst_number' => ['required', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
+                'gst_number' => ['required', 'unique:users,gst_number'],
                 'business_name' => 'required|string|max:255',
             ]);
         }
@@ -311,6 +312,7 @@ class UserController extends Controller
 
         if (Hash::check($request->password, Auth::user()->password)) {
             $message = '';
+            if ($request->action != 'edit') {
             switch ($request->type) {
                 case 'user':
                     User::where('id', $request->id)->delete();
@@ -326,6 +328,7 @@ class UserController extends Controller
                     $message = 'Group deleted successfully'; 
                     break;
             }
+        }
             return response()->json(['success' => true, 'message' => $message]);
         } else {
             return response()->json(['success' => false, 'message' => 'Password does not match']);
