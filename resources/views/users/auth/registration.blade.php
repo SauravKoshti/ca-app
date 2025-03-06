@@ -151,6 +151,8 @@
                                 <div class="form-group">
                                     <label for="user_full_name">Full name <small>(as per pancard)</small><span
                                             class="text-danger registration-mark">*</span></label>
+                                    <!-- <input type="text" id="user_full_name" name="user_full_name" class="form-control"
+       value="{{ old('user_full_name') }}" required> -->
                                     <input type="text" id="user_full_name" name="user_full_name" class="form-control"
                                         value="{{ old('user_full_name') }}" required>
 
@@ -388,9 +390,9 @@ $(document).ready(function() {
 
             let fullName = [firstName, middleName, lastName].filter(name => name !== "").join(" ");
 
-            $("#user_full_name").val(fullName).prop("disabled", true);
+            $("#user_full_name").val(fullName).prop("readonly", true);
         } else {
-            $("#user_full_name").val("").prop("disabled", false);;
+            $("#user_full_name").val("").prop("readonly", false);
         }
     });
 });

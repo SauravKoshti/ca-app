@@ -213,10 +213,14 @@ class DocumentController extends Controller
     {
         // Fetch images based on the selected year
         $year = $request->input('year');
+        $userId = $request->input(key: 'user_Id');
+        // dd($userId, $request);
         if ($year) {
-            $images = Document::where('financial_year', $year)->latest()->get();
+            $images = Document::where('financial_year', $year)
+                                ->where('user_id', $userId)
+                                ->latest()->get();
         } else {
-            $images = Document::latest()->get();
+            $images = Document::where('user_id', $userId)->latest()->get();
         }
         $imagesHtml = '';
         if ($images->isEmpty()) {

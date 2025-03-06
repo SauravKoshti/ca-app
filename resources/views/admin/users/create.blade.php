@@ -440,9 +440,9 @@
 
                     let fullName = [firstName, middleName, lastName].filter(name => name !== "").join(" ");
 
-                    $("#user_full_name").val(fullName).prop("disabled", true);
+                    $("#user_full_name").val(fullName).prop("readonly", true);
                 } else {
-                    $("#user_full_name").val("").prop("disabled", false);;
+                    $("#user_full_name").val("").prop("readonly", false);
                 }
             });
         });

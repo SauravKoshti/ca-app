@@ -73,19 +73,19 @@
                     <div class="card-body">
                         <div class="card-head-row card-tools-still-right">
                             <div class="card-title">New Customers</div>
-                            <div class="card-tools">
-                                <div class="dropdown">
-                                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="card-tools">--}}
+{{--                                <div class="dropdown">--}}
+{{--                                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton"--}}
+{{--                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                        <i class="fas fa-ellipsis-h"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+{{--                                        <a class="dropdown-item" href="#">Action</a>--}}
+{{--                                        <a class="dropdown-item" href="#">Another action</a>--}}
+{{--                                        <a class="dropdown-item" href="#">Something else here</a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                         <div class="card-list py-4">
                             @if ($newUsers->isEmpty())
@@ -117,19 +117,19 @@
                     <div class="card-header">
                         <div class="card-head-row card-tools-still-right">
                             <div class="card-title">Transaction History</div>
-                            <div class="card-tools">
-                                <div class="dropdown">
-                                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="card-tools">--}}
+{{--                                <div class="dropdown">--}}
+{{--                                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton"--}}
+{{--                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                        <i class="fas fa-ellipsis-h"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+{{--                                        <a class="dropdown-item" href="#">Action</a>--}}
+{{--                                        <a class="dropdown-item" href="#">Another action</a>--}}
+{{--                                        <a class="dropdown-item" href="#">Something else here</a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -158,11 +158,12 @@
                                             Payment from #{{ $payment->user_id }}
                                         </th>
                                         <td class="text-end">
-                                            {{ $payment->user_id }}
-                                            Mar 19, 2020, 2.45pm
+{{--                                            {{ $payment->user_id }}--}}
+                                            {{ \Carbon\Carbon::parse($payment->created_at)->format('d-m-Y H:i:s') }}
+                                            {{--                                            Mar 19, 2020, 2.45pm--}}
                                         </td>
                                         <td class="text-end">
-                                            $250.00
+                                            250.00
                                         </td>
                                     </tr>
                                     @endforeach
