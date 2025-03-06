@@ -46,7 +46,7 @@ Route::get('/dashboard', [AuthController::class, 'index'])->name('admin.index');
 //Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware(['admin:admin,user'])->group(function () {
+    // Route::middleware(['admin:admin,user'])->group(function () {
         // User Routes
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
@@ -90,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/remove-user-from-group', [GroupController::class, 'removeUserFromGroup'])
             ->name('user.remove.from.group');
 
-    });
+    // });
 });
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');

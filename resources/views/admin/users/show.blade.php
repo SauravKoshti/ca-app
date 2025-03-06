@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Create User')
+@section('title', 'User Details')
 @section('content')
 <div class="container">
     <div class="page-inner">
@@ -71,99 +71,47 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="profile-card">
+                        <div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="profile-card">
+                <!-- Left Side: Profile Image -->
+                <div class="text-center me-4">
+                    @if (!empty($user->profile_image))
+                        <img src="{{ asset($user->profile_image) }}" alt="Profile Image" class="profile-img">
+                    @else
+                        <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image" class="profile-img">
+                    @endif
+                    <h5 class="mt-3">{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</h5>
+                    <p class="text-muted">
+                        {{ $user->user_type == 'personal' ? 'Personal' : ($user->user_type == 'gst' ? 'GST' : 'N/A') }} User
+                    </p>
+                </div>
 
-                                @if (!empty($user->profile_image))
-                                <img src="{{ asset($user->profile_image) }}" alt="Profile Image" class="profile-img">
-                                @else
-                                <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image" class="profile-img">
-                                @endif
-
-                                <div class="profile-info">
-                                    <h3>{{ $user->first_name }} {{ $user->lastname }}</h3>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="form-label">User Type</label>
-                                            <p> {{ $user->user_type == 'personal' ? 'Personal' : ($user->user_type == 'gst' ? 'GST' : 'N/A') }}
-                                            </p>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Username</label>
-                                            <p>{{ $user->username ?? 'N/A' }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="form-label">Full Name</label>
-                                            <p>{{ $user->user_full_name ?? 'N/A' }}</p>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Address</label>
-                                            <p>{{ $user->address ?? 'N/A' }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="form-label">City</label>
-                                            <p>{{ $user->city ?? 'N/A' }}</p>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Pincode</label>
-                                            <p>{{ $user->pincode ?? 'N/A' }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="form-label">Aadhar Card</label>
-                                            <p>{{ $user->aadhar_card ?? 'N/A' }}</p>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">PAN Card</label>
-                                            <p>{{ $user->pan_card ?? 'N/A' }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="form-label">Date of Birth</label>
-                                            <p>{{ \Carbon\Carbon::parse($user->dob)->format('d-m-Y') ?? 'N/A' }}</p>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Mobile</label>
-                                            <p>{{ $user->mobile ?? 'N/A' }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="form-label">Anniversary Date</label>
-                                            <p>{{ \Carbon\Carbon::parse($user->anniversary_date)->format('d-m-Y') ?? 'N/A' }}
-                                            </p>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Email</label>
-                                            <p>{{ $user->email ?? 'N/A' }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="form-label">Business Name</label>
-                                            <p>{{ $user->business_name ?? 'N/A' }}</p>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Gender</label>
-                                            <p>
-                                                {{ $user->gender == 0 ? 'Female' : ($user->gender == 1 ? 'Male' : 'N/A') }}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                <!-- Right Side: User Information -->
+                <div class="flex-grow-1">
+                    <div class="profile-info">
+                        <div><span class="info-label">Username:</span> {{ $user->username ?? 'N/A' }}</div>
+                        <div><span class="info-label">Email:</span> {{ $user->email ?? 'N/A' }}</div>
+                        <div><span class="info-label">Mobile:</span> {{ $user->mobile ?? 'N/A' }}</div>
+                        <div><span class="info-label">Gender:</span> {{ $user->gender == 0 ? 'Female' : ($user->gender == 1 ? 'Male' : 'N/A') }}</div>
+                        <div><span class="info-label">State:</span> {{ $user->state ?? 'N/A' }}</div>
+                        <div><span class="info-label">Address:</span> {{ $user->address ?? 'N/A' }}</div>
+                        <div><span class="info-label">City:</span> {{ $user->city ?? 'N/A' }}</div>
+                        <div><span class="info-label">Pincode:</span> {{ $user->pincode ?? 'N/A' }}</div>
+                        <div><span class="info-label">Full Name:</span> {{ $user->user_full_name ?? 'N/A' }}</div>
+                        <div><span class="info-label">Aadhar Card:</span> {{ $user->aadhar_card ?? 'N/A' }}</div>
+                        <div><span class="info-label">PAN Card:</span> {{ $user->pan_card ?? 'N/A' }}</div>
+                        <div><span class="info-label">Father's Name:</span> {{ $user->father_full_name ?? 'N/A' }}</div>
+                        <div><span class="info-label">DOB:</span> {{ !empty($user->dob) ? \Carbon\Carbon::parse($user->dob)->format('d-m-Y') : 'N/A' }}</div>
+                        <div><span class="info-label">Anniversary Date:</span> {{ !empty($user->anniversary_date) ? \Carbon\Carbon::parse($user->anniversary_date)->format('d-m-Y') : 'N/A' }}</div>
+                        <div><span class="info-label">Business Name:</span> {{ $user->business_name ?? 'N/A' }}</div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
                         </div>
 
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -394,7 +342,6 @@
                                                 @else
                                                 @foreach ($documentDataArray as $documentData)
                                                 <tr>
-                                                    <!-- <td>{{ $documentData }}</td> -->
                                                     <td>
                                                         <input type="checkbox" name="document_id"
                                                             data-id="{{ $documentData->id }}">
@@ -447,12 +394,9 @@
                                     <div class="Payment-card">
                                         @if (auth()->user()->user_type == 'admin')
                                         <div class="card-header d-flex justify-content-between">
-                                            <!-- <div class="card-title">Payment List</div> -->
                                             <div class="btn-primary btn-round ms-auto">
                                                 <a href="{{ route('users.payment', ['user' => $user->id]) }}"
                                                     class="btn btn-primary btn-round ms-auto">
-                                                    <!-- <i class="fa fa-money"></i> -->
-                                                    <!-- <i class="fa-solid fa-indian-rupee-sign"></i> -->
                                                     Add Payment
                                                 </a>
                                             </div>
@@ -490,12 +434,6 @@
                                                                     data-bs-toggle="tooltip" title="edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
-                                                                <!-- <a href="{{ route('users.payment.edit', $payment->id) }}" onClick="editData({{ $payment->id }}, 'payment')"
-                                                                                    class="btn btn-link btn-primary btn-lg"
-                                                                                    data-bs-toggle="tooltip"
-                                                                                    title="Edit Task">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                </a> -->
 
                                                                 <button type="button"
                                                                     onClick="removeData({{ $payment->id }}, 'payment')"
@@ -561,7 +499,8 @@
     <script>
     let urlSegments = window.location.pathname.split('/');
     let user_Id = urlSegments[urlSegments.length - 1];
-console.log(user_Id);
+    console.log(user_Id);
+
     function handleYearChange(year, userId) {
         $.ajaxSetup({
             headers: {
@@ -611,7 +550,7 @@ console.log(user_Id);
 
             $('.progress').show();
             $('#progressBar').css('width', '0%').text('0%');
-        
+
             $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop('disabled', true);
             $.ajax({
                 url: "{{ route('users.upload.document', $user->id) }}",
@@ -737,51 +676,32 @@ console.log(user_Id);
     </script>
     <style>
     .profile-card {
-        /* max-width: 800px; */
-        background: #fff;
-        /* border-radius: 10px; */
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        /* padding: 20px;
-                                                                                margin: 50px auto; */
-        display: flex;
-        align-items: center;
-    }
-
-    .profile-img {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        border: 4px solid #007bff;
-        object-fit: cover;
-    }
-
-    .profile-info {
-        flex: 1;
-        margin-left: 20px;
-    }
-
-    .profile-info h3 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .profile-info p {
-        color: #666;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-
-    .profile-info .row {
-        margin-bottom: 10px;
-    }
-
-    .form-label {
-        font-weight: bold;
-        color: #444;
-    }
-
+            border-radius: 10px;
+            background: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 10px;
+            border: 4px solid #007bff;
+            object-fit: cover;
+        }
+        .profile-info {
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 20px;
+        }
+        .profile-info div {
+            width: 50%;
+            padding: 5px 0;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #333;
+        }
     .form-control-static {
         background: #f8f9fa;
         padding: 8px;

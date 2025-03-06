@@ -17,13 +17,11 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         $login_user = Auth::user();
-        if ($login_user->user_type == 'user') {
+        if ($login_user->user_type == 'personal' || $login_user->user_type == 'gst') {
             $users = collect();
             if ($login_user->group_id) {
                 $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
@@ -49,8 +47,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request data\
-        //  dd($request->all());
         $validatedData = $request->validate([
             'user_type' => 'required|in:gst,personal,admin',
             'username' => 'required|string|max:255|unique:users,username',
@@ -129,7 +125,6 @@ class UserController extends Controller
         $loggedInUserId = Auth::user()->id;
         $payments = Payment::where('user_id', $user->id)->latest()->get();
         $referData = User::where('refer', $user->id)->get();
-        // $referData = '1';
         return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments', 'referData'));
     }
 
