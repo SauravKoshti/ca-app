@@ -153,7 +153,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Document Name:</label>
-                                            <input type="text" name="document_name" class="form-control">
+                                            <input type="text" id="document_name" name="document_name" class="form-control">
                                             @error('document_name')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -218,7 +218,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Upload File:</label>
-                                            <input type="file" if name="document_image_path" id="fileInput"
+                                            <input type="file" if name="document_image_path" id="fileInput" 
                                                 class="form-control" accept="image/*,.pdf">
                                             @error('document_image_path')
                                             <span class="text-danger">{{ $message }}</span>
@@ -234,10 +234,29 @@
 
                         <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                             <div class="document-card">
+                            <div class="card-header d-flex justify-content-between">
+                                    <div class="d-flex align-items-center" style="width: 220px;">
+                                        <label for="yearSelect" class="w-100">Select Year:</label>
+                                        <select id="documentDownloadYearSelect" class="form-control"
+                                            onchange="handleYearChange(this.value,'')" name="year">
+                                            <option value="">Select Year</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="documentDownloadSelected('pdf')">Download
+                                            Pdf</button>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="documentDownloadSelected('zip')">Download
+                                            Zip</button>
+                                    </div>
+                                </div>
+                                
                                 <div class="card-body">
-                                    <table class="datatables table table-bordered" id="documentTable" data-order='[]'>
+                                    <table class="datatables table table-bordered table-striped table-hover" id="documentTable" data-order='[]'>
                                         <thead>
                                             <tr>
+                                            <th><input type="checkbox" name="document_select_all"></th>
                                                 <th>Document Name</th>
                                                 <th>Document Type</th>
                                                 <th>Upload Type</th>
@@ -247,51 +266,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if ($documentDataArray->isEmpty())
-                                            <tr>
-                                                <td colspan="4" class="text-center">No document records found.
-                                                </td>
-                                            </tr>
-                                            @else
-                                            @foreach ($documentDataArray as $documentData)
-                                            <tr>
-                                                <td>{{ $documentData->document_name }}</td>
-                                                <td>
-                                                    @if ($documentData->doc_type)
-                                                    @foreach (explode(',', $documentData->doc_type) as $doc_type)
-                                                    <p class="mb-0">
-                                                        {{ Config::get('constant.doc_type')[$doc_type] }}
-                                                    </p>
-                                                    @endforeach
-                                                    @endif
-                                                </td>
-                                                <td>{{ $documentData->upload_type }} </td>
-                                                <td>
-                                                    <p> {{ $documentData->uploader->user_full_name }}</p>
-                                                </td>
-                                                <td>
-                                                    <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <a href="{{ asset($documentData->document_image_path) }}" download
-                                                        class="btn btn-success">
-                                                        <i class="fas fa-download"></i>
-                                                    </a>
-
-                                                    <form action="{{ route('users.document.destroy') }}"
-                                                        id="documentUpload" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{ $documentData->id }}">
-                                                        <input type="hidden" name="user_id" id="user_Id"
-                                                            value="{{ $documentData->user_id }}">
-                                                        <button type="submit"
-                                                            class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -301,11 +275,12 @@
                         <div class="tab-pane fade" id="download-document" role="tabpanel"
                             aria-labelledby="download-document-tab">
                             <div class="download-document-card">
+                                
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="d-flex align-items-center" style="width: 220px;">
                                         <label for="yearSelect" class="w-100">Select Year:</label>
                                         <select id="downloadYearSelect" class="form-control"
-                                            onchange="handleYearChange(this.value)" name="year">
+                                            onchange="handleYearChange(this.value,'admin')" name="year">
                                             <option value="">Select Year</option>
                                         </select>
                                     </div>
@@ -329,59 +304,11 @@
                                                     <th>Document Type</th>
                                                     <th>Upload Type</th>
                                                     <th>Uploaded By</th>
+                                                    <th>Uploaded Date</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if ($documentDataArray->isEmpty())
-                                                <tr>
-                                                    <td colspan="6" class="text-center">No document records
-                                                        found.
-                                                    </td>
-                                                </tr>
-                                                @else
-                                                @foreach ($documentDataArray as $documentData)
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" name="document_id"
-                                                            data-id="{{ $documentData->id }}">
-                                                    </td>
-                                                    <td>{{ $documentData->document_name }}</td>
-                                                    <td>
-                                                        @if ($documentData->doc_type)
-                                                        @foreach (explode(',', $documentData->doc_type) as $doc_type)
-                                                        <p class="mb-0">
-                                                            {{ Config::get('constant.doc_type')[$doc_type] }}
-                                                        </p>
-                                                        @endforeach
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $documentData->upload_type }} </td>
-                                                    <td>
-                                                        <p> {{ $documentData->uploader->user_full_name }}</p>
-                                                        <p> {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ asset($documentData->document_image_path) }}"
-                                                            download class="btn btn-success">
-                                                            <i class="fas fa-download"></i>
-                                                        </a>
-
-                                                        <form action="{{ route('users.document.destroy') }}"
-                                                            id="documentUpload" method="POST" style="display:inline;">
-                                                            @csrf
-                                                            <input type="hidden" name="id"
-                                                                value="{{ $documentData->id }}">
-                                                            <input type="hidden" name="user_id"
-                                                                value="{{ $documentData->user_id }}">
-                                                            <button type="submit"
-                                                                class="btn btn-danger btn-sm">Delete</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -501,7 +428,7 @@
     let user_Id = urlSegments[urlSegments.length - 1];
     console.log(user_Id);
 
-    function handleYearChange(year, userId) {
+    function handleYearChange(year, userType) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -513,11 +440,16 @@
             type: "POST",
             data: {
                 year: year,
-                user_Id: user_Id
+                user_Id: user_Id,
+                user_type: userType
             },
             success: function(response) {
-                $('#downloadDocTable tbody').html(response);
-            },
+                if(userType == 'admin') {
+                    $('#downloadDocTable tbody').html(response);
+                } else {
+                    $('#documentTable tbody').html(response);
+                }
+                },
             error: function(xhr) {
                 console.log(xhr.responseText);
             }
@@ -536,7 +468,8 @@
         }
     });
     $(document).ready(function() {
-        handleYearChange();
+        handleYearChange('','');
+        handleYearChange('', 'admin');
         $('#fileUploadForm').on('submit', function(event) {
             event.preventDefault();
 
@@ -575,7 +508,7 @@
                 },
                 success: function(response) {
                     successMessage('Document created successfully.')
-                    $('#progressBar').css('width', '100%').text('Upload Complete');
+                    $('#progressBar').css('width', '100%').html('100% Complete ✅');
                 },
                 error: function(xhr) {
                     $('#message').html(
@@ -596,12 +529,57 @@
         $('[name="document_id"]').prop('checked', this.checked);
     });
 
+    $('[name="document_select_all"]').on('change', function() {
+        $('[name="document_select_id"]').prop('checked', this.checked);
+    });
+
     function changeType(uploadType) {
         if (uploadType === 'Manual') {
             $('#doc_type').prop('multiple', true).attr('name', 'doc_type[]').select2();
         } else {
             $('#doc_type').prop('multiple', false).attr('name', 'doc_type').select2();
         }
+    }
+
+    function documentDownloadSelected(type) {
+        const year = $('#documentDownloadYearSelect').val();
+        // console.log(year);
+        let allIds = [];
+        var checkboxes = document.querySelectorAll('[name="document_select_id"]:checked');
+        checkboxes.forEach(function(checkbox) {
+            allIds.push(checkbox.getAttribute('data-id'));
+        });
+        $.ajax({
+            url: "{{ route('users.download.documents') }}",
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                type: type,
+                document_ids: allIds,
+                select_all: $('[name="document_select_all"]').val(),
+                year: year
+            },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function(response) {
+                var blob = new Blob([response], {
+                    type: 'application/pdf'
+                });
+                var link = document.createElement('a');
+                if (type === 'pdf') {
+                    link.download = 'merged_document.pdf';
+                } else if (type === 'zip') {
+                    link.download = 'documents.zip';
+                }
+                link.href = window.URL.createObjectURL(blob);
+                link.click();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                console.log('Response:', xhr.responseText);
+            }
+        });
     }
 
     function downloadSelected(type) {
@@ -644,7 +622,13 @@
             }
         });
     }
-
+    $(document).ready(function() {
+        $('#doc_type').change(function(){
+            var selectedValue = $(this).val();
+            console.log(selectedValue);
+            $('#document_name').val(selectedValue);
+        });
+    });
     $(document).ready(function() {
         $(".datepicker").prop("disabled", true);
 

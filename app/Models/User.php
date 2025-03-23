@@ -80,4 +80,11 @@ class User extends Authenticatable
     {
         $this->attributes['anniversary_date'] = date('Y-m-d', strtotime($value));
     }
+
+    // In User model (User.php)
+public function documents()
+{
+    return $this->hasMany(Document::class, User::class);
+}
+
 }

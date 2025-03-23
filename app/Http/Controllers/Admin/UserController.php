@@ -121,11 +121,12 @@ class UserController extends Controller
     }
     public function show(User $user)
     {
-        $documentDataArray = Document::where('user_id', $user->id)->latest()->get();
+        $downloadDocumentArray = Document::leftJoin('users','users.id', '=' ,'documents.uploaded_by')->where('user_type', 'admin')->get();
         $loggedInUserId = Auth::user()->id;
+        $documentDataArray = Document::leftJoin('users','users.id', '=' ,'documents.uploaded_by')->where('user_type', 'admin')->get();
         $payments = Payment::where('user_id', $user->id)->latest()->get();
         $referData = User::where('refer', $user->id)->get();
-        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId', 'payments', 'referData'));
+        return view('admin.users.show', compact('user', 'documentDataArray', 'loggedInUserId','downloadDocumentArray', 'payments', 'referData'));
     }
 
     public function edit(User $user)
@@ -293,7 +294,7 @@ class UserController extends Controller
         }
         if ($request->is_select_all) {
             $login_user = Auth::user();
-            if ($login_user->user_type == 'user') {
+            if ($login_user->user_type != 'admin') {
                 if ($login_user->group_id) {
                     $userIds = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->pluck('id')->toArray();
                 }

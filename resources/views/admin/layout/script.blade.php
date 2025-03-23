@@ -18,7 +18,9 @@
 
 <script>
 $(document).ready(function() {
-    $("#basic-datatables").DataTable({});
+    $("#basic-datatables").DataTable({
+        ordering: false
+});
     $(".datepicker").datepicker({
         dateFormat: "dd-mm-yy"
     }).attr("placeholder", "DD-MM-YY");
@@ -191,6 +193,7 @@ function uploadFile() {
 let currentYear = new Date().getFullYear();
 let selectBox = document.getElementById("financial_year");
 let filterBox = document.getElementById("downloadYearSelect");
+let documentFilterBox = document.getElementById("documentDownloadYearSelect");
 
 // Generate financial years (Example: 2022-2023, 2023-2024)
 for (let year = currentYear; year >= 2000; year--) {
@@ -202,6 +205,12 @@ for (let year = currentYear; year >= 2000; year--) {
     let financialYear = `${year - 1}-${year}`;
     let option = new Option(financialYear, financialYear);
     filterBox.add(option);
+}
+
+for (let year = currentYear; year >= 2000; year--) {
+    let financialYear = `${year - 1}-${year}`;
+    let option = new Option(financialYear, financialYear);
+    documentFilterBox.add(option);
 }
 
 </script>

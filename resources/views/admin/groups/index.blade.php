@@ -41,6 +41,7 @@
                                 class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
+                                        <!-- <th>Date</th> -->
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Action</th>
@@ -48,6 +49,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                    <!-- <th>Date</th> -->
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Action</th>
@@ -62,6 +64,7 @@
                                     
                                     @foreach($groups as $user)
                                     <tr>
+                                        <!-- <td>{{ $user->created_at }} </td> -->
                                         <td>{{ $user->name }} </td>
                                         <td>{{ $user->description }}</td>
                                         <td>

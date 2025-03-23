@@ -40,7 +40,6 @@ class DocumentController extends Controller
                 ->withInput();
         }
 
-
         // Store file
         $path = '';
         if ($image = $request->file('document_image_path')) {
@@ -68,7 +67,6 @@ class DocumentController extends Controller
             'user' => $request->user_id,
             'tab' => 'document-tab'
         ])->with('success', 'Document created successfully.');
-
     }
 
     public function show($id)
@@ -214,33 +212,45 @@ class DocumentController extends Controller
         // Fetch images based on the selected year
         $year = $request->input('year');
         $userId = $request->input(key: 'user_Id');
-        // dd($userId, $request);
-        if ($year) {
-            $images = Document::where('financial_year', $year)
-                                ->where('user_id', $userId)
-                                ->latest()->get();
+        if ($request->input(key: 'user_type') == 'admin') {
+            $images = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->select('documents.*')->where('users.user_type', 'admin')
+                ->where('user_id', $userId);
         } else {
-            $images = Document::where('user_id', $userId)->latest()->get();
+            $images = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->select('documents.*')->where('users.user_type', '!=', 'admin')
+                ->where('user_id', $userId);
+        }
+        if ($year) {
+            $images = $images->where('financial_year', $year)
+                ->latest()->get();
+        } else {
+            $images = $images->latest()->get();
         }
         $imagesHtml = '';
         if ($images->isEmpty()) {
-            return response()->json('<tr><td colspan="6" class="text-center">No images found</td></tr>');
+            return response()->json('<tr><td colspan="7" class="text-center">No data found</td></tr>');
         }
         foreach ($images as $documentData) {
             $imagesHtml .= '<tr>';
-            $imagesHtml .= '<td><input type="checkbox" name="document_id" data-id="' . $documentData->id . '"></td>';
+            if ($request->input(key: 'user_type') == 'admin') {
+                $imagesHtml .= '<td><input type="checkbox" name="document_id" data-id="' . $documentData->id . '"></td>';
+            } else {
+                $imagesHtml .= '<td><input type="checkbox" name="document_select_id" data-id="' .
+                    $documentData->id . '"></td>';
+            }
             $imagesHtml .= '<td>' . $documentData->document_name . '</td>';
             $imagesHtml .= '<td>';
             if ($documentData->doc_type) {
                 foreach (explode(',', $documentData->doc_type) as $doc_type) {
-                    $imagesHtml .= '<p class="mb-0">'.Config::get('constant.doc_type')[$doc_type].'</p>';
+                    $imagesHtml .= '<p class="mb-0">' . Config::get('constant.doc_type')[$doc_type] . '</p>';
                 }
             }
             $imagesHtml .= '</td>';
             $imagesHtml .= '<td>' . $documentData->upload_type . '</td>';
             $imagesHtml .= '<td>';
             $imagesHtml .= '<p>' . $documentData->uploader->user_full_name . '</p>';
-            $imagesHtml .= '<p>' . \Carbon\Carbon::parse($documentData->created_at)->format('d-m-Y H:i:s') . '</p>';
+            $imagesHtml .= '</td>';
+            $imagesHtml .= '<td>';
+             $imagesHtml .= '<p>' . \Carbon\Carbon::parse($documentData->created_at)->format('d-m-Y H:i:s') . '</p>';
             $imagesHtml .= '</td>';
             $imagesHtml .= '<td>';
             $imagesHtml .= '<a href="' . asset($documentData->document_image_path) . '" download class="btn btn-success"><i class="fas fa-download"></i></a>';

@@ -49,7 +49,9 @@
                             <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
+                                    @if (auth()->user()->user_type == 'admin')
                                         <th><input type="checkbox" name="select_all" id="selectAll"></th>
+                                    @endif
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>UserName</th>
@@ -59,8 +61,9 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th></th>
-                                        <!-- <th><input type="checkbox" name="select_all" id="selectAll"></th> -->
+                                    @if (auth()->user()->user_type == 'admin')
+                                        <th><input type="checkbox" name="select_all" id="selectAll"></th>
+                                    @endif
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>UserName</th>
@@ -76,9 +79,11 @@
                                     @else
                                     @foreach ($users as $user)
                                     <tr>
+                                    @if (auth()->user()->user_type == 'admin')
                                         <td>
-                                            <input type="checkbox" name="user_id" data-id="{{ $user->id }}">
+                                        <input type="checkbox" name="user_id" data-id="{{ $user->id }}">
                                         </td>
+                                        @endif
                                         <td>{{ $user->first_name }} {{ $user->last_name }} </td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->username }}</td>

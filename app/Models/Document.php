@@ -47,4 +47,5 @@ class Document extends Model
     {
         $this->attributes['date_to'] = date('Y-m-d', strtotime($value));
     }
+    
 }

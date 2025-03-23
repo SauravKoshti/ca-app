@@ -15,11 +15,10 @@ class GroupController extends Controller
     public function index()
     {
         $login_user = Auth::user();
-        if ($login_user->user_type == 'user') {
+        if ($login_user->user_type !='admin') {
             $groups = Group::leftJoin('users', 'users.group_id', '=', 'groups.id')
                 ->select('groups.*')
-                ->where('users.id', $login_user->id)
-                ->get();
+                ->where('users.id', $login_user->id)->orderBy('id', 'desc')->get();
         } else {
             $groups = Group::all();
         }
@@ -42,7 +41,7 @@ class GroupController extends Controller
         }
         $login_user = Auth::user();
         $group_id = Group::create($request->all())->id;
-        if ($login_user->user_type == 'user') {
+        if ($login_user->user_type != 'admin') {
             $user = User::findOrFail($login_user->id);
             $user->update([
                 'group_id' => $group_id

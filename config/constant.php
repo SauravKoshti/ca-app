@@ -2,9 +2,9 @@
 return [
     'doc_type' => [
         'aadhaar_card' => 'Aadhaar Card / આધાર કાર્ડ',
-        'pan_card' => 'PAN Card / પાન કાર્ડ',
+        'pan_card' => 'Permanent Account Number(PAN Card) / પાન કાર્ડ',
         'form_16' => 'Form 16 / ફોર્મ 16',
-        'rc_book' => 'RC Book / આરસી બુક',
+        'rc_book' => 'Registration Certificate book (RC Book)/ આરસી બુક',
         'bank_statement' => 'Bank Statement / Passbook / બેંક સ્ટેટમેન્ટ /પાસબુક',
         'fd_statement' => 'Fixed Deposit statement & Certificate / બાંધી મુદતની થાપણ / પ્રમાણપત્ર',
         'loan_statement' => 'Loan Statement & interest certificate / લોન સ્ટેટમેન્ટ / લોન પત્ર',
@@ -32,5 +32,23 @@ return [
         'gst_2b_pdf' => 'GST 2B PDF',
         'gst_challan_pdf' => 'GST Challan PDF',
         'gst_summary' => 'GST Summary',
+    ],
+    'user_doc' => [
+        'aadhaar_card' => 'Aadhaar Card / આધાર કાર્ડ',
+        'pan_card' => 'Permanent Account Number(PAN Card) / પાન કાર્ડ',
+        'form_16' => 'Form 16 / ફોર્મ 16',
+        'rc_book' => 'Registration Certificate book (RC Book)/ આરસી બુક',
+        'bank_statement' => 'Bank Statement / Passbook / બેંક સ્ટેટમેન્ટ /પાસબુક',
+        'fd_statement' => 'Fixed Deposit statement & Certificate / બાંધી મુદતની થાપણ / પ્રમાણપત્ર',
+        'loan_statement' => 'Loan Statement & interest certificate / લોન સ્ટેટમેન્ટ / લોન પત્ર',
+        'driving_license' => 'Driving License / ડ્રાઈવિંગ લાયસન્સ',
+        'residential_proof' => 'Residential Proof / રહેઠાણ પુરાવો',
+        'property_tax_receipt' => 'Property Tax Receipt / મિલ્કત કર રસીદ',
+        'electricity_bill' => 'Latest Electricity or Telephone Bill / તાજેતરની વીજળી અથવા ટેલિફોન બીલ',
+        'business_proof' => 'Business Proof / Registration Certificate / વ્યવસાય પુરાવો / નોંધણી પ્રમાણપત્ર',
+        'etc' => 'ETC (Toll, FASTag, Other) / ETC (ટોલ, ફાસ્ટેગ, અન્ય)',
+        'purchase_bill' => 'Purchase Bill / ખરીદી બિલ',
+        'sales_bill' => 'Sales Bill / વેચાણ બિલ',
+        'expense_bill' => 'Expense Bill / ખર્ચ બિલ',
     ]
 ];
