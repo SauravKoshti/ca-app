@@ -71,47 +71,69 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-10">
-            <div class="profile-card">
-                <!-- Left Side: Profile Image -->
-                <div class="text-center me-4">
-                    @if (!empty($user->profile_image))
-                        <img src="{{ asset($user->profile_image) }}" alt="Profile Image" class="profile-img">
-                    @else
-                        <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image" class="profile-img">
-                    @endif
-                    <h5 class="mt-3">{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</h5>
-                    <p class="text-muted">
-                        {{ $user->user_type == 'personal' ? 'Personal' : ($user->user_type == 'gst' ? 'GST' : 'N/A') }} User
-                    </p>
-                </div>
+                            <div class="container mt-5">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="profile-card">
+                                            <!-- Left Side: Profile Image -->
+                                            <div class="text-center me-4">
+                                                @if (!empty($user->profile_image))
+                                                <img src="{{ asset($user->profile_image) }}" alt="Profile Image"
+                                                    class="profile-img">
+                                                @else
+                                                <img src="{{ asset('profiles/dummy.png') }}" alt="Profile Image"
+                                                    class="profile-img">
+                                                @endif
+                                                <h5 class="mt-3">{{ $user->first_name }} {{ $user->middle_name }}
+                                                    {{ $user->last_name }}</h5>
+                                                <p class="text-muted">
+                                                    {{ $user->user_type == 'personal' ? 'Personal' : ($user->user_type == 'gst' ? 'GST' : 'N/A') }}
+                                                    User
+                                                </p>
+                                            </div>
 
-                <!-- Right Side: User Information -->
-                <div class="flex-grow-1">
-                    <div class="profile-info">
-                        <div><span class="info-label">Username:</span> {{ $user->username ?? 'N/A' }}</div>
-                        <div><span class="info-label">Email:</span> {{ $user->email ?? 'N/A' }}</div>
-                        <div><span class="info-label">Mobile:</span> {{ $user->mobile ?? 'N/A' }}</div>
-                        <div><span class="info-label">Gender:</span> {{ $user->gender == 0 ? 'Female' : ($user->gender == 1 ? 'Male' : 'N/A') }}</div>
-                        <div><span class="info-label">State:</span> {{ $user->state ?? 'N/A' }}</div>
-                        <div><span class="info-label">Address:</span> {{ $user->address ?? 'N/A' }}</div>
-                        <div><span class="info-label">City:</span> {{ $user->city ?? 'N/A' }}</div>
-                        <div><span class="info-label">Pincode:</span> {{ $user->pincode ?? 'N/A' }}</div>
-                        <div><span class="info-label">Full Name:</span> {{ $user->user_full_name ?? 'N/A' }}</div>
-                        <div><span class="info-label">Aadhar Card:</span> {{ $user->aadhar_card ?? 'N/A' }}</div>
-                        <div><span class="info-label">PAN Card:</span> {{ $user->pan_card ?? 'N/A' }}</div>
-                        <div><span class="info-label">Father's Name:</span> {{ $user->father_full_name ?? 'N/A' }}</div>
-                        <div><span class="info-label">DOB:</span> {{ !empty($user->dob) ? \Carbon\Carbon::parse($user->dob)->format('d-m-Y') : 'N/A' }}</div>
-                        <div><span class="info-label">Anniversary Date:</span> {{ !empty($user->anniversary_date) ? \Carbon\Carbon::parse($user->anniversary_date)->format('d-m-Y') : 'N/A' }}</div>
-                        <div><span class="info-label">Business Name:</span> {{ $user->business_name ?? 'N/A' }}</div>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </div>
-</div>
+                                            <!-- Right Side: User Information -->
+                                            <div class="flex-grow-1">
+                                                <div class="profile-info">
+                                                    <div><span class="info-label">Username:</span>
+                                                        {{ $user->username ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Email:</span>
+                                                        {{ $user->email ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Mobile:</span>
+                                                        {{ $user->mobile ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Gender:</span>
+                                                        {{ $user->gender == 0 ? 'Female' : ($user->gender == 1 ? 'Male' : 'N/A') }}
+                                                    </div>
+                                                    <div><span class="info-label">State:</span>
+                                                        {{ $user->state ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Address:</span>
+                                                        {{ $user->address ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">City:</span>
+                                                        {{ $user->city ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Pincode:</span>
+                                                        {{ $user->pincode ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Full Name:</span>
+                                                        {{ $user->user_full_name ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Aadhar Card:</span>
+                                                        {{ $user->aadhar_card ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">PAN Card:</span>
+                                                        {{ $user->pan_card ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">Father's Name:</span>
+                                                        {{ $user->father_full_name ?? 'N/A' }}</div>
+                                                    <div><span class="info-label">DOB:</span>
+                                                        {{ !empty($user->dob) ? \Carbon\Carbon::parse($user->dob)->format('d-m-Y') : 'N/A' }}
+                                                    </div>
+                                                    <div><span class="info-label">Anniversary Date:</span>
+                                                        {{ !empty($user->anniversary_date) ? \Carbon\Carbon::parse($user->anniversary_date)->format('d-m-Y') : 'N/A' }}
+                                                    </div>
+                                                    <div><span class="info-label">Business Name:</span>
+                                                        {{ $user->business_name ?? 'N/A' }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -137,7 +159,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <label>Select Financial Year</label>
-                                                <select class="form-control" name="financial_year" id="financial_year">
+                                                <select class="form-control" name="financial_year" id="financial_year"
+                                                    required>
                                                     <option value="" selected disabled>Select Financial Year
                                                     </option>
                                                 </select>
@@ -153,7 +176,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Document Name:</label>
-                                            <input type="text" id="document_name" name="document_name" class="form-control">
+                                            <input type="text" id="document_name" name="document_name"
+                                                class="form-control">
                                             @error('document_name')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -162,37 +186,37 @@
                                         <div class="mb-3">
                                             <label>Document Type:</label>
                                             <select name="doc_type" id="doc_type" class="form-control select2-multiple">
+                                                <option>Select document type</option>
                                                 <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
-                                                <option value="pan_card">PAN Card / પાન કાર્ડ</option>
+                                                <option value="pan_card">Pan Card / પાન કાર્ડ</option>
                                                 <option value="form_16">Form 16 / ફોર્મ 16</option>
-                                                <option value="rc_book">RC Book / આરસી બુક</option>
+                                                <option value="rc_book">Vehicle R.C Book / વાહન ની આર.સી. બુક</option>
                                                 <option value="bank_statement">Bank Statement / Passbook / બેંક
                                                     સ્ટેટમેન્ટ /પાસબુક</option>
-                                                <option value="fd_statement">Fixed Deposit statment & Certicate /
-                                                    બાંધી
-                                                    મુદતની થાપણ / પ્રમાણપત્ર</option>
-                                                <option value="loan_statement">Loan Statement & interest
-                                                    certificate /
-                                                    લોન સ્ટેટમેન્ટ / લોન પત્ર</option>
-                                                <option value="driving_license">Driving License / ડ્રાઈવિંગ લાયસન્સ
+                                                <option value="fd_statement">Fixed Deposit Receipt & Certificate /
+                                                    ફિક્સ્ડ ડિપોઝિટ રસીદ અને સ્ટેટમેન્ટ</option>
+                                                <option value="loan_statement">Loan Statement & Interest
+                                                    Certificate /
+                                                    લોન સ્ટેટમેન્ટ અને વ્યાજ નું સર્ટી</option>
+                                                <option value="post_investment">Post Office Investment / પોસ્ટ માં રોકાણ
                                                 </option>
-                                                <option value="residential_proof">Residential Proof / રહેઠાણ પુરાવો
+                                                <option value="insurance_investment">Insurance Investment / વીમા માં
+                                                    રોકાણ
                                                 </option>
-                                                <option value="property_tax_receipt">Property Tax Receipt / મિલ્કત
-                                                    કર
-                                                    રસીદ</option>
-                                                <option value="electricity_bill">Latest Electricity or Telephone
-                                                    Bill /
-                                                    તાજેતરની વીજળી અથવા ટેલિફોન બીલ</option>
-                                                <option value="business_proof">Business Proof / Registration
-                                                    Certificate
-                                                    / વ્યવસાય પુરાવો / નોંધણી પ્રમાણપત્ર</option>
-                                                <option value="etc">ETC (Toll, FASTag, Other) / ETC (ટોલ,
-                                                    ફાસ્ટેગ, અન્ય)
+                                                <option value="property_documents">Property Documents / મિલકત દસ્તાવેજો
                                                 </option>
-                                                <option value="purchase_bill">Purchase Bill / ખરીદી બિલ</option>
-                                                <option value="sales_bill">Sales Bill / વેચાણ બિલ</option>
-                                                <option value="expense_bill">Expense Bill / ખર્ચ બિલ</option>
+                                                <option value="capital_account">Capital Account From Partnership Firm /
+                                                    ભાગીદારી પેઢીમાંથી ભાગીદાર નું મૂડી ખાતું</option>
+                                                <option value="agriculture_invoice">Agriculture Invoice / ખેતીવાડીના બિલ
+                                                </option>
+                                                <option value="sharemarket_detail">Share Market Statement (Ledger,
+                                                    Profit & Loss, Holding) / શેર બજાર સ્ટેટમેન્ટ (લેજર, નફો અને નુકસાન,
+                                                    હોલ્ડિંગ)
+                                                </option>
+                                                <option value="purchase_bill">Purchase Invoice / ખરીદી ના બિલ</option>
+                                                <option value="sales_bill">Sales Invoice / વેચાણ ના બિલ</option>
+                                                <option value="expense_bill">Expense Invoice / ખર્ચ ના બિલ</option>
+                                                <option value="other_details">Other Details / અન્ય વિગતો </option>
                                                 @if (auth()->user()->user_type == 'admin')
                                                 <option value="computation">Computation</option>
                                                 <option value="trading">Trading</option>
@@ -218,7 +242,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Upload File:</label>
-                                            <input type="file" if name="document_image_path" id="fileInput" 
+                                            <input type="file" if name="document_image_path" id="fileInput"
                                                 class="form-control" accept="image/*,.pdf">
                                             @error('document_image_path')
                                             <span class="text-danger">{{ $message }}</span>
@@ -234,7 +258,7 @@
 
                         <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                             <div class="document-card">
-                            <div class="card-header d-flex justify-content-between">
+                                <div class="card-header d-flex justify-content-between">
                                     <div class="d-flex align-items-center" style="width: 220px;">
                                         <label for="yearSelect" class="w-100">Select Year:</label>
                                         <select id="documentDownloadYearSelect" class="form-control"
@@ -251,12 +275,13 @@
                                             Zip</button>
                                     </div>
                                 </div>
-                                
+
                                 <div class="card-body">
-                                    <table class="datatables table table-bordered table-striped table-hover" id="documentTable" data-order='[]'>
+                                    <table class="datatables table table-bordered table-striped table-hover"
+                                        id="documentTable" data-order='[]'>
                                         <thead>
                                             <tr>
-                                            <th><input type="checkbox" name="document_select_all"></th>
+                                                <th><input type="checkbox" name="document_select_all"></th>
                                                 <th>Document Name</th>
                                                 <th>Document Type</th>
                                                 <th>Upload Type</th>
@@ -275,7 +300,7 @@
                         <div class="tab-pane fade" id="download-document" role="tabpanel"
                             aria-labelledby="download-document-tab">
                             <div class="download-document-card">
-                                
+
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="d-flex align-items-center" style="width: 220px;">
                                         <label for="yearSelect" class="w-100">Select Year:</label>
@@ -444,12 +469,12 @@
                 user_type: userType
             },
             success: function(response) {
-                if(userType == 'admin') {
+                if (userType == 'admin') {
                     $('#downloadDocTable tbody').html(response);
                 } else {
                     $('#documentTable tbody').html(response);
                 }
-                },
+            },
             error: function(xhr) {
                 console.log(xhr.responseText);
             }
@@ -468,7 +493,7 @@
         }
     });
     $(document).ready(function() {
-        handleYearChange('','');
+        handleYearChange('', '');
         handleYearChange('', 'admin');
         $('#fileUploadForm').on('submit', function(event) {
             event.preventDefault();
@@ -623,9 +648,8 @@
         });
     }
     $(document).ready(function() {
-        $('#doc_type').change(function(){
+        $('#doc_type').change(function() {
             var selectedValue = $(this).val();
-            console.log(selectedValue);
             $('#document_name').val(selectedValue);
         });
     });
@@ -636,56 +660,64 @@
         $("#financial_year").change(function() {
             var financialYear = $(this).val();
             var years = financialYear.split("-"); // Split into [startYear, endYear]
-            var startDate = `04/01/${years[0]}`; // April 1st of start year
-            var endDate = `03/31/${years[1]}`; // March 31st of end year
+
+            var startDate = new Date(years[0], 3,
+            1); // April 1st of start year (Month index starts from 0, so 3 = April)
+            var endDate = new Date(years[1], 2, 31); // March 31st of end year (2 = March)
 
             if (startDate && endDate) {
                 $("#date_from").datepicker("destroy").datepicker({
-                    dateFormat: "mm/dd/yy",
-                    minDate: new Date(startDate),
-                    maxDate: new Date(endDate)
-                }).val(startDate);
+                    dateFormat: "dd/mm/yy",
+                    minDate: startDate,
+                    maxDate: endDate
+                }).val($.datepicker.formatDate("dd/mm/yy", startDate));
 
                 $("#date_to").datepicker("destroy").datepicker({
-                    dateFormat: "mm/dd/yy",
-                    minDate: new Date(startDate),
-                    maxDate: new Date(endDate)
-                }).val(endDate);
+                    dateFormat: "dd/mm/yy",
+                    minDate: startDate,
+                    maxDate: endDate
+                }).val($.datepicker.formatDate("dd/mm/yy", endDate));
 
                 $(".datepicker").prop("disabled", false); // Enable date pickers
             }
         });
+
         $(".datatables").DataTable({});
     });
     </script>
     <style>
     .profile-card {
-            border-radius: 10px;
-            background: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 10px;
-            border: 4px solid #007bff;
-            object-fit: cover;
-        }
-        .profile-info {
-            display: flex;
-            flex-wrap: wrap;
-            padding-left: 20px;
-        }
-        .profile-info div {
-            width: 50%;
-            padding: 5px 0;
-        }
-        .info-label {
-            font-weight: bold;
-            color: #333;
-        }
+        border-radius: 10px;
+        background: white;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-img {
+        width: 180px;
+        height: 180px;
+        border-radius: 10px;
+        border: 4px solid #007bff;
+        object-fit: cover;
+    }
+
+    .profile-info {
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 20px;
+    }
+
+    .profile-info div {
+        width: 50%;
+        padding: 5px 0;
+    }
+
+    .info-label {
+        font-weight: bold;
+        color: #333;
+    }
+
     .form-control-static {
         background: #f8f9fa;
         padding: 8px;

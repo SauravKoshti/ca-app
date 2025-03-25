@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/forgot-username', [UserController::class, 'showForgotUsernameForm'])->name('forgot.username');
         Route::post('/forgot-username', [UserController::class, 'sendUsername']);
 
-        Route::get('/forgot.password', [UserController::class, 'showForgotPasswordForm'])->name('forgot.password.form');
+        Route::get('/forgot-password', [UserController::class, 'showForgotPasswordForm'])->name('forgot.password.form');
         Route::post('/forgot.password', [UserController::class, 'sendPasswordResetLink'])->name('forgot.password.send');
 
         Route::get('/users/document/{user}', [UserController::class, 'getDocument'])->name('users.document');
