@@ -17,200 +17,219 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 
 <script>
-$(document).ready(function() {
-    $("#basic-datatables").DataTable({
-        ordering: false
-});
-    $(".datepicker").datepicker({
-        dateFormat: "dd-mm-yy"
-    }).attr("placeholder", "DD-MM-YY");
-});
+    $(document).ready(function() {
+        $("#basic-datatables").DataTable({
+            ordering: false
+        });
+        $(".datepicker").datepicker({
+            dateFormat: "dd-mm-yy"
+        }).attr("placeholder", "DD-MM-YY");
+    });
 
-function removeData(id, type) {
-    swal({
-        title: "Enter Your Password",
-        content: {
-            element: "input",
-            attributes: {
-                type: "password",
-                placeholder: "Enter Password",
-                id: "password-field",
-                className: "form-control",
-                autocomplete: "new-password",
+    function removeData(id, type) {
+        swal({
+            title: "Enter Your Password",
+            content: {
+                element: "input",
+                attributes: {
+                    type: "password",
+                    placeholder: "Enter Password",
+                    id: "password-field",
+                    className: "form-control",
+                    autocomplete: "new-password",
+                },
             },
-        },
-        buttons: {
-            cancel: {
-                visible: true,
-                className: "btn btn-danger",
+            buttons: {
+                cancel: {
+                    visible: true,
+                    className: "btn btn-danger",
+                },
+                confirm: {
+                    className: "btn btn-success",
+                },
             },
-            confirm: {
-                className: "btn btn-success",
-            },
-        },
-    }).then((value) => {
-        if (value) {
-            let password = document.getElementById("password-field").value;
+        }).then((value) => {
+            if (value) {
+                let password = document.getElementById("password-field").value;
 
-            fetch('/confirm-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector(
-                                'meta[name="csrf-token"]')
-                            .getAttribute('content'),
-                    },
-                    body: JSON.stringify({
-                        password: password,
-                        id: id,
-                        type: type
+                fetch('/confirm-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]')
+                                .getAttribute('content'),
+                        },
+                        body: JSON.stringify({
+                            password: password,
+                            id: id,
+                            type: type
+                        })
                     })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        swal("Success", data.message, "success");
-                        setTimeout(() => {
-                            location.reload();
-                        }, 1000); // Reload after 1 second
-                    } else {
-                        swal("Error", data.message, "error");
-                    }
-                });
-        }
-    });
-}
-
-function editData(url) {
-    swal({
-        title: "Enter Your Password",
-        content: {
-            element: "input",
-            attributes: {
-                type: "password",
-                placeholder: "Enter Password",
-                id: "password-field",
-                className: "form-control",
-                autocomplete: "new-password",
-            },
-        },
-        buttons: {
-            cancel: {
-                visible: true,
-                className: "btn btn-danger",
-            },
-            confirm: {
-                className: "btn btn-success",
-            },
-        },
-    }).then((value) => {
-        if (value) {
-            let password = document.getElementById("password-field").value;
-
-            fetch('/confirm-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector(
-                                'meta[name="csrf-token"]')
-                            .getAttribute('content'),
-                    },
-                    body: JSON.stringify({
-                        password: password,
-                        action:'edit'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        swal("Success", data.message, "success");
-                        setTimeout(() => {
-                            window.location.href = url;
-                        }, 1000); 
-                    } else {
-                        swal("Error", data.message, "error");
-                    }
-                });
-        }
-    });
-}
-layout: {
-    topStart: {
-        buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
-    }
-}
-$(".select2-multiple").select2({
-    theme: "bootstrap",
-    placeholder: "Select a User",
-    containerCssClass: ':all:'
-});
-
-function successMessage(message) {
-    var content = {};
-    content.message = '';
-    content.title = message;
-    content.icon = "fa fa-bell";
-    $.notify(content, {
-        type: 'success',
-        placement: {
-            from: 'top',
-            align: 'center',
-        },
-        time: 1000,
-        delay: 5000, // Notification disappears after 5 seconds
-        animate: {
-            enter: 'animated fadeInDown',
-            exit: 'animated fadeOutUp'
-        }
-    });
-}
-@if(session('success'))
-successMessage("{{ session('success') }}");
-@endif
-
-function uploadFile() {
-    let progressBar = document.getElementById('progressBar');
-    let fileInput = document.getElementById('fileInput');
-    if (fileInput.files.length === 0) {
-        alert('Please select a file first.');
-        return;
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            swal("Success", data.message, "success");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000); // Reload after 1 second
+                        } else {
+                            swal("Error", data.message, "error");
+                        }
+                    });
+            }
+        });
     }
 
-    let progress = 0;
-    let interval = setInterval(() => {
-        progress += 10;
-        progressBar.style.width = progress + '%';
-        progressBar.setAttribute('aria-valuenow', progress);
-        if (progress >= 100) {
-            clearInterval(interval);
-            alert('File uploaded successfully!');
+    function editData(url) {
+        swal({
+            title: "Enter Your Password",
+            content: {
+                element: "input",
+                attributes: {
+                    type: "password",
+                    placeholder: "Enter Password",
+                    id: "password-field",
+                    className: "form-control",
+                    autocomplete: "new-password",
+                },
+            },
+            buttons: {
+                cancel: {
+                    visible: true,
+                    className: "btn btn-danger",
+                },
+                confirm: {
+                    className: "btn btn-success",
+                },
+            },
+        }).then((value) => {
+            if (value) {
+                let password = document.getElementById("password-field").value;
+
+                fetch('/confirm-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]')
+                                .getAttribute('content'),
+                        },
+                        body: JSON.stringify({
+                            password: password,
+                            action: 'edit'
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            swal("Success", data.message, "success");
+                            setTimeout(() => {
+                                window.location.href = url;
+                            }, 1000);
+                        } else {
+                            swal("Error", data.message, "error");
+                        }
+                    });
+            }
+        });
+    }
+    layout: {
+        topStart: {
+            buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
         }
-    }, 300);
-}
+    }
+    $(".select2-multiple").select2({
+        theme: "bootstrap",
+        placeholder: "Select a User",
+        containerCssClass: ':all:'
+    });
+
+    function successMessage(message) {
+        var content = {};
+        content.message = '';
+        content.title = message;
+        content.icon = "fa fa-bell";
+        $.notify(content, {
+            type: 'success',
+            placement: {
+                from: 'top',
+                align: 'center',
+            },
+            time: 1000,
+            delay: 5000, // Notification disappears after 5 seconds
+            animate: {
+                enter: 'animated fadeInDown',
+                exit: 'animated fadeOutUp'
+            }
+        });
+    }
+    @if(session('success'))
+    successMessage("{{ session('success') }}");
+    @endif
+
+    function uploadFile() {
+        let progressBar = document.getElementById('progressBar');
+        let fileInput = document.getElementById('fileInput');
+        if (fileInput.files.length === 0) {
+            alert('Please select a file first.');
+            return;
+        }
+
+        let progress = 0;
+        let interval = setInterval(() => {
+            progress += 10;
+            progressBar.style.width = progress + '%';
+            progressBar.setAttribute('aria-valuenow', progress);
+            if (progress >= 100) {
+                clearInterval(interval);
+                alert('File uploaded successfully!');
+            }
+        }, 300);
+    }
 </script>
 
 <script>
-let currentYear = new Date().getFullYear();
-let selectBox = document.getElementById("financial_year");
-let filterBox = document.getElementById("downloadYearSelect");
-let documentFilterBox = document.getElementById("documentDownloadYearSelect");
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth() + 1; // JS months are 0-based
 
-// Generate financial years (Example: 2022-2023, 2023-2024)
-for (let year = currentYear; year >= 2000; year--) {
-    let financialYear = `${year - 1}-${year}`;
-    let option = new Option(financialYear, financialYear);
-    selectBox.add(option);
-}
-for (let year = currentYear; year >= 2000; year--) {
-    let financialYear = `${year - 1}-${year}`;
-    let option = new Option(financialYear, financialYear);
-    filterBox.add(option);
-}
+    let currentYear = new Date().getFullYear();
+    let selectBox = document.getElementById("financial_year");
+    let filterBox = document.getElementById("downloadYearSelect");
+    let documentFilterBox = document.getElementById("documentDownloadYearSelect");
+    let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth() + 1; // JS months are 0-based
 
-for (let year = currentYear; year >= 2000; year--) {
-    let financialYear = `${year - 1}-${year}`;
-    let option = new Option(financialYear, financialYear);
-    documentFilterBox.add(option);
-}
+let financialYear = month < 4 ? `${year - 1}-${year}` : `${year}-${year + 1}`;
+let currentFinancialYear = currentMonth < 4 ? `${currentYear - 1}-${currentYear}` : `${currentYear}-${currentYear + 1}`;
 
+    // Generate financial years (Example: 2022-2023, 2023-2024)
+    for (let year = currentYear; year >= 2000; year--) {
+        let financialYear = `${year - 1}-${year}`;
+        let option = new Option(financialYear, financialYear);
+        selectBox.add(option);
+        if (financialYear === currentFinancialYear) {
+            option.selected = true;
+        }
+    }
+    for (let year = currentYear; year >= 2000; year--) {
+        let financialYear = `${year - 1}-${year}`;
+        let option = new Option(financialYear, financialYear);
+        console.log("financialYeaqr", financialYear)
+        filterBox.add(option);
+        if (financialYear === currentFinancialYear) {
+            option.selected = true;
+        }
+    }
+
+    for (let year = currentYear; year >= 2000; year--) {
+        let financialYear = `${year - 1}-${year}`;
+        let option = new Option(financialYear, financialYear);
+        documentFilterBox.add(option);
+        console.log("financialYearw", financialYear)
+        if (financialYear === currentFinancialYear) {
+            option.selected = true;
+        }
+    }
 </script>

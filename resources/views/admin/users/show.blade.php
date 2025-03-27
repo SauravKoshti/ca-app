@@ -449,17 +449,18 @@
     @endsection
     @section('section_script')
     <script>
+let financialYearDropdown = document.getElementById("financial_year").value;
     let urlSegments = window.location.pathname.split('/');
     let user_Id = urlSegments[urlSegments.length - 1];
-    console.log(user_Id);
+    // console.log(user_Id, financialYearDropdown);
 
-    function handleYearChange(year, userType) {
+    function handleYearChange(financialYearDropdown, userType) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
+        if (financialYearDropdown) {
         $.ajax({
             url: "/fetch-images",
             type: "POST",
@@ -479,6 +480,7 @@
                 console.log(xhr.responseText);
             }
         });
+    }
 
     }
 
