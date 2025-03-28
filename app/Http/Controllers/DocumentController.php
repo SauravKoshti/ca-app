@@ -241,9 +241,21 @@ class DocumentController extends Controller
             $imagesHtml .= '<td>';
             if ($documentData->doc_type) {
                 foreach (explode(',', $documentData->doc_type) as $doc_type) {
-                    $imagesHtml .= '<p class="mb-0">' . Config::get('constant.doc_type')[$doc_type] . '</p>';
+                    $docTypes = Config::get('constant.doc_type');
+            
+                    if (isset($docTypes[$doc_type])) {
+                        $imagesHtml .= '<p class="mb-0">' . $docTypes[$doc_type] . '</p>';
+                    } else {
+                        $imagesHtml .= '<p class="mb-0 text-danger">Unknown Document Type: ' . htmlspecialchars($doc_type) . '</p>'; // Handle unknown doc type
+                    }
                 }
             }
+            
+            // if ($documentData->doc_type) {
+            //     foreach (explode(',', $documentData->doc_type) as $doc_type) {
+            //         $imagesHtml .= '<p class="mb-0">' . Config::get('constant.doc_type')[$doc_type] . '</p>';
+            //     }
+            // }
             $imagesHtml .= '</td>';
             $imagesHtml .= '<td>' . $documentData->upload_type . '</td>';
             $imagesHtml .= '<td>';
