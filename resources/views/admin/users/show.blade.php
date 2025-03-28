@@ -449,18 +449,124 @@
     @endsection
     @section('section_script')
     <script>
-let financialYearDropdown = document.getElementById("financial_year").value;
-    let urlSegments = window.location.pathname.split('/');
-    let user_Id = urlSegments[urlSegments.length - 1];
-    // console.log(user_Id, financialYearDropdown);
+// let financialYearDropdown = document.getElementById("financial_year").value;
+//     let urlSegments = window.location.pathname.split('/');
+//     let user_Id = urlSegments[urlSegments.length - 1];
+//     // console.log(user_Id, financialYearDropdown);
 
-    function handleYearChange(financialYearDropdown, userType) {
-        $.ajaxSetup({
+//     function handleYearChange(financialYearDropdown, userType) {
+//         $.ajaxSetup({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             }
+//         });
+//         if (financialYearDropdown) {
+//         $.ajax({
+//             url: "/fetch-images",
+//             type: "POST",
+//             data: {
+//                 year: year,
+//                 user_Id: user_Id,
+//                 user_type: userType
+//             },
+//             success: function(response) {
+//                 if (userType == 'admin') {
+//                     $('#downloadDocTable tbody').html(response);
+//                 } else {
+//                     $('#documentTable tbody').html(response);
+//                 }
+//             },
+//             error: function(xhr) {
+//                 console.log(xhr.responseText);
+//             }
+//         });
+//     }
+$(document).ready(function () {
+    let currentYear = getCurrentFinancialYear();
+    
+    // Set the dropdown values to the current financial year
+    $('#downloadYearSelect').val(currentYear);
+    $('#documentDownloadYearSelect').val(currentYear);
+
+    // Trigger the function on page load with the current year
+    handleYearChange(currentYear, 'admin');
+    handleYearChange(currentYear, '');
+
+    $('#fileUploadForm').on('submit', function (event) {
+        event.preventDefault();
+
+        let formData = new FormData(this);
+        let file = $('#fileInput')[0].files[0];
+
+        if (!file) {
+            alert("Please select a file to upload.");
+            return;
+        }
+
+        $('.progress').show();
+        $('#progressBar').css('width', '0%').text('0%');
+
+        $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop('disabled', true);
+        $.ajax({
+            url: "{{ route('users.upload.document', $user->id) }}",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            },
+            xhr: function () {
+                let xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        let percentComplete = Math.round((evt.loaded / evt.total) * 100);
+                        $('#progressBar').css('width', percentComplete + '%').text(percentComplete + '%');
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function (response) {
+                successMessage('Document created successfully.')
+                $('#progressBar').css('width', '100%').html('100% Complete ✅');
+            },
+            error: function (xhr) {
+                $('#message').html('<div class="alert alert-danger">Error uploading file.</div>');
+                $('#progressBar').css('width', '0%').text('0%');
+            },
+            complete: function () {
+                $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop('disabled', false);
             }
         });
-        if (financialYearDropdown) {
+    });
+});
+
+// Function to get the current financial year
+function getCurrentFinancialYear() {
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+
+    // Assuming financial year starts in April and ends in March
+    if (month < 4) {
+        return (year - 1) + "-" + year;
+    } else {
+        return year + "-" + (year + 1);
+    }
+}
+
+// Function to handle financial year change
+function handleYearChange(year, userType) {
+    let urlSegments = window.location.pathname.split('/');
+    let user_Id = urlSegments[urlSegments.length - 1];
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    if (year) {
         $.ajax({
             url: "/fetch-images",
             type: "POST",
@@ -469,14 +575,14 @@ let financialYearDropdown = document.getElementById("financial_year").value;
                 user_Id: user_Id,
                 user_type: userType
             },
-            success: function(response) {
+            success: function (response) {
                 if (userType == 'admin') {
                     $('#downloadDocTable tbody').html(response);
                 } else {
                     $('#documentTable tbody').html(response);
                 }
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 console.log(xhr.responseText);
             }
         });
@@ -495,8 +601,8 @@ let financialYearDropdown = document.getElementById("financial_year").value;
         }
     });
     $(document).ready(function() {
-        handleYearChange('', '');
-        handleYearChange('', 'admin');
+        // handleYearChange(financialYearDropdown, '');
+        // handleYearChange(financialYearDropdown, 'admin');
         $('#fileUploadForm').on('submit', function(event) {
             event.preventDefault();
 
