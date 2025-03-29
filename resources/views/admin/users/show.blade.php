@@ -52,7 +52,12 @@
                                 <button class="nav-link" id="download-document-tab" data-bs-toggle="tab"
                                     data-bs-target="#download-document" type="button" role="tab"
                                     aria-controls="download-document" aria-selected="false">
+                                    @if (auth()->user()->user_type == 'admin')
+                                    Upload Document
+                                    @else
                                     Download Document
+                                    @endif
+                                    
                                 </button>
                             </li>
 
@@ -277,8 +282,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <table class="datatables table table-bordered table-striped table-hover"
-                                        id="documentTable" data-order='[]'>
+                                    <table class="datatables table table-bordered table-striped table-hover" id="documentTable" data-order='[]'>
                                         <thead>
                                             <tr>
                                                 <th><input type="checkbox" name="document_select_all"></th>
@@ -508,7 +512,7 @@ $(document).ready(function () {
 
         $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop('disabled', true);
         $.ajax({
-            url: "{{ route('users.upload.document', $user->id) }}",
+            url: "{{ route('users.upload.document') }}",
             type: "POST",
             data: formData,
             contentType: false,
@@ -599,63 +603,6 @@ function handleYearChange(year, userType) {
                 new bootstrap.Tab(tabElement).show();
             }
         }
-    });
-    $(document).ready(function() {
-        // handleYearChange(financialYearDropdown, '');
-        // handleYearChange(financialYearDropdown, 'admin');
-        $('#fileUploadForm').on('submit', function(event) {
-            event.preventDefault();
-
-            let formData = new FormData(this);
-            let file = $('#fileInput')[0].files[0];
-
-            if (!file) {
-                alert("Please select a file to upload.");
-                return;
-            }
-
-            $('.progress').show();
-            $('#progressBar').css('width', '0%').text('0%');
-
-            $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop('disabled', true);
-            $.ajax({
-                url: "{{ route('users.upload.document', $user->id) }}",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').val()
-                },
-                xhr: function() {
-                    let xhr = new window.XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", function(evt) {
-                        if (evt.lengthComputable) {
-                            let percentComplete = Math.round((evt.loaded / evt
-                                .total) * 100);
-                            $('#progressBar').css('width', percentComplete + '%')
-                                .text(percentComplete + '%');
-                        }
-                    }, false);
-                    return xhr;
-                },
-                success: function(response) {
-                    successMessage('Document created successfully.')
-                    $('#progressBar').css('width', '100%').html('100% Complete ✅');
-                },
-                error: function(xhr) {
-                    $('#message').html(
-                        '<div class="alert alert-danger">Error uploading file.</div>');
-                    $('#progressBar').css('width', '0%').text('0%');
-                },
-                complete: function() {
-                    // Enable form fields and button after upload completes
-                    $('#fileUploadForm input, #fileUploadForm select, #uploadBtn').prop(
-                        'disabled', false);
-                }
-            });
-        });
-
     });
 
     $('[name="select_all"]').on('change', function() {

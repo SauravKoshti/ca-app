@@ -312,89 +312,90 @@
 @endsection
 @section('section_script')
 <script>
-$(document).ready(function() {
-    $('.gstNumberField').hide();
-    $('#userType').on('change', function() {
+    $(document).ready(function() {
         $('.gstNumberField').hide();
-        if ($(this).val() === 'gst') {
+        let userType = document.getElementById("userType").value;
+        if (userType === 'gst') {
             $('.gstNumberField').show();
         }
+        $('#userType').on('change', function() {
+            $('.gstNumberField').hide();
+            if ($(this).val() === 'gst') {
+                $('.gstNumberField').show();
+            }
+        });
+
+        // pincode  format
+        $("#pincode").on("input", function() {
+            let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
+
+            if (value.length > 7) value = value.substring(0, 6); // Limit to 6 digits
+
+            let formattedValue = value.replace(/(\d{4})/g, "$1").trim();
+
+            $(this).val(formattedValue);
+        });
+
+        // aadhar card number format XXXX XXXX XXXX
+        $("#aadharCard").on("input", function() {
+            let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
+            if (value.length > 12) value = value.substring(0, 12); // Limit to 12 digits
+
+            // Format as XXXX XXXX XXXX
+            let formattedValue = value.replace(/(\d{4})/g, "$1 ").trim();
+
+            $(this).val(formattedValue);
+        });
+
+        // contact number format XXXX XXXX XXXX
+        $("#mobile").on("input", function() {
+            let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
+            if (value.length > 10) value = value.substring(0, 10); // Limit to 10 digits
+
+            $(this).val(value); // Set the formatted value
+        });
+
+        // pancard number format XXXXXXXXXX
+        $("#panCard").on("keydown", function(event) {
+            // Allow Tab key to move to the next field
+            if (event.key === "Tab") {
+                return true; // Let the default behavior occur
+            }
+            event.preventDefault(); // Prevent default input
+
+            let value = $(this).val();
+            let currentLength = value.length;
+
+            // Allow Backspace
+            if (event.key === "Backspace") {
+                $(this).val(value.slice(0, -1));
+                return;
+            }
+
+            // Allow only specific characters based on position
+            let isAlpha = (currentLength < 5 || currentLength === 9);
+            let isNumeric = (currentLength >= 5 && currentLength < 9);
+
+            if (isAlpha && /^[a-zA-Z]$/.test(event.key)) {
+                $(this).val(value + event.key.toUpperCase());
+            } else if (isNumeric && /^[0-9]$/.test(event.key)) {
+                $(this).val(value + event.key);
+            }
+        });
+
+        $("#fullName").change(function() {
+            if ($(this).is(":checked")) {
+                let firstName = $("#firstName").val().trim();
+                let middleName = $("#middleName").val().trim();
+                let lastName = $("#lastName").val().trim();
+
+                let fullName = [firstName, middleName, lastName].filter(name => name !== "").join(" ");
+
+                $("#user_full_name").val(fullName).prop("readonly", true);
+            } else {
+                $("#user_full_name").val("").prop("readonly", false);
+            }
+        });
     });
-
-    // pincode  format
-    $("#pincode").on("input", function() {
-        let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
-
-        if (value.length > 7) value = value.substring(0, 6); // Limit to 6 digits
-
-        let formattedValue = value.replace(/(\d{4})/g, "$1").trim();
-
-        $(this).val(formattedValue);
-    });
-
-    // aadhar card number format XXXX XXXX XXXX
-    $("#aadharCard").on("input", function() {
-        let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
-        if (value.length > 12) value = value.substring(0, 12); // Limit to 12 digits
-
-        // Format as XXXX XXXX XXXX
-        let formattedValue = value.replace(/(\d{4})/g, "$1 ").trim();
-
-        $(this).val(formattedValue);
-    });
-
-    // contact number format XXXX XXXX XXXX
-    $("#mobile").on("input", function() {
-        let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
-        if (value.length > 11) value = value.substring(0, 10); // Limit to 12 digits
-
-        // Format as XXXX XXXX XXXX
-        let formattedValue = value.replace(/(\d{4})/g, "$1").trim();
-
-        $(this).val(formattedValue);
-    });
-
-    // pancard number format XXXXXXXXXX
-    $("#panCard").on("keydown", function(event) {
-        // Allow Tab key to move to the next field
-        if (event.key === "Tab") {
-            return true; // Let the default behavior occur
-        }
-        event.preventDefault(); // Prevent default input
-
-        let value = $(this).val();
-        let currentLength = value.length;
-
-        // Allow Backspace
-        if (event.key === "Backspace") {
-            $(this).val(value.slice(0, -1));
-            return;
-        }
-
-        // Allow only specific characters based on position
-        let isAlpha = (currentLength < 5 || currentLength === 9);
-        let isNumeric = (currentLength >= 5 && currentLength < 9);
-
-        if (isAlpha && /^[a-zA-Z]$/.test(event.key)) {
-            $(this).val(value + event.key.toUpperCase());
-        } else if (isNumeric && /^[0-9]$/.test(event.key)) {
-            $(this).val(value + event.key);
-        }
-    });
-
-    $("#fullName").change(function() {
-        if ($(this).is(":checked")) {
-            let firstName = $("#firstName").val().trim();
-            let middleName = $("#middleName").val().trim();
-            let lastName = $("#lastName").val().trim();
-
-            let fullName = [firstName, middleName, lastName].filter(name => name !== "").join(" ");
-
-            $("#user_full_name").val(fullName).prop("readonly", true);
-        } else {
-            $("#user_full_name").val("").prop("readonly", false);
-        }
-    });
-});
 </script>
 @endsection

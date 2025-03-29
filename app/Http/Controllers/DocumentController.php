@@ -63,10 +63,11 @@ class DocumentController extends Controller
         ]);
 
         session()->flash('success', 'Document created successfully');
-        return redirect()->route('users.show', [
-            'user' => $request->user_id,
-            'tab' => 'document-tab'
-        ])->with('success', 'Document created successfully.');
+        return response()->json([], 200);
+        // return redirect()->route('users.show', [
+        //     'user' => $request->user_id,
+        //     'tab' => 'document-tab'
+        // ])->with('success', 'Document created successfully.');
     }
 
     public function show($id)
