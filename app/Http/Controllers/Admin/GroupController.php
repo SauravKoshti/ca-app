@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,17 +13,28 @@ use Auth;
 
 class GroupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $login_user = Auth::user();
-        if ($login_user->user_type !='admin') {
-            $groups = Group::leftJoin('users', 'users.group_id', '=', 'groups.id')
-                ->select('groups.*')
-                ->where('users.id', $login_user->id)->orderBy('id', 'desc')->get();
-        } else {
-            $groups = Group::all();
+        if ($request->ajax()) {
+            $login_user = Auth::user();
+
+            if ($login_user->user_type != 'admin') {
+                $groups = Group::leftJoin('users', 'users.group_id', '=', 'groups.id')
+                    ->select('groups.*')
+                    ->where('users.id', $login_user->id)
+                    ->orderBy('groups.id', 'desc');
+            } else {
+                $groups = Group::orderBy('id', 'desc');
+            }
+
+            return DataTables::of($groups)
+                ->addColumn('action', function ($row) {
+                    return '<a href="' . route('groups.edit', $row->id) . '" class="btn btn-sm btn-primary">Edit</a>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
-        return view('admin.groups.index', compact('groups'));
+        return view('admin.groups.index');
     }
 
     public function create()
@@ -105,5 +117,4 @@ class GroupController extends Controller
         ]);
         return redirect()->route('groups.show', $request->group_id)->with('success', 'User remove from group successfully.');
     }
-
 }

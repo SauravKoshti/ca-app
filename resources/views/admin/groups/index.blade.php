@@ -37,8 +37,8 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table
-                                id="basic-datatables"
-                                class="display table table-striped table-hover">
+                                id="group-basic-datatables"
+                                class="display table table-striped table-hover ">
                                 <thead>
                                     <tr>
                                         <!-- <th>Date</th> -->
@@ -46,52 +46,7 @@
                                         <th>Description</th>
                                         <th>Action</th>
                                     </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                    <!-- <th>Date</th> -->
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                @if ($groups->isEmpty())
-                                    <tr>
-                                        <td colspan="4" class="text-center">No documet records found.</td>
-                                    </tr>
-                                    @else
-                                    
-                                    @foreach($groups as $user)
-                                    <tr>
-                                        <!-- <td>{{ $user->created_at }} </td> -->
-                                        <td>{{ $user->name }} </td>
-                                        <td>{{ $user->description }}</td>
-                                        <td>
-                                            <a href="{{ route('groups.show', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Show Group">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <div class="form-button-action">
-                                                <!-- <a href="{{ route('groups.edit', $user->id) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Group">
-                                                    <i class="fa fa-edit"></i>
-                                                </a> -->
-                                                <button type="button"
-                                                    onClick="editData('{{ route('groups.edit', $user->id) }}')"
-                                                    class="btn btn-link btn-primary btn-lg edit_data"
-                                                    data-bs-toggle="tooltip" title="edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                @if(auth()->user()->user_type == 'admin')
-                                                    <button onClick="removeData({{ $user->id }}, 'group')" class="btn btn-link btn-danger remove_data" data-bs-toggle="tooltip" title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                @endif
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
+                                </thead> 
                             </table>
                         </div>
                     </div>
@@ -101,4 +56,49 @@
         </div>
     </div>
 </div>
+@endsection
+@section('section_script')
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+    $('#group-basic-datatables').DataTable({
+        "dom": '<"top"f>rt<"bottom"pli><"clear">',
+        processing: true,
+        searching: true,
+        serverSide: true,
+        ajax: "{{ route('groups.index') }}",
+        columns: [{
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'description',
+                name: 'description'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            }
+        ],
+        drawCallback: function(settings) {
+            // feather.replace(); // Initialize Feather icons
+            // Check if no data is returned
+            let api = this.api();
+            let rows = api.rows({
+                page: 'current'
+            }).count();
+
+            // Hide pagination if no data
+            if (rows === 0) {
+                $('.dataTables_paginate').hide();
+            } else {
+                $('.dataTables_paginate').show();
+            }
+        }
+    });
+});
+</script>
+
 @endsection

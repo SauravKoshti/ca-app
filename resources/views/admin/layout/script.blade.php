@@ -15,15 +15,34 @@
 <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+<!-- SheetJS for Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- jsPDF & autoTable for PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
 
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+
     $(document).ready(function() {
+        $("#mobile").on("input", function() {
+            let value = $(this).val().replace(/\D/g, ""); 
+            if (value.length > 10) value = value.substring(0, 10);
+            $(this).val(value); 
+        });
         $("#basic-datatables").DataTable({
             ordering: false
         });
         $(".datepicker").datepicker({
-            dateFormat: "dd-mm-yy"
-        }).attr("placeholder", "DD-MM-YY");
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true
+        }).attr("placeholder", "DD-MM-YYYY");
     });
 
     function removeData(id, type) {
@@ -72,7 +91,7 @@
                             swal("Success", data.message, "success");
                             setTimeout(() => {
                                 location.reload();
-                            }, 1000); // Reload after 1 second
+                            }, 1000);
                         } else {
                             swal("Error", data.message, "error");
                         }
@@ -193,43 +212,63 @@
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth() + 1; // JS months are 0-based
 
-    let currentYear = new Date().getFullYear();
+    let currentYear = new Date().getFullYear() + 1;
     let selectBox = document.getElementById("financial_year");
     let filterBox = document.getElementById("downloadYearSelect");
     let documentFilterBox = document.getElementById("documentDownloadYearSelect");
     let date = new Date();
-let year = date.getFullYear();
-let month = date.getMonth() + 1; // JS months are 0-based
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; 
 
-let financialYear = month < 4 ? `${year - 1}-${year}` : `${year}-${year + 1}`;
-let currentFinancialYear = currentMonth < 4 ? `${currentYear - 1}-${currentYear}` : `${currentYear}-${currentYear + 1}`;
+    let financialYear = month < 4 ? `${year - 1}-${year}` : `${year}-${year + 1}`;
+    let currentFinancialYear = currentMonth < 4 ? `${currentYear - 1}-${currentYear}` : `${currentYear}-${currentYear + 1}`;
 
     // Generate financial years (Example: 2022-2023, 2023-2024)
     for (let year = currentYear; year >= 2000; year--) {
         let financialYear = `${year - 1}-${year}`;
         let option = new Option(financialYear, financialYear);
-        selectBox.add(option);
-        if (financialYear === currentFinancialYear) {
-            option.selected = true;
+        if (selectBox) {
+            selectBox.add(option);
+            if (financialYear === currentFinancialYear) {
+                var years = financialYear.split("-"); 
+                var startDate = new Date(years[0], 3,
+                    1);
+                var endDate = new Date(years[1], 2, 31); 
+                if (startDate && endDate) {
+                    $("#date_from").datepicker("destroy").datepicker({
+                        dateFormat: "dd/mm/yy",
+                        minDate: startDate,
+                        maxDate: endDate
+                    }).val($.datepicker.formatDate("dd/mm/yy", startDate));
+                    $("#date_to").datepicker("destroy").datepicker({
+                        dateFormat: "dd/mm/yy",
+                        minDate: startDate,
+                        maxDate: endDate
+                    }).val($.datepicker.formatDate("dd/mm/yy", endDate));
+                }
+                option.selected = true;
+            }
         }
     }
     for (let year = currentYear; year >= 2000; year--) {
         let financialYear = `${year - 1}-${year}`;
         let option = new Option(financialYear, financialYear);
-        console.log("financialYeaqr", financialYear)
-        filterBox.add(option);
-        if (financialYear === currentFinancialYear) {
-            option.selected = true;
+        if (filterBox) {
+            filterBox.add(option);
+            if (financialYear === currentFinancialYear) {
+                option.selected = true;
+            }
         }
     }
 
     for (let year = currentYear; year >= 2000; year--) {
         let financialYear = `${year - 1}-${year}`;
         let option = new Option(financialYear, financialYear);
-        documentFilterBox.add(option);
-        console.log("financialYearw", financialYear)
-        if (financialYear === currentFinancialYear) {
-            option.selected = true;
+        if (documentFilterBox) {
+            documentFilterBox.add(option);
+            if (financialYear === currentFinancialYear) {
+                option.selected = true;
+            }
         }
     }
 </script>
