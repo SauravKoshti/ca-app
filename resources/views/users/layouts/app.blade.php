@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="{{ asset('assets/user/css/custom.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Bootstrap 3 CSS -->
-<!-- jQuery (required for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Bootstrap 3 JS -->
+    <!-- jQuery (required for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap 3 JS -->
 
 </head>
 
@@ -35,40 +35,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    $(document).ready(function() {
-        $('.navbar a.dropdown-toggle').on('click', function(e) {
-            var $el = $(this);
-            var $parent = $(this).offsetParent(".dropdown-menu");
-            $(this).parent("li").toggleClass('open');
+        $(document).ready(function() {
+            $('.navbar a.dropdown-toggle').on('click', function(e) {
+                var $el = $(this);
+                var $parent = $(this).offsetParent(".dropdown-menu");
+                $(this).parent("li").toggleClass('open');
 
-            if (!$parent.parent().hasClass('nav')) {
-                $el.next().css({
-                    "top": $el[0].offsetTop,
-                    "left": $parent.outerWidth() - 4
-                });
-            }
+                if (!$parent.parent().hasClass('nav')) {
+                    $el.next().css({
+                        "top": $el[0].offsetTop,
+                        "left": $parent.outerWidth() - 4
+                    });
+                }
 
-            $('.nav li.open').not($(this).parents("li")).removeClass("open");
+                $('.nav li.open').not($(this).parents("li")).removeClass("open");
 
-            return false;
+                return false;
+            });
+
         });
-
-    });
     </script>
     <script language="javascript">
-    $(function() {
-        $('#myNavbar li a[href^="' + location.pathname.split("")[1] + '"]').addClass('active');
-    });
+        $(function() {
+            $('#myNavbar li a[href^="' + location.pathname.split("")[1] + '"]').addClass('active');
+        });
     </script>
     <script>
-    $(document).ready(function() {
-        $('.carousel').carousel({
-            interval: 3000 // Change image every 3 seconds
+        $(document).ready(function() {
+            $('.carousel').carousel({
+                interval: 3000 // Change image every 3 seconds
+            });
+            $(".datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true
+            }).attr("placeholder", "DD-MM-YYYY");
         });
-        $(".datepicker").datepicker({
-            dateFormat: "dd-mm-yy"
-        }).attr("placeholder", "DD-MM-YY");
-    });
     </script>
     @yield('section_script')
 </body>
