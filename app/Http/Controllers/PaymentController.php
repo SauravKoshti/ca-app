@@ -22,7 +22,8 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'payament_mode' => 'required',
+            'payment_mode' => 'required',
+            'payment_note' => 'required',
             'discuss_fees' => 'required|numeric',
             'paid_fees' => 'nullable|numeric', 
             'user_id' => 'required|exists:users,id',
@@ -30,6 +31,7 @@ class PaymentController extends Controller
         ]);        
 
         Payment::create($request->all());
+        
         return redirect()->route('users.show',  [
             'user' => $request->user_id,
             'tab' => 'payment-tab'
@@ -48,6 +50,7 @@ class PaymentController extends Controller
     
         // Validate and update the payment
         $payment->update([
+            'payment_note' => 'required',
             'discuss_fees' => $request->input('discuss_fees'),
             'paid_fees' => $request->input('paid_fees'),
             'payament_mode' => $request->input('payament_mode')
