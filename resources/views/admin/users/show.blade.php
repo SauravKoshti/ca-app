@@ -157,7 +157,6 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="user-profile-card">
                                 <div class="card-body">
-
                                     <div class="progress mt-3" style="display: none;">
                                         <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;"
                                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
@@ -170,7 +169,7 @@
                                             <div class="col-6">
                                                 <label>Select Type</label>
                                                 <select class="form-control" name="upload_type"
-                                                    onclick="changeType(this.value)">
+                                                    onclick="changeType(this.value)" value="Online">
                                                     <option value="Online">Online</option>
                                                     <option value="Manual">Manual</option>
                                                 </select>
@@ -204,6 +203,25 @@
                                         <div class="mb-3">
                                             <label>Document Type:</label>
                                             <select name="doc_type" id="doc_type" class="form-control select2-multiple">
+                                                
+                                                @if (auth()->user()->user_type == 'admin')
+                                                <option>Select document type</option>
+                                                <option value="computation">Computation</option>
+                                                <option value="trading">Trading</option>
+                                                <option value="p&l">P&L</option>
+                                                <option value="capital">Capital</option>
+                                                <option value="balance_sheet">Balance Sheet</option>
+                                                <option value="26aS">26AS</option>
+                                                <option value="aib">AIB</option>
+                                                <option value="ttb">TTB</option>
+                                                <option value="gstr_1_excel">GSTR 1 Excel</option>
+                                                <option value="gstr_1_json">GSTR 1 JSON</option>
+                                                <option value="gstr_1_pdf">GSTR 1 PDF</option>
+                                                <option value="gst_3b_pdf">GST 3B PDF</option>
+                                                <option value="gst_2b_pdf">GST 2B PDF</option>
+                                                <option value="gst_challan_pdf">GST Challan PDF</option>
+                                                <option value="gst_summary">GST Summary</option>
+                                                @else
                                                 <option>Select document type</option>
                                                 <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
                                                 <option value="pan_card">Pan Card / પાન કાર્ડ</option>
@@ -235,22 +253,6 @@
                                                 <option value="sales_bill">Sales Invoice / વેચાણ ના બિલ</option>
                                                 <option value="expense_bill">Expense Invoice / ખર્ચ ના બિલ</option>
                                                 <option value="other_details">Other Details / અન્ય વિગતો </option>
-                                                @if (auth()->user()->user_type == 'admin')
-                                                <option value="computation">Computation</option>
-                                                <option value="trading">Trading</option>
-                                                <option value="p&l">P&L</option>
-                                                <option value="capital">Capital</option>
-                                                <option value="balance_sheet">Balance Sheet</option>
-                                                <option value="26aS">26AS</option>
-                                                <option value="aib">AIB</option>
-                                                <option value="ttb">TTB</option>
-                                                <option value="gstr_1_excel">GSTR 1 Excel</option>
-                                                <option value="gstr_1_json">GSTR 1 JSON</option>
-                                                <option value="gstr_1_pdf">GSTR 1 PDF</option>
-                                                <option value="gst_3b_pdf">GST 3B PDF</option>
-                                                <option value="gst_2b_pdf">GST 2B PDF</option>
-                                                <option value="gst_challan_pdf">GST Challan PDF</option>
-                                                <option value="gst_summary">GST Summary</option>
                                                 @endif
                                             </select>
 
@@ -260,7 +262,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Upload File:</label>
-                                            <input type="file" if name="document_image_path" id="fileInput"
+                                            <input type="file" name="document_image_path" id="fileInput"
                                                 class="form-control" accept="image/*,.pdf">
                                             @error('document_image_path')
                                             <span class="text-danger">{{ $message }}</span>
@@ -338,7 +340,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="datatables display table table-striped table-hover"
+                                        <table class="display table table-striped table-hover"
                                             id="downloadDocTable">
                                             <thead>
                                                 <tr>
@@ -351,8 +353,6 @@
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -476,6 +476,8 @@
     @endsection
     @section('section_script')
     <script>
+        
+
         // let financialYearDropdown = document.getElementById("financial_year").value;
         //     let urlSegments = window.location.pathname.split('/');
         //     let user_Id = urlSegments[urlSegments.length - 1];
@@ -510,14 +512,37 @@
         //     }
         $(document).ready(function() {
             let currentYear = getCurrentFinancialYear();
+            $('#downloadDocTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('users.documents') }}",
+                    type: "POST",
+                    data: function(d) {
+                        d.year = $('#documentDownloadYearSelect').val();
+                        d.user_id = "{{ $user->id }}";
+                        d.user_type = "admin";
+                        d._token = "{{ csrf_token() }}";
+                    }
+                },
+                columns: [
+                    { data: 'checkbox', name: 'checkbox' , orderable: false, searchable: false },
+                    { data: 'document_name', name: 'document_name' },
+                    { data: 'doc_type', name: 'doc_type' },
+                    { data: 'upload_type', name: 'upload_type' },
+                    { data: 'uploader_name', name: 'uploader_name' },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
+                ]
+            });
 
             // Set the dropdown values to the current financial year
-            $('#downloadYearSelect').val(currentYear);
-            $('#documentDownloadYearSelect').val(currentYear);
+            // $('#downloadYearSelect').val(currentYear);
+            // $('#documentDownloadYearSelect').val(currentYear);
 
             // Trigger the function on page load with the current year
-            handleYearChange(currentYear, 'admin');
-            handleYearChange(currentYear, '');
+            // handleYearChange(currentYear, 'admin');
+            // handleYearChange(currentYear, '');
 
             $('#fileUploadForm').on('submit', function(event) {
                 event.preventDefault();
@@ -695,7 +720,7 @@
             let allIds = [];
             var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
             checkboxes.forEach(function(checkbox) {
-                allIds.push(checkbox.getAttribute('data-id'));
+                allIds.push(checkbox.getAttribute('value'));
             });
             $.ajax({
                 url: "{{ route('users.download.documents') }}",
@@ -704,7 +729,7 @@
                     _token: '{{ csrf_token() }}',
                     type: type,
                     document_ids: allIds,
-                    select_all: $('[name="select_all"]').val(),
+                    select_all: $('[name="select_all"]:checked').val(),
                     year: year
                 },
                 xhrFields: {
@@ -736,7 +761,7 @@
             });
         });
         $(document).ready(function() {
-            $(".datepicker").prop("disabled", true);
+            // $(".datepicker").prop("disabled", true);
 
             // Function to set date range based on selected financial year
             $("#financial_year").change(function() {
@@ -744,8 +769,8 @@
                 var years = financialYear.split("-"); // Split into [startYear, endYear]
 
                 var startDate = new Date(years[0], 3,
-                    1); // April 1st of start year (Month index starts from 0, so 3 = April)
-                var endDate = new Date(years[1], 2, 31); // March 31st of end year (2 = March)
+                    1);
+                var endDate = new Date(years[1], 2, 31); 
 
                 if (startDate && endDate) {
                     $("#date_from").datepicker("destroy").datepicker({

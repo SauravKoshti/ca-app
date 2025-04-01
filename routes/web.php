@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/users/document/destroy', [DocumentController::class, 'documentDestroy'])->name('users.document.destroy');
         Route::post('/users/download/documents', [DocumentController::class, 'mergeDocuments'])->name('users.download.documents');
         Route::post('/fetch-images', [DocumentController::class, 'fetchImages'])->name('users.fetch.images');
+        Route::post('/get-user-document', [DocumentController::class, 'index'])->name('users.documents');
         Route::get('/payment/{user}', [PaymentController::class, 'create'])->name('users.payment');
         Route::post('/payment/store', [PaymentController::class, 'store'])->name('users.payment.store');
         Route::get('/payment/{user}', [PaymentController::class, 'create'])->name('users.payment');

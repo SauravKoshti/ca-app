@@ -14,24 +14,58 @@ use Illuminate\Support\Facades\Mail;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
    
-    public function index()
+    public function index(Request $request)
     {
-        $login_user = Auth::user();
-        if ($login_user->user_type == 'personal' || $login_user->user_type == 'gst') {
-            $users = collect();
-            if ($login_user->group_id) {
-                $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+        if ($request->ajax()) {
+            $login_user = Auth::user();
+
+            if ($login_user->user_type == 'personal' || $login_user->user_type == 'gst') {
+                $users = collect();
+                if ($login_user->group_id) {
+                    $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+                }
+                $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
+                $users = $users->merge($singleUser)->unique('id');
+            } else {
+                $users = User::orderBy('id', 'desc')->get();
             }
-            $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
-            $users = $users->merge($singleUser)->unique('id');
-        } else {
-            $users = User::orderBy('id', 'desc')->get();
+
+            return DataTables::of($users)
+            ->addColumn('checkbox', function ($row) {
+                return '<input type="checkbox" class="user-checkbox" name="user_id[]" value="' . $row->id . '" id="user_' . $row->id . '" >';
+            })
+            ->addColumn('name', function ($row) {
+                return $row->first_name . ' ' . $row->last_name;
+            })
+            ->addColumn('action', function ($row) {
+                return '<a href="' . route('users.edit', $row->id) . '"  class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task"> <i class="fa fa-edit"></i></a>
+                <a href="' . route('users.show', $row->id) . '" class="btn btn-sm btn-primary">Show</a>
+                        <button class="deleteUserbtn btn-link btn-danger" data-bs-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>';
+            })
+            ->rawColumns(['checkbox', 'action']) // Ensure the columns are not escaped
+            ->toJson();
+        
         }
-        return view('admin.users.index', compact('users'));
+        // return view('admin.groups.index');
+
+
+        // $login_user = Auth::user();
+        // if ($login_user->user_type == 'personal' || $login_user->user_type == 'gst') {
+        //     $users = collect();
+        //     if ($login_user->group_id) {
+        //         $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
+        //     }
+        //     $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
+        //     $users = $users->merge($singleUser)->unique('id');
+        // } else {
+        //     $users = User::orderBy('id', 'desc')->get();
+        // }
+        return view('admin.users.index');
     }
 
     /**

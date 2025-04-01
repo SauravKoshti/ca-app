@@ -7,25 +7,67 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use setasign\Fpdi\Fpdi;
+use Yajra\DataTables\DataTables;
 use Config;
 
 class DocumentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $documents = Document::with(['user', 'creator', 'uploader'])->get();
-        return response()->json($documents);
+        if ($request->ajax()) {
+            if($request->input('user_type') == 'admin') {
+                $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', 'admin')
+                    ->where('user_id', $request->input('user_id'));
+            } else {
+                $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', '!=', 'admin')
+                    ->where('user_id', $request->input('user_id'));
+            }
+            return DataTables::of($documents)
+                ->addColumn('checkbox', function ($row) {
+                    return '<input type="checkbox" class="user-checkbox" name="document_id" value="' . $row->id . '" id="user_' . $row->id . '" >';
+                })
+                ->addColumn('user_name', function ($document) {
+                    return $document->user ? $document->user->name : 'N/A';
+                })
+                ->addColumn('creator_name', function ($document) {
+                    return $document->creator ? $document->creator->user_full_name : 'N/A';
+                })
+                ->addColumn('created_at', function ($document) {
+                    return \Carbon\Carbon::parse($document->created_at)->format('d-m-Y H:i:s');
+                })
+                ->addColumn('uploader_name', function ($document) {
+                    return $document->uploader ? $document->uploader->user_full_name : 'N/A';
+                })
+                ->addColumn('actions', function ($document) {
+                    return '<a href="' . asset($document->document_image_path) . '" download="' . basename($document->document_image_path) . '" class="btn btn-success"><i class="fas fa-download"></i></a>
+                            <form action="' . route('users.document.destroy') . '" id="documentUpload" method="POST" style="display:inline;">
+                                ' . csrf_field() . '
+                                <input type="hidden" name="id" value="' . $document->id . '">
+                                <input type="hidden" name="user_id" value="' . $document->user_id . '">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>';
+                })
+                ->rawColumns(['actions', 'checkbox'])
+                ->make(true);
+        }
+        // return response()->json($documents);
     }
 
     public function store(Request $request)
     {
         $login_user_id = Auth::user()->id;
-        $validator = \Validator::make($request->all(), [
+        $rules = [
             'user_id' => 'required|exists:users,id',
             'document_name' => 'required|string|max:255',
             'doc_type' => 'required|max:300',
             'document_image_path' => 'required_if:upload_type,online|file|mimes:jpg,jpeg,png,pdf|max:2048',
-        ], [
+        ];
+
+        if ($request->upload_type === 'manual') {
+            unset($rules['document_image_path']);
+        }
+
+        $validator = \Validator::make($request->all(), $rules, [
             'document_image_path.required' => 'The document image file is required.',
             'document_image_path.file' => 'The document must be a valid file.',
             'document_image_path.mimes' => 'The document must be in JPG, JPEG, PNG, or PDF format.',
@@ -34,17 +76,18 @@ class DocumentController extends Controller
 
         if ($validator->fails()) {
             return redirect()->route('users.show', [
-                'user' => $request->user_id,
-                'tab' => 'document-tab'
+            'user' => $request->user_id,
+            'tab' => 'document-tab'
             ])->withErrors($validator)
-                ->withInput();
+            ->withInput();
         }
 
         // Store file
         $path = '';
-        if ($image = $request->file('document_image_path')) {
+        if ($request->hasFile('document_image_path')) {
+            $image = $request->file('document_image_path');
             $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $profileImage = $image->getClientOriginalName().date('His') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $path = $destinationPath . $profileImage;
         }
@@ -80,7 +123,11 @@ class DocumentController extends Controller
     public function documentDestroy(Request $request)
     {
         Document::where('id', $request->id)->delete();
-        return redirect()->route('users.show', $request->user_id)->with('success', 'Document deleted successfully.');
+        return redirect()->route('users.show', [
+            'user' => $request->user_id,
+            'tab' => 'download-document-tab'
+            ])->with('success', 'Document deleted successfully.');
+
     }
 
     public function update(Request $request, $id)
@@ -122,10 +169,11 @@ class DocumentController extends Controller
         ]);
 
         $year = $request->input('year');
-        if ($year) {
-            $documents = Document::where('financial_year', $year)->latest()->get();
+        $documents = Document::query();
+        if ($year && $request->input('select_all') == 'on') {
+            $documents = $documents->where('financial_year', $year)->latest()->get();
         } else {
-            $documents = Document::whereIn('id', $request->document_ids)->get();
+            $documents = $documents->whereIn('id', $request->document_ids)->get();
         }
         if ($request->type === 'pdf') {
             return $this->downloadPdf($documents);
