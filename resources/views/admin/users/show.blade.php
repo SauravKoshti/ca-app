@@ -29,6 +29,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
+                        <input type="hidden" name="user_type" id="user_type" value="{{ auth()->user()->user_type }}">
                         <div class="card-title">User Details</div>
                     </div>
                     <div class="card-body">
@@ -297,8 +298,8 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <table class="datatables table table-bordered table-striped table-hover"
-                                        id="documentTable" data-order='[]'>
+                                    <table class="table table-bordered table-striped table-hover"
+                                        id="documentTable">
                                         <thead>
                                             <tr>
                                                 <th><input type="checkbox" name="document_select_all"></th>
@@ -510,8 +511,10 @@
         //             }
         //         });
         //     }
+
         $(document).ready(function() {
             let currentYear = getCurrentFinancialYear();
+            // var userType = document.getElementById('user_type').value;
             $('#downloadDocTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -522,6 +525,29 @@
                         d.year = $('#documentDownloadYearSelect').val();
                         d.user_id = "{{ $user->id }}";
                         d.user_type = "admin";
+                        d._token = "{{ csrf_token() }}";
+                    }
+                },
+                columns: [
+                    { data: 'checkbox', name: 'checkbox' , orderable: false, searchable: false },
+                    { data: 'document_name', name: 'document_name' },
+                    { data: 'doc_type', name: 'doc_type' },
+                    { data: 'upload_type', name: 'upload_type' },
+                    { data: 'uploader_name', name: 'uploader_name' },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
+                ]
+            });
+            $('#documentTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('users.documents') }}",
+                    type: "POST",
+                    data: function(d) {
+                        d.year = $('#documentDownloadYearSelect').val();
+                        d.user_id = "{{ $user->id }}";
+                        // d.user_type = ;
                         d._token = "{{ csrf_token() }}";
                     }
                 },
@@ -629,7 +655,7 @@
                     data: {
                         year: year,
                         user_Id: user_Id,
-                        user_type: userType
+                        user_type: ''
                     },
                     success: function(response) {
                         if (userType == 'admin') {
@@ -792,6 +818,7 @@
             $(".datatables").DataTable({});
         });
     </script>
+    
     <style>
         .profile-card {
             border-radius: 10px;

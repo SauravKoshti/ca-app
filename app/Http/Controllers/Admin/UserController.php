@@ -14,58 +14,25 @@ use Illuminate\Support\Facades\Mail;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
-use Yajra\DataTables\DataTables;
+use PDF;
 
 class UserController extends Controller
 {
    
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            $login_user = Auth::user();
-
-            if ($login_user->user_type == 'personal' || $login_user->user_type == 'gst') {
-                $users = collect();
-                if ($login_user->group_id) {
-                    $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
-                }
-                $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
-                $users = $users->merge($singleUser)->unique('id');
-            } else {
-                $users = User::orderBy('id', 'desc')->get();
+        $login_user = Auth::user();
+        if ($login_user->user_type == 'personal' || $login_user->user_type == 'gst') {
+            $users = collect();
+            if ($login_user->group_id) {
+                $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
             }
-
-            return DataTables::of($users)
-            ->addColumn('checkbox', function ($row) {
-                return '<input type="checkbox" class="user-checkbox" name="user_id[]" value="' . $row->id . '" id="user_' . $row->id . '" >';
-            })
-            ->addColumn('name', function ($row) {
-                return $row->first_name . ' ' . $row->last_name;
-            })
-            ->addColumn('action', function ($row) {
-                return '<a href="' . route('users.edit', $row->id) . '"  class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" title="Edit Task"> <i class="fa fa-edit"></i></a>
-                <a href="' . route('users.show', $row->id) . '" class="btn btn-sm btn-primary">Show</a>
-                        <button class="deleteUserbtn btn-link btn-danger" data-bs-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>';
-            })
-            ->rawColumns(['checkbox', 'action']) // Ensure the columns are not escaped
-            ->toJson();
-        
+            $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
+            $users = $users->merge($singleUser)->unique('id');
+        } else {
+            $users = User::orderBy('id', 'desc')->get();
         }
-        // return view('admin.groups.index');
-
-
-        // $login_user = Auth::user();
-        // if ($login_user->user_type == 'personal' || $login_user->user_type == 'gst') {
-        //     $users = collect();
-        //     if ($login_user->group_id) {
-        //         $users = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->get();
-        //     }
-        //     $singleUser = User::where('id', $login_user->id)->orderBy('id', 'desc')->get();
-        //     $users = $users->merge($singleUser)->unique('id');
-        // } else {
-        //     $users = User::orderBy('id', 'desc')->get();
-        // }
-        return view('admin.users.index');
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -321,24 +288,55 @@ class UserController extends Controller
 
     public function downloadSelectedUsers(Request $request)
     {
-        $userIds = $request->input(key: 'user_ids');
+        $userQuery = User::query();
 
-        if (empty($userIds)) {
-            return response()->json(['error' => 'No users selected'], 400);
-        }
         if ($request->is_select_all) {
-            $login_user = Auth::user();
-            if ($login_user->user_type != 'admin') {
-                if ($login_user->group_id) {
-                    $userIds = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->pluck('id')->toArray();
-                }
-                $userIds = User::where('id', $login_user->id)->orderBy('id', 'desc')->pluck('id')->toArray();
-            } else {
-                $userIds = User::orderBy('id', 'desc')->pluck('id')->toArray();
-            }
+            // Fetch all matching users
+            $users = $userQuery->get();
+        } else {
+            // Fetch only selected users
+            $users = $userQuery->whereIn('id', $request->user_ids)->get();
         }
-        return Excel::download(new UsersExport($userIds), 'users.xlsx');
+        return Excel::download(new UsersExport($users), 'users.xlsx');
+
+            // return Excel::download(new UsersExport($users), 'users.xlsx');
+
+        // $userIds = $request->input(key: 'user_ids');
+
+        // if (empty($userIds)) {
+        //     return response()->json(['error' => 'No users selected'], 400);
+        // }
+        // if ($request->is_select_all) {
+        //     $login_user = Auth::user();
+        //     if ($login_user->user_type != 'admin') {
+        //         if ($login_user->group_id) {
+        //             $userIds = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->pluck('id')->toArray();
+        //         }
+        //         $userIds = User::where('id', $login_user->id)->orderBy('id', 'desc')->pluck('id')->toArray();
+        //     } else {
+        //         $userIds = User::orderBy('id', 'desc')->pluck('id')->toArray();
+        //     }
+        // }
+        // return Excel::download(new UsersExport($userIds), 'users.xlsx');
     }
+
+   
+    public function downloadSelectedUsersPdf(Request $request)
+    {
+        // $userIds = $request->user_ids;
+        $userIds = ['2','6'];
+
+        if ($request->is_select_all) {
+            $users = User::all();
+        } else {
+            $users = User::whereIn('id', $userIds)->get();
+            // dd($users, $request->user_ids);
+        }
+    
+        $pdf = PDF::loadView('exports.users_pdf', compact('users'));
+        return $pdf->download('users.pdf');
+    }
+
 
     public function confirmPassword(Request $request)
     {

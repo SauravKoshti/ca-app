@@ -16,12 +16,58 @@ class DocumentController extends Controller
     {
         if ($request->ajax()) {
             if($request->input('user_type') == 'admin') {
+                // dd("he");
                 $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', 'admin')
                     ->where('user_id', $request->input('user_id'));
             } else {
+                // dd("hess");
                 $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', '!=', 'admin')
                     ->where('user_id', $request->input('user_id'));
-            }
+                    // dd($documents);
+                }
+            
+            return DataTables::of($documents)
+                ->addColumn('checkbox', function ($row) {
+                    return '<input type="checkbox" class="user-checkbox" name="document_id" value="' . $row->id . '" id="user_' . $row->id . '" >';
+                })
+                ->addColumn('user_name', function ($document) {
+                    return $document->user ? $document->user->name : 'N/A';
+                })
+                ->addColumn('creator_name', function ($document) {
+                    return $document->creator ? $document->creator->user_full_name : 'N/A';
+                })
+                ->addColumn('created_at', function ($document) {
+                    return \Carbon\Carbon::parse($document->created_at)->format('d-m-Y H:i:s');
+                })
+                ->addColumn('uploader_name', function ($document) {
+                    return $document->uploader ? $document->uploader->user_full_name : 'N/A';
+                })
+                ->addColumn('actions', function ($document) {
+                    return '<a href="' . asset($document->document_image_path) . '" download="' . basename($document->document_image_path) . '" class="btn btn-success"><i class="fas fa-download"></i></a>
+                            <form action="' . route('users.document.destroy') . '" id="documentUpload" method="POST" style="display:inline;">
+                                ' . csrf_field() . '
+                                <input type="hidden" name="id" value="' . $document->id . '">
+                                <input type="hidden" name="user_id" value="' . $document->user_id . '">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>';
+                })
+                ->rawColumns(['actions', 'checkbox'])
+                ->make(true);
+        }
+        // return response()->json($documents);
+    }
+
+    public function downloadDocuments(Request $request)
+    {
+        if ($request->ajax()) {
+            // if($request->input('user_type') == 'admin') {
+            //     $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', 'admin')
+            //         ->where('user_id', $request->input('user_id'));
+            // } else {
+                $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', '!=', 'admin')
+                    ->where('user_id', $request->input('user_id'))->get();
+            // }
+            // dd($documents);
             return DataTables::of($documents)
                 ->addColumn('checkbox', function ($row) {
                     return '<input type="checkbox" class="user-checkbox" name="document_id" value="' . $row->id . '" id="user_' . $row->id . '" >';
