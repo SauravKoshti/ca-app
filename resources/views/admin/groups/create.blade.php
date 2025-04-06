@@ -21,7 +21,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Group Create</a>
+                    <span>Group Create</s>
                 </li>
             </ul>
         </div>

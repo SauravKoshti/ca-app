@@ -6,8 +6,8 @@
         <div class="page-header">
             <h3 class="fw-bold mb-3">User</h3>
             <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="#">
+            <li class="nav-home">
+                    <a href="{{ route('admin.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -15,13 +15,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">User</a>
+                    <a href="{{ route('users.index') }}">User</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Show User</a>
+                    <span>Show User</span>
                 </li>
             </ul>
         </div>
@@ -204,7 +204,7 @@
                                         <div class="mb-3">
                                             <label>Document Type:</label>
                                             <select name="doc_type" id="doc_type" class="form-control select2-multiple">
-                                                
+
                                                 @if (auth()->user()->user_type == 'admin')
                                                 <option>Select document type</option>
                                                 <option value="computation">Computation</option>
@@ -382,23 +382,23 @@
                                                             <th>Paid Amount</th>
                                                             <th>Payment Date</th>
                                                             @if(auth()->user()->user_type == 'admin')
-                                                                <th>Actions</th>
+                                                            <th>Actions</th>
                                                             @endif
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @if ($payments->isEmpty())
                                                         <tr>
-                                                        @if(auth()->user()->user_type == 'admin')
-                                                        <td colspan="4" class="text-center">No payment
+                                                            @if(auth()->user()->user_type == 'admin')
+                                                            <td colspan="4" class="text-center">No payment
                                                                 records
                                                                 found.</td>
-                                                        @else
-                                                        <td colspan="3" class="text-center">No payment
+                                                            @else
+                                                            <td colspan="3" class="text-center">No payment
                                                                 records
                                                                 found.</td>
-                                                        @endif
-                                                            
+                                                            @endif
+
                                                         </tr>
                                                         @else
                                                         @foreach ($payments as $payment)
@@ -477,8 +477,6 @@
     @endsection
     @section('section_script')
     <script>
-        
-
         // let financialYearDropdown = document.getElementById("financial_year").value;
         //     let urlSegments = window.location.pathname.split('/');
         //     let user_Id = urlSegments[urlSegments.length - 1];
@@ -528,14 +526,38 @@
                         d._token = "{{ csrf_token() }}";
                     }
                 },
-                columns: [
-                    { data: 'checkbox', name: 'checkbox' , orderable: false, searchable: false },
-                    { data: 'document_name', name: 'document_name' },
-                    { data: 'doc_type', name: 'doc_type' },
-                    { data: 'upload_type', name: 'upload_type' },
-                    { data: 'uploader_name', name: 'uploader_name' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
+                columns: [{
+                        data: 'checkbox',
+                        name: 'checkbox',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'document_name',
+                        name: 'document_name'
+                    },
+                    {
+                        data: 'doc_type',
+                        name: 'doc_type'
+                    },
+                    {
+                        data: 'upload_type',
+                        name: 'upload_type'
+                    },
+                    {
+                        data: 'uploader_name',
+                        name: 'uploader_name'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false
+                    }
                 ]
             });
             $('#documentTable').DataTable({
@@ -551,14 +573,38 @@
                         d._token = "{{ csrf_token() }}";
                     }
                 },
-                columns: [
-                    { data: 'checkbox', name: 'checkbox' , orderable: false, searchable: false },
-                    { data: 'document_name', name: 'document_name' },
-                    { data: 'doc_type', name: 'doc_type' },
-                    { data: 'upload_type', name: 'upload_type' },
-                    { data: 'uploader_name', name: 'uploader_name' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
+                columns: [{
+                        data: 'checkbox',
+                        name: 'checkbox',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'document_name',
+                        name: 'document_name'
+                    },
+                    {
+                        data: 'doc_type',
+                        name: 'doc_type'
+                    },
+                    {
+                        data: 'upload_type',
+                        name: 'upload_type'
+                    },
+                    {
+                        data: 'uploader_name',
+                        name: 'uploader_name'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false
+                    }
                 ]
             });
 
@@ -796,7 +842,7 @@
 
                 var startDate = new Date(years[0], 3,
                     1);
-                var endDate = new Date(years[1], 2, 31); 
+                var endDate = new Date(years[1], 2, 31);
 
                 if (startDate && endDate) {
                     $("#date_from").datepicker("destroy").datepicker({
@@ -818,7 +864,7 @@
             $(".datatables").DataTable({});
         });
     </script>
-    
+
     <style>
         .profile-card {
             border-radius: 10px;

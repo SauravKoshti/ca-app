@@ -21,7 +21,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="">User Create</a>
+                    <span>User Create</span>
                 </li>
             </ul>
         </div>

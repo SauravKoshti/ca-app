@@ -6,8 +6,8 @@
         <div class="page-header">
             <h3 class="fw-bold mb-3">User</h3>
             <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="#">
+            <li class="nav-home">
+                    <a href="{{ route('admin.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -15,13 +15,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">User</a>
+                    <a href="{{ route('users.index') }}">User</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Edit User</a>
+                    <span>Edit User</span>
                 </li>
             </ul>
         </div>

@@ -6,8 +6,8 @@
         <div class="page-header">
             <h4 class="page-title">Dashboard</h4>
             <ul class="breadcrumbs">
-                <li class="nav-home">
-                    <a href="#">
+            <li class="nav-home">
+                    <a href="{{ route('admin.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -15,7 +15,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Contact</a>
+                    <span>Contact</span>
                 </li>
             </ul>
         </div>
@@ -23,12 +23,6 @@
             <div class="card">
                 <div class="col-md-12">
                     <div class="card-body">
-                        <!-- @if (!$contacts->isEmpty())
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-                            <button class="btn btn-primary me-md-2" type="button"
-                                onclick="downloadSelectedUserData()">Download Data</button>
-                        </div>
-                        @endif -->
                         <div class="table-responsive">
                             <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>

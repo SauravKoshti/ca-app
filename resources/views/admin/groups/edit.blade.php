@@ -7,7 +7,7 @@
             <h3 class="fw-bold mb-3">Group</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                    <a href="#">
+                    <a href="{{ route('admin.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -15,13 +15,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Group</a>
+                    <a href="{{route('groups.index')}}">Group</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Edit Group</a>
+                    <span>Edit Group</s>
                 </li>
             </ul>
         </div>

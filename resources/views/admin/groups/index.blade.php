@@ -7,7 +7,7 @@
             <h4 class="page-title">Dashboard</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
-                    <a href="#">
+                    <a href="{{ route('admin.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -15,7 +15,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Groups</a>
+                    <span>Groups</span>
                 </li>
             </ul>
         </div>
@@ -62,7 +62,7 @@
     
     $(document).ready(function() {
     $('#group-basic-datatables').DataTable({
-        "dom": '<"top"f>rt<"bottom"pli><"clear">',
+        // "dom": '<"top"f>rt<"bottom"pli><"clear">',
         processing: true,
         searching: true,
         serverSide: true,
