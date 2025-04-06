@@ -47,13 +47,14 @@ class PaymentController extends Controller
     {
         // Find the payment by ID
         $payment = Payment::findOrFail($id);
-    
+
         // Validate and update the payment
         $payment->update([
             'payment_note' => 'required',
             'discuss_fees' => $request->input('discuss_fees'),
             'paid_fees' => $request->input('paid_fees'),
-            'payament_mode' => $request->input('payament_mode')
+            'payment_mode' => $request->input('payment_mode'),
+            'financial_year' => $request->input('financial_year')
         ]);
     
         // Redirect back with success message

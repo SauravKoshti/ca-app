@@ -44,6 +44,15 @@
                                 <label>Paid Fees:</label>
                                 <input type="text" step="0.01" name="paid_fees" class="form-control amount" value="{{ $payment->paid_fees }}">
                             </div>
+                            <div class="mb-3">
+                                <label>Select Financial Year</label>
+                                <select class="form-control" name="financial_year"
+                                    id="financial_year" required value="{{ $payment->financial_year }}">
+                                    <option value=""  disabled>Select Financial
+                                        Year
+                                    </option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>
 

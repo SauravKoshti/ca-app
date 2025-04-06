@@ -297,7 +297,13 @@ class UserController extends Controller
             // Fetch only selected users
             $users = $userQuery->whereIn('id', $request->user_ids)->get();
         }
-        return Excel::download(new UsersExport($users), 'users.xlsx');
+
+        // payment data
+        $user_id_array = $users->pluck('id')->toArray();
+        $payment_year = Payment::whereNotNull('financial_year')->whereIn('user_id', $user_id_array)->orderBy('financial_year')->pluck('financial_year')->unique()->toArray();
+        $payment_data = Payment::whereNotNull('financial_year')->whereIn('user_id', $user_id_array)->get();
+
+        return Excel::download(new UsersExport($users, $payment_year, $payment_data), 'users.xlsx');
     }
 
    
