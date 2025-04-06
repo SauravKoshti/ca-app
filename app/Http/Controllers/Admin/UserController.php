@@ -74,7 +74,7 @@ class UserController extends Controller
             $request->validate([
                 // 'gst_number' => ['required', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
                 'gst_number' => ['required', 'unique:users,gst_number'],
-                'business_name' => 'required|string|max:255',
+                'company_name' => 'required|string|max:255',
             ]);
         }
         if ($request->hasFile('profile_image')) {
@@ -82,8 +82,8 @@ class UserController extends Controller
         } else {
             $profilePath = null;
         }
-        $referUser = User::where('username', $request['refer'])->first();
-        $referUserId = $referUser ? $referUser->id : null;
+        // $referUser = User::where('username', $request['refer'])->first();
+        // $referUserId = $referUser ? $referUser->id : $request['refer'];
 
         $path = '';
         if ($image = $request->file('profile_image')) {
@@ -91,7 +91,9 @@ class UserController extends Controller
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $path = $destinationPath . $profileImage;
+            // dd($path);
         }
+        // dd($request->all());
         $user = User::create([
             'user_type' => $request['user_type'],
             'username' => $request['username'],
@@ -99,7 +101,6 @@ class UserController extends Controller
             'last_name' => $request['last_name'],
             'middle_name' => $request['middle_name'],
             'user_full_name' => $request['user_full_name'],
-            'profile_image' => $path,
             'address' => $request['address'],
             'city' => $request['city'],
             'state' => $request['state'],
@@ -109,14 +110,16 @@ class UserController extends Controller
             'dob' => $request['dob'],
             'mobile' => $request['mobile'],
             'anniversary_date' => $request['anniversary_date'] ?? null,
+            'profile_image' => $path,
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'gst_number' => $request['gst_number'] ?? null,
             'father_full_name' => $request['father_full_name'],
-            'business_name' => $request['business_name'] ?? null,
+            'company_name' => $request['company_name'] ?? null,
             'gender' => $request['gender'],
-            'refer' => $referUserId,
+            'refer' => $request['refer'],
         ]);
+    //    dd($user);
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -187,12 +190,14 @@ class UserController extends Controller
             $request->validate([
                 'gst_number' => [
                     'required',
-                    'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/',
+                    // 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/',
                     Rule::unique('users', 'gst_number')->ignore($id),
                 ],
-                'business_name' => 'required|string|max:255',
+                'com' => 'required|string|max:255',
             ]);
         }
+        // $referUser = User::where('username', $request['refer'])->first();
+        // $referUserId = $referUser ? $referUser->id : $request['refer'];
         $user = User::findOrFail($id);
         $path = $user->profile_image;
         if ($image = $request->file('profile_image')) {
@@ -201,28 +206,34 @@ class UserController extends Controller
             $image->move($destinationPath, $profileImage);
             $path = $destinationPath . $profileImage;
         }
-
+// dd($request->all(), $user);
         // Update user fields
         $user->update([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'business_name' => $request->business_name,
-            'username' => $request->username,
-            'mobile' => $request->mobile,
-            'email' => $request->email,
-            'dob' => $request->dob,
-            'profile_image' => $path,
-            'pan_card' => $request->pan_card,
-            'aadhar_card' => $request->aadhar_card,
-            'user_full_name' => $request->user_full_name,
-            'address' => $request->address,
-            'city' => $request->city,
-            'state' => $request->state,
-            'pincode' => $request->pincode,
-            'gst_number' => $request->gst_number ?? null,
+            'user_type'        => $request->user_type,
+            'username'         => $request->username,
+            'first_name'       => $request->first_name,
+            'last_name'        => $request->last_name,
+            'middle_name'      => $request->middle_name,
+            'user_full_name'   => $request->user_full_name,
+            'profile_image'    => $path,
+            'address'          => $request->address,
+            'city'             => $request->city,
+            'state'            => $request->state,
+            'pincode'          => $request->pincode,
+            'aadhar_card'      => $request->aadhar_card,
+            'pan_card'         => $request->pan_card,
+            'dob'              => $request->dob,
+            'mobile'           => $request->mobile,
             'anniversary_date' => $request->anniversary_date ?? null,
-            'role' => $request->role,
+            'email'            => $request->email,
+            'gst_number'       => $request->gst_number ?? null,
+            'father_full_name' => $request->father_full_name,
+            'company_name'    => $request->company_name ?? null,
+            'gender'           => $request->gender,
+            'refer'            => $request->refer,
         ]);
+        
+        // dd($user);
         if ($request->filled('password')) {
             $user->update([
                 'password' => Hash::make($request->password),

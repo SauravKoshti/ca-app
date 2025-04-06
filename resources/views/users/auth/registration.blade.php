@@ -39,10 +39,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="business_name">Business Name</label>
-                                    <input type="text" id="business_name" name="business_name" class="form-control"
-                                        value="{{ old('business_name') }}">
-                                    @error('business_name')
+                                    <label for="company_name">Business Name</label>
+                                    <input type="text" id="company_name" name="company_name" class="form-control"
+                                        value="{{ old('company_name') }}">
+                                    @error('company_name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -88,8 +88,9 @@
                                 <div class="form-group">
                                     <label for="address">Address<span
                                             class="text-danger registration-mark">*</span></label>
-                                    <input type="text" id="address" name="address" class="form-control"
-                                        value="{{ old('address') }}" required>
+                                    <!-- <input type="text" id="address" name="address" class="form-control"
+                                        value="{{ old('address') }}" required> -->
+                                        <textarea id="address" name="address" class="form-control" rows="3" required>{{ old('address') }}</textarea>
                                     @error('address')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

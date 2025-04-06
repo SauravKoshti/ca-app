@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <form action="{{ route('users.store') }}" method="POST">
+                                        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -61,10 +61,10 @@
                                                 </div>
                                                 <div class="col-md-6 ">
                                                     <div class="form-group">
-                                                        <label for="business_name">Business Name</label>
-                                                        <input type="text" id="business_name" name="business_name"
-                                                            class="form-control" value="{{ old('business_name') }}">
-                                                        @error('business_name')
+                                                        <label for="company_name">Business Name</label>
+                                                        <input type="text" id="company_name" name="company_name"
+                                                            class="form-control" value="{{ old('company_name') }}">
+                                                        @error('company_name')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -114,8 +114,7 @@
                                                     <div class="form-group">
                                                         <label for="address">Address</label>
                                                         <span class="text-danger ms-1">*</span>
-                                                        <input type="text" id="address" name="address"
-                                                            class="form-control" value="{{ old('address') }}" required>
+                                                        <textarea id="address" name="address" class="form-control" rows="3" required>{{ old('address') }}</textarea>
                                                         @error('address')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -202,7 +201,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -441,6 +439,16 @@ $(document).ready(function() {
             $("#user_full_name").val("").prop("readonly", false);
         }
     });
+
+    $("#pincode").on("input", function() {
+            let value = $(this).val().replace(/\D/g, ""); // Remove non-digits
+
+            if (value.length > 7) value = value.substring(0, 6); // Limit to 6 digits
+
+            let formattedValue = value.replace(/(\d{4})/g, "$1").trim();
+
+            $(this).val(formattedValue);
+        });
 });
 </script>
 @endsection

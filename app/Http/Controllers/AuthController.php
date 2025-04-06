@@ -59,7 +59,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8',
             // 'gst_number' => ['nullable', 'regex:/^[0-3][0-9][A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/', 'unique:users,gst_number'],
             'father_full_name' => 'required|string|max:255',
-            // 'business_name' => 'nullable|string|max:255',
+            'company_name' => 'nullable|string|max:255',
             'gender' => 'required|boolean',
             'refer' => 'nullable|string|max:255',
         ]);
@@ -75,9 +75,6 @@ class AuthController extends Controller
         } else {
             $profilePath = null;
         }
-
-        $referUser = User::where('username', $request['refer'])->first();
-        $referUserId = $referUser ? $referUser->id : null;
         $path = '';
         if ($image = $request->file('profile_image')) {
             $destinationPath = 'profiles/';
@@ -85,6 +82,7 @@ class AuthController extends Controller
             $image->move($destinationPath, $profileImage);
             $path = $destinationPath . $profileImage;
         }
+        // dd($request->all());
         $user = User::create([
             'user_type' => $request['user_type'],
             'username' => $request['username'],
@@ -106,11 +104,11 @@ class AuthController extends Controller
             'password' => Hash::make($request['password']),
             'gst_number' => $request['gst_number'] ?? null,
             'father_full_name' => $request['father_full_name'],
-            'business_name' => $request['business_name'] ?? null,
+            'company_name' => $request['company_name'] ?? null,
             'gender' => $request['gender'],
-            'refer' => $referUserId,
+            'refer' => $request['refer'],
         ]);
-       
+    //    dd($user);
         return redirect('login')->with('success', 'Registration successful!');
     }
 
