@@ -67,11 +67,11 @@
                                     type="button" role="tab" aria-controls="payment" aria-selected="false">Payment
                                     List</button>
                             </li>
-                            <!-- <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="refer-tab" data-bs-toggle="tab" data-bs-target="#refer"
-                                        type="button" role="tab" aria-controls="refer" aria-selected="false">Reference
-                                        List</button>
-                                </li> -->
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="refer-tab" data-bs-toggle="tab" data-bs-target="#refer"
+                                    type="button" role="tab" aria-controls="refer" aria-selected="false">Reference
+                                    List</button>
+                            </li>
                         </ul>
                     </div>
 
@@ -157,167 +157,209 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="user-profile-card">
-                                    <div class="card-body">
-                                        <div class="progress mt-3" style="display: none;">
-                                            <div id="progressBar" class="progress-bar" role="progressbar"
-                                                style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-                                                aria-valuemax="100">0%</div>
-                                        </div>
-                                        <form id="fileUploadForm" enctype="multipart/form-data">
-                                            @csrf
-                                            <input type="hidden" id="user_id" name="user_id"
-                                                value="{{ $user->id }}">
-                                            <input type="hidden" name="created_by" value="{{ $loggedInUserId }}">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label>Select Type</label>
-                                                    <select class="form-control" name="upload_type"
-                                                        onclick="changeType(this.value)" value="Online">
-                                                        <option value="Online">Online</option>
-                                                        <option value="Manual">Manual</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label>Select Financial Year</label>
-                                                    <select class="form-control" name="financial_year"
-                                                        id="financial_year" required>
-                                                        <option value="" selected disabled>Select Financial Year
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label>Date From</label>
-                                                    <input name="date_from" id="date_from"
-                                                        class="form-control datepicker">
-                                                </div>
-                                                <div class="col-6">
-                                                    <label>Date To</label>
-                                                    <input name="date_to" id="date_to" class="form-control datepicker">
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Document Name:</label>
-                                                <input type="text" id="document_name" name="document_name"
-                                                    class="form-control">
-                                                @error('document_name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Document Type:</label>
-                                                <select name="doc_type" id="doc_type"
-                                                    class="form-control select2-multiple">
-
-                                                    @if (auth()->user()->user_type == 'admin')
-                                                    <option>Select document type</option>
-                                                    <option value="computation">Computation</option>
-                                                    <option value="trading">Trading</option>
-                                                    <option value="p&l">P&L</option>
-                                                    <option value="capital">Capital</option>
-                                                    <option value="balance_sheet">Balance Sheet</option>
-                                                    <option value="26aS">26AS</option>
-                                                    <option value="aib">AIB</option>
-                                                    <option value="ttb">TTB</option>
-                                                    <option value="gstr_1_excel">GSTR 1 Excel</option>
-                                                    <option value="gstr_1_json">GSTR 1 JSON</option>
-                                                    <option value="gstr_1_pdf">GSTR 1 PDF</option>
-                                                    <option value="gst_3b_pdf">GST 3B PDF</option>
-                                                    <option value="gst_2b_pdf">GST 2B PDF</option>
-                                                    <option value="gst_challan_pdf">GST Challan PDF</option>
-                                                    <option value="gst_summary">GST Summary</option>
-                                                    @else
-                                                    <option>Select document type</option>
-                                                    <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
-                                                    <option value="pan_card">Pan Card / પાન કાર્ડ</option>
-                                                    <option value="form_16">Form 16 / ફોર્મ 16</option>
-                                                    <option value="rc_book">Vehicle R.C Book / વાહન ની આર.સી. બુક
-                                                    </option>
-                                                    <option value="bank_statement">Bank Statement / Passbook / બેંક
-                                                        સ્ટેટમેન્ટ /પાસબુક</option>
-                                                    <option value="fd_statement">Fixed Deposit Receipt & Certificate /
-                                                        ફિક્સ્ડ ડિપોઝિટ રસીદ અને સ્ટેટમેન્ટ</option>
-                                                    <option value="loan_statement">Loan Statement & Interest
-                                                        Certificate /
-                                                        લોન સ્ટેટમેન્ટ અને વ્યાજ નું સર્ટી</option>
-                                                    <option value="post_investment">Post Office Investment / પોસ્ટ માં
-                                                        રોકાણ
-                                                    </option>
-                                                    <option value="insurance_investment">Insurance Investment / વીમા
-                                                        માં
-                                                        રોકાણ
-                                                    </option>
-                                                    <option value="property_documents">Property Documents / મિલકત
-                                                        દસ્તાવેજો
-                                                    </option>
-                                                    <option value="capital_account">Capital Account From Partnership
-                                                        Firm /
-                                                        ભાગીદારી પેઢીમાંથી ભાગીદાર નું મૂડી ખાતું</option>
-                                                    <option value="agriculture_invoice">Agriculture Invoice /
-                                                        ખેતીવાડીના બિલ
-                                                    </option>
-                                                    <option value="sharemarket_detail">Share Market Statement (Ledger,
-                                                        Profit & Loss, Holding) / શેર બજાર સ્ટેટમેન્ટ (લેજર, નફો અને
-                                                        નુકસાન,
-                                                        હોલ્ડિંગ)
-                                                    </option>
-                                                    <option value="purchase_bill">Purchase Invoice / ખરીદી ના બિલ
-                                                    </option>
-                                                    <option value="sales_bill">Sales Invoice / વેચાણ ના બિલ</option>
-                                                    <option value="expense_bill">Expense Invoice / ખર્ચ ના બિલ</option>
-                                                    <option value="other_details">Other Details / અન્ય વિગતો </option>
-                                                    @endif
-                                                </select>
-
-                                                @error('doc_type')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Upload File:</label>
-                                                <input type="file" name="document_image_path" id="fileInput"
-                                                    class="form-control" accept="image/*,.pdf">
-                                                @error('document_image_path')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                            <button type="submit" class="btn btn-success">Upload</button>
-                                        </form>
-                                        <div id="message" class="mt-3"></div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="user-profile-card">
+                                <div class="card-body">
+                                    <div class="progress mt-3" style="display: none;">
+                                        <div id="progressBar" class="progress-bar" role="progressbar"
+                                            style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100">0%</div>
                                     </div>
+                                    <form id="fileUploadForm" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" id="user_id" name="user_id"
+                                            value="{{ $user->id }}">
+                                        <input type="hidden" name="created_by" value="{{ $loggedInUserId }}">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Select Type</label>
+                                                <select class="form-control" name="upload_type"
+                                                    onclick="changeType(this.value)" value="Online">
+                                                    <option value="Online">Online</option>
+                                                    <option value="Manual">Manual</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Select Financial Year</label>
+                                                <select class="form-control" name="financial_year"
+                                                    id="financial_year" required>
+                                                    <option value="" selected disabled>Select Financial Year
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Date From</label>
+                                                <input name="date_from" id="date_from"
+                                                    class="form-control datepicker">
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Date To</label>
+                                                <input name="date_to" id="date_to" class="form-control datepicker">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Document Name:</label>
+                                            <input type="text" id="document_name" name="document_name"
+                                                class="form-control">
+                                            @error('document_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Document Type:</label>
+                                            <select name="doc_type" id="doc_type"
+                                                class="form-control select2-multiple">
+
+                                                @if (auth()->user()->user_type == 'admin')
+                                                <option>Select document type</option>
+                                                <option value="computation">Computation</option>
+                                                <option value="trading">Trading</option>
+                                                <option value="p&l">P&L</option>
+                                                <option value="capital">Capital</option>
+                                                <option value="balance_sheet">Balance Sheet</option>
+                                                <option value="26aS">26AS</option>
+                                                <option value="aib">AIB</option>
+                                                <option value="ttb">TTB</option>
+                                                <option value="gstr_1_excel">GSTR 1 Excel</option>
+                                                <option value="gstr_1_json">GSTR 1 JSON</option>
+                                                <option value="gstr_1_pdf">GSTR 1 PDF</option>
+                                                <option value="gst_3b_pdf">GST 3B PDF</option>
+                                                <option value="gst_2b_pdf">GST 2B PDF</option>
+                                                <option value="gst_challan_pdf">GST Challan PDF</option>
+                                                <option value="gst_summary">GST Summary</option>
+                                                @else
+                                                <option>Select document type</option>
+                                                <option value="aadhaar_card">Aadhaar Card / આધાર કાર્ડ</option>
+                                                <option value="pan_card">Pan Card / પાન કાર્ડ</option>
+                                                <option value="form_16">Form 16 / ફોર્મ 16</option>
+                                                <option value="rc_book">Vehicle R.C Book / વાહન ની આર.સી. બુક
+                                                </option>
+                                                <option value="bank_statement">Bank Statement / Passbook / બેંક
+                                                    સ્ટેટમેન્ટ /પાસબુક</option>
+                                                <option value="fd_statement">Fixed Deposit Receipt & Certificate /
+                                                    ફિક્સ્ડ ડિપોઝિટ રસીદ અને સ્ટેટમેન્ટ</option>
+                                                <option value="loan_statement">Loan Statement & Interest
+                                                    Certificate /
+                                                    લોન સ્ટેટમેન્ટ અને વ્યાજ નું સર્ટી</option>
+                                                <option value="post_investment">Post Office Investment / પોસ્ટ માં
+                                                    રોકાણ
+                                                </option>
+                                                <option value="insurance_investment">Insurance Investment / વીમા
+                                                    માં
+                                                    રોકાણ
+                                                </option>
+                                                <option value="property_documents">Property Documents / મિલકત
+                                                    દસ્તાવેજો
+                                                </option>
+                                                <option value="capital_account">Capital Account From Partnership
+                                                    Firm /
+                                                    ભાગીદારી પેઢીમાંથી ભાગીદાર નું મૂડી ખાતું</option>
+                                                <option value="agriculture_invoice">Agriculture Invoice /
+                                                    ખેતીવાડીના બિલ
+                                                </option>
+                                                <option value="sharemarket_detail">Share Market Statement (Ledger,
+                                                    Profit & Loss, Holding) / શેર બજાર સ્ટેટમેન્ટ (લેજર, નફો અને
+                                                    નુકસાન,
+                                                    હોલ્ડિંગ)
+                                                </option>
+                                                <option value="purchase_bill">Purchase Invoice / ખરીદી ના બિલ
+                                                </option>
+                                                <option value="sales_bill">Sales Invoice / વેચાણ ના બિલ</option>
+                                                <option value="expense_bill">Expense Invoice / ખર્ચ ના બિલ</option>
+                                                <option value="other_details">Other Details / અન્ય વિગતો </option>
+                                                @endif
+                                            </select>
+
+                                            @error('doc_type')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Upload File:</label>
+                                            <input type="file" name="document_image_path" id="fileInput"
+                                                class="form-control" accept="image/*,.pdf">
+                                            @error('document_image_path')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success">Upload</button>
+                                    </form>
+                                    <div id="message" class="mt-3"></div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
-                                <div class="document-card">
-                                    <div class="card-header d-flex justify-content-between">
-                                        <div class="d-flex align-items-center" style="width: 220px;">
-                                            <label for="yearSelect" class="w-100">Select Year:</label>
-                                            <select id="documentDownloadYearSelect" class="form-control"
-                                                onchange="handleYearChange(this.value,'')" name="year">
-                                                <option value="">Select Year</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-primary ms-auto"
-                                                onclick="documentDownloadSelected('pdf')">Download
-                                                Pdf</button>
-                                            <button class="btn btn-primary ms-auto"
-                                                onclick="documentDownloadSelected('zip')">Download
-                                                Zip</button>
-                                        </div>
+                        <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
+                            <div class="document-card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="d-flex align-items-center" style="width: 220px;">
+                                        <label for="yearSelect" class="w-100">Select Year:</label>
+                                        <select id="documentDownloadYearSelect" class="form-control"
+                                            onchange="handleYearChange(this.value,'')" name="year">
+                                            <option value="">Select Year</option>
+                                        </select>
                                     </div>
+                                    <div>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="documentDownloadSelected('pdf')">Download
+                                            Pdf</button>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="documentDownloadSelected('zip')">Download
+                                            Zip</button>
+                                    </div>
+                                </div>
 
-                                    <div class="card-body">
-                                        <table class="table table-bordered table-striped table-hover w-100"
-                                            id="documentTable">
+                                <div class="card-body">
+                                    <table class="table table-bordered table-striped table-hover w-100"
+                                        id="documentTable">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="document_select_all"></th>
+                                                <th>Document Name</th>
+                                                <th>Document Type</th>
+                                                <th>Upload Type</th>
+                                                <th>Uploaded By</th>
+                                                <th>Uploaded Date</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="download-document" role="tabpanel"
+                            aria-labelledby="download-document-tab">
+                            <div class="download-document-card">
+
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="d-flex align-items-center" style="width: 220px;">
+                                        <label for="yearSelect" class="w-100">Select Year:</label>
+                                        <select id="downloadYearSelect" class="form-control"
+                                            onchange="handleYearChange(this.value,'admin')" name="year">
+                                            <option value="">Select Year</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="downloadSelected('pdf')">Download
+                                            Pdf</button>
+                                        <button class="btn btn-primary ms-auto"
+                                            onclick="downloadSelected('zip')">Download
+                                            Zip</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="display table table-striped table-hover w-100"
+                                            id="downloadDocTable">
                                             <thead>
                                                 <tr>
-                                                    <th><input type="checkbox" name="document_select_all"></th>
+                                                    <th><input type="checkbox" name="select_all"></th>
                                                     <th>Document Name</th>
                                                     <th>Document Type</th>
                                                     <th>Upload Type</th>
@@ -330,162 +372,123 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="tab-pane fade" id="download-document" role="tabpanel"
-                                aria-labelledby="download-document-tab">
-                                <div class="download-document-card">
-
-                                    <div class="card-header d-flex justify-content-between">
-                                        <div class="d-flex align-items-center" style="width: 220px;">
-                                            <label for="yearSelect" class="w-100">Select Year:</label>
-                                            <select id="downloadYearSelect" class="form-control"
-                                                onchange="handleYearChange(this.value,'admin')" name="year">
-                                                <option value="">Select Year</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-primary ms-auto"
-                                                onclick="downloadSelected('pdf')">Download
-                                                Pdf</button>
-                                            <button class="btn btn-primary ms-auto"
-                                                onclick="downloadSelected('zip')">Download
-                                                Zip</button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="display table table-striped table-hover w-100"
-                                                id="downloadDocTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th><input type="checkbox" name="select_all"></th>
-                                                        <th>Document Name</th>
-                                                        <th>Document Type</th>
-                                                        <th>Upload Type</th>
-                                                        <th>Uploaded By</th>
-                                                        <th>Uploaded Date</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
-                                <div class="document-card">
-                                    <div class="card-body">
-                                        <div class="Payment-card">
-                                            @if (auth()->user()->user_type == 'admin')
-                                            <div class="card-header d-flex justify-content-between">
-                                                <div class="btn-primary btn-round ms-auto">
-                                                    <a href="{{ route('users.payment', ['user' => $user->id]) }}"
-                                                        class="btn btn-primary btn-round ms-auto">
-                                                        Add Payment
-                                                    </a>
-                                                </div>
+                        <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                            <div class="document-card">
+                                <div class="card-body">
+                                    <div class="Payment-card">
+                                        @if (auth()->user()->user_type == 'admin')
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="btn-primary btn-round ms-auto">
+                                                <a href="{{ route('users.payment', ['user' => $user->id]) }}"
+                                                    class="btn btn-primary btn-round ms-auto">
+                                                    Add Payment
+                                                </a>
                                             </div>
-                                            @endif
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="datatables display table table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Payment Discuss</th>
-                                                                <th>Paid Amount</th>
-                                                                <th>Payment Date</th>
-                                                                @if (auth()->user()->user_type == 'admin')
-                                                                <th>Actions</th>
-                                                                @endif
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if ($payments->isEmpty())
-                                                            <tr>
-                                                                @if (auth()->user()->user_type == 'admin')
-                                                                <td colspan="4" class="text-center">No payment
-                                                                    records
-                                                                    found.</td>
-                                                                @else
-                                                                <td colspan="3" class="text-center">No payment
-                                                                    records
-                                                                    found.</td>
-                                                                @endif
-
-                                                            </tr>
-                                                            @else
-                                                            @foreach ($payments as $payment)
-                                                            <tr>
-                                                                <td>{{ $payment->discuss_fees }}</td>
-                                                                <td>{{ $payment->paid_fees }}</td>
-                                                                <td>{{ $payment->payment_date }}</td>
-                                                                @if (auth()->user()->user_type == 'admin')
-                                                                <td>
-                                                                    <button type="button"
-                                                                        onClick="editData('{{ route('users.payment.edit', $payment->id) }}')"
-                                                                        class="btn btn-link btn-primary btn-lg edit_data"
-                                                                        data-bs-toggle="tooltip"
-                                                                        title="edit">
-                                                                        <i class="fa fa-edit"></i>
-                                                                    </button>
-
-                                                                    <button type="button"
-                                                                        onClick="removeData({{ $payment->id }}, 'payment')"
-                                                                        class="btn btn-link btn-danger remove_data"
-                                                                        data-bs-toggle="tooltip"
-                                                                        title="Remove">
-                                                                        <i class="fa fa-times"></i>
-                                                                    </button>
-                                                                    </form>
-                                                                </td>
-                                                                @endif
-                                                            </tr>
-                                                            @endforeach
+                                        </div>
+                                        @endif
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="datatables display table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Payment Discuss</th>
+                                                            <th>Paid Amount</th>
+                                                            <th>Payment Date</th>
+                                                            @if (auth()->user()->user_type == 'admin')
+                                                            <th>Actions</th>
                                                             @endif
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="refer" role="tabpanel" aria-labelledby="refer-tab">
-                                <div class="document-card">
-                                    <div class="card-body">
-                                        <div class="Refer-card">
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="datatables display table table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>User Name</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if ($referData->isEmpty())
-                                                            <tr>
-                                                                <td colspan="4" class="text-center">No
-                                                                    records
-                                                                    found.</td>
-                                                            </tr>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if ($payments->isEmpty())
+                                                        <tr>
+                                                            @if (auth()->user()->user_type == 'admin')
+                                                            <td colspan="4" class="text-center">No payment
+                                                                records
+                                                                found.</td>
                                                             @else
-                                                            @foreach ($referData as $refer)
-                                                            <tr>
-                                                                <td>{{ $refer->username }}</td>
-                                                            </tr>
-                                                            @endforeach
+                                                            <td colspan="3" class="text-center">No payment
+                                                                records
+                                                                found.</td>
                                                             @endif
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+
+                                                        </tr>
+                                                        @else
+                                                        @foreach ($payments as $payment)
+                                                        <tr>
+                                                            <td>{{ $payment->discuss_fees }}</td>
+                                                            <td>{{ $payment->paid_fees }}</td>
+                                                            <td>{{ $payment->payment_date }}</td>
+                                                            @if (auth()->user()->user_type == 'admin')
+                                                            <td>
+                                                                <button type="button"
+                                                                    onClick="editData('{{ route('users.payment.edit', $payment->id) }}')"
+                                                                    class="btn btn-link btn-primary btn-lg edit_data"
+                                                                    data-bs-toggle="tooltip"
+                                                                    title="edit">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+
+                                                                <button type="button"
+                                                                    onClick="removeData({{ $payment->id }}, 'payment')"
+                                                                    class="btn btn-link btn-danger remove_data"
+                                                                    data-bs-toggle="tooltip"
+                                                                    title="Remove">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                                </form>
+                                                            </td>
+                                                            @endif
+                                                        </tr>
+                                                        @endforeach
+                                                        @endif
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+
+                        <div class="tab-pane fade" id="refer" role="tabpanel" aria-labelledby="refer-tab">
+                            <div class="document-card">
+                                <div class="card-body">
+                                    <div class="Refer-card">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="datatables display table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>User Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if ($referData->isEmpty())
+                                                        <tr>
+                                                            <td colspan="4" class="text-center">No
+                                                                records
+                                                                found.</td>
+                                                        </tr>
+                                                        @else
+                                                        @foreach ($referData as $refer)
+                                                        <tr>
+                                                            <td>{{ $refer->username }}</td>
+                                                        </tr>
+                                                        @endforeach
+                                                        @endif
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

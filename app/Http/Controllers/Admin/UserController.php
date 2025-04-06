@@ -206,7 +206,6 @@ class UserController extends Controller
             $image->move($destinationPath, $profileImage);
             $path = $destinationPath . $profileImage;
         }
-// dd($request->all(), $user);
         // Update user fields
         $user->update([
             'user_type'        => $request->user_type,
