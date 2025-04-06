@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('financial_year')->nullable()->after('payment_date');
         });
     }
-
+  
     /**
      * Reverse the migrations.
      */
