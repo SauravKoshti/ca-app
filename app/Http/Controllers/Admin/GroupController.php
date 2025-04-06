@@ -72,7 +72,7 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         $groupData = Group::where('id', $group->id)->first();
-        $userData = User::where('role', 'user')
+        $userData = User::where('user_type', '!=', 'admin')
             ->whereNull('group_id')
             ->get();
         $userListData = User::where('group_id', $group->id)->get();
