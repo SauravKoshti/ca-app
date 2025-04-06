@@ -26,13 +26,20 @@ class GroupController extends Controller
             } else {
                 $groups = Group::orderBy('id', 'desc');
             }
-
             return DataTables::of($groups)
-                ->addColumn('action', function ($row) {
-                    return '<a href="' . route('groups.edit', $row->id) . '" class="btn btn-sm btn-primary">Edit</a>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+            ->addColumn('action', function ($row) {
+                return '
+                    <a href="' . route('groups.show', $row->id) . '" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="View">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a href="' . route('groups.edit', $row->id) . '" class="btn btn-sm btn-warning ms-1" data-bs-toggle="tooltip" title="Edit">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+            
         }
         return view('admin.groups.index');
     }

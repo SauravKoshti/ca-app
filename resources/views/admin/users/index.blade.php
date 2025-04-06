@@ -30,7 +30,9 @@
 
                         <form id="pdfExportForm" action="{{ route('users.export.pdf') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="user_ids[2,3]" id="selected_user_ids">
+                            <input type="hidden" name="user_ids" id="selected_user_ids">
+
+                            <!-- <input type="hidden" name="user_ids[2,3]" id="selected_user_ids"> -->
                             <input type="hidden" name="is_select_all" id="is_select_all" value="0">
                             <button type="submit" class="btn btn-danger">Export to PDF</button>
                         </form>
@@ -93,7 +95,7 @@
                                     <tr>
                                         @if (auth()->user()->user_type == 'admin')
                                         <td>
-                                            <input type="checkbox" name="user_id" data-id="{{ $user->id }}">
+                                            <input type="checkbox" name="user_id" value="{{ $user->id }}" data-id="{{ $user->id }}">
                                         </td>
                                         @endif
                                         <td>{{ $user->first_name }} {{ $user->last_name }} </td>
@@ -139,6 +141,10 @@
 @section('section_script')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const selectedUserIds = Array.from(document.querySelectorAll('input[name="user_id"]:checked'))
+        .map(cb => cb.value);
+        document.getElementById('selected_user_ids').value = selectedUserIds.join(',');
+
         document.getElementById("selectAll").addEventListener("change", function() {
             let isChecked = this.checked;
             // Select or deselect all individual checkboxes based on the "Select All" checkbox
