@@ -15,7 +15,7 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            if($request->input('user_type') == 'admin') {
+            if ($request->input('user_type') == 'admin') {
                 // dd("he");
                 $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', 'admin')
                     ->where('user_id', $request->input('user_id'));
@@ -23,12 +23,21 @@ class DocumentController extends Controller
                 // dd("hess");
                 $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', '!=', 'admin')
                     ->where('user_id', $request->input('user_id'));
-                    // dd($documents);
-                }
-            
+                // dd($documents);
+            }
+            $year = $request->input('year');
+            if ($year) {
+                $documents = $documents->where('financial_year', $year);
+            }
+
+
             return DataTables::of($documents)
-                ->addColumn('checkbox', function ($row) {
-                    return '<input type="checkbox" class="user-checkbox" name="document_id" value="' . $row->id . '" id="user_' . $row->id . '" >';
+                ->addColumn('checkbox', function ($row) use($request) {
+                    if($request->input('user_type') == 'admin') {
+                        return '<input type="checkbox" class="user-checkbox" name="document_id" value="' . $row->id . '" id="user_' . $row->id . '" >';
+                    } else {
+                        return '<input type="checkbox" class="user-checkbox" name="document_select_id" value="' . $row->id . '" id="user_' . $row->id . '" >';
+                    }
                 })
                 ->addColumn('user_name', function ($document) {
                     return $document->user ? $document->user->name : 'N/A';
@@ -64,8 +73,8 @@ class DocumentController extends Controller
             //     $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', 'admin')
             //         ->where('user_id', $request->input('user_id'));
             // } else {
-                $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', '!=', 'admin')
-                    ->where('user_id', $request->input('user_id'))->get();
+            $documents = Document::leftJoin('users', 'users.id', '=', 'documents.uploaded_by')->with(['user', 'creator', 'uploader'])->select('documents.*')->where('users.user_type', '!=', 'admin')
+                ->where('user_id', $request->input('user_id'))->get();
             // }
             // dd($documents);
             return DataTables::of($documents)
@@ -122,10 +131,10 @@ class DocumentController extends Controller
 
         if ($validator->fails()) {
             return redirect()->route('users.show', [
-            'user' => $request->user_id,
-            'tab' => 'document-tab'
+                'user' => $request->user_id,
+                'tab' => 'document-tab'
             ])->withErrors($validator)
-            ->withInput();
+                ->withInput();
         }
 
         // Store file
@@ -133,7 +142,7 @@ class DocumentController extends Controller
         if ($request->hasFile('document_image_path')) {
             $image = $request->file('document_image_path');
             $destinationPath = 'images/';
-            $profileImage = $image->getClientOriginalName().date('His') . "." . $image->getClientOriginalExtension();
+            $profileImage = $image->getClientOriginalName() . date('His') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $path = $destinationPath . $profileImage;
         }
@@ -165,14 +174,13 @@ class DocumentController extends Controller
         return response()->json($document);
     }
 
-
     public function documentDestroy(Request $request)
     {
         Document::where('id', $request->id)->delete();
         return redirect()->route('users.show', [
             'user' => $request->user_id,
             'tab' => 'download-document-tab'
-            ])->with('success', 'Document deleted successfully.');
+        ])->with('success', 'Document deleted successfully.');
 
     }
 
@@ -326,7 +334,7 @@ class DocumentController extends Controller
         }
         foreach ($images as $documentData) {
             $imagesHtml .= '<tr>';
-            if ($request->input(key: 'user_type') == 'admin') {
+            if ($request->input( 'user_type') == 'admin') {
                 $imagesHtml .= '<td><input type="checkbox" name="document_id" data-id="' . $documentData->id . '"></td>';
             } else {
                 $imagesHtml .= '<td><input type="checkbox" name="document_select_id" data-id="' .
@@ -337,7 +345,7 @@ class DocumentController extends Controller
             if ($documentData->doc_type) {
                 foreach (explode(',', $documentData->doc_type) as $doc_type) {
                     $docTypes = Config::get('constant.doc_type');
-            
+
                     if (isset($docTypes[$doc_type])) {
                         $imagesHtml .= '<p class="mb-0">' . $docTypes[$doc_type] . '</p>';
                     } else {
@@ -345,7 +353,7 @@ class DocumentController extends Controller
                     }
                 }
             }
-            
+
             // if ($documentData->doc_type) {
             //     foreach (explode(',', $documentData->doc_type) as $doc_type) {
             //         $imagesHtml .= '<p class="mb-0">' . Config::get('constant.doc_type')[$doc_type] . '</p>';
@@ -357,7 +365,7 @@ class DocumentController extends Controller
             $imagesHtml .= '<p>' . $documentData->uploader->user_full_name . '</p>';
             $imagesHtml .= '</td>';
             $imagesHtml .= '<td>';
-             $imagesHtml .= '<p>' . \Carbon\Carbon::parse($documentData->created_at)->format('d-m-Y H:i:s') . '</p>';
+            $imagesHtml .= '<p>' . \Carbon\Carbon::parse($documentData->created_at)->format('d-m-Y H:i:s') . '</p>';
             $imagesHtml .= '</td>';
             $imagesHtml .= '<td>';
             $imagesHtml .= '<a href="' . asset($documentData->document_image_path) . '" download class="btn btn-success"><i class="fas fa-download"></i></a>';
