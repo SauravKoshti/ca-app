@@ -290,7 +290,7 @@ class UserController extends Controller
     {
         $userQuery = User::query();
 
-        if ($request->is_select_all) {
+        if ($request->is_select_all && $request->is_select_all !== 'false') {
             // Fetch all matching users
             $users = $userQuery->get();
         } else {
@@ -298,39 +298,17 @@ class UserController extends Controller
             $users = $userQuery->whereIn('id', $request->user_ids)->get();
         }
         return Excel::download(new UsersExport($users), 'users.xlsx');
-
-            // return Excel::download(new UsersExport($users), 'users.xlsx');
-
-        // $userIds = $request->input(key: 'user_ids');
-
-        // if (empty($userIds)) {
-        //     return response()->json(['error' => 'No users selected'], 400);
-        // }
-        // if ($request->is_select_all) {
-        //     $login_user = Auth::user();
-        //     if ($login_user->user_type != 'admin') {
-        //         if ($login_user->group_id) {
-        //             $userIds = User::where('group_id', $login_user->group_id)->orderBy('id', 'desc')->pluck('id')->toArray();
-        //         }
-        //         $userIds = User::where('id', $login_user->id)->orderBy('id', 'desc')->pluck('id')->toArray();
-        //     } else {
-        //         $userIds = User::orderBy('id', 'desc')->pluck('id')->toArray();
-        //     }
-        // }
-        // return Excel::download(new UsersExport($userIds), 'users.xlsx');
     }
 
    
     public function downloadSelectedUsersPdf(Request $request)
     {
-        // $userIds = $request->user_ids;
-        $userIds = ['2','6'];
+        $userIds = $request->user_ids;
 
-        if ($request->is_select_all) {
+        if ($request->is_select_all && $request->is_select_all !== 'false') {
             $users = User::all();
         } else {
             $users = User::whereIn('id', $userIds)->get();
-            // dd($users, $request->user_ids);
         }
     
         $pdf = PDF::loadView('exports.users_pdf', compact('users'));
