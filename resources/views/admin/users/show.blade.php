@@ -169,13 +169,13 @@
                                     </div>
                                     <form id="fileUploadForm" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" id="user_id" name="user_id"
+                                        <input type=$"hidden" id="user_id" name="user_id"
                                             value="{{ $user->id }}">
                                         <input type="hidden" name="created_by" value="{{ $loggedInUserId }}">
                                         <div class="row">
                                             <div class="col-6">
                                                 <label>Select Type</label>
-                                                <select class="form-control" name="upload_type"
+                                                <select class="form-control" name="upload_type" id ="upload_type"
                                                     onclick="changeType(this.value)" value="Online">
                                                     <option value="Online">Online</option>
                                                     <option value="Manual">Manual</option>
@@ -277,7 +277,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-3" id="uploadDocumentImage">
                                             <label>Upload File:</label>
                                             <input type="file" name="document_image_path" id="fileInput"
                                                 class="form-control" accept="image/*,.pdf">
@@ -339,7 +339,7 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="d-flex align-items-center" style="width: 220px;">
                                         <label for="yearSelect" class="w-100">Select Year:</label>
-                                        <select id="downloadYearSelect" class="form-control"
+                                        <select id="downloadYearSelect" class="form-control" id="userDocumentTypeUpload"
                                             onchange="handleYearChange(this.value,'admin')" name="year">
                                             <option value="">Select Year</option>
                                         </select>
@@ -506,7 +506,7 @@
                         url: "{{ route('users.documents') }}",
                         type: "POST",
                         data: function(d) {
-                            d.year = $('#selectedYear').val();
+                            d.year = $('#downloadYearSelect').val();
                             d.user_id = "{{ $user->id }}";
                             d.user_type = "admin";
                             d._token = "{{ csrf_token() }}";
@@ -612,8 +612,9 @@
 
                 $('#fileUploadForm').on('submit', function(event) {
                     event.preventDefault();
-
-                    let formData = new FormData(this);
+                    let userDocumentTypeUpload = $('#upload_type').val();
+                    if (userDocumentTypeUpload !== 'Manual') {
+                        let formData = new FormData(this);
                     let file = $('#fileInput')[0].files[0];
 
                     if (!file) {
@@ -660,7 +661,9 @@
                                 'disabled', false);
                         }
                     });
-                });
+                
+                    }
+                   });
             });
 
             // Function to get the current financial year
@@ -708,8 +711,10 @@
 
             function changeType(uploadType) {
                 if (uploadType === 'Manual') {
+                    $('#uploadDocumentImage').hide();
                     $('#doc_type').prop('multiple', true).attr('name', 'doc_type[]').select2();
                 } else {
+                    $('#uploadDocumentImage').show();
                     $('#doc_type').prop('multiple', false).attr('name', 'doc_type').select2();
                 }
             }
@@ -758,7 +763,6 @@
 
             function downloadSelected(type) {
                 const year = $('#downloadYearSelect').val();
-                // console.log(year);
                 let allIds = [];
                 var checkboxes = document.querySelectorAll('[name="document_id"]:checked');
                 checkboxes.forEach(function(checkbox) {
@@ -812,19 +816,18 @@
                     var startDate = new Date(years[0], 3,
                         1);
                     var endDate = new Date(years[1], 2, 31);
-
                     if (startDate && endDate) {
                         $("#date_from").datepicker("destroy").datepicker({
                             dateFormat: "dd/mm/yyyy",
                             minDate: startDate,
                             maxDate: endDate
-                        }).val($.datepicker.formatDate("dd/mm/yyyy", startDate));
+                        }).val($.datepicker.formatDate("dd/mm/yy", startDate));
 
                         $("#date_to").datepicker("destroy").datepicker({
                             dateFormat: "dd/mm/yyyy",
                             minDate: startDate,
                             maxDate: endDate
-                        }).val($.datepicker.formatDate("dd/mm/yyyy", endDate));
+                        }).val($.datepicker.formatDate("dd/mm/yy", endDate));
 
                         $(".datepicker").prop("disabled", false); // Enable date pickers
                     }
